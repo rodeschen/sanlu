@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module relativePaths="false" type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="Groovy" name="Groovy">
+      <configuration compile="true" mvc-application="false" />
+    </facet>
+    <facet type="web" name="GrailsWeb">
+      <configuration>
+        <webroots>
+          <root url="file:///home/ms/.grails/1.2-M2/projects/jquery-calendar-sample/plugins/jquery-calendar-0.1/web-app" relative="/" />
+          <root url="file:///home/ms/.grails/1.2-M2/projects/jquery-calendar-sample/plugins/quartz-0.4.1/web-app" relative="/" />
+          <root url="file:///home/ms/.grails/1.2-M2/projects/jquery-calendar-sample/plugins/jquery-calendar-0.2.1/web-app" relative="/" />
+        </webroots>
+        <sourceRoots />
+        <building>
+          <setting name="EXPLODED_URL" value="file://" />
+          <setting name="EXPLODED_ENABLED" value="false" />
+          <setting name="JAR_URL" value="file://" />
+          <setting name="JAR_ENABLED" value="false" />
+          <setting name="EXCLUDE_EXPLODED_DIRECTORY" value="true" />
+        </building>
+      </configuration>
+    </facet>
+  </component>
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file:///home/ms/.grails/1.2-M2/projects/jquery-calendar-sample/plugins/jquery-calendar-0.2.1">
+      <sourceFolder url="file:///home/ms/.grails/1.2-M2/projects/jquery-calendar-sample/plugins/jquery-calendar-0.2.1/src/groovy" isTestSource="false" />
+      <sourceFolder url="file:///home/ms/.grails/1.2-M2/projects/jquery-calendar-sample/plugins/jquery-calendar-0.2.1/grails-app/controllers" isTestSource="false" />
+      <sourceFolder url="file:///home/ms/.grails/1.2-M2/projects/jquery-calendar-sample/plugins/jquery-calendar-0.2.1/grails-app/domain" isTestSource="false" />
+      <sourceFolder url="file:///home/ms/.grails/1.2-M2/projects/jquery-calendar-sample/plugins/jquery-calendar-0.2.1/grails-app/services" isTestSource="false" />
+      <sourceFolder url="file:///home/ms/.grails/1.2-M2/projects/jquery-calendar-sample/plugins/jquery-calendar-0.2.1/grails-app/taglib" isTestSource="false" />
+    </content>
+    <content url="file:///home/ms/.grails/1.2-M2/projects/jquery-calendar-sample/plugins/quartz-0.4.1">
+      <sourceFolder url="file:///home/ms/.grails/1.2-M2/projects/jquery-calendar-sample/plugins/quartz-0.4.1/src/java" isTestSource="false" />
+      <sourceFolder url="file:///home/ms/.grails/1.2-M2/projects/jquery-calendar-sample/plugins/quartz-0.4.1/src/groovy" isTestSource="false" />
+      <sourceFolder url="file:///home/ms/.grails/1.2-M2/projects/jquery-calendar-sample/plugins/quartz-0.4.1/grails-app/services" isTestSource="false" />
+    </content>
+    <content url="file:///home/ms/.grails/1.2-M2/projects/jquery-calendar-sample/plugins/tomcat-1.2-M2">
+      <sourceFolder url="file:///home/ms/.grails/1.2-M2/projects/jquery-calendar-sample/plugins/tomcat-1.2-M2/src/groovy" isTestSource="false" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Grails 1.2-M2" level="application" />
+    <orderEntry type="module-library" exported="">
+      <library name="Grails User Library">
+        <CLASSES>
+          <root url="file:///home/ms/.grails/1.2-M2/projects/jquery-calendar-sample/plugins/tomcat-1.2-M2/lib" />
+          <root url="file:///home/ms/.grails/1.2-M2/projects/jquery-calendar-sample/plugins/hibernate-1.2-M2/lib" />
+          <root url="file:///home/ms/.grails/1.2-M2/projects/jquery-calendar-sample/plugins/quartz-0.4.1/lib" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+        <jarDirectory url="file:///home/ms/.grails/1.2-M2/projects/jquery-calendar-sample/plugins/hibernate-1.2-M2/lib" recursive="false" />
+        <jarDirectory url="file:///home/ms/.grails/1.2-M2/projects/jquery-calendar-sample/plugins/quartz-0.4.1/lib" recursive="false" />
+        <jarDirectory url="file:///home/ms/.grails/1.2-M2/projects/jquery-calendar-sample/plugins/tomcat-1.2-M2/lib" recursive="false" />
+      </library>
+    </orderEntry>
+  </component>
+</module>
+
