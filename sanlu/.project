@@ -24,74 +24,39 @@
 	</natures>
 	<linkedResources>
 		<link>
-			<name>jquery-calendar-0.2.2-grails-app-controllers</name>
+			<name>jquery-1.4.4.1-grails-app-conf</name>
 			<type>2</type>
-			<locationURI>GRAILS_ROOT/1.3.6/projects/jquery-calendar-sample/plugins/jquery-calendar-0.2.2/grails-app/controllers</locationURI>
+			<locationURI>GRAILS_ROOT/1.3.6/projects/sanlu/plugins/jquery-1.4.4.1/grails-app/conf</locationURI>
 		</link>
 		<link>
-			<name>jquery-calendar-0.2.2-grails-app-domain</name>
+			<name>jquery-1.4.4.1-grails-app-i18n</name>
 			<type>2</type>
-			<locationURI>GRAILS_ROOT/1.3.6/projects/jquery-calendar-sample/plugins/jquery-calendar-0.2.2/grails-app/domain</locationURI>
+			<locationURI>GRAILS_ROOT/1.3.6/projects/sanlu/plugins/jquery-1.4.4.1/grails-app/i18n</locationURI>
 		</link>
 		<link>
-			<name>jquery-calendar-0.2.2-grails-app-i18n</name>
+			<name>jquery-1.4.4.1-grails-app-services</name>
 			<type>2</type>
-			<locationURI>GRAILS_ROOT/1.3.6/projects/jquery-calendar-sample/plugins/jquery-calendar-0.2.2/grails-app/i18n</locationURI>
+			<locationURI>GRAILS_ROOT/1.3.6/projects/sanlu/plugins/jquery-1.4.4.1/grails-app/services</locationURI>
 		</link>
 		<link>
-			<name>jquery-calendar-0.2.2-grails-app-jobs</name>
+			<name>jquery-1.4.4.1-grails-app-taglib</name>
 			<type>2</type>
-			<locationURI>GRAILS_ROOT/1.3.6/projects/jquery-calendar-sample/plugins/jquery-calendar-0.2.2/grails-app/jobs</locationURI>
+			<locationURI>GRAILS_ROOT/1.3.6/projects/sanlu/plugins/jquery-1.4.4.1/grails-app/taglib</locationURI>
 		</link>
 		<link>
-			<name>jquery-calendar-0.2.2-grails-app-services</name>
+			<name>jquery-1.4.4.1-src-groovy</name>
 			<type>2</type>
-			<locationURI>GRAILS_ROOT/1.3.6/projects/jquery-calendar-sample/plugins/jquery-calendar-0.2.2/grails-app/services</locationURI>
+			<locationURI>GRAILS_ROOT/1.3.6/projects/sanlu/plugins/jquery-1.4.4.1/src/groovy</locationURI>
 		</link>
 		<link>
-			<name>jquery-calendar-0.2.2-grails-app-taglib</name>
+			<name>richui-0.8-src-groovy</name>
 			<type>2</type>
-			<locationURI>GRAILS_ROOT/1.3.6/projects/jquery-calendar-sample/plugins/jquery-calendar-0.2.2/grails-app/taglib</locationURI>
-		</link>
-		<link>
-			<name>jquery-calendar-0.2.2-grails-app-views</name>
-			<type>2</type>
-			<locationURI>GRAILS_ROOT/1.3.6/projects/jquery-calendar-sample/plugins/jquery-calendar-0.2.2/grails-app/views</locationURI>
-		</link>
-		<link>
-			<name>jquery-calendar-0.2.2-src-groovy</name>
-			<type>2</type>
-			<locationURI>GRAILS_ROOT/1.3.6/projects/jquery-calendar-sample/plugins/jquery-calendar-0.2.2/src/groovy</locationURI>
-		</link>
-		<link>
-			<name>quartz-0.4.1-grails-app-conf</name>
-			<type>2</type>
-			<locationURI>GRAILS_ROOT/1.3.6/projects/jquery-calendar-sample/plugins/quartz-0.4.1/grails-app/conf</locationURI>
-		</link>
-		<link>
-			<name>quartz-0.4.1-grails-app-i18n</name>
-			<type>2</type>
-			<locationURI>GRAILS_ROOT/1.3.6/projects/jquery-calendar-sample/plugins/quartz-0.4.1/grails-app/i18n</locationURI>
-		</link>
-		<link>
-			<name>quartz-0.4.1-grails-app-services</name>
-			<type>2</type>
-			<locationURI>GRAILS_ROOT/1.3.6/projects/jquery-calendar-sample/plugins/quartz-0.4.1/grails-app/services</locationURI>
-		</link>
-		<link>
-			<name>quartz-0.4.1-src-groovy</name>
-			<type>2</type>
-			<locationURI>GRAILS_ROOT/1.3.6/projects/jquery-calendar-sample/plugins/quartz-0.4.1/src/groovy</locationURI>
-		</link>
-		<link>
-			<name>quartz-0.4.1-src-java</name>
-			<type>2</type>
-			<locationURI>GRAILS_ROOT/1.3.6/projects/jquery-calendar-sample/plugins/quartz-0.4.1/src/java</locationURI>
+			<locationURI>GRAILS_ROOT/1.3.6/projects/sanlu/plugins/richui-0.8/src/groovy</locationURI>
 		</link>
 		<link>
 			<name>tomcat-1.3.6-src-groovy</name>
 			<type>2</type>
-			<locationURI>GRAILS_ROOT/1.3.6/projects/jquery-calendar-sample/plugins/tomcat-1.3.6/src/groovy</locationURI>
+			<locationURI>GRAILS_ROOT/1.3.6/projects/sanlu/plugins/tomcat-1.3.6/src/groovy</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>
