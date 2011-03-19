@@ -27,9 +27,8 @@ class BillDetail {
 	String description
 	String color
 	
-	static belongsTo ={
-		projects:Project
-	}	
+	static belongsTo =[projects:Project]	
+	
     static constraints = {
 		product nullable:false
 		quantity nullable:false

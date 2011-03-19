@@ -33,9 +33,9 @@ class Project {
 	//結帳人員
 	Employee closer
 	
-	static hasMany = {
-		bill:BillDetail
-	}
+	static hasMany = [bill:BillDetail]
+		
+	
 	static constraints = {
 		projectName maxSize:20,nullable:false
 		funeralCompany maxSize:60,nullable:false
