@@ -11,11 +11,11 @@ class Product {
 	//庫存數量
 	Integer totalQuantity
 	//內帳銷售單價
-	Double price
+	BigDecimal price
 	//銷售單價
-	Double sallingPrice
+	BigDecimal sallingPrice
 	//成本單價
-	Double costPrice
+	BigDecimal costPrice
 	//產品類型
 	String type
 	//單位
@@ -27,11 +27,9 @@ class Product {
 	
 	static constraints = {
 		productName maxSize:60,blank:false, unique:true
-		totalQuantity blank:false,nullable:false
-		price nullable:false
-		sallingPrice nullable:false
-		costPrice nullable:false
-		type nullable:false,blank:false
-		unit nullable:false,blank:false
+		totalQuantity blank:false
+		type blank:false
+		unit blank:false
+		
 	}
 }

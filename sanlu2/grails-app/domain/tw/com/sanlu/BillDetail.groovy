@@ -16,21 +16,24 @@ class BillDetail {
 	Date endTime
 	//消費產品數量
 	Integer quantity
-	//手動調整消費產品數量
-	Integer modifyQuantity
+	//小計
+	BigDecimal subtotal
+	//手動調整小計
+	BigDecimal modifySubtotal
 	//最後修改時間
-	Date lostModifyTime
+	Date lastUpdated
 	//最後修改人
-	Employee employee	
+	Employee lastModifyBy	
 	
 	String location
 	String description
 	String color
 	
-	static belongsTo =[projects:Project]	
+	static belongsTo =[project:Project]	
 	
     static constraints = {
-		product nullable:false
-		quantity nullable:false
+		color nullable:true
+		description nullable:true
+		location nullable:true
     }
 }
