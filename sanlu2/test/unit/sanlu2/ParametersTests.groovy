@@ -2,7 +2,7 @@ package sanlu2
 
 import grails.test.*
 
-class CalendarControllerTests extends ControllerUnitTestCase {
+class ParametersTests extends GrailsUnitTestCase {
     protected void setUp() {
         super.setUp()
     }
