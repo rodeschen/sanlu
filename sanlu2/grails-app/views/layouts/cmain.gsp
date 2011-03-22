@@ -2,12 +2,13 @@
 <html>
     <head>
         <title><g:layoutTitle default="Grails" /></title>
-       <!--   <link rel="stylesheet" href="${resource(dir:'css',file:'main.css')}" />-->
         <link rel="stylesheet" href="${resource(dir:'js/jquery/plugins/wdcalendar/css',file:'calendar.css')}" />
         <link rel="stylesheet" href="${resource(dir:'js/jquery/plugins/wdcalendar/css',file:'dp.css')}" />
         <link rel="stylesheet" href="${resource(dir:'js/jquery/plugins/wdcalendar/css',file:'main.css')}" />
+        <link rel="stylesheet" href="${resource(dir:'js/jquery/plugins/ui/css',file:'jquery-ui-1.8.11.custom.css')}" />
         
         <script type="text/javascript" src="${resource(dir:'js/jquery',file:'jquery-1.5.1.js')}"></script>
+        <script type="text/javascript" src="${resource(dir:'js/jquery/plugins/ui',file:'jquery-ui-1.8.11.custom.min.js')}"></script>
         <script type="text/javascript" src="${resource(dir:'js/jquery/plugins/wdcalendar',file:'datepicker_lang_HK.js')}"></script>
         <script type="text/javascript" src="${resource(dir:'js/jquery/plugins/wdcalendar',file:'jquery.datepicker.js')}"></script>
         <script type="text/javascript" src="${resource(dir:'js/jquery/plugins/wdcalendar',file:'wdCalendar_lang_HK.js')}"></script>
