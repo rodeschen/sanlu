@@ -1709,7 +1709,8 @@
 			var r = false;
 			var r2 = false;
 			for ( var i = 0; i < ll; i++) {
-				r = false; r2 = false;
+				r = false;
+				r2 = false;
 				var dr = option.loadDateR[i];
 				if (start >= dr.startdate && start <= dr.enddate) {
 					r = true;
@@ -2193,8 +2194,7 @@
 										+ buddle.find("#cal-start-hour").val()
 										+ ":"
 										+ buddle.find("#cal-start-min").val(),
-								"endTime" : buddle.find("#cal-end-year")
-										.val()
+								"endTime" : buddle.find("#cal-end-year").val()
 										+ "-"
 										+ buddle.find("#cal-end-month").val()
 										+ "-"
@@ -2213,33 +2213,48 @@
 							var tId = -1;
 							option.onBeforeRequestData
 									&& option.onBeforeRequestData(2);
-							$.post(option.quickAddUrl,param,function(data) {
-								if (data) {
-									debugger;
-									if (data.IsSuccess == true) {
-										option.isloading = false;
-										option.eventItems[tId][0] = data.Data;
-										option.eventItems[tId][8] = 1;
-										render();
-										option.onAfterRequestData
-												&& option
-														.onAfterRequestData(2);
-									} else {
-										option.onRequestDataError
-												&& option
-														.onRequestDataError(
-																2,
-																data);
-										option.isloading = false;
-										option.onAfterRequestData
-												&& option
-														.onAfterRequestData(2);
-										realsedragevent();
-									}
+							$
+									.post(
+											option.quickAddUrl,
+											param,
+											function(data) {
+												if (data) {
+													if (data.IsSuccess == true) {
+														option.isloading = false;
+														option.eventItems[tId][0] = data.Data;
+														option.eventItems[tId][8] = 1;
+														render();
+														option.onAfterRequestData
+																&& option
+																		.onAfterRequestData(2);
+													} else {
+														option.onRequestDataError
+																&& option
+																		.onRequestDataError(
+																				2,
+																				data);
+														option.isloading = false;
+														option.onAfterRequestData
+																&& option
+																		.onAfterRequestData(2);
+														realsedragevent();
+														option.eventItems;
+														for ( var i = 0; i < option.eventItems.length; i++) {
+															if (option.eventItems[i] == newdata) {
+																option.eventItems
+																		.splice(
+																				i,
+																				1);
+																break;
+															}
+														}
+														;
+														option.eventItems;
+													}
 
-								}
+												}
 
-							}, "json");
+											}, "json");
 
 							newdata.push(-1, what);
 							var sd = strtodate(datestart);
@@ -2249,8 +2264,8 @@
 									diff > 0 ? 1 : 0, 0);
 							newdata.push(-1, 0, "", "");
 							tId = Ind(newdata);
-							//realsedragevent();
-							//render();
+							// realsedragevent();
+							// render();
 						});
 				buddle.mousedown(function(e) {
 					return false
