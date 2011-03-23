@@ -1,7 +1,5 @@
 package tw.com.sanlu
 
-import java.util.Date;
-
 /**
  * 專案
  * @author rick
@@ -23,22 +21,28 @@ class Project {
 	//備註
 	String memo
 	//消費總金額
-	Double sallingTotal
+	BigDecimal sallingTotal
 	//內帳銷售總金額
-	Double total
+	BigDecimal total
 	//成本總金額
-	Double costTotal
+	BigDecimal costTotal
 	//結帳日期
 	Date closingDate
 	//結帳人員
 	Employee closer
-	
+
 	static hasMany = [bill:BillDetail]
-		
-	
+
+
 	static constraints = {
-		projectName maxSize:20,nullable:false
-		funeralCompany maxSize:60,nullable:false
-		emp nullable:false
+		projectName maxSize:20
+		funeralCompany maxSize:60
+		memo nullable:true
+		outDate(validator: { val, obj ->
+			val?.after(obj.inDate)
+		})
+		closingDate nullable:true
+		closer nullable:true
+		
 	}
 }

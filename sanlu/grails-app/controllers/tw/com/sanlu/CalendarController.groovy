@@ -1,10 +1,12 @@
 package tw.com.sanlu
 
+
 import grails.converters.JSON
+import java.text.DateFormat
+import java.text.SimpleDateFormat
 
 
 class CalendarController {
-
     def index = {
         redirect(action: "list", params: params)
     }
@@ -17,9 +19,25 @@ class CalendarController {
     }
 	
 	def add ={
-		def startTime = params.startTime
-		def endTime = params.endTime
-		System.out.println "XXXX"
+		DateFormat df = new SimpleDateFormat("yyyy-M-d HH:mm");
+		def project1 = Project.findByProjectName("projectName")
+		def emp2 = Employee.findByEmpNo("00002")
+		def hall = Product.findByProductName("大忠廳")
+		System.out.println params.startTime
+		def cal= new BillDetail(
+			product:hall,
+			startTime:df.parse(params.startTime),
+			endTime:df.parse(params.endTime),
+			quantity:10,
+			subtotal:550,
+			modifySubtotal:500,
+			lastModifyBy:emp2,
+			project:project1
+		)
+		cal.save()
+		//def startTime = params.startTime
+		//def endTime = params.endTime
+		
 		def res = ["IsSuccess" : false]
 		render res as JSON
 	}
