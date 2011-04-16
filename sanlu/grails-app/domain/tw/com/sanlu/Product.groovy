@@ -6,8 +6,9 @@ package tw.com.sanlu
  *
  */
 class Product {
+	Product parentOid
 	//產品名稱
-	String productName
+	String name	
 	//庫存數量
 	Integer totalQuantity
 	//內帳銷售單價
@@ -16,9 +17,11 @@ class Product {
 	BigDecimal sallingPrice
 	//成本單價
 	BigDecimal costPrice
-	//產品類型
-	String type
-	//單位
+	//時間類型
+	String timeType
+	//重覆單位
+	String repeatUnit
+	//計價單位
 	String unit
 	//呈現
 //	String toString(){
@@ -26,10 +29,11 @@ class Product {
 //	}
 	
 	static constraints = {
-		productName maxSize:60,blank:false, unique:true
+		name maxSize:60,blank:false, unique:true
 		totalQuantity blank:false
-		type blank:false
-		unit blank:false
+		timeType maxSize:10,blank:false
+		repeatUnit maxSize:10,blank:false,nullable:false
+		unit maxSize:10,blank:false,nullable:false
 		
 	}
 }

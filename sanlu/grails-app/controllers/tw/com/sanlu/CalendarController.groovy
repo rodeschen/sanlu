@@ -38,7 +38,7 @@ class CalendarController {
 		//def startTime = params.startTime
 		//def endTime = params.endTime
 		
-		def res = ["IsSuccess" : false]
+		def res = ["IsSuccess" : true]
 		render res as JSON
 	}
 }
