@@ -52,8 +52,7 @@ class BootStrap {
 						sallingPrice:200,
 						costPrice:50,
 						timeType:1,
-						unit:"對",
-						repeatUnit:"天"
+						unit:"對"
 						)
 				flower.save()
 				def washbasin = new Product(name:"奉臉盆水",
@@ -62,8 +61,7 @@ class BootStrap {
 						sallingPrice:500,
 						costPrice:100,
 						timeType:1,
-						unit:"組",
-						repeatUnit:"天"
+						unit:"組"
 						)
 				washbasin.save()
 
@@ -73,8 +71,7 @@ class BootStrap {
 						sallingPrice:8000,
 						costPrice:5000,
 						timeType:1,
-						unit:"節",
-						repeatUnit:"天"
+						unit:"節"
 						)
 				hall.save()
 			//init Project

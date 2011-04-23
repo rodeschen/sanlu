@@ -19,8 +19,6 @@ class Product {
 	BigDecimal costPrice
 	//時間類型
 	String timeType
-	//重覆單位
-	String repeatUnit
 	//計價單位
 	String unit
 	//呈現
@@ -32,7 +30,6 @@ class Product {
 		name maxSize:60,blank:false, unique:true
 		totalQuantity blank:false
 		timeType maxSize:10,blank:false
-		repeatUnit maxSize:10,blank:false,nullable:false
 		unit maxSize:10,blank:false,nullable:false
 		
 	}
