@@ -1,7 +1,6 @@
 grails.project.class.dir = "target/classes"
 grails.project.test.class.dir = "target/test-classes"
 grails.project.test.reports.dir = "target/test-reports"
-grails.project.plugins.dir = "plugins"
 //grails.project.war.file = "target/${appName}-${appVersion}.war"
 grails.project.dependency.resolution = {
     // inherit Grails' default dependencies
@@ -18,18 +17,26 @@ grails.project.dependency.resolution = {
         // uncomment the below to enable remote dependency resolution
         // from public Maven repositories
         //mavenLocal()
-        //mavenCentral()
+        mavenCentral()
         //mavenRepo "http://snapshots.repository.codehaus.org"
         //mavenRepo "http://repository.codehaus.org"
         //mavenRepo "http://download.java.net/maven/2/"
         //mavenRepo "http://repository.jboss.com/maven2/"
-		//mavenRepo "http://repo1.maven.org/maven2"
     }
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
-
-        // runtime 'mysql:mysql-connector-java:5.1.13'
-		//compile 'org.eclipse.jetty:jetty-websocket:8.0.0.M2'
-		grails.plugin.repos.discovery.jetty7Repository="http://grails-jetty7.googlecode.com/svn/"
+        // runtime 'mysql:mysql-connector-java:5.1.5'
+        def jettyVersion = "7.3.1.v20110307"
+        runtime(
+          "org.eclipse.jetty:jetty-http:${jettyVersion}",
+          "org.eclipse.jetty:jetty-server:${jettyVersion}",
+          "org.eclipse.jetty:jetty-webapp:${jettyVersion}",
+          "org.eclipse.jetty:jetty-plus:${jettyVersion}",
+          "org.eclipse.jetty:jetty-continuation:${jettyVersion}",
+          "org.eclipse.jetty:jetty-websocket:${jettyVersion}"
+        ) {
+          excludes 'commons-el','ant', 'sl4j-api','sl4j-simple','jcl104-over-slf4j','xercesImpl','xmlParserAPIs', 'servlet-api'
+          excludes 'mail', 'commons-lang'
+        }
     }
 }

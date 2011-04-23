@@ -1,0 +1,14 @@
+<plugin name='jetty7' version='0.3.2' grailsVersion='1.3 &gt; *'>
+  <author>Ford Guo</author>
+  <title>Jetty 7 for Grails</title>
+  <description>\
+Makes Jetty7 the development time container for Grails
+</description>
+  <documentation>http://grails.org/plugin/jetty7</documentation>
+  <resources>
+    <resource>BuildConfig</resource>
+    <resource>UrlMappings</resource>
+  </resources>
+  <dependencies />
+  <behavior />
+</plugin>
