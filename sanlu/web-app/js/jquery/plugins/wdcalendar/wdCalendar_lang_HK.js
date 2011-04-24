@@ -3,7 +3,7 @@ var i18n = $.extend({}, i18n || {}, {
         dateformat: {
             "fulldaykey": "yyyyMMdd",
             "fulldayshow": "yyyy年M月d日",
-            "fulldayvalue": "yyyy-M-d",
+            "fulldayvalue": "yyyy-MM-dd",
             "Md": "M/d (W)",
             "Md3": "M月d日",
             "separator": "-",

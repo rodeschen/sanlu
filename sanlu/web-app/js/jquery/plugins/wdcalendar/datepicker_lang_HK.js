@@ -1,7 +1,7 @@
 var i18n = $.extend({}, i18n || {}, {
     datepicker: {
         dateformat: {
-            "fulldayvalue": "yyyy-M-d",
+            "fulldayvalue": "yyyy-MM-dd",
             "separator": "-",
             "year_index": 0,
             "month_index": 1,
