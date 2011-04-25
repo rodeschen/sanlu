@@ -47,8 +47,7 @@ fieldset {
 	margin:10px 0;
 	border:1px solid #AAAA00;
 }
-
-fieldset > legend{
+fieldset > legend {
 	font-weight: bold;
 	font-size:16px;
 }
@@ -85,7 +84,7 @@ nav a {
 	margin: 0;
 	-webkit-border-radius: 1.6em;
 	-moz-border-radius: 1.6em;
-	text-shadow: 4px 4px 3px rgba(0,0,0, .3);
+	text-shadow: 5px 5px 8px rgba(0,0,0, .3);
 }
 #nav a:hover {
 	background: #000;
@@ -177,4 +176,12 @@ nav a {
 }
 #nav {
 	display: inline-block;
+}
+/**  Grid **/
+.r-grid .ui-th-column > div{
+	font-size:11px;
+    padding-top:3px;
+}
+.r-grid .HeaderButton {
+	display: none;
 }

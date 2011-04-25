@@ -8,14 +8,15 @@
 					datatype: "local",
 					height: 100,
 					autowidth:true,
-					//pager: '#page1',
-					colNames:['Inv No','Date', 'Client', 'Amount','Tax','Total','Notes'],
+					//pager: true,
+					//colNames:['Inv No','Date', 'Client', 'Amount','Tax','Total','Notes'],
 					colModel:[{
 						name:'id',
 						index:'id',
 						width:60,
 						sorttype:"int"
 					},{
+						header:"他是頭",
 						name:'invdate',
 						index:'invdate',
 						width:90,
@@ -109,20 +110,13 @@
 			<legend>
 				進行中專案
 			</legend>
-			<table id="grid1">
-			</table>
-			<div id="page1">
-			</div>
+			<div id="grid1"/>
 		</fieldset>
 		<fieldset>
 			<legend>
 				場地清單
 			</legend>
-			<table id="grid2">
-			</table>
-			<div id="page2">
-			</div>
-		</fieldset>
+			<div id="grid2"/>
 		</fieldset>
 	</body>
 </html>

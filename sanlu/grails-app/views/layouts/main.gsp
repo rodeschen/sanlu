@@ -10,6 +10,7 @@
 		<script src="${resource(dir:'js/jquery',file:'jquery-1.5.2.js')}"></script>
 		<script src="${resource(dir:'js/jquery/plugins/ui',file:'jquery-ui-1.8.12.custom.min.js')}"></script>
 		<script src="${resource(dir:'js/jquery/plugins/jqgrid/js',file:'jquery.jqGrid.src.js')}"></script>
+		<script src="${resource(dir:'js/base',file:'base.js')}"></script>
 		<g:layoutHead />
 			<!--<g:javascript library="application" />-->
 			<style>
