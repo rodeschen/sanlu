@@ -5,18 +5,18 @@ package tw.com.sanlu
 */
 class FuneralCompany {
 	//公司名
-	String name
+	String funeralCompanyName
 	//電話1
 	String phone1
 	//電話2	
-	String phone2
-	
+	String phone2	
 	//地址
 	String address
+	static hasMany = [funer:Funeraler]
 	
     static constraints = {
-		name nullable:false,maxSize:60,blank:false, unique:true
-		phone1 nullable:false,maxSize:20
+		funeralCompanyName maxSize:60,blank:false, unique:true
+		phone1 maxSize:20
 		phone2 nullable:true,maxSize:20
 		address maxSize:100
     }

@@ -2,6 +2,7 @@ import grails.util.GrailsUtil
 import tw.com.sanlu.BillDetail
 import tw.com.sanlu.Employee
 import tw.com.sanlu.FuneralCompany
+import tw.com.sanlu.Funeraler;
 import tw.com.sanlu.Product
 import tw.com.sanlu.Project
 
@@ -13,11 +14,18 @@ class BootStrap {
 
 			//init 禮儀公司
 				def fCom = new FuneralCompany(
-				name:"祥安禮儀",
+				funeralCompanyName:"祥安禮儀",
 				phone1:"091234567",
 				address:"新北市三重區XX路"
 				)
 				fCom.save()
+			//init 禮儀師
+				def funer = new Funeraler(
+						funeralCommpany:fCom,
+						funeralerName:"李XX",
+						phone1:"0988765241"
+						)
+				funer.save()
 			//init Employee
 				def emp1 = new Employee(
 						empNo:"00001",
@@ -46,7 +54,9 @@ class BootStrap {
 
 
 			//init Product
-				def flower = new Product(name:"花",
+				def flower = new Product(
+						productNo:"000001",
+						productName:"花",
 						totalQuantity:50,
 						price:100,
 						sallingPrice:200,
@@ -55,7 +65,12 @@ class BootStrap {
 						unit:"對"
 						)
 				flower.save()
-				def washbasin = new Product(name:"奉臉盆水",
+				if(flower.hasErrors()){
+					println flower.errors
+				}
+				def washbasin = new Product(
+						productNo:"000002",
+						productName:"奉臉盆水",
 						totalQuantity:100,
 						price:200,
 						sallingPrice:500,
@@ -65,7 +80,9 @@ class BootStrap {
 						)
 				washbasin.save()
 
-				def hall = new Product(name:"大忠廳",
+				def hall = new Product(
+						productNo:"000003",
+						productName:"大忠廳",
 						totalQuantity:1,
 						price:6400,
 						sallingPrice:8000,
@@ -77,7 +94,7 @@ class BootStrap {
 			//init Project
 				def project1 = new Project(
 						projectName:"projectName",
-						funeralCompany:fCom,
+						funeraler:funer,
 						inDate:new Date(99,12,1,10,00,00),
 						outDate:new Date(),
 						emp:emp1,
@@ -95,8 +112,10 @@ class BootStrap {
 						startTime:new Date(99,12,1,10,00,00),
 						endTime:new Date(),
 						quantity:10,
-						subtotal:550,
-						modifySubtotal:500,
+						price:550,
+						modifiedPrice:500,
+						costPrice:300,
+						modifiedCostPrice:300,
 						lastModifyBy:emp2,
 						project:project1
 						)
@@ -109,8 +128,10 @@ class BootStrap {
 						startTime:new Date(99,12,1,10,00,00),
 						endTime:new Date(),
 						quantity:10,
-						subtotal:550,
-						modifySubtotal:500,
+						price:550,
+						modifiedPrice:500,
+						costPrice:300,
+						modifiedCostPrice:300,
 						lastModifyBy:emp2,
 						project:project1
 						)

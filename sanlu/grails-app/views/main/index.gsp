@@ -7,35 +7,39 @@
         <script>
             $(document).ready(function(){
                 $("#grid1").jqGrid({
-                    url: contextRoot + "/project/queryAction",
+                    url: contextRoot + "/project/query",
                     datatype: "json",
                     height: "auto",
                     autowidth: true,
 					pager:true,
                     colModel: [{
-                        name: 'id',
-                        index: 'id',
-                        width: 60,
-                        sorttype: "int"
+                        name: 'projectName',
+                        index: 'projectName',
+                        width: 60
                     }, {
                         header: "他是頭",
-                        name: 'invdate',
-                        index: 'invdate',
-                        width: 90,
+                        name: 'funeraler',
+                        index: 'funeraler',
+                        width: 90
+                       
+                    }, {
+                        name: 'inDate',
+                        index: 'inDate',
+                        width: 100,
                         sorttype: "date"
                     }, {
-                        name: 'name',
-                        index: 'name',
-                        width: 100
+                        name: 'outDate',
+                        index: 'outDate',
+                        width: 100,
+                        sorttype: "date"
                     }, {
-                        name: 'amount',
-                        index: 'amount',
+                        name: 'emp',
+                        index: 'emp',
                         width: 80,
-                        align: "right",
-                        sorttype: "float"
+                        align: "right"
                     }, {
-                        name: 'tax',
-                        index: 'tax',
+                        name: 'sallingTotal',
+                        index: 'sallingTotal',
                         width: 80,
                         align: "right",
                         sorttype: "float"
@@ -46,8 +50,8 @@
                         align: "right",
                         sorttype: "float"
                     }, {
-                        name: 'note',
-                        index: 'note',
+                        name: 'memo',
+                        index: 'memo',
                         width: 150,
                         sortable: false
                     }],

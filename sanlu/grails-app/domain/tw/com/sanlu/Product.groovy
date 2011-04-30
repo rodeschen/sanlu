@@ -6,9 +6,10 @@ package tw.com.sanlu
  *
  */
 class Product {
-	Product parentOid
+	//商品代號
+	String productNo
 	//產品名稱
-	String name	
+	String productName
 	//庫存數量
 	Integer totalQuantity
 	//內帳銷售單價
@@ -21,16 +22,22 @@ class Product {
 	String timeType
 	//計價單位
 	String unit
+	//是否為場地類商品
+	boolean hasPlace
 	//呈現
-//	String toString(){
-//		return "${productName}-${empName}}"
-//	}
+	//	String toString(){
+	//		return "${productName}-${empName}}"
+	//	}
 	
 	static constraints = {
-		name maxSize:60,blank:false, unique:true
-		totalQuantity blank:false
-		timeType maxSize:10,blank:false
-		unit maxSize:10,blank:false,nullable:false
-		
+		productNo maxSize:6
+		productName maxSize:60, unique:true
+		timeType maxSize:10
+		unit maxSize:10
+		totalQuantity nullable:true
+		price nullable:true
+		sallingPrice nullable:true
+		costPrice nullable:true
+		hasPlace nullable:true
 	}
 }

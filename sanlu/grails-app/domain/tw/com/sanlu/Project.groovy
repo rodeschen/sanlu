@@ -9,9 +9,7 @@ class Project {
 	//案名
 	String projectName
 	//禮儀公司/禮儀師
-	FuneralCompany funeralCompany
-	//String funeralDirector
-
+	Funeraler funeraler
 	//入館日期
 	Date inDate
 	//出館日期
@@ -36,7 +34,6 @@ class Project {
 
 	static constraints = {
 		projectName maxSize:20
-		funeralCompany nullable:false
 		memo nullable:true
 		outDate(validator: { val, obj ->
 			val?.after(obj.inDate)
