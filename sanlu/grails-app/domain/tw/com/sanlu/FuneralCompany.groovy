@@ -10,6 +10,7 @@ class FuneralCompany {
 	String phone1
 	//電話2	
 	String phone2
+	
 	//地址
 	String address
 	
