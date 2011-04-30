@@ -10,8 +10,6 @@ class FuneralCompany {
 	String phone1
 	//電話2	
 	String phone2
-	//電話3
-	String phone3
 	//地址
 	String address
 	
@@ -19,7 +17,6 @@ class FuneralCompany {
 		name nullable:false,maxSize:60,blank:false, unique:true
 		phone1 nullable:false,maxSize:20
 		phone2 nullable:true,maxSize:20
-		phone3 nullable:true,maxSize:20
 		address maxSize:100
     }
 }
