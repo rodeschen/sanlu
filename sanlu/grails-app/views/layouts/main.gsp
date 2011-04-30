@@ -1,7 +1,7 @@
-<html lang="cht">
+<html>
 	<head>
 		<title>
-			<g:layoutTitle default="Grails" />
+			<g:layoutTitle default="三蘆關懷會館" />
 		</title>
 		<link rel="shortcut icon" href="${resource(dir:'images',file:'favicon.ico')}" type="image/x-icon" />
 		<link rel="stylesheet" href="${resource(dir:'js/jquery/plugins/ui',file:'jquery-ui-1.8.12.custom.css')}" />
@@ -24,7 +24,7 @@
 			<nav>
 				<ul id="nav">
 					<li class="current">
-						<a href="#">首頁</a>
+						<a href="${request.contextPath}/main">首頁</a>
 					</li>
 					<li>
 						<a href="#">報表</a>
@@ -33,10 +33,10 @@
 						<a href="#">系統管理</a>
 						<ul>
 							<li>
-								<a href="#">商品管理</a>
+								<a href="${request.contextPath}/manager/product">商品管理</a>
 							</li>
 							<li>
-								<a href="#">禮儀公司管理</a>
+								<a href="${request.contextPath}/manager/funeralcompany">禮儀公司管理</a>
 							</li>
 							<li>
 								<hr />
@@ -48,6 +48,7 @@
 					</li>
 				</ul>
 			</nav>
+			<aside> <span>&gt;&gt;</span> 首頁 </aside>
 			<section>
 				<g:layoutBody />
 			</section>

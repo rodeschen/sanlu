@@ -35,9 +35,23 @@ nav {
 nav > ul {
 	width:960px;
 }
+
+aside{
+	margin:5px 0px 5px 10px;
+	color: #00A;
+	font-weight:bold;
+	font-size:13px;
+}
+
+aside span{
+	color: #AAAA00;
+	font-weight:normal;
+	font-size:10px;
+}
+
 section {
 	min-height: 300px;
-	padding:10px;
+	padding:0px 10px 0;
 	5px;
 }
 fieldset {
@@ -120,6 +134,7 @@ nav a {
 	display: block;
 	z-index: 100;
 }
+
 /* level 2 list */
 #nav ul {
 	display: none;
@@ -184,4 +199,13 @@ nav a {
 }
 .r-grid .HeaderButton {
 	display: none;
+}
+
+/** button **/
+button{
+	margin:5px 0px
+}
+.ui-button .ui-button-text{
+	font-size:11px;
+	line-height:11px;
 }
