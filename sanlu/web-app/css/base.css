@@ -197,6 +197,14 @@ nav a {
 	font-size:11px;
     padding-top:3px;
 }
+
+.r-grid .ui-th-column > div{
+	font-size:11px;
+    padding-top:3px;
+}
+.r-grid .ui-row-ltr > td{
+	font-size:11px;
+}
 .r-grid .HeaderButton {
 	display: none;
 }

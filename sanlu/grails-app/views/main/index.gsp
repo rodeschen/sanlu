@@ -25,13 +25,11 @@
                     }, {
                         name: 'inDate',
                         index: 'inDate',
-                        width: 100,
-                        sorttype: "date"
+                        width: 100
                     }, {
                         name: 'outDate',
                         index: 'outDate',
-                        width: 100,
-                        sorttype: "date"
+                        width: 100
                     }, {
                         name: 'emp.empName',
                         index: 'emp.empName',
@@ -41,14 +39,12 @@
                         name: 'sallingTotal',
                         index: 'sallingTotal',
                         width: 80,
-                        align: "right",
-                        sorttype: "float"
+                        align: "right"
                     }, {
                         name: 'total',
                         index: 'total',
                         width: 80,
-                        align: "right",
-                        sorttype: "float"
+                        align: "right"
                     }, {
                         name: 'memo',
                         index: 'memo',
@@ -67,13 +63,11 @@
                     colModel: [{
                         name: 'id',
                         index: 'id',
-                        width: 60,
-                        sorttype: "int"
+                        width: 60
                     }, {
                         name: 'invdate',
                         index: 'invdate',
-                        width: 90,
-                        sorttype: "date"
+                        width: 90
                     }, {
                         name: 'name',
                         index: 'name',
@@ -82,20 +76,17 @@
                         name: 'amount',
                         index: 'amount',
                         width: 80,
-                        align: "right",
-                        sorttype: "float"
+                        align: "right"
                     }, {
                         name: 'tax',
                         index: 'tax',
                         width: 80,
-                        align: "right",
-                        sorttype: "float"
+                        align: "right"
                     }, {
                         name: 'total',
                         index: 'total',
                         width: 80,
-                        align: "right",
-                        sorttype: "float"
+                        align: "right"
                     }, {
                         name: 'note',
                         index: 'note',

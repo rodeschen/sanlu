@@ -16,7 +16,8 @@ class ProjectController extends GridController {
 		//			gt("outDate",date())
 		//			order("holderLastName", "desc")
 		//		}
-		def rows=[:]
+		def rows=[]
+		def row = [:]
 		def projects = Project.findAll("from Project as p where p.outDate is null or p.outDate > day(current_date()) "+(sortBy?"order by "+sortBy+(isAsc?" asc":" desc"):""),[max:pageRows,offset:startRow])
 		for (project in projects) {
 			//def o =[:]
@@ -26,13 +27,15 @@ class ProjectController extends GridController {
 				def aa = project
 
 				for(i in obj){
+			//		system.out.print i
 					aa = aa.getAt(i)
 				}
 				o.add aa
 				//o.put("${it}", aa)
 				
 			}
-			rows.put(GridEnum.CELL.getCode(),o)
+			row.put(GridEnum.CELL.getCode(),o)
+			rows.add row
 		}
 		return rows
 	}

@@ -15,16 +15,17 @@
         }
         
         if ((this.is("div") || !this.is("[role=grid]")) && typeof arguments[0] === 'object') {
+			var id = this.attr("id");
             this.append($("<table />", {
-                id: this.attr("id")
+                id: id
             })).addClass("r-grid").removeAttr("id");
             // add pager
             arguments[0].pager &&
             this.append($("<div />", {
-                id: this.attr("id") + "-pager"
+                id: id + "-pager"
             })) &&
             $.extend(arguments[0], {
-                pager: this.attr("id") + "-pager",
+                pager: id + "-pager",
                 hidegrid: false
             });
             
@@ -46,7 +47,7 @@
             
             var resGrid = _jqGrid.call(this.is("table") ? this : this.find("table"), s);
             s.pager &&
-            resGrid.navGrid("#" + this.attr("id") + "-pager", {
+            resGrid.navGrid("#" + id + "-pager", {
                 del: false,
                 add: false,
                 edit: false,
@@ -57,7 +58,10 @@
         return _jqGrid.apply(this.is("table") ? this : this.find("table"), arguments);
     }
 })(jQuery);
-
+$.ajaxSetup({
+   jsonp: null,
+   jsonpCallback: null
+});
 //APIS
 var API = {
     loadPage: function(href){
