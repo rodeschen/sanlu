@@ -55,8 +55,10 @@
             });
             return resGrid;
         }
-        return _jqGrid.apply(this.is("table") ? this : this.find("table"), arguments);
+       // 
+        return _jqGrid.apply(this.is("table") ? $(this) : $(this.find("table")), arguments);
     }
+    $.extend($.fn.jqGrid,_jqGrid);
 })(jQuery);
 $.ajaxSetup({
    jsonp: null,
