@@ -18,8 +18,8 @@
                         width: 60
                     }, {
                         header: "他是頭",
-                        name: 'funeraler',
-                        index: 'funeraler',
+                        name: 'funeraler.funeralerName',
+                        index: 'funeraler.funeralerName',
                         width: 90
                        
                     }, {
@@ -33,8 +33,8 @@
                         width: 100,
                         sorttype: "date"
                     }, {
-                        name: 'emp',
-                        index: 'emp',
+                        name: 'emp.empName',
+                        index: 'emp.empName',
                         width: 80,
                         align: "right"
                     }, {

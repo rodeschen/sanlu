@@ -10,7 +10,8 @@ public enum GridEnum {
 	PAGE("page"), PAGEROWS("rows"), TOTAL("total"), RECORDS("records"), SORTTYPE(
 			"sord"), SORTASC("asc"), SORTDESC("desc"), SORTCOLUMN("sidx"), CELL(
 			"cell"), COL_NAME("name"), COL_INDEX("index"), COL_PARAM(
-			"_columnParam");
+			"columnParam"), GROUP_COLUMN(
+			"groupCloumn");
 
 	private String code;
 

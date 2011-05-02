@@ -96,7 +96,7 @@ class BootStrap {
 						projectName:"projectName",
 						funeraler:funer,
 						inDate:new Date(99,12,1,10,00,00),
-						outDate:new Date(),
+						outDate:new Date(100,12,1,10,00,00),
 						emp:emp1,
 						sallingTotal:100000,
 						total:90000,
