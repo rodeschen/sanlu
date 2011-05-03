@@ -13,7 +13,7 @@ import java.util.concurrent.ThreadPoolExecutor.AbortPolicy;
  */
 abstract class GridController {
 	public int page = 0, pageRows = 0, startRow = 0, rowCount = 0, pagerows = 0
-	def sortBy = null,columns=[]
+	def id ,sortBy,columns=[]
 	
 
 	public boolean pages,isAsc
@@ -30,7 +30,7 @@ abstract class GridController {
 			pageRows = params.int(GridEnum.PAGEROWS.getCode())
 			startRow = (page - 1) * pageRows;
 			rowCount = getCountRow(params)
-			columns = getColumns(params);
+			columns = getColumns(params.get(GridEnum.COL_PARAM.getCode()));
 		}
 
 		if (params.containsKey(GridEnum.SORTCOLUMN)) {
@@ -46,7 +46,6 @@ abstract class GridController {
 		result.put(GridEnum.RECORDS.getCode(),rowCount)
 		render result as JSON
 	}
-
 	def queryAction={}
 	public abstract int getCountRow(params)
 
@@ -57,8 +56,8 @@ abstract class GridController {
 	 *            String
 	 * @return String string[]
 	 */
-	public getColumns(params) {
-		JSONArray arr = new JSONArray(params.get(GridEnum.COL_PARAM.getCode()))
+	public getColumns(colInfo) {
+		JSONArray arr = new JSONArray(colInfo)
 		def colName= new String[arr.size()]
 		for (int i = 0; i < arr.size(); i++) {
 			JSONObject m =arr.get(i);
@@ -67,4 +66,17 @@ abstract class GridController {
 		}
 		return colName
 	}
+	
+	def delete={
+		id  = params.long("id")
+		deleteAction()
+		}
+	def deleteAction={}
+	
+	def modify={
+		columns = getColumns(new JSONArray(params.get("columnParam")));
+		id  = new JSONObject(params.get("data")).getLong("id")
+		modifyAction()
+		}
+	def modifyAction={}
 }

@@ -6,22 +6,26 @@
     <body>
         <script>
             $(document).ready(function(){
-                $("#grid1").jqGrid({
+                var grid1 = $("#grid1").jqGrid({
                     url: contextRoot + "/project/query",
                     datatype: "json",
                     height: "auto",
                     autowidth: true,
-					pager:true,
+                    pager: true,
                     colModel: [{
+                        name: 'id',
+                        index: 'id',
+                        hidden: true
+                    }, {
                         name: 'projectName',
                         index: 'projectName',
                         width: 60
                     }, {
-                        header: "他是頭",
+                        header: "禮儀公司/禮儀師",
                         name: 'funeraler.funeralerName',
                         index: 'funeraler.funeralerName',
                         width: 90
-                       
+                    
                     }, {
                         name: 'inDate',
                         index: 'inDate',
@@ -55,7 +59,7 @@
                     caption: "Manipulating Array Data"
                 });
                 
-                $("#grid2").jqGrid({
+                var grid2 = $("#grid2").jqGrid({
                     datatype: "local",
                     height: "auto",
                     autowidth: true,
@@ -95,6 +99,41 @@
                     }],
                     multiselect: true,
                     caption: "Manipulating Array Data"
+                });
+                $("#delete1").click(function(){
+                    var selrow = grid1.jqGrid('getGridParam', 'selarrrow');
+                    if (!selrow) {
+                        alert("請先選擇刪除列");
+                    }
+                    var id = grid1.getRowData(selrow);
+                    $.ajax({
+                        type: "POST",
+                        url: contextRoot + "/project/delete",
+                        data: id,
+                        success: function(msg){
+                            grid1.trigger("reloadGrid");
+                            alert("刪除成功: " + msg);
+                        }
+                    })
+                });
+                $("#modify1").click(function(){
+                    var selrow = grid1.jqGrid('getGridParam', 'selarrrow');
+                    if (!selrow) {
+                        alert("請先選擇修改列");
+                    }
+                    var id = grid1.getRowData(selrow);
+                    $.ajax({
+                        type: "POST",
+                        url: contextRoot + "/project/modify",
+                        data: {
+                            columnParam: JSON.stringify(grid1.jqGrid('getGridParam', 'colModel')),
+							data : JSON.stringify(id)
+                        },
+                        success: function(msg){
+                            grid1.trigger("reloadGrid");
+                            alert("修改成功: " + msg);
+                        }
+                    })
                 });
             });
         </script>

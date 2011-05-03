@@ -1,10 +1,12 @@
 package tw.com.sanlu
-import org.codehaus.groovy.grails.web.json.JSONArray
+import java.sql.Timestamp
+import java.text.DateFormat
+
 import org.codehaus.groovy.grails.web.json.JSONObject
 
 
 class ProjectController extends GridController {
-
+	
 	def index = { }
 	def queryAction = {
 
@@ -27,12 +29,16 @@ class ProjectController extends GridController {
 				def aa = project
 
 				for(i in obj){
-			//		system.out.print i
+					//		system.out.print i
 					aa = aa.getAt(i)
+				}
+				if(aa instanceof Timestamp){
+
+					aa=	Utility.shortFormat.format(aa)
 				}
 				o.add aa
 				//o.put("${it}", aa)
-				
+
 			}
 			row.put(GridEnum.CELL.getCode(),o)
 			rows.add row
@@ -41,5 +47,34 @@ class ProjectController extends GridController {
 	}
 	public int getCountRow(params){
 		Project.count()
+	}
+
+	def deleteAction = {
+		def project = Project.findById(id)
+		return project?project.delete():println("無法刪除")
+	}
+	def modifyAction={
+		def project = Project.findById(id)
+		if(!project) {
+			return println("無法修改")
+		}
+		new JSONObject(params.get("data")).each(){
+			switch( it.key ){
+				case 'projectName':
+					project.putAt it.key,it.value
+					break
+				case 'inDate':
+				case 'outDate':
+					project.putAt it.key,Utility.shortFormat.parse(it.value)
+					break
+				case 'sallingTotal':
+				case 'total':
+					project.putAt it.key,new BigDecimal( it.value)
+					break
+				default:
+					break
+			}
+		}
+		return project.save()
 	}
 }
