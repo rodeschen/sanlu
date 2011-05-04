@@ -11,46 +11,50 @@ class BootStrap {
 	def init = { servletContext ->
 		switch(GrailsUtil.environment){
 			case "development":
-
+			//init Employee
+			def emp1 = new Employee(
+					empNo:"00001",
+					empName:"emp1",
+					password:"1234",
+					hireDate:new Date(),
+					empLevel:5,
+					gender:"M")
+			emp1.save()
+			def emp2= new Employee(
+					empNo:"00002",
+					empName:"emp2",
+					password:"1234",
+					hireDate:new Date(),
+					empLevel:5,
+					gender:"M")
+			emp2.save()
+			def emp3 = new Employee(
+					empNo:"00003",
+					empName:"emp3",
+					password:"1234",
+					hireDate:new Date(),
+					empLevel:5,
+					gender:"M")
+			emp3.save()
 			//init 禮儀公司
 				def fCom = new FuneralCompany(
 				funeralCompanyName:"祥安禮儀",
 				phone1:"091234567",
-				address:"新北市三重區XX路"
+				address:"新北市三重區XX路",
+				lastModify:new Date(),
+				lastModifyBy:emp1
 				)
 				fCom.save()
 			//init 禮儀師
 				def funer = new Funeraler(
 						funeralCommpany:fCom,
 						funeralerName:"李XX",
-						phone1:"0988765241"
+						phone1:"0988765241",
+						lastModify:new Date(),
+						lastModifyBy:emp1
 						)
 				funer.save()
-			//init Employee
-				def emp1 = new Employee(
-						empNo:"00001",
-						empName:"emp1",
-						password:"1234",
-						hireDate:new Date(),
-						empLevel:5,
-						gender:"M")
-				emp1.save()
-				def emp2= new Employee(
-						empNo:"00002",
-						empName:"emp2",
-						password:"1234",
-						hireDate:new Date(),
-						empLevel:5,
-						gender:"M")
-				emp2.save()
-				def emp3 = new Employee(
-						empNo:"00003",
-						empName:"emp3",
-						password:"1234",
-						hireDate:new Date(),
-						empLevel:5,
-						gender:"M")
-				emp3.save()
+			
 
 
 			//init Product

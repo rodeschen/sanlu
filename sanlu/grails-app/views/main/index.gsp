@@ -12,11 +12,12 @@
                     height: "auto",
                     autowidth: true,
                     pager: true,
-                    colModel: [{
+                    colModel: [{						
                         name: 'id',
                         index: 'id',
                         hidden: true
                     }, {
+						header: "案名",
                         name: 'projectName',
                         index: 'projectName',
                         width: 60
@@ -24,32 +25,37 @@
                         header: "禮儀公司/禮儀師",
                         name: 'funeraler.funeralerName',
                         index: 'funeraler.funeralerName',
-                        width: 90
+                        width: 80
                     
                     }, {
+						header: "進館日期",
                         name: 'inDate',
                         index: 'inDate',
-                        width: 100
+                        width: 130
                     }, {
+						header: "出館日期",
                         name: 'outDate',
                         index: 'outDate',
-                        width: 100
+                        width: 130
                     }, {
+						header: "承辦業務",
                         name: 'emp.empName',
                         index: 'emp.empName',
-                        width: 80,
-                        align: "right"
+                        width: 80
                     }, {
+						header: "消費總金額",
                         name: 'sallingTotal',
                         index: 'sallingTotal',
                         width: 80,
                         align: "right"
                     }, {
+						header: "內帳銷售總金額",
                         name: 'total',
                         index: 'total',
                         width: 80,
                         align: "right"
                     }, {
+						header: "備註",
                         name: 'memo',
                         index: 'memo',
                         width: 150,
@@ -112,7 +118,7 @@
                         data: id,
                         success: function(msg){
                             grid1.trigger("reloadGrid");
-                            alert("刪除成功: " + msg);
+                            alert("刪除成功");
                         }
                     })
                 });
@@ -131,7 +137,7 @@
                         },
                         success: function(msg){
                             grid1.trigger("reloadGrid");
-                            alert("修改成功: " + msg);
+                            alert("修改成功 ");
                         }
                     })
                 });

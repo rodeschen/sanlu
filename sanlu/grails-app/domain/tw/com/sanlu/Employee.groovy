@@ -1,4 +1,7 @@
 package tw.com.sanlu
+
+import java.util.Date;
+
 /**
  * 員工資料
  * @author rick
@@ -13,13 +16,12 @@ class Employee {
 	Integer empLevel
 	//性別
 	String gender
-	
+
 	static constraints = {
 		empNo minSize:5,maxSize:5,blank:false, unique:true
 		empName maxSize:8,blank:false
 		empLevel size:1,range:0..5
 		password minSize:4,password:true
 		gender(inList:["M", "F"])
-		
 	}
 }

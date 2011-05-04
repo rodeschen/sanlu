@@ -1,13 +1,13 @@
 package tw.com.sanlu
 
+import java.util.Date;
+
 /**
  * 禮儀師
  * @author rickhuang
  *
  */
-class Funeraler {
-	
-	//FuneralCompany funeralCommpany
+class Funeraler {	
 	//禮儀師姓名
 	String funeralerName
 	//禮儀師電話1
@@ -16,6 +16,10 @@ class Funeraler {
 	String phone2
 	//所屬禮儀公司
 	static belongsTo =[funeralCommpany:FuneralCompany]
+	//最後修改日期
+	Date lastModify
+	//最後修改人員
+	Employee lastModifyBy
 	static constraints = {
 		funeralerName maxSize:60, unique:true
 		phone1 maxSize:20

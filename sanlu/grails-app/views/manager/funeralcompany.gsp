@@ -1,137 +1,193 @@
 <html>
-	<head>
-		<title>禮儀公司管理</title>
-		<meta name="layout" content="inner" />
-	</head>
-	<body>
-		 <script>
+<head>
+<title>禮儀公司管理</title>
+<meta name="layout" content="inner" />
+</head>
+<body>
+	<script>
             $(document).ready(function(){
-                $("#grid1").jqGrid({
-                    datatype: "local",
+            	var grid1 = $("#grid1").jqGrid({
+                	url: contextRoot + "/funeralCompany/query",
+                    datatype: "json",
                     height: "auto",
                     autowidth: true,
+                    pager: true,
                     colModel: [{
                         name: 'id',
                         index: 'id',
-                        width: 60,
-                        sorttype: "int"
+                        hidden: true
                     }, {
-                        header: "他是頭",
-                        name: 'invdate',
-                        index: 'invdate',
-                        width: 90,
-                        sorttype: "date"
+                        header: "禮儀公司",
+                        name: 'funeralCompanyName',
+                        index: 'funeralCompanyName',
+                        width: 90
                     }, {
-                        name: 'name',
-                        index: 'name',
+                    	header: "電話1",
+                        name: 'phone1',
+                        index: 'phone1',
                         width: 100
                     }, {
-                        name: 'amount',
-                        index: 'amount',
-                        width: 80,
-                        align: "right",
-                        sorttype: "float"
+                    	header: "電話2",
+                        name: 'phone2',
+                        index: 'phone2',
+                        width: 100
                     }, {
-                        name: 'tax',
-                        index: 'tax',
-                        width: 80,
-                        align: "right",
-                        sorttype: "float"
+                    	header: "地址",
+                        name: 'address',
+                        index: 'address',
+                        width: 220          
                     }, {
-                        name: 'total',
-                        index: 'total',
-                        width: 80,
-                        align: "right",
-                        sorttype: "float"
+                    	header: "最後修改時間",
+                        name: 'lastModify',
+                        index: 'lastModify',
+                        width: 120,
+                        sorttype: "date"
                     }, {
-                        name: 'note',
-                        index: 'note',
-                        width: 150,
-                        sortable: false
+                    	header: "最後修改者",
+                        name: 'lastModifyBy.empName',
+                        index: 'lastModifyBy.empName',
+                        width: 80        
                     }],
                     multiselect: true,
                     caption: "Manipulating Array Data"
                 });
                 
-                $("#grid2").jqGrid({
-                    datatype: "local",
+            	var grid2 = $("#grid2").jqGrid({
+                	url: contextRoot + "/funeraler/query",
+                    datatype: "json",
                     height: "auto",
                     autowidth: true,
-                    //pager: true,
+                    pager: true,
                     colModel: [{
                         name: 'id',
                         index: 'id',
-                        width: 60,
-                        sorttype: "int"
+                        hidden: true
                     }, {
-                        name: 'invdate',
-                        index: 'invdate',
-                        width: 90,
+                        name: 'funeralCommpany.id',
+                        index: 'funeralCommpany.id',
+                        hidden: true
+                    }, {
+                    	header: "禮儀師姓名",
+                        name: 'funeralerName',
+                        index: 'funeralerName',
+                        width: 90
+                  
+                    }, {
+                    	header: "電話1",
+                        name: 'phone1',
+                        index: 'phone1',
+                        width: 100
+                    }, {
+                    	header: "電話2",
+                        name: 'phone2',
+                        index: 'phone2',
+                        width: 100
+                    }, {
+                    	header: "最後修改時間",
+                        name: 'lastModify',
+                        index: 'lastModify',
+                        width: 120,
                         sorttype: "date"
                     }, {
-                        name: 'name',
-                        index: 'name',
-                        width: 500
-                    }, {
-                        name: 'amount',
-                        index: 'amount',
-                        width: 80,
-                        align: "right",
-                        sorttype: "float"
-                    }, {
-                        name: 'tax',
-                        index: 'tax',
-                        width: 80,
-                        align: "right",
-                        sorttype: "float"
-                    }, {
-                        name: 'total',
-                        index: 'total',
-                        width: 80,
-                        align: "right",
-                        sorttype: "float"
-                    }, {
-                        name: 'note',
-                        index: 'note',
-                        width: 150,
-                        sortable: false
+                    	header: "最後修改者",
+                    	name: 'lastModifyBy.empName',
+                        index: 'lastModifyBy.empName',
+                        width: 80        
                     }],
                     multiselect: true,
                     caption: "Manipulating Array Data"
                 });
+
+            	$("#delete1").click(function(){
+                    var selrow = grid1.jqGrid('getGridParam', 'selarrrow');
+                    if (!selrow) {
+                        alert("請先選擇刪除列");
+                    }
+                    var id = grid1.getRowData(selrow);
+                    $.ajax({
+                        type: "POST",
+                        url: contextRoot + "/funeralCompany/delete",
+                        data: id,
+                        success: function(msg){
+                            grid1.trigger("reloadGrid");
+                            alert("刪除成功");
+                        }
+                    })
+                });
+                $("#modify1").click(function(){
+                    var selrow = grid1.jqGrid('getGridParam', 'selarrrow');
+                    if (!selrow) {
+                        alert("請先選擇修改列");
+                    }
+                    var id = grid1.getRowData(selrow);
+                    $.ajax({
+                        type: "POST",
+                        url: contextRoot + "/funeralCompany/modify",
+                        data: {
+                            columnParam: JSON.stringify(grid1.jqGrid('getGridParam', 'colModel')),
+							data : JSON.stringify(id)
+                        },
+                        success: function(msg){
+                            grid1.trigger("reloadGrid");
+                            alert("修改成功");
+                        }
+                    })
+                });
+
+                $("#delete2").click(function(){
+                    var selrow = grid2.jqGrid('getGridParam', 'selarrrow');
+                    if (!selrow) {
+                        alert("請先選擇刪除列");
+                    }
+                    var id = grid2.getRowData(selrow);
+                    $.ajax({
+                        type: "POST",
+                        url: contextRoot + "/funeraler/delete",
+                        data: id,
+                        success: function(msg){
+                            grid2.trigger("reloadGrid");
+                            alert("刪除成功 ");
+                        }
+                    })
+                });
+                $("#modify2").click(function(){
+                    var selrow = grid2.jqGrid('getGridParam', 'selarrrow');
+                    if (!selrow) {
+                        alert("請先選擇修改列");
+                    }
+                    var id = grid2.getRowData(selrow);
+                    $.ajax({
+                        type: "POST",
+                        url: contextRoot + "/funeraler/modify",
+                        data: {
+                            columnParam: JSON.stringify(grid2.jqGrid('getGridParam', 'colModel')),
+							data : JSON.stringify(id)
+                        },
+                        success: function(msg){
+                            grid2.trigger("reloadGrid");
+                            alert("修改成功");
+                        }
+                    })
+                });
             });
         </script>
-		<fieldset>
-			<legend>
-				 禮儀公司
-			</legend><div>
-                <button id="add1">
-                    新增
-                </button>
-                <button id="modify1">
-                    修改
-                </button>
-                <button id="delete1">
-                    刪除
-                </button>
-            </div>
-			<div id="grid1"/>
-		</fieldset>
-		<fieldset>
-			<legend>
-				禮儀師
-			</legend><div>
-                <button id="add2">
-                    新增
-                </button>
-                <button id="modify2">
-                    修改
-                </button>
-                <button id="delete2">
-                    刪除
-                </button>
-            </div>
-			<div id="grid2"/>
-		</fieldset>
-	</body>
+	<fieldset>
+		<legend> 禮儀公司 </legend>
+		<div>
+			<button id="add1">新增</button>
+			<button id="modify1">修改</button>
+			<button id="delete1">刪除</button>
+		</div>
+		<div id="grid1" />
+	</fieldset>
+	<fieldset>
+		<legend> 禮儀師 </legend>
+		<div>
+			<button id="add2">新增</button>
+			<button id="modify2">修改</button>
+			<button id="delete2">刪除</button>
+		</div>
+		<div id="grid2" />
+	</fieldset>
+</body>
 </html>

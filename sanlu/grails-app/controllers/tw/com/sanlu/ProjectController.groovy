@@ -5,7 +5,11 @@ import java.text.DateFormat
 
 import org.codehaus.groovy.grails.web.json.JSONObject
 
-
+/**
+ * 專案清單
+ * @author rick
+ *
+ */
 class ProjectController extends GridController {
 	
 	def index = { }

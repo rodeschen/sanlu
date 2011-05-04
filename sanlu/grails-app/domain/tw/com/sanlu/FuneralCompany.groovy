@@ -1,4 +1,7 @@
 package tw.com.sanlu
+
+import java.util.Date;
+
 /**
 * 禮儀公司
 * @author rick
@@ -12,6 +15,10 @@ class FuneralCompany {
 	String phone2	
 	//地址
 	String address
+	//最後修改日期
+	Date lastModify
+	//最後修改人員
+	Employee lastModifyBy
 	static hasMany = [funer:Funeraler]
 	
     static constraints = {
