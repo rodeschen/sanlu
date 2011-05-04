@@ -1,4 +1,5 @@
 package tw.com.sanlu
+import grails.converters.JSON
 import java.sql.Timestamp
 import java.text.DateFormat
 
@@ -75,6 +76,8 @@ class ProjectController extends GridController {
 					break
 			}
 		}
-		return project.save()
+		project.save()
+		def res = ["IsSuccess" : true]
+		render res as JSON
 	}
 }
