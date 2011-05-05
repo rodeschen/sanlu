@@ -48,13 +48,17 @@
                         index: 'lastModifyBy.empName',
                         width: 80        
                     }],
+                    onSelectRow: function(id){ 
+                    	var company = grid1.getRowData(id);
+                    	grid2.jqGrid('setGridParam',{postData:{'funeralCompanyId':company.id},datatype:"json" }).trigger("reloadGrid");
+                     },
                     multiselect: true,
                     caption: "Manipulating Array Data"
                 });
                 
             	var grid2 = $("#grid2").jqGrid({
                 	url: contextRoot + "/funeraler/query",
-                    datatype: "json",
+                    datatype: "local",
                     height: "auto",
                     autowidth: true,
                     pager: true,

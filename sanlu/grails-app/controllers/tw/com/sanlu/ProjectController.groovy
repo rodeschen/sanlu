@@ -11,7 +11,7 @@ import org.codehaus.groovy.grails.web.json.JSONObject
  *
  */
 class ProjectController extends GridController {
-	
+
 	def index = { }
 	def queryAction = {
 
@@ -25,7 +25,8 @@ class ProjectController extends GridController {
 		//		}
 		def rows=[]
 		def row = [:]
-		def projects = Project.findAll("from Project as p where p.outDate is null or p.outDate > day(current_date()) "+(sortBy?"order by "+sortBy+(isAsc?" asc":" desc"):""),[max:pageRows,offset:startRow])
+		//def projects = Project.findAll("from Project as p where p.outDate is null or p.outDate > day(current_date()) "+(sortBy?"order by "+sortBy+(isAsc?" asc":" desc"):""),[max:pageRows,offset:startRow])
+		def projects = Project.findByClosingDateOrClosingDateIsNull(new Date(),[max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc"])
 		for (project in projects) {
 			//def o =[:]
 			def o=[]

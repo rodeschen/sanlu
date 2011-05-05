@@ -15,7 +15,9 @@ class FuneralerController extends GridController{
 	def queryAction = {
 		def rows=[]
 		def row = [:]
-		def funeralers = Funeraler.list(max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc")
+		//def funeralers = Funeraler.list(max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc")		
+		def company = FuneralCompany.findById(params.long("funeralCompanyId"))		
+		def funeralers = Funeraler.findByFuneralCommpany(company,[max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc"])
 		for (funeraler in funeralers) {
 			def o=[]
 			columns.each(){
