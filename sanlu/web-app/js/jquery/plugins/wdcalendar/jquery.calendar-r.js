@@ -302,11 +302,9 @@
 			 */
 			readonly : false,
 			/**
-			 * @description {Config} extParam {Array} Extra params submitted to
-			 *              server. Sample - [{name:"param1", value:"value1"},
-			 *              {name:"param2", value:"value2"}]
+			 * @description {Config} extParam {MAP} Extra params submitted to
 			 */
-			extParam : [],
+			extParam : {},
 			/**
 			 * @description {Config} enableDrag {Boolean} Whether end user can
 			 *              drag event item by mouse.
@@ -582,7 +580,7 @@
 		function closeCc() {
 			$("#cal-month-cc").css("visibility", "hidden");
 		}
-
+		//[id,text,startDate,endDate,isallday,crossday,recurring,color,editable,local,?]
 		// all-day event, including more-than-one-day events
 		function PropareEvents(dayarrs, events, aDE, sDE) {
 			var l = dayarrs.length;
@@ -737,11 +735,13 @@
 					title = i18n.xgcalendar.to_date_view;
 					cl = "wk-daylink";
 				}
+				//debugger; 
+				var chDate = CalConv(dayarrs[i].date);
 				ht.push("<th abbr='", dateFormat.call(dayarrs[i].date,
 						i18n.xgcalendar.dateformat.fulldayvalue),
 						"' class='gcweekname' scope=\"col\"><div title='",
 						title, "' ", ev, " class='wk-dayname'><span class='",
-						cl, "'>", dayarrs[i].display, "</span></div></th>");
+						cl, "'>", dayarrs[i].display,"<br/>農",chDate.chDate,"<br/>",chDate.bad, "</span></div></th>");
 
 			}
 			ht.push("<th width=\"16\" rowspan=\"3\">&nbsp;</th>");
@@ -1075,7 +1075,7 @@
 
 				// title tr
 				htb.push("<tr>");
-				var titletemp = "<td class=\"st-dtitle${titleClass}\" ch='qkadd' abbr='${abbr}' axis='00:00' title=\"${title}\"><span class='monthdayshow'>${dayshow}</span></a></td>";
+				var titletemp = "<td class=\"st-dtitle${titleClass}\" ch='qkadd' abbr='${abbr}' axis='00:00' title=\"${title}\"><span class='monthdayshow'><span style='float:left;margin-left:10%' title='${bad}'>農${chdayshow}</span>${dayshow}</span></a></td>";
 
 				for ( var i = 0; i < 7; i++) {
 					var o = {
@@ -1105,6 +1105,9 @@
 					}
 					o.abbr = dateFormat.call(day,
 							i18n.xgcalendar.dateformat.fulldayvalue);
+					var chdate = CalConv(day);
+					o.chdayshow = chdate.chDate;
+					o.bad =  chdate.bad;
 					htb.push(Tp(titletemp, o));
 				}
 				htb.push("</tr>");
@@ -1447,6 +1450,7 @@
 									data["start"] = parseDate(data["start"]);
 									data["end"] = parseDate(data["end"]);
 									$.each(data.events, function(index, value) {
+										//debugger;
 										value[2] = parseDate(value[2]);
 										value[3] = parseDate(value[3]);
 									});
