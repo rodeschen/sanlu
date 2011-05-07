@@ -170,6 +170,7 @@ class BootStrap {
 							costPrice:200,
 							lastModifyBy:emp1
 							)
+					product2LinkPlace.save()
 					def product2LinkPlace2 = new ProductLinkPlace(
 							product:product2,
 							place:place3,

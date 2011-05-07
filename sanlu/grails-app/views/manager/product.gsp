@@ -25,43 +25,43 @@
                         header: "產品名稱",
                         name: 'productName',
                         index: 'productName',
-                        width: 100
+                        width: 40
                     }, {
                         header: "庫存數量",
                         name: 'totalQuantity',
                         index: 'totalQuantity',
-                        width: 60
+                        width: 40
                     }, {
                         header: "內帳銷售單價",
                         name: 'price',
                         index: 'price',
-                        width: 60
+                        width: 30
                     }, {
                         header: "成本單價",
                         name: 'costPrice',
                         index: 'costPrice',
-                        width: 60
+                        width: 40
                     }, {
                         header: "時間類型",
                         name: 'timeType',
                         index: 'timeType',
-                        width: 60
+                        width: 20
                     }, {
                         header: "計價單位",
                         name: 'unit',
                         index: 'unit',
-                        width: 60
+                        width: 20
                     }, {
                         header: "最後修改時間",
                         name: 'lastUpdated',
                         index: 'lastUpdated',
-                        width: 120,
+                        width: 40,
                         sorttype: "date"
                     }, {
                         header: "最後修改者",
                         name: 'lastModifyBy.empName',
                         index: 'lastModifyBy.empName',
-                        width: 80
+                        width: 40
                     }],
                     onSelectRow: function(id){
                         var company = grid1.getRowData(id);
@@ -90,7 +90,7 @@
                         header: "產品名稱",
                         name: 'product.productName',
                         index: 'product.productName',
-                        width: 100
+                        width: 40
                     }, {
                         header: "商品代號",
                         name: 'product.productNo',
@@ -105,42 +105,42 @@
                         header: "內帳銷售單價",
                         name: 'price',
                         index: 'price',
-                        width: 60
+                        width: 30
                     }, {
                         header: "銷售單價",
                         name: 'sallingPrice',
                         index: 'sallingPrice',
-                        width: 60
+                        width: 30
                     }, {
                         header: "成本單價",
                         name: 'costPrice',
                         index: 'costPrice',
-                        width: 60
+                        width: 30
                     }, {
                         header: "時間類型",
                         name: 'product.timeType',
                         index: 'product.timeType',
-                        width: 60
+                        width: 20
                     }, {
                         header: "計價單位",
                         name: 'product.unit',
                         index: 'product.unit',
-                        width: 60
+                        width: 20
                     }, {
                         header: "最後修改時間",
                         name: 'lastUpdated',
                         index: 'lastUpdated',
-                        width: 120,
+                        width: 40,
                         sorttype: "date"
                     }, {
                         header: "最後修改者",
                         name: 'lastModifyBy.empName',
                         index: 'lastModifyBy.empName',
-                        width: 80
+                        width: 30
                     }],
                     grouping: true,
                     groupingView: {
-                        groupField: ['productName']
+                        groupField: ['product.productName']
                     },
                     multiselect: true,
 					sortname: 'productName',
