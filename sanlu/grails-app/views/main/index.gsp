@@ -111,6 +111,9 @@
                     if (!selrow) {
                         alert("請先選擇刪除列");
                     }
+                    if(!confirm("確定要刪除?")){
+                        return ;
+                    }
                     var id = grid1.getRowData(selrow);
                     $.ajax({
                         type: "POST",

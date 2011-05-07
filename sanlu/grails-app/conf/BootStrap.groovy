@@ -3,7 +3,9 @@ import tw.com.sanlu.BillDetail
 import tw.com.sanlu.Employee
 import tw.com.sanlu.FuneralCompany
 import tw.com.sanlu.Funeraler;
+import tw.com.sanlu.Place
 import tw.com.sanlu.Product
+import tw.com.sanlu.ProductLinkPlace
 import tw.com.sanlu.Project
 
 class BootStrap {
@@ -11,53 +13,173 @@ class BootStrap {
 	def init = { servletContext ->
 		switch(GrailsUtil.environment){
 			case "development":
+				log.debug("development")
 			//init Employee
-			def emp1 = new Employee(
-					empNo:"00001",
-					empName:"emp1",
-					password:"1234",
-					hireDate:new Date(),
-					empLevel:5,
-					gender:"M")
-			emp1.save()
-			def emp2= new Employee(
-					empNo:"00002",
-					empName:"emp2",
-					password:"1234",
-					hireDate:new Date(),
-					empLevel:5,
-					gender:"M")
-			emp2.save()
-			def emp3 = new Employee(
-					empNo:"00003",
-					empName:"emp3",
-					password:"1234",
-					hireDate:new Date(),
-					empLevel:5,
-					gender:"M")
-			emp3.save()
+				def emp1 = new Employee(
+						empNo:"00001",
+						empName:"emp1",
+						password:"1234",
+						hireDate:new Date(),
+						empLevel:5,
+						gender:"M")
+				emp1.save()
+				def emp2= new Employee(
+						empNo:"00002",
+						empName:"emp2",
+						password:"1234",
+						hireDate:new Date(),
+						empLevel:5,
+						gender:"M")
+				emp2.save()
+				def emp3 = new Employee(
+						empNo:"00003",
+						empName:"emp3",
+						password:"1234",
+						hireDate:new Date(),
+						empLevel:5,
+						gender:"M")
+				emp3.save()
 			//init 禮儀公司
 				def fCom = new FuneralCompany(
-				funeralCompanyName:"祥安禮儀",
-				phone1:"091234567",
-				address:"新北市三重區XX路",
-				lastModify:new Date(),
-				lastModifyBy:emp1
-				)
+						funeralCompanyName:"祥安禮儀",
+						phone1:"091234567",
+						address:"新北市三重區XX路",
+						lastModifyBy:emp1
+						)
 				fCom.save()
+				def fCom2 = new FuneralCompany(
+						funeralCompanyName:"祥安禮儀2",
+						phone1:"091234567",
+						address:"新北市三重區XX路",
+						lastModifyBy:emp1
+						)
+				fCom2.save()
 			//init 禮儀師
 				def funer = new Funeraler(
 						funeralCommpany:fCom,
 						funeralerName:"李XX",
 						phone1:"0988765241",
-						lastModify:new Date(),
 						lastModifyBy:emp1
 						)
 				funer.save()
-			
+				def funer2 = new Funeraler(
+						funeralCommpany:fCom2,
+						funeralerName:"林XX",
+						phone1:"0988765241",
+						lastModifyBy:emp1
+						)
+				funer2.save()
 
 
+			//init Place
+				def place = new Place(
+						placeName : "助念室",
+						lastModifyBy:emp1
+						)
+				place.save()
+				def place1 = new Place(
+						placeName : "功德廳",
+						lastModifyBy:emp1
+						)
+				place1.save()
+				def place2 = new Place(
+						placeName : "大忠廳",
+						lastModifyBy:emp1
+						)
+				place2.save()
+				def place3 = new Place(
+						placeName : "靈位區",
+						lastModifyBy:emp1
+						)
+				place3.save()
+				def place4 = new Place(
+						placeName : "至正廳",
+						lastModifyBy:emp1
+						)
+				place4.save()
+				def place5 = new Place(
+						placeName : "誦經室(一)",
+						lastModifyBy:emp1
+						)
+				place5.save()
+				def place6 = new Place(
+						placeName : "誦經室(二)",
+						lastModifyBy:emp1
+						)
+				place6.save()
+				def place7 = new Place(
+						placeName : "誦經室(三)",
+						lastModifyBy:emp1
+						)
+				place7.save()
+				def place8 = new Place(
+						placeName : "誦經室(五)",
+						lastModifyBy:emp1
+						)
+				place8.save()
 			//init Product
+				def leave = new Product(productNo:"000004",
+						productName:"告別式",
+						totalQuantity:50,
+						price:100,
+						sallingPrice:200,
+						costPrice:50,
+						timeType:1,
+						unit:"場",
+						lastModifyBy:emp1,
+						hasPlace:true)
+				leave.save()
+			//init Product link Place
+				def productLinkPlace = new ProductLinkPlace(
+						product:leave,
+						place:place1,
+						price:2000,
+						sallingPrice:1000,
+						costPrice:100
+						)
+				productLinkPlace.save()
+				def productLinkPlace1 = new ProductLinkPlace(
+						product:product2,
+						place:place3,
+						price:3000,
+						sallingPrice:2000,
+						costPrice:200
+						)
+
+				productLinkPlace1.save()
+				if(productLinkPlace.hasErrors()){
+					println productLinkPlace.errors
+				}
+				def product2 = new Product(productNo:"000005",
+						productName:"助念",
+						totalQuantity:50,
+						price:100,
+						sallingPrice:200,
+						costPrice:50,
+						timeType:1,
+						unit:"場",
+						lastModifyBy:emp1,
+						hasPlace:true)
+				product2.save()
+			//init Product link Place
+				def product2LinkPlace = new ProductLinkPlace(
+						product:product2,
+						place:place2,
+						price:3000,
+						sallingPrice:2000,
+						costPrice:200
+						)
+
+				product2LinkPlace.save()
+				def product2LinkPlace2 = new ProductLinkPlace(
+						product:product6,
+						place:place3,
+						price:3000,
+						sallingPrice:2000,
+						costPrice:200
+						)
+
+				product2LinkPlace2.save()
 				def flower = new Product(
 						productNo:"000001",
 						productName:"花",
@@ -66,6 +188,7 @@ class BootStrap {
 						sallingPrice:200,
 						costPrice:50,
 						timeType:1,
+						lastModifyBy:emp1,
 						unit:"對"
 						)
 				flower.save()
@@ -80,6 +203,7 @@ class BootStrap {
 						sallingPrice:500,
 						costPrice:100,
 						timeType:1,
+						lastModifyBy:emp1,
 						unit:"組"
 						)
 				washbasin.save()
@@ -92,6 +216,7 @@ class BootStrap {
 						sallingPrice:8000,
 						costPrice:5000,
 						timeType:1,
+						lastModifyBy:emp1,
 						unit:"節"
 						)
 				hall.save()

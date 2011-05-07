@@ -16,11 +16,13 @@ class FuneralCompany {
 	//地址
 	String address
 	//最後修改日期
-	Date lastModify
+	Date lastUpdate
 	//最後修改人員
 	Employee lastModifyBy
 	static hasMany = [funer:Funeraler]
-	
+	static mapping = {
+		funer cascade:'all-delete-orphan'
+	}
     static constraints = {
 		funeralCompanyName maxSize:60,blank:false, unique:true
 		phone1 maxSize:20

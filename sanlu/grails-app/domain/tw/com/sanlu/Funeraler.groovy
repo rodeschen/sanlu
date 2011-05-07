@@ -17,7 +17,7 @@ class Funeraler {
 	//所屬禮儀公司
 	static belongsTo =[funeralCommpany:FuneralCompany]
 	//最後修改日期
-	Date lastModify
+	Date lastUpdate
 	//最後修改人員
 	Employee lastModifyBy
 	static constraints = {

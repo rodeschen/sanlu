@@ -14,12 +14,13 @@ import org.codehaus.groovy.grails.web.json.JSONObject
 class FuneralerController extends GridController{
 	def queryAction = {
 		def rows=[]
-		def row = [:]
-		//def funeralers = Funeraler.list(max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc")		
-		def company = FuneralCompany.findById(params.long("funeralCompanyId"))		
+
+		//def funeralers = Funeraler.list(max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc")
+		def company = FuneralCompany.findById(params.long("funeralCompanyId"))
 		def funeralers = Funeraler.findByFuneralCommpany(company,[max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc"])
 		for (funeraler in funeralers) {
 			def o=[]
+			def row = [:]
 			columns.each(){
 				def obj = it.split('\\.')
 				def tmp = funeraler
@@ -29,7 +30,7 @@ class FuneralerController extends GridController{
 				}
 				if(tmp instanceof Timestamp){
 
-					tmp=	Utility.shortFormat.format(tmp)
+					tmp=Utility.shortFormat.format(tmp)
 				}
 				o.add tmp
 			}
@@ -67,7 +68,6 @@ class FuneralerController extends GridController{
 					break
 			}
 		}
-		funeraler.setLastModify new Date()
 		Employee emp = Employee.findByEmpNo("00002")
 		if(emp){
 			funeraler.setLastModifyBy emp

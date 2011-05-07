@@ -1,26 +1,27 @@
 package tw.com.sanlu
 
 import grails.converters.JSON
-
 import java.sql.Timestamp
-
 import org.codehaus.groovy.grails.web.json.JSONObject
 
 /**
- * 禮儀公司管理
- * @author rick
+ * 商品管理
+ * @author rickhuang
  *
  */
-class FuneralCompanyController extends GridController{
+class ProductLinkPlaceController extends GridController{
 	def queryAction = {
-		def rows=[]		
-		def companys = FuneralCompany.list(max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc")
-		for (company in companys) {
+		def rows=[]
+		boolean hasPlace = params.boolean("hasPlace")
+		//Project.findAll("from Project as p where p.outDate is null or p.outDate > day(current_date()) "+(sortBy?"order by "+sortBy+(isAsc?" asc":" desc"):""),[max:pageRows,offset:startRow])
+		ProductLinkPlace.list(max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc")
+		def products = Product.findByHasPlace(hasPlace,[max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc"])
+		for (product in products) {
 			def row = [:]
 			def o=[]
 			columns.each(){
 				def obj = it.split('\\.')
-				def tmp = company
+				def tmp = product
 
 				for(i in obj){
 					tmp = tmp.getAt(i)
@@ -62,8 +63,8 @@ class FuneralCompanyController extends GridController{
 				case 'phone1':
 				case 'phone2':
 				case 'address':
-					company.putAt it.key,it.value
-					break
+				company.putAt it.key,it.value
+				break
 			}
 		}
 		Employee emp = Employee.findByEmpNo("00002")

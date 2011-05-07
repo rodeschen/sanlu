@@ -1,5 +1,7 @@
 package tw.com.sanlu
 
+import java.util.Date;
+
 /**
  * 專案
  * @author rick
@@ -24,6 +26,8 @@ class Project {
 	BigDecimal total
 	//成本總金額
 	BigDecimal costTotal
+	//最後修改日期
+	Date lastUpdate
 	//結帳日期
 	Date closingDate
 	//結帳人員

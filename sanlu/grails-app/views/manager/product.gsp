@@ -1,13 +1,13 @@
 <html>
     <head>
-        <title>禮儀公司管理</title>
+        <title>產品管理</title>
         <meta name="layout" content="inner" />
     </head>
     <body>
         <script>
             $(document).ready(function(){
                 var grid1 = $("#grid1").jqGrid({
-                    url: contextRoot + "/funeralCompany/query",
+                    url: contextRoot + "/product/query",
                     datatype: "json",
                     height: "auto",
                     autowidth: true,
@@ -17,25 +17,40 @@
                         index: 'id',
                         hidden: true
                     }, {
-                        header: "禮儀公司",
-                        name: 'funeralCompanyName',
-                        index: 'funeralCompanyName',
-                        width: 90
+                        header: "商品代號",
+                        name: 'productNo',
+                        index: 'productNo',
+                        width: 10
                     }, {
-                        header: "電話1",
-                        name: 'phone1',
-                        index: 'phone1',
+                        header: "產品名稱",
+                        name: 'productName',
+                        index: 'productName',
                         width: 100
                     }, {
-                        header: "電話2",
-                        name: 'phone2',
-                        index: 'phone2',
-                        width: 100
+                        header: "庫存數量",
+                        name: 'totalQuantity',
+                        index: 'totalQuantity',
+                        width: 60
                     }, {
-                        header: "地址",
-                        name: 'address',
-                        index: 'address',
-                        width: 220
+                        header: "內帳銷售單價",
+                        name: 'price',
+                        index: 'price',
+                        width: 60
+                    }, {
+                        header: "成本單價",
+                        name: 'costPrice',
+                        index: 'costPrice',
+                        width: 60
+                    }, {
+                        header: "時間類型",
+                        name: 'timeType',
+                        index: 'timeType',
+                        width: 60
+                    }, {
+                        header: "計價單位",
+                        name: 'unit',
+                        index: 'unit',
+                        width: 60
                     }, {
                         header: "最後修改時間",
                         name: 'lastModify',
@@ -62,8 +77,8 @@
                 });
                 
                 var grid2 = $("#grid2").jqGrid({
-                    url: contextRoot + "/funeraler/query",
-                    datatype: "local",
+                    url: contextRoot + "/product/query?hasPlace=true",
+                    datatype: "json",
                     height: "auto",
                     autowidth: true,
                     pager: true,
@@ -72,25 +87,45 @@
                         index: 'id',
                         hidden: true
                     }, {
-                        name: 'funeralCommpany.id',
-                        index: 'funeralCommpany.id',
-                        hidden: true
-                    }, {
-                        header: "禮儀師姓名",
-                        name: 'funeralerName',
-                        index: 'funeralerName',
-                        width: 90
-                    
-                    }, {
-                        header: "電話1",
-                        name: 'phone1',
-                        index: 'phone1',
+                        header: "產品名稱",
+                        name: 'productName',
+                        index: 'productName',
                         width: 100
                     }, {
-                        header: "電話2",
-                        name: 'phone2',
-                        index: 'phone2',
-                        width: 100
+                        header: "商品代號",
+                        name: 'productNo',
+                        index: 'productNo',
+                        width: 10
+                    }, {
+                        header: "場地名稱",
+                        name: 'productNo',
+                        index: 'productNo',
+                        width: 10
+                    }, {
+                        header: "庫存數量",
+                        name: 'totalQuantity',
+                        index: 'totalQuantity',
+                        width: 60
+                    }, {
+                        header: "內帳銷售單價",
+                        name: 'price',
+                        index: 'price',
+                        width: 60
+                    }, {
+                        header: "成本單價",
+                        name: 'costPrice',
+                        index: 'costPrice',
+                        width: 60
+                    }, {
+                        header: "時間類型",
+                        name: 'timeType',
+                        index: 'timeType',
+                        width: 60
+                    }, {
+                        header: "計價單位",
+                        name: 'unit',
+                        index: 'unit',
+                        width: 60
                     }, {
                         header: "最後修改時間",
                         name: 'lastModify',
@@ -103,9 +138,15 @@
                         index: 'lastModifyBy.empName',
                         width: 80
                     }],
+                    grouping: true,
+                    groupingView: {
+                        groupField: ['productName']
+                    },
                     multiselect: true,
+					sortname: 'productName',
                     caption: "Manipulating Array Data"
                 });
+                
                 
                 $("#delete1").click(function(){
                     var selrow = grid1.jqGrid('getGridParam', 'selarrrow');
@@ -189,7 +230,7 @@
         </script>
         <fieldset>
             <legend>
-                禮儀公司 
+                一般類商品 
             </legend>
             <div>
                 <button id="add1">
@@ -206,7 +247,7 @@
         </fieldset>
         <fieldset>
             <legend>
-                禮儀師 
+                場地類商品
             </legend>
             <div>
                 <button id="add2">

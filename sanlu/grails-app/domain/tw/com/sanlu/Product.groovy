@@ -1,5 +1,7 @@
 package tw.com.sanlu
 
+import java.util.Date;
+
 /**
  * 產品
  * @author rick
@@ -24,11 +26,18 @@ class Product {
 	String unit
 	//是否為場地類商品
 	boolean hasPlace
+	//最後修改日期
+	Date lastUpdate
+	//最後修改人員
+	Employee lastModifyBy
 	//呈現
 	//	String toString(){
 	//		return "${productName}-${empName}}"
 	//	}
 	
+	def beforeInsert = {
+		hasPlace = false
+		}
 	static constraints = {
 		productNo maxSize:6
 		productName maxSize:60, unique:true
