@@ -27,7 +27,7 @@ class Product {
 	//是否為場地類商品
 	boolean hasPlace
 	//最後修改日期
-	Date lastUpdate
+	Date lastUpdated
 	//最後修改人員
 	Employee lastModifyBy
 	//呈現

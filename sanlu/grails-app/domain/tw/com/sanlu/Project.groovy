@@ -27,7 +27,7 @@ class Project {
 	//成本總金額
 	BigDecimal costTotal
 	//最後修改日期
-	Date lastUpdate
+	Date lastUpdated
 	//結帳日期
 	Date closingDate
 	//結帳人員

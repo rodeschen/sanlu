@@ -9,13 +9,14 @@ import org.codehaus.groovy.grails.web.json.JSONObject
  * @author rickhuang
  *
  */
-class ProductLinkPlaceController extends GridController{
+class ProductController extends GridController{
 	def queryAction = {
 		def rows=[]
 		boolean hasPlace = params.boolean("hasPlace")
+
 		//Project.findAll("from Project as p where p.outDate is null or p.outDate > day(current_date()) "+(sortBy?"order by "+sortBy+(isAsc?" asc":" desc"):""),[max:pageRows,offset:startRow])
-		ProductLinkPlace.list(max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc")
-		def products = Product.findByHasPlace(hasPlace,[max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc"])
+		def products = hasPlace?ProductLinkPlace.list(max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc"): Product.findByHasPlace(false,[max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc"])
+
 		for (product in products) {
 			def row = [:]
 			def o=[]
@@ -63,8 +64,8 @@ class ProductLinkPlaceController extends GridController{
 				case 'phone1':
 				case 'phone2':
 				case 'address':
-				company.putAt it.key,it.value
-				break
+					company.putAt it.key,it.value
+					break
 			}
 		}
 		Employee emp = Employee.findByEmpNo("00002")
@@ -76,3 +77,4 @@ class ProductLinkPlaceController extends GridController{
 		render res as JSON
 	}
 }
+

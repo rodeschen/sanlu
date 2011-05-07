@@ -20,7 +20,7 @@
                         header: "商品代號",
                         name: 'productNo',
                         index: 'productNo',
-                        width: 10
+                        width: 30
                     }, {
                         header: "產品名稱",
                         name: 'productName',
@@ -53,8 +53,8 @@
                         width: 60
                     }, {
                         header: "最後修改時間",
-                        name: 'lastModify',
-                        index: 'lastModify',
+                        name: 'lastUpdated',
+                        index: 'lastUpdated',
                         width: 120,
                         sorttype: "date"
                     }, {
@@ -88,28 +88,28 @@
                         hidden: true
                     }, {
                         header: "產品名稱",
-                        name: 'productName',
-                        index: 'productName',
+                        name: 'product.productName',
+                        index: 'product.productName',
                         width: 100
                     }, {
                         header: "商品代號",
-                        name: 'productNo',
-                        index: 'productNo',
+                        name: 'product.productNo',
+                        index: 'product.productNo',
                         width: 10
                     }, {
                         header: "場地名稱",
-                        name: 'productNo',
-                        index: 'productNo',
+                        name: 'place.placeName',
+                        index: 'place.placeName',
                         width: 10
-                    }, {
-                        header: "庫存數量",
-                        name: 'totalQuantity',
-                        index: 'totalQuantity',
-                        width: 60
                     }, {
                         header: "內帳銷售單價",
                         name: 'price',
                         index: 'price',
+                        width: 60
+                    }, {
+                        header: "銷售單價",
+                        name: 'sallingPrice',
+                        index: 'sallingPrice',
                         width: 60
                     }, {
                         header: "成本單價",
@@ -118,18 +118,18 @@
                         width: 60
                     }, {
                         header: "時間類型",
-                        name: 'timeType',
-                        index: 'timeType',
+                        name: 'product.timeType',
+                        index: 'product.timeType',
                         width: 60
                     }, {
                         header: "計價單位",
-                        name: 'unit',
-                        index: 'unit',
+                        name: 'product.unit',
+                        index: 'product.unit',
                         width: 60
                     }, {
                         header: "最後修改時間",
-                        name: 'lastModify',
-                        index: 'lastModify',
+                        name: 'lastUpdated',
+                        index: 'lastUpdated',
                         width: 120,
                         sorttype: "date"
                     }, {

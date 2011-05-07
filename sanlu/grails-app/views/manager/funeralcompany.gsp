@@ -38,8 +38,8 @@
                         width: 220
                     }, {
                         header: "最後修改時間",
-                        name: 'lastModify',
-                        index: 'lastModify',
+                        name: 'lastUpdated',
+                        index: 'lastUpdated',
                         width: 120,
                         sorttype: "date"
                     }, {
@@ -93,8 +93,8 @@
                         width: 100
                     }, {
                         header: "最後修改時間",
-                        name: 'lastModify',
-                        index: 'lastModify',
+                        name: 'lastUpdated',
+                        index: 'lastUpdated',
                         width: 120,
                         sorttype: "date"
                     }, {

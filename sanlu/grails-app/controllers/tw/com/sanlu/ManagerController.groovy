@@ -5,4 +5,6 @@ class ManagerController {
     def index = { }
 	
 	def funeralcompany = {}
+	
+	def product ={}
 }

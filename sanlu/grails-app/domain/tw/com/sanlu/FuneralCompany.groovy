@@ -16,7 +16,7 @@ class FuneralCompany {
 	//地址
 	String address
 	//最後修改日期
-	Date lastUpdate
+	Date lastUpdated
 	//最後修改人員
 	Employee lastModifyBy
 	static hasMany = [funer:Funeraler]
