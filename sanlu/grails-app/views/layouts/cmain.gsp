@@ -11,7 +11,7 @@
         <script type="text/javascript" src="${resource(dir:'js/jquery/plugins/wdcalendar',file:'datepicker_lang_HK.js')}"></script>
         <script type="text/javascript" src="${resource(dir:'js/jquery/plugins/wdcalendar',file:'jquery.datepicker.js')}"></script>
         <script type="text/javascript" src="${resource(dir:'js/jquery/plugins/wdcalendar',file:'wdCalendar_lang_HK.js')}"></script>
-        <script type="text/javascript" src="${resource(dir:'js/jquery/plugins/wdcalendar',file:'jquery.calendar-r.js')}"></script>
+        <script type="text/javascript" src="${resource(dir:'js/jquery/plugins/wdcalendar',file:'jquery.calendar.js')}"></script>
 		<script src="${resource(dir:'js/function',file:'chineseCalendar.js')}"></script>
         <g:layoutHead />
         <g:javascript library="application" />

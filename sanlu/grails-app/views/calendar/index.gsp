@@ -8,16 +8,19 @@
 			</title>
 			<script type="text/javascript">
 				var contextRoot = "${request.contextPath}";
+				
 				$(document).ready( function() {
 					var view = "week";
-
 					var op = {
 						url : contextRoot + "/calendar/query",
 						showday: new Date(),
-						ViewCmdhandler: View,
-						onWeekOrMonthToDay: wtd,
-						readonly : true,autoload:true,
-						onRequestDataError: cal_onerror
+						//ViewCmdhandler: View,
+						//onWeekOrMonthToDay: wtd,
+						readonly : true,
+						autoload:true,
+						onRequestDataError: cal_onerror,
+						datestrshowId: "txtdatetimeshow",
+						cache: false
 					};
 					var $dv = $("#calhead");
 					var _MH = document.documentElement.clientHeight;
@@ -25,20 +28,14 @@
 					//op.height = 600;
 					//op.eventItems = [];
 
-					var p = $("#gridcontainer").bcalendar(op).BcalGetOp();
-					if (p && p.datestrshow) {
-						$("#txtdatetimeshow").text(p.datestrshow);
-					}
+					var calendar = $("#gridcontainer").bcalendar(op);
 					$("#caltoolbar").noSelect();
 
 					$("#hdtxtshow").datepicker({
 						picker: "#txtdatetimeshow",
 						showtarget: $("#txtdatetimeshow"),
 						onReturn: function(r) {
-							var p = $("#gridcontainer").gotoDate(r).BcalGetOp();
-							if (p && p.datestrshow) {
-								$("#txtdatetimeshow").text(p.datestrshow);
-							}
+							calendar.gotoDate(r);
 						}
 					});
 					function cal_beforerequest(type) {
@@ -85,15 +82,12 @@
 						$.each(data, function(i, item) {
 							str += "[" + i + "]: " + item + "\n";
 						});
-						alert(str);
+					//	alert(str);
 					}
 
 
 					function wtd(p) {
-						alert("XX")
-						if (p && p.datestrshow) {
-							$("#txtdatetimeshow").text(p.datestrshow);
-						}
+
 						$("#caltoolbar div.fcurrent").each( function() {
 							$(this).removeClass("fcurrent");
 						})
@@ -107,22 +101,15 @@
 							$(this).removeClass("fcurrent");
 						})
 						$(this).addClass("fcurrent");
-						var p = $("#gridcontainer").swtichView("day").BcalGetOp();
-						if (p && p.datestrshow) {
-							$("#txtdatetimeshow").text(p.datestrshow);
-						}
+						calendar.swtichView("day");
 					});
 					//to show week view
 					$("#showweekbtn").click( function(e) {
-						//document.location.href="#week";
 						$("#caltoolbar div.fcurrent").each( function() {
 							$(this).removeClass("fcurrent");
 						})
 						$(this).addClass("fcurrent");
-						var p = $("#gridcontainer").swtichView("week").BcalGetOp();
-						if (p && p.datestrshow) {
-							$("#txtdatetimeshow").text(p.datestrshow);
-						}
+						calendar.swtichView("week");
 
 					});
 					//to show month view
@@ -132,14 +119,12 @@
 							$(this).removeClass("fcurrent");
 						})
 						$(this).addClass("fcurrent");
-						var p = $("#gridcontainer").swtichView("month").BcalGetOp();
-						if (p && p.datestrshow) {
-							$("#txtdatetimeshow").text(p.datestrshow);
-						}
+						var p = $("#gridcontainer").swtichView("month");
 					});
 					$("#showreflashbtn").click( function(e) {
 						$("#gridcontainer").reload();
 					});
+					/*
 					//Add a new event
 					$("#faddbtn").click( function(e) {
 						var url = "edit.php";
@@ -148,29 +133,22 @@
 							height: 400,
 							caption: "Create New Calendar"
 						});
-					});
+					});*/
 					//go to today
 					$("#showtodaybtn").click( function(e) {
-						var p = $("#gridcontainer").gotoDate().BcalGetOp();
-						if (p && p.datestrshow) {
-							$("#txtdatetimeshow").text(p.datestrshow);
-						}
+						calendar.gotoDate();
+
 
 					});
 					//previous date range
 					$("#sfprevbtn").click( function(e) {
-						var p = $("#gridcontainer").previousRange().BcalGetOp();
-						if (p && p.datestrshow) {
-							$("#txtdatetimeshow").text(p.datestrshow);
-						}
+						calendar.previousRange();
+
 
 					});
 					//next date range
 					$("#sfnextbtn").click( function(e) {
-						var p = $("#gridcontainer").nextRange().BcalGetOp();
-						if (p && p.datestrshow) {
-							$("#txtdatetimeshow").text(p.datestrshow);
-						}
+						calendar.nextRange();
 					});
 					$("button").button();
 				});
@@ -193,11 +171,13 @@
 						</div>
 					</div>
 					<div id="caltoolbar" class="ctoolbar">
+						<!--
 						<div id="faddbtn" class="fbutton">
 							<div>
 								<span title='Click to Create New Event' class="addcal"> New Event </span>
 							</div>
 						</div>
+						-->
 						<div class="btnseparator">
 						</div>
 						<div id="showtodaybtn" class="fbutton">
@@ -209,24 +189,24 @@
 						</div>
 						<div id="showdaybtn" class="fbutton">
 							<div>
-								<span title='Day' class="showdayview">Day</span>
+								<span title='Day' class="showdayview">日</span>
 							</div>
 						</div>
 						<div  id="showweekbtn" class="fbutton fcurrent">
 							<div>
-								<span title='Week' class="showweekview">Week</span>
+								<span title='Week' class="showweekview">周</span>
 							</div>
 						</div>
 						<div  id="showmonthbtn" class="fbutton">
 							<div>
-								<span title='Month' class="showmonthview">Month</span>
+								<span title='Month' class="showmonthview">月</span>
 							</div>
 						</div>
 						<div class="btnseparator">
 						</div>
 						<div  id="showreflashbtn" class="fbutton">
 							<div>
-								<span title='Refresh view' class="showdayflash">Refresh</span>
+								<span title='Refresh view' class="showdayflash">重新整理</span>
 							</div>
 						</div>
 						<div class="btnseparator">

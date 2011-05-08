@@ -240,10 +240,12 @@ class BootStrap {
 					//init BillDetail
 					def flowerDetail = new BillDetail(
 							product:flower,
-							startTime:new Date(99,12,1,10,00,00),
-							endTime:new Date(),
+							startTime:new Date(111,4,8,10,00,00),
+							endTime:new Date(111,4,8,12,00,00),
 							quantity:10,
 							price:550,
+							description:"法會",
+							location:"大忠聽",
 							modifiedPrice:500,
 							costPrice:300,
 							modifiedCostPrice:300,
@@ -256,12 +258,14 @@ class BootStrap {
 					}
 					def washbasinDetail= new BillDetail(
 							product:washbasin,
-							startTime:new Date(99,12,1,10,00,00),
-							endTime:new Date(),
+							startTime:new Date(111,4,6,10,00,00),
+							endTime:new Date(111,4,6,14,00,00),
 							quantity:10,
 							price:550,
 							modifiedPrice:500,
 							costPrice:300,
+							description:"助念",
+							location:"至正廳",
 							modifiedCostPrice:300,
 							lastModifyBy:emp2,
 							project:project1

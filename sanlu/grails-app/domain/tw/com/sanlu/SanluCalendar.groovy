@@ -1,7 +1,7 @@
 package tw.com.sanlu
 
 
-class Calendar {
+class SanluCalendar {
 
 	String subject
 	String location

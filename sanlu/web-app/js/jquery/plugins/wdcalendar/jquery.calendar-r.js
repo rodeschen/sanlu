@@ -310,7 +310,12 @@
 			 *              drag event item by mouse.
 			 */
 			enableDrag : true,
-			loadDateR : []
+			loadDateR : [],
+			
+			/**
+			 * @description {Config} enableDrag {String} daystrshow auto set dom id
+			 */
+			datestrshowId: ""
 		};
 		var eventDiv = $("#gridEvent");
 		if (eventDiv.length == 0) {
@@ -474,6 +479,11 @@
 			}
 			initevents(option.view);
 			ResizeView();
+				debugger;
+			if(option.datestrshowId){
+				debugger;
+				$("#" + option.datestrshowId).text(option.datestrshow)
+			}
 		}
 
 		// build day view
@@ -3310,6 +3320,7 @@
 				if (view == option.view) {
 					return;
 				}
+				debugger;
 				clearcontainer();
 				option.view = view;
 				render();
@@ -3467,3 +3478,5 @@
 	};
 
 })(jQuery);
+
+

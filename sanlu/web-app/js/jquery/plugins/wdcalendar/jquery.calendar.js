@@ -240,7 +240,17 @@
              * {Boolean} Whether end user can drag event item by mouse. 
              */
             enableDrag: true, 
-            loadDateR: [] 
+            loadDateR: [] ,
+			
+			/**
+			 * @description {Config} enableDrag {String} daystrshow auto set dom id
+			 */
+			datestrshowId: "",
+			
+			/**
+			 * @description {Config} enableDrag {Boolean} catche for remote request
+			 */
+			cache : false
         };
         var eventDiv = $("#gridEvent");
         if (eventDiv.length == 0) {
@@ -389,6 +399,9 @@
             }
             initevents(option.view); 
             ResizeView();
+			if(option.datestrshowId){
+				$("#" + option.datestrshowId).text(option.datestrshow)
+			}
         }
 
         //build day view
@@ -614,8 +627,16 @@
                     title = i18n.xgcalendar.to_date_view;
                     cl = "wk-daylink";
                 }
-                ht.push("<th abbr='", dateFormat.call(dayarrs[i].date, i18n.xgcalendar.dateformat.fulldayvalue), "' class='gcweekname' scope=\"col\"><div title='", title, "' ", ev, " class='wk-dayname'><span class='", cl, "'>", dayarrs[i].display, "</span></div></th>");
-
+				
+				//debugger; 
+				var chDate = CalConv(dayarrs[i].date);
+				ht.push("<th abbr='", dateFormat.call(dayarrs[i].date,
+						i18n.xgcalendar.dateformat.fulldayvalue),
+						"' class='gcweekname' scope=\"col\"><div title='",
+						title, "' ", ev, " class='wk-dayname'><span class='",
+						cl, "'>", dayarrs[i].display,"<br/>農",chDate.chDate,"<br/>",chDate.bad, "</span></div></th>");
+				
+             
             }
             ht.push("<th width=\"16\" rowspan=\"3\">&nbsp;</th>");
             ht.push("</tr>"); //end tr1;
@@ -893,7 +914,7 @@
 
                 //title tr
                 htb.push("<tr>");
-                var titletemp = "<td class=\"st-dtitle${titleClass}\" ch='qkadd' abbr='${abbr}' axis='00:00' title=\"${title}\"><span class='monthdayshow'>${dayshow}</span></a></td>";
+                var titletemp = "<td class=\"st-dtitle${titleClass}\" ch='qkadd' abbr='${abbr}' axis='00:00' title=\"${title}\"><span class='monthdayshow'><span style='float:left;margin-left:10%' title='${bad}'>農${chdayshow}</span>${dayshow}</span></a></td>";
 
                 for (var i = 0; i < 7; i++) {
                     var o = { titleClass: "", dayshow: "" };
@@ -917,6 +938,9 @@
                         o.dayshow = day.getDate();
                     }
                     o.abbr = dateFormat.call(day, i18n.xgcalendar.dateformat.fulldayvalue);
+					var chdate = CalConv(day);
+					o.chdayshow = chdate.chDate;
+					o.bad =  chdate.bad;
                     htb.push(Tp(titletemp, o));
                 }
                 htb.push("</tr>");
@@ -1156,7 +1180,6 @@
                         param[param.length] = option.extParam[pi];
                     }
                 }
-				
                 $.ajax({
                     type: option.method, //
                     url: option.url,
@@ -1184,7 +1207,7 @@
                                 value[3] = parseDate(value[3]); 
                             });
                             responseData(data, data.start, data.end);
-                            pushER(data.start, data.end);
+							option.cache && pushER(data.start, data.end);
                         }
                         if (option.onAfterRequestData && $.isFunction(option.onAfterRequestData)) {
                             option.onAfterRequestData(1);
@@ -1408,7 +1431,7 @@
             var r = false;
             var r2 = false;
             for (var i = 0; i < ll; i++) {
-                r = false, r2 = false;
+                r = false; r2 = false;
                 var dr = option.loadDateR[i];
                 if (start >= dr.startdate && start <= dr.enddate) {
                     r = true;
@@ -1803,7 +1826,7 @@
                         option.onBeforeRequestData && option.onBeforeRequestData(2);
                         $.post(option.quickAddUrl, param, function(data) {
                             if (data) {
-                                if (data.IsSuccess == true) {
+                                if (data.IsSuccess == false) {
                                     option.isloading = false;
                                     option.eventItems[tId][0] = data.Data;
                                     option.eventItems[tId][8] = 1;
@@ -1814,6 +1837,7 @@
                                     option.onRequestDataError && option.onRequestDataError(2, data);
                                     option.isloading = false;
                                     option.onAfterRequestData && option.onAfterRequestData(2);
+                                    realsedragevent(); 
                                 }
 
                             }
@@ -2029,7 +2053,7 @@
 
 
             }
-            else if (viewtype = "month") {
+            else if ((viewtype = "month")) {
                 $("div.rb-o", gridcontainer).each(function(i) {
                     var chip = $(this);
                     chip.click(dayshow);
@@ -2653,6 +2677,7 @@
                 }
                 clearcontainer();
                 option.view = view;
+				!option.cache && (option.eventItems = []);
                 render();
                 dochange();
             },
@@ -2794,3 +2819,5 @@
     };
     
 })(jQuery);
+
+

@@ -4,8 +4,10 @@
 package tw.com.sanlu;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  * @author rick
@@ -17,6 +19,22 @@ public class Utility {
 	public final static DateFormat shortFormat = DateFormat.getDateTimeInstance(DateFormat.SHORT,
 			DateFormat.SHORT);
 
+	
+	public static Date stringToDate(String date,String formatter){
+		SimpleDateFormat sdf = new SimpleDateFormat(formatter);
+		try {
+			return sdf.parse(date);
+		} catch (ParseException e) {
+			e.printStackTrace();
+			return new Date();
+		}
+	}
+	
+	public static String dateToString(Date date,String formatter){
+		SimpleDateFormat sdf = new SimpleDateFormat(formatter);
+		return sdf.format(date);
+	}
+	
 	/**
 	 * 西元轉民國
 	 * 
