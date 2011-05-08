@@ -190,7 +190,8 @@ class BootStrap {
 							costPrice:50,
 							timeType:1,
 							lastModifyBy:emp1,
-							unit:"對"
+							unit:"對",
+							hasPlace:false
 							)
 					flower.save()
 					def washbasin = new Product(
@@ -202,7 +203,8 @@ class BootStrap {
 							costPrice:100,
 							timeType:1,
 							lastModifyBy:emp1,
-							unit:"組"
+							unit:"組",
+							hasPlace:false
 							)
 					washbasin.save()
 					if(washbasin.hasErrors()){
@@ -211,14 +213,15 @@ class BootStrap {
 
 					def hall = new Product(
 							productNo:"000003",
-							productName:"大忠廳",
+							productName:"六菜碗",
 							totalQuantity:1,
-							price:6400,
-							sallingPrice:8000,
-							costPrice:5000,
+							price:400,
+							sallingPrice:800,
+							costPrice:500,
 							timeType:1,
 							lastModifyBy:emp1,
-							unit:"節"
+							unit:"節",
+							hasPlace:false
 							)
 					hall.save()
 

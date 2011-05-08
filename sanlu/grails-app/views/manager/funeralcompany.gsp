@@ -15,7 +15,8 @@
                     colModel: [{
                         name: 'id',
                         index: 'id',
-                        hidden: true
+                        hidden: true,
+                        key:true
                     }, {
                         header: "禮儀公司",
                         name: 'funeralCompanyName',
@@ -57,7 +58,6 @@
                             datatype: "json"
                         }).trigger("reloadGrid");
                     },
-                    multiselect: true,
                     caption: "Manipulating Array Data"
                 });
                 
@@ -70,7 +70,8 @@
                     colModel: [{
                         name: 'id',
                         index: 'id',
-                        hidden: true
+                        hidden: true,
+                        key:true
                     }, {
                         name: 'funeralCommpany.id',
                         index: 'funeralCommpany.id',
@@ -103,12 +104,11 @@
                         index: 'lastModifyBy.empName',
                         width: 80
                     }],
-                    multiselect: true,
                     caption: "Manipulating Array Data"
                 });
                 
                 $("#delete1").click(function(){
-                    var selrow = grid1.jqGrid('getGridParam', 'selarrrow');
+                    var selrow = grid1.jqGrid('getGridParam', 'selrow');
                     if (!selrow) {
                         alert("請先選擇刪除列");
                     }
@@ -128,7 +128,8 @@
                     })
                 });
                 $("#modify1").click(function(){
-                    var selrow = grid1.jqGrid('getGridParam', 'selarrrow');
+                    debugger;
+                    var selrow = grid1.jqGrid('getGridParam', 'selrow');
                     if (!selrow) {
                         alert("請先選擇修改列");
                     }
@@ -148,7 +149,7 @@
                 });
                 
                 $("#delete2").click(function(){
-                    var selrow = grid2.jqGrid('getGridParam', 'selarrrow');
+                    var selrow = grid2.jqGrid('getGridParam', 'selrow');
                     if (!selrow) {
                         alert("請先選擇刪除列");
                     }
@@ -161,13 +162,13 @@
                         url: contextRoot + "/funeraler/delete",
                         data: id,
                         success: function(msg){
-                            grid1.trigger("reloadGrid");
+                            grid2.trigger("reloadGrid");
                             alert("刪除成功 ");
                         }
                     })
                 });
                 $("#modify2").click(function(){
-                    var selrow = grid2.jqGrid('getGridParam', 'selarrrow');
+                    var selrow = grid2.jqGrid('getGridParam', 'selrow');
                     if (!selrow) {
                         alert("請先選擇修改列");
                     }

@@ -35,9 +35,6 @@ class Product {
 	//		return "${productName}-${empName}}"
 	//	}
 	
-	def beforeInsert = {
-		hasPlace = false
-		}
 	static constraints = {
 		productNo maxSize:6
 		productName maxSize:60, unique:true

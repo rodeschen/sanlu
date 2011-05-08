@@ -15,32 +15,38 @@
                     colModel: [{
                         name: 'id',
                         index: 'id',
-                        hidden: true
+                        hidden: true,
+                        key: true
                     }, {
                         header: "商品代號",
                         name: 'productNo',
                         index: 'productNo',
-                        width: 30
+                        width: 15
                     }, {
                         header: "產品名稱",
                         name: 'productName',
                         index: 'productName',
-                        width: 40
+                        width: 20
                     }, {
                         header: "庫存數量",
                         name: 'totalQuantity',
                         index: 'totalQuantity',
-                        width: 40
+                        width: 20
                     }, {
                         header: "內帳銷售單價",
                         name: 'price',
                         index: 'price',
-                        width: 30
+                        width: 20
+                    }, {
+                        header: "銷售單價",
+                        name: 'sallingPrice',
+                        index: 'sallingPrice',
+                        width: 20
                     }, {
                         header: "成本單價",
                         name: 'costPrice',
                         index: 'costPrice',
-                        width: 40
+                        width: 20
                     }, {
                         header: "時間類型",
                         name: 'timeType',
@@ -55,67 +61,65 @@
                         header: "最後修改時間",
                         name: 'lastUpdated',
                         index: 'lastUpdated',
-                        width: 40,
+                        width: 35,
                         sorttype: "date"
                     }, {
                         header: "最後修改者",
                         name: 'lastModifyBy.empName',
                         index: 'lastModifyBy.empName',
-                        width: 40
+                        width: 30
                     }],
-                    onSelectRow: function(id){
-                        var company = grid1.getRowData(id);
-                        grid2.jqGrid('setGridParam', {
-                            postData: {
-                                'funeralCompanyId': company.id
-                            },
-                            datatype: "json"
-                        }).trigger("reloadGrid");
+                    sortname: 'productNo',
+                    postData: {
+                        hasPlace: false
                     },
-                    multiselect: true,
                     caption: "Manipulating Array Data"
                 });
                 
                 var grid2 = $("#grid2").jqGrid({
-                    url: contextRoot + "/product/query?hasPlace=true",
+                    url: contextRoot + "/product/query",
                     datatype: "json",
                     height: "auto",
                     autowidth: true,
                     pager: true,
                     colModel: [{
-                        name: 'id',
-                        index: 'id',
+                        name: 'product.id',
+                        index: 'product.id',
+                        hidden: true
+                    }, {
+                        name: 'place.id',
+                        index: 'place.id',
                         hidden: true
                     }, {
                         header: "產品名稱",
                         name: 'product.productName',
                         index: 'product.productName',
-                        width: 40
+                        width: 20
                     }, {
                         header: "商品代號",
                         name: 'product.productNo',
                         index: 'product.productNo',
-                        width: 10
+                        width: 15
                     }, {
                         header: "場地名稱",
                         name: 'place.placeName',
                         index: 'place.placeName',
-                        width: 10
+                        width: 20
                     }, {
                         header: "內帳銷售單價",
                         name: 'price',
                         index: 'price',
-                        width: 30
+                        width: 20
                     }, {
                         header: "銷售單價",
                         name: 'sallingPrice',
                         index: 'sallingPrice',
-                        width: 30
+                        width: 20
                     }, {
                         header: "成本單價",
                         name: 'costPrice',
                         index: 'costPrice',
-                        width: 30
+                        width: 20
                     }, {
                         header: "時間類型",
                         name: 'product.timeType',
@@ -130,26 +134,29 @@
                         header: "最後修改時間",
                         name: 'lastUpdated',
                         index: 'lastUpdated',
-                        width: 40,
+                        width: 35,
                         sorttype: "date"
                     }, {
                         header: "最後修改者",
-                        name: 'lastModifyBy.empName',
-                        index: 'lastModifyBy.empName',
+                        name: 'product.lastModifyBy.empName',
+                        index: 'product.lastModifyBy.empName',
                         width: 30
                     }],
                     grouping: true,
                     groupingView: {
-                        groupField: ['product.productName']
+                        groupField: ['product.productName'],
+                        groupColumnShow: [false]
                     },
-                    multiselect: true,
-					sortname: 'productName',
+                    postData: {
+                        hasPlace: true
+                    },
+                    sortname: 'productName',
                     caption: "Manipulating Array Data"
                 });
                 
                 
                 $("#delete1").click(function(){
-                    var selrow = grid1.jqGrid('getGridParam', 'selarrrow');
+                    var selrow = grid1.jqGrid('getGridParam', 'selrow');
                     if (!selrow) {
                         alert("請先選擇刪除列");
                     }
@@ -160,7 +167,7 @@
                     var id = grid1.getRowData(selrow);
                     $.ajax({
                         type: "POST",
-                        url: contextRoot + "/funeralCompany/delete",
+                        url: contextRoot + "/product/delete",
                         data: id,
                         success: function(msg){
                             grid1.trigger("reloadGrid");
@@ -169,14 +176,14 @@
                     })
                 });
                 $("#modify1").click(function(){
-                    var selrow = grid1.jqGrid('getGridParam', 'selarrrow');
+                    var selrow = grid1.jqGrid('getGridParam', 'selrow');
                     if (!selrow) {
                         alert("請先選擇修改列");
                     }
                     var id = grid1.getRowData(selrow);
                     $.ajax({
                         type: "POST",
-                        url: contextRoot + "/funeralCompany/modify",
+                        url: contextRoot + "/product/modify",
                         data: {
                             columnParam: JSON.stringify(grid1.jqGrid('getGridParam', 'colModel')),
                             data: JSON.stringify(id)
@@ -189,7 +196,7 @@
                 });
                 
                 $("#delete2").click(function(){
-                    var selrow = grid2.jqGrid('getGridParam', 'selarrrow');
+                    var selrow = grid2.jqGrid('getGridParam', 'selrow');
                     if (!selrow) {
                         alert("請先選擇刪除列");
                     }
@@ -199,23 +206,25 @@
                     var id = grid2.getRowData(selrow);
                     $.ajax({
                         type: "POST",
-                        url: contextRoot + "/funeraler/delete",
-                        data: id,
+                        url: contextRoot + "/product/delete",
+                        data: {
+                            data: JSON.stringify(id)
+                        },
                         success: function(msg){
-                            grid1.trigger("reloadGrid");
+                            grid2.trigger("reloadGrid");
                             alert("刪除成功 ");
                         }
                     })
                 });
                 $("#modify2").click(function(){
-                    var selrow = grid2.jqGrid('getGridParam', 'selarrrow');
+                    var selrow = grid2.jqGrid('getGridParam', 'selrow');
                     if (!selrow) {
                         alert("請先選擇修改列");
                     }
                     var id = grid2.getRowData(selrow);
                     $.ajax({
                         type: "POST",
-                        url: contextRoot + "/funeraler/modify",
+                        url: contextRoot + "/product/modify",
                         data: {
                             columnParam: JSON.stringify(grid2.jqGrid('getGridParam', 'colModel')),
                             data: JSON.stringify(id)
@@ -247,7 +256,7 @@
         </fieldset>
         <fieldset>
             <legend>
-                場地類商品
+                場地類商品 
             </legend>
             <div>
                 <button id="add2">

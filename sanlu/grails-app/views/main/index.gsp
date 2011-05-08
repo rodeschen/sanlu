@@ -107,7 +107,7 @@
                     caption: "Manipulating Array Data"
                 });
                 $("#delete1").click(function(){
-                    var selrow = grid1.jqGrid('getGridParam', 'selarrrow');
+                    var selrow = grid1.jqGrid('getGridParam', 'selrow');
                     if (!selrow) {
                         alert("請先選擇刪除列");
                     }
@@ -126,7 +126,7 @@
                     })
                 });
                 $("#modify1").click(function(){
-                    var selrow = grid1.jqGrid('getGridParam', 'selarrrow');
+                    var selrow = grid1.jqGrid('getGridParam', 'selrow');
                     if (!selrow) {
                         alert("請先選擇修改列");
                     }

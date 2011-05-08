@@ -68,14 +68,15 @@ abstract class GridController {
 	}
 	
 	def delete={
-		id  = params.long("id")
+		id  = params.containsKey("id")?params.long("id"):null
 		deleteAction()
 		}
 	def deleteAction={}
 	
 	def modify={
 		columns = getColumns(new JSONArray(params.get("columnParam")));
-		id  = new JSONObject(params.get("data")).getLong("id")
+		def data = new JSONObject(params.get("data"))
+		id  = data.containsKey("id")?data.getLong("id"):null
 		modifyAction()
 		}
 	def modifyAction={}

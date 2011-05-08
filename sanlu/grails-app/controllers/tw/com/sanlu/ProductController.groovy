@@ -15,8 +15,8 @@ class ProductController extends GridController{
 		boolean hasPlace = params.boolean("hasPlace")
 
 		//Project.findAll("from Project as p where p.outDate is null or p.outDate > day(current_date()) "+(sortBy?"order by "+sortBy+(isAsc?" asc":" desc"):""),[max:pageRows,offset:startRow])
-		def products = hasPlace?ProductLinkPlace.list(max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc"): Product.findByHasPlace(false,[max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc"])
-
+		def products = hasPlace?ProductLinkPlace.list(max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc"): Product.findAllByHasPlace(false,[max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc"])
+		//println hasPlace + products.size()
 		for (product in products) {
 			def row = [:]
 			def o=[]
@@ -39,42 +39,70 @@ class ProductController extends GridController{
 		return rows
 	}
 	public int getCountRow(params){
-		FuneralCompany.count()
+		ProductLinkPlace.count()
 	}
 
 	def deleteAction = {
-		def company = FuneralCompany.findById(id)
+		boolean hasPlace = params.boolean("hasPlace")
+		def productLinkPlace = hasPlace?ProductLinkPlace.findByPlaceAndProduct(Place.findById(params.get("place.id")),Product.findById(params.get("product.id"))):Product.findById(id)
+		println productLinkPlace
 		def res = ["IsSuccess" : true]
-		if(company){
-			company.delete()
+		if(productLinkPlace){
+			productLinkPlace.delete()
 		}else{
 			res =["IsSuccess" : false]
 		}
 		render res as JSON
 	}
 	def modifyAction={
-		def company = FuneralCompany.findById(id)
-		if(!company) {
+		boolean hasPlace = params.boolean("hasPlace")
+		def productLinkPlace
+		def json = new JSONObject(params.get("data"))
+		if(hasPlace){
+			productLinkPlace = ProductLinkPlace.findByPlaceAndProduct(Place.findById(json.getString("place.id")),Product.findById(json.getString("product.id")))
+		}else{
+			productLinkPlace= Product.findById(id)
+		}
+		if(!productLinkPlace) {
 			return println("無法修改")
 		}
 
-		new JSONObject(params.get("data")).each(){
-			switch( it.key ){
-				case 'funeralCompanyName':
-				case 'phone1':
-				case 'phone2':
-				case 'address':
-					company.putAt it.key,it.value
-					break
-			}
+		json.each(){
+			setObj(it.key,productLinkPlace,it.value)
 		}
 		Employee emp = Employee.findByEmpNo("00002")
 		if(emp){
-			company.setLastModifyBy emp
+			productLinkPlace.setLastModifyBy emp
 		}
-		company.save()
+		productLinkPlace.save()
 		def res = ["IsSuccess" : true]
 		render res as JSON
+	}
+	//product.lastModifyBy.empName
+	def setObj(keyNames,obj,val){
+		if(keyNames.indexOf('.') > -1){
+			def keyName = keyNames.substring(0,keyNames.indexOf('.'))
+			def lastKeyNames = keyNames.substring(keyNames.indexOf('.')+1)
+			obj.putAt(keyName,setObj(lastKeyNames,obj.getAt(keyName),val))
+			return obj
+		}else{
+			switch( keyNames ){
+				case 'lastUpdated':
+					break
+				case 'outDate':
+					obj.putAt keyNames,Utility.shortFormat.parse(val)
+					break
+				case 'price':
+				case 'sallingPrice':
+				case 'costPrice':
+				case 'totalQuantity':
+					obj.putAt keyNames,new BigDecimal( val)
+					break				
+				default:
+					obj.putAt keyNames,val
+			}
+			return obj
+		}
 	}
 }
 
