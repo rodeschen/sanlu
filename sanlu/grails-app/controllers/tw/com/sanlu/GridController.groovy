@@ -14,7 +14,7 @@ import java.util.concurrent.ThreadPoolExecutor.AbortPolicy;
 abstract class GridController {
 	public int page = 0, pageRows = 0, startRow = 0, rowCount = 0, pagerows = 0
 	def id ,sortBy,columns=[]
-	
+
 
 	public boolean pages,isAsc
 
@@ -23,28 +23,33 @@ abstract class GridController {
 
 	def query={
 		def result=[:];
-		pages= params.containsKey(GridEnum.PAGE.getCode())
+		try{
+			pages= params.containsKey(GridEnum.PAGE.getCode())
 
-		if (pages) {
-			page = params.int(GridEnum.PAGE.getCode())
-			pageRows = params.int(GridEnum.PAGEROWS.getCode())
-			startRow = (page - 1) * pageRows;
-			rowCount = getCountRow(params)
-			columns = getColumns(params.get(GridEnum.COL_PARAM.getCode()));
+			if (pages) {
+				page = params.int(GridEnum.PAGE.getCode())
+				pageRows = params.int(GridEnum.PAGEROWS.getCode())
+				startRow = (page - 1) * pageRows;
+				rowCount = getCountRow(params)
+				columns = getColumns(params.get(GridEnum.COL_PARAM.getCode()));
+			}
+
+			if (params.containsKey(GridEnum.SORTCOLUMN)) {
+				sortBy = params.get(GridEnum.SORTCOLUMN.getCode())
+				boolean isAsc = GridEnum.SORTASC.getCode().equals(
+						params.boolean(GridEnum.SORTTYPE.getCode()))
+			}
+
+			result.put(GridEnum.PAGEROWS.getCode(),queryAction())
+			result.put(GridEnum.PAGE.getCode(),page)
+			result.put(GridEnum.TOTAL.getCode(),rowCount.intdiv(pageRows)
+					+ (rowCount % pageRows > 0 ? 1 : 0))
+			result.put(GridEnum.RECORDS.getCode(),rowCount)
+			render result as JSON
+		}catch(Exception e){
+			log.error e.dump()
+			render(status: 400, contentType:"text/json", text: e.dump())
 		}
-
-		if (params.containsKey(GridEnum.SORTCOLUMN)) {
-			sortBy = params.get(GridEnum.SORTCOLUMN.getCode())
-			boolean isAsc = GridEnum.SORTASC.getCode().equals(
-					params.boolean(GridEnum.SORTTYPE.getCode()))
-		}
-
-		result.put(GridEnum.PAGEROWS.getCode(),queryAction())
-		result.put(GridEnum.PAGE.getCode(),page)
-		result.put(GridEnum.TOTAL.getCode(),rowCount.intdiv(pageRows)
-				+ (rowCount % pageRows > 0 ? 1 : 0))
-		result.put(GridEnum.RECORDS.getCode(),rowCount)
-		render result as JSON
 	}
 	def queryAction={}
 	public abstract int getCountRow(params)
@@ -66,18 +71,28 @@ abstract class GridController {
 		}
 		return colName
 	}
-	
+
 	def delete={
-		id  = params.containsKey("id")?params.long("id"):null
-		deleteAction()
+		try{
+			id  = params.containsKey("id")?params.long("id"):null
+			deleteAction()
+		}catch(Exception e){
+			log.error e.dump()
+			render(status: 400, contentType:"text/json", text: e.dump())
 		}
+	}
 	def deleteAction={}
-	
+
 	def modify={
-		columns = getColumns(new JSONArray(params.get("columnParam")));
-		def data = new JSONObject(params.get("data"))
-		id  = data.containsKey("id")?data.getLong("id"):null
-		modifyAction()
+		try{
+			columns = getColumns(new JSONArray(params.get("columnParam")));
+			def data = new JSONObject(params.get("data"))
+			id  = data.containsKey("id")?data.getLong("id"):null
+			modifyAction()
+		}catch(Exception e){
+			log.error e.printStackTrace()
+			render(status: 400, contentType:"text/json", text: e.dump())
 		}
+	}
 	def modifyAction={}
 }

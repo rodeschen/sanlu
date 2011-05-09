@@ -45,7 +45,7 @@ class ProductController extends GridController{
 	def deleteAction = {
 		boolean hasPlace = params.boolean("hasPlace")
 		def productLinkPlace = hasPlace?ProductLinkPlace.findByPlaceAndProduct(Place.findById(params.get("place.id")),Product.findById(params.get("product.id"))):Product.findById(id)
-		println productLinkPlace
+
 		def res = ["IsSuccess" : true]
 		if(productLinkPlace){
 			productLinkPlace.delete()
@@ -57,18 +57,41 @@ class ProductController extends GridController{
 	def modifyAction={
 		boolean hasPlace = params.boolean("hasPlace")
 		def productLinkPlace
-		def json = new JSONObject(params.get("data"))
+		def json = new JSONObject(params.get("data"))		
+		log.debug hasPlace
 		if(hasPlace){
 			productLinkPlace = ProductLinkPlace.findByPlaceAndProduct(Place.findById(json.getString("place.id")),Product.findById(json.getString("product.id")))
 		}else{
 			productLinkPlace= Product.findById(id)
 		}
+		log.debug productLinkPlace
 		if(!productLinkPlace) {
 			return println("無法修改")
 		}
 
 		json.each(){
-			setObj(it.key,productLinkPlace,it.value)
+			def keyNames = it.key.split('\\.')
+			def tmp = productLinkPlace
+			int i=0
+			for(i=0;i<keyNames.size()-1;i++){
+				tmp = i==0?productLinkPlace.getAt(keyNames[i]):tmp.getAt(keyNames[i])
+			}
+			def keyName = keyNames[i]
+			switch(keyName){
+				case 'lastUpdated':
+					break
+				case 'outDate':
+					(keyNames.size() >1? tmp:productLinkPlace).putAt keyName,Utility.shortFormat.parse(it.value)
+					break
+				case 'price':
+				case 'sallingPrice':
+				case 'costPrice':
+				case 'totalQuantity':
+					(keyNames.size() >1? tmp:productLinkPlace).putAt keyName,new BigDecimal(it.value)
+					break
+				default:
+					(keyNames.size() >1? tmp:productLinkPlace).putAt keyName,it.value
+			}
 		}
 		Employee emp = Employee.findByEmpNo("00002")
 		if(emp){
@@ -83,8 +106,7 @@ class ProductController extends GridController{
 		if(keyNames.indexOf('.') > -1){
 			def keyName = keyNames.substring(0,keyNames.indexOf('.'))
 			def lastKeyNames = keyNames.substring(keyNames.indexOf('.')+1)
-			obj.putAt(keyName,setObj(lastKeyNames,obj.getAt(keyName),val))
-			return obj
+			setObj(lastKeyNames,obj.getAt(keyName),val)
 		}else{
 			switch( keyNames ){
 				case 'lastUpdated':
@@ -97,11 +119,10 @@ class ProductController extends GridController{
 				case 'costPrice':
 				case 'totalQuantity':
 					obj.putAt keyNames,new BigDecimal( val)
-					break				
+					break
 				default:
 					obj.putAt keyNames,val
 			}
-			return obj
 		}
 	}
 }

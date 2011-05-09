@@ -227,7 +227,8 @@
                         url: contextRoot + "/product/modify",
                         data: {
                             columnParam: JSON.stringify(grid2.jqGrid('getGridParam', 'colModel')),
-                            data: JSON.stringify(id)
+                            data: JSON.stringify(id),							
+							hasPlace: true
                         },
                         success: function(msg){
                             grid2.trigger("reloadGrid");
