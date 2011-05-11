@@ -34,6 +34,7 @@
 					$("#hdtxtshow").datepicker({
 						picker: "#txtdatetimeshow",
 						showtarget: $("#txtdatetimeshow"),
+						firstDay:2,
 						onReturn: function(r) {
 							calendar.gotoDate(r);
 						}
@@ -187,11 +188,13 @@
 						</div>
 						<div class="btnseparator">
 						</div>
+						<!--
 						<div id="showdaybtn" class="fbutton">
 							<div>
 								<span title='Day' class="showdayview">日</span>
 							</div>
 						</div>
+						-->
 						<div  id="showweekbtn" class="fbutton fcurrent">
 							<div>
 								<span title='Week' class="showweekview">周</span>

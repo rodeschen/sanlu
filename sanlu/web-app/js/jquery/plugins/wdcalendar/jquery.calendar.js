@@ -1319,11 +1319,11 @@
         }
         //utils goes here
         function weekormonthtoday(e) {
-            var th = $(this);
-            var daystr = th.attr("abbr");
-            option.showday = strtodate(daystr + " 00:00");
-            option.view = "day";
-            render();
+            //var th = $(this);
+            //var daystr = th.attr("abbr");
+            //option.showday = strtodate(daystr + " 00:00");
+           // option.view = "day";
+          //  render();
             if (option.onweekormonthtoday) {
                 option.onweekormonthtoday(option);
             }
