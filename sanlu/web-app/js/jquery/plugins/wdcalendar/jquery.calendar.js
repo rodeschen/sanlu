@@ -450,6 +450,9 @@
             html.push("</tbody></table></td></tr></tbody></table></div>");
             gridcontainer.html(html.join(""));
             html = null;
+			gridcontainer.find(".editorchdate span").click(function(){
+				$.get("",{}).done(function(){}).fail(function(){})
+			})
             //TODO event handlers
             //$("#weekViewAllDaywk").click(RowHandler);
         }
@@ -633,8 +636,9 @@
 				ht.push("<th abbr='", dateFormat.call(dayarrs[i].date,
 						i18n.xgcalendar.dateformat.fulldayvalue),
 						"' class='gcweekname' scope=\"col\"><div title='",
-						title, "' ", ev, " class='wk-dayname'><span class='",
-						cl, "'>", dayarrs[i].display,"<br/>農",chDate.chDate,"<br/>",chDate.bad, "</span></div></th>");
+						title, "' ", ev, " class='wk-dayname' style='position:relative'><span class='",
+						cl, "'>", dayarrs[i].display,"<br/>農",chDate.chDate,"<br/>",chDate.bad, "</span><span class='editorchdate' abbr='",dateFormat.call(dayarrs[i].date,
+						i18n.xgcalendar.dateformat.fulldayvalue),"'><span clas='good' title='好日子'>吉</span>&nbsp;<span class='bad' title='壞日子'>兇</span></span></div></th>");
 				
              
             }
@@ -1319,11 +1323,11 @@
         }
         //utils goes here
         function weekormonthtoday(e) {
-            //var th = $(this);
-            //var daystr = th.attr("abbr");
-            //option.showday = strtodate(daystr + " 00:00");
+           // var th = $(this);
+           // var daystr = th.attr("abbr");
+           // option.showday = strtodate(daystr + " 00:00");
            // option.view = "day";
-          //  render();
+           // render();
             if (option.onweekormonthtoday) {
                 option.onweekormonthtoday(option);
             }
