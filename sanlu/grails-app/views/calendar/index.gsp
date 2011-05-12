@@ -198,7 +198,7 @@
 						-->
 						<div  id="showweekbtn" class="fbutton fcurrent">
 							<div>
-								<span title='Week' class="showweekview">周</span>
+								<span title='Week' class="showweekview">週</span>
 							</div>
 						</div>
 						<div  id="showmonthbtn" class="fbutton">
