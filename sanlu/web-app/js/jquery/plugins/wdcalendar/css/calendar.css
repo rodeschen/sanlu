@@ -676,3 +676,22 @@ border-bottom:2px solid #c3d9ff;
 {
     text-decoration:underline;
 }
+
+
+.editorchdate {
+	color:#A50;
+    position:absolute;
+    right: 5px;
+    top: 2px;
+    cursor:pointer;
+}
+
+.editorchdate .good{
+	color:#A00;
+    cursor:pointer;
+}
+
+.editorchdate .bad{
+	color:#000;
+    cursor:pointer;
+}
