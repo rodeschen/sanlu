@@ -250,7 +250,9 @@
 			/**
 			 * @description {Config} enableDrag {Boolean} catche for remote request
 			 */
-			cache : false
+			cache : false,
+			
+			contextRoot: ""
         };
         var eventDiv = $("#gridEvent");
         if (eventDiv.length == 0) {
@@ -450,9 +452,26 @@
             html.push("</tbody></table></td></tr></tbody></table></div>");
             gridcontainer.html(html.join(""));
             html = null;
-			gridcontainer.find(".editorchdate span").click(function(){
-				$.get("",{}).done(function(){}).fail(function(){})
-			})
+			if(option.view == "week" && event.type != 'click') {
+				gridcontainer.find(".editorchdate span").click( function() {
+					var $this = $(this);
+					$.post(contextRoot + "/calendar/updatechdate", {
+						date : $this.parent().data("date"),
+						dateStatus : $this.data("status")
+					}).done( function(json) {
+						$this.parent().siblings(".wk-daylink").removeClass("good normal bad").addClass(json.dateStatus);
+					}).fail( function() {
+					})
+				});
+				$.post(contextRoot + "/calendar/querychdatestatus",{
+					start : dateFormat.call(option.vstart,i18n.xgcalendar.dateformat.fulldayvalue),
+					end : dateFormat.call(option.vend,i18n.xgcalendar.dateformat.fulldayvalue)
+				}).done(function(json){
+					gridcontainer.find("th[abbr]").each(function(){
+						$(this).find(".wk-daylink").removeClass("good normal bad").addClass(json[$(this).attr("abbr")] || "normal");
+					})
+				});
+			}
             //TODO event handlers
             //$("#weekViewAllDaywk").click(RowHandler);
         }
@@ -479,6 +498,18 @@
             gridcontainer.html(html.join(""));
             html = null;
             $("#cal-month-closebtn").click(closeCc);
+            $.post(contextRoot + "/calendar/querychdatestatus",{
+				start : dateFormat.call(option.vstart,i18n.xgcalendar.dateformat.fulldayvalue),
+				end : dateFormat.call(option.vend,i18n.xgcalendar.dateformat.fulldayvalue)
+			}).done(function(json){
+				gridcontainer.find("td[abbr]").each(function(){
+					$(this).find(".monthdayshow").removeClass("good normal bad").addClass(json[$(this).attr("abbr")] || "normal");
+				}).click(function(){
+					gridcontainer.swtichView("week").gotoDate(parseDate($(this).attr("abbr")));
+					$("#caltoolbar").find("#showweekbtn").addClass("fcurrent")
+					.end().find("#showmonthbtn").removeClass("fcurrent");
+				});
+			});
         }
         function closeCc() {
             $("#cal-month-cc").css("visibility", "hidden");
@@ -627,7 +658,7 @@
                 }
                 else {
                     ev = ""; // "onclick=\"javascript:FunProxy('week2day',event,this);\"";
-                    title = i18n.xgcalendar.to_date_view;
+                    title = "";//i18n.xgcalendar.to_date_view;
                     cl = "wk-daylink";
                 }
 				
@@ -637,8 +668,8 @@
 						i18n.xgcalendar.dateformat.fulldayvalue),
 						"' class='gcweekname' scope=\"col\"><div title='",
 						title, "' ", ev, " class='wk-dayname' style='position:relative'><span class='",
-						cl, "'>", dayarrs[i].display,"<br/>農",chDate.chDate,"<br/>",chDate.bad, "</span><span class='editorchdate' abbr='",dateFormat.call(dayarrs[i].date,
-						i18n.xgcalendar.dateformat.fulldayvalue),"'><span clas='good' title='好日子'>吉</span>&nbsp;<span class='bad' title='壞日子'>兇</span></span></div></th>");
+						cl, "'>", dayarrs[i].display,"<br/>農",chDate.chDate,"<br/>",chDate.bad, "</span><span class='editorchdate' data-date='",dateFormat.call(dayarrs[i].date,
+						i18n.xgcalendar.dateformat.fulldayvalue),"'><span class='good' data-status='good' title='好日子'>吉</span><br/><span data-status='normal' class='normal' title='一般日子'>平</span><br/><span class='bad' data-status='bad' title='壞日子'>兇</span></span></div></th>");
 				
              
             }
@@ -918,7 +949,7 @@
 
                 //title tr
                 htb.push("<tr>");
-                var titletemp = "<td class=\"st-dtitle${titleClass}\" ch='qkadd' abbr='${abbr}' axis='00:00' title=\"${title}\"><span class='monthdayshow'><span style='float:left;margin-left:10%' title='${bad}'>農${chdayshow}</span>${dayshow}</span></a></td>";
+                var titletemp = "<td class=\"st-dtitle${titleClass}\" ch='qkadd' abbr='${abbr}' axis='00:00' title=\"${title}\"><span class='monthdayshow'><span style='float:left;margin-left:10%' title='${bad}'>農${chdayshow}</span><b>${dayshow}</b></span></a></td>";
 
                 for (var i = 0; i < 7; i++) {
                     var o = { titleClass: "", dayshow: "" };
@@ -930,7 +961,7 @@
                         o.titleClass = " st-dtitle-nonmonth";
                     }
                     o.title = dateFormat.call(day, i18n.xgcalendar.dateformat.fulldayshow);
-                    if (day.getDate() == 1) {
+                    /*if (day.getDate() == 1) {
                         if (day.getMonth == 0) {
                             o.dayshow = dateFormat.call(day, i18n.xgcalendar.dateformat.fulldayshow);
                         }
@@ -940,7 +971,9 @@
                     }
                     else {
                         o.dayshow = day.getDate();
-                    }
+                    }*/
+                    
+                    o.dayshow = dateFormat.call(day, i18n.xgcalendar.dateformat.Md3);
                     o.abbr = dateFormat.call(day, i18n.xgcalendar.dateformat.fulldayvalue);
 					var chdate = CalConv(day);
 					o.chdayshow = chdate.chDate;

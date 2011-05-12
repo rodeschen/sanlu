@@ -12,6 +12,7 @@
 				$(document).ready( function() {
 					var view = "week";
 					var op = {
+						contextRoot: contextRoot,
 						url : contextRoot + "/calendar/query",
 						showday: new Date(),
 						//ViewCmdhandler: View,

@@ -41,7 +41,25 @@ class CalendarController {
 		render res as JSON
 	}
 
+	def updatechdate={
+		def date = ChineseDateStatus.findByDate(params.date)
+		if(date){
+			date.properties = params
+			date.save()
+		}else{
+			new ChineseDateStatus(params).save()
+		}
+		render params as JSON
+	}
 
+	def querychdatestatus ={
+		def dates = ChineseDateStatus.findAllByDateBetween(params.start,params.end)
+		def res = [:]
+		dates?.each(){
+			res[it.date] = it.dateStatus
+		}
+		render res as JSON
+	}
 	def query={
 		def startAndEnd = calCalendar();
 		def billDetails = BillDetail.findAllByStartTimeBetween(startAndEnd.start,startAndEnd.end)

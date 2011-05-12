@@ -674,24 +674,26 @@ border-bottom:2px solid #c3d9ff;
 }
 .monthdayshow:hover
 {
-    text-decoration:underline;
+    /*text-decoration:underline;*/
 }
 
-
+/**sanlu*/
 .editorchdate {
-	color:#A50;
     position:absolute;
     right: 5px;
     top: 2px;
     cursor:pointer;
 }
-
-.editorchdate .good{
-	color:#A00;
-    cursor:pointer;
-}
-
-.editorchdate .bad{
+.bad{
 	color:#000;
-    cursor:pointer;
 }
+.normal{
+	color:#112ABB;
+}
+.good{
+	color:#A00;
+}
+
+
+
+
