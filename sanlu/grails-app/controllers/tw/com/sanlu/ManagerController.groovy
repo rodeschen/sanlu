@@ -1,6 +1,6 @@
 package tw.com.sanlu
 
-class ManagerController {
+class ManagerController extends BaseController {
 
     def index = { }
 	

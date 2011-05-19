@@ -5,9 +5,7 @@
 	</head>
 	<body>
 		<script>
-			var contextRoot = "${request.contextPath}";
 			$(document).ready(function(){
-				
 				API.loadPage("${request.contextPath}/main");
 			})
 		</script>

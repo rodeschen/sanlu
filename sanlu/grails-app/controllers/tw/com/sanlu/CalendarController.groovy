@@ -9,12 +9,13 @@ import java.util.Calendar;
 import javax.servlet.http.HttpServletResponse;
 
 
-class CalendarController {
+class CalendarController extends BaseController {
 	def index = {
 		// redirect(action: "list", params: params)
 	}
 
 	def list = {
+		params.put("data" , params.get("data") || "")
 	}
 
 	def add ={

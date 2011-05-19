@@ -14,9 +14,9 @@
 		<script src="${resource(dir:'js/function',file:'chineseCalendar.js')}"></script>
 		<script src="${resource(dir:'js/base',file:'base.js')}"></script>
 		<script type="text/javascript">
-			var contextRoot = "${request.contextPath}";
-			//var responseJSON = ${request.getAttribute("responseJSON")}; 
-		</script>
+		    var contextRoot = "${request.contextPath}";
+			var responseJSON = ${rjson};
+       </script>
 		<g:layoutHead />
 			<!--<g:javascript library="application" />-->
 			<style>
@@ -26,35 +26,6 @@
 		<div id="body">
 			<header>
 			</header>
-			<hr/>
-			<nav>
-				<ul id="nav">
-					<li class="current">
-						<a href="${request.contextPath}/main">首頁</a>
-					</li>
-					<li>
-						<a href="#">報表</a>
-					</li>
-					<li>
-						<a href="#">系統管理</a>
-						<ul>
-							<li>
-								<a href="${request.contextPath}/manager/product">商品管理</a>
-							</li>
-							<li>
-								<a href="${request.contextPath}/manager/funeralcompany">禮儀公司管理</a>
-							</li>
-							<li>
-								<hr />
-							</li>
-							<li>
-								<a href="${request.contextPath}/product/funeralcompany">員工管理</a>
-							</li>
-						</ul>
-					</li>
-				</ul>
-			</nav>
-			<aside> <span>&gt;&gt;</span> 首頁 </aside>
 			<section>
 				<g:layoutBody />
 			</section>

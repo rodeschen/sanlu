@@ -89,7 +89,7 @@ $.jgrid = {
 	formatter : {
 		integer : {thousandsSeparator: " ", defaultValue: '0'},
 		number : {decimalSeparator:".", thousandsSeparator: " ", decimalPlaces: 2, defaultValue: '0.00'},
-		currency : {decimalSeparator:".", thousandsSeparator: " ", decimalPlaces: 2, prefix: "", suffix:"", defaultValue: '0.00'},
+		currency : {decimalSeparator:".", thousandsSeparator: ",", decimalPlaces: 0, prefix: "", suffix:"", defaultValue: '0.00'},
 		date : {
 			dayNames:   [
 				"Sun", "Mon", "Tue", "Wed", "Thr", "Fri", "Sat",

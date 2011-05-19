@@ -8,7 +8,7 @@
 			</title>
 			<script type="text/javascript">
 				var contextRoot = "${request.contextPath}";
-				
+				var cc = $.parseJSON( );
 				$(document).ready( function() {
 					var view = "week";
 					var op = {
@@ -96,15 +96,6 @@
 						$("#showdaybtn").addClass("fcurrent");
 					}
 
-					//to show day view
-					$("#showdaybtn").click( function(e) {
-						//document.location.href="#day";
-						$("#caltoolbar div.fcurrent").each( function() {
-							$(this).removeClass("fcurrent");
-						})
-						$(this).addClass("fcurrent");
-						calendar.swtichView("day");
-					});
 					//to show week view
 					$("#showweekbtn").click( function(e) {
 						$("#caltoolbar div.fcurrent").each( function() {
@@ -126,33 +117,18 @@
 					$("#showreflashbtn").click( function(e) {
 						$("#gridcontainer").reload();
 					});
-					/*
-					//Add a new event
-					$("#faddbtn").click( function(e) {
-						var url = "edit.php";
-						OpenModelWindow(url, {
-							width: 500,
-							height: 400,
-							caption: "Create New Calendar"
-						});
-					});*/
 					//go to today
 					$("#showtodaybtn").click( function(e) {
 						calendar.gotoDate();
-
-
 					});
 					//previous date range
 					$("#sfprevbtn").click( function(e) {
 						calendar.previousRange();
-
-
 					});
 					//next date range
 					$("#sfnextbtn").click( function(e) {
 						calendar.nextRange();
 					});
-					$("button").button();
 				});
 			</script>
 	</head>

@@ -20,6 +20,8 @@ body {
     border: #BBB solid 1px;
     margin-top: 10px;
     border-radius: .8em;
+    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, .4);
+    -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, .4);
 }
 
 header {
@@ -31,6 +33,8 @@ header {
     background: url(../images/sanluHeader.png) no-repeat;
     border-top-left-radius: .8em;
     border-top-right-radius: .8em;
+    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, .4);
+    -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, .4);
 }
 
 nav {
@@ -246,3 +250,14 @@ button {
     line-height: 11px;
 }
 
+.field-row span.th1{
+	color:#AB8915 ;
+	font-weight:bold;
+	width:100px;
+	display:inline-block;
+	padding:5px;
+	text-align:right;
+}
+
+.field-row span.td1{
+}

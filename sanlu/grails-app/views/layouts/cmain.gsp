@@ -24,7 +24,7 @@
         </script>
         <g:layoutHead/><g:javascript library="application" />
         <script type="text/javascript">
-
+			//var responseJSON = ${params.responseJSON}; 
         </script>
     </head>
     <body>

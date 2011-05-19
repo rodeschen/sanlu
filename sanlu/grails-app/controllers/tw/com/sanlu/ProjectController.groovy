@@ -12,14 +12,15 @@ import org.codehaus.groovy.grails.web.json.JSONObject
  */
 class ProjectController extends GridController {
 
-	def index = { }
+	def index = {
+		[rjson : params.responseJSON.toString()] 
+	}
 	def queryAction = {
 
-		def rows=[]	
-		
+		def rows=[]
 		def projects = Project.findByClosingDateOrClosingDateIsNull(new Date(),[max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc"])
 		for (project in projects) {
-			
+
 			def o=[]
 			def row = [:]
 			columns.each(){

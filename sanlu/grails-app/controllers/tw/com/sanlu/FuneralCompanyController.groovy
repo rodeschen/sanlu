@@ -74,4 +74,5 @@ class FuneralCompanyController extends GridController{
 		def res = ["IsSuccess" : true]
 		render res as JSON
 	}
+	
 }

@@ -11,7 +11,7 @@ import java.util.concurrent.ThreadPoolExecutor.AbortPolicy;
  * @author rickhuang
  *
  */
-abstract class GridController {
+abstract class GridController extends BaseController {
 	public int page = 0, pageRows = 0, startRow = 0, rowCount = 0, pagerows = 0
 	def id ,sortBy,columns=[]
 
