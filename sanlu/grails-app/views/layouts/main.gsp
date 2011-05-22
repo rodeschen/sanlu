@@ -13,10 +13,7 @@
 		<script src="${resource(dir:'js/jquery/plugins/jqgrid/js',file:'jquery.jqGrid.src.js')}"></script>
 		<script src="${resource(dir:'js/function',file:'chineseCalendar.js')}"></script>
 		<script src="${resource(dir:'js/base',file:'base.js')}"></script>
-		<script type="text/javascript">
-			var contextRoot = "${request.contextPath}";
-			//var responseJSON = ${request.getAttribute("responseJSON")}; 
-		</script>
+		
 		<g:layoutHead />
 			<!--<g:javascript library="application" />-->
 			<style>
@@ -27,6 +24,7 @@
 			<header>
 			</header>
 			<hr/>
+			<g:if test="${session.empLevel}">
 			<nav>
 				<ul id="nav">
 					<li class="current">
@@ -35,6 +33,7 @@
 					<li>
 						<a href="#">報表</a>
 					</li>
+					
 					<li>
 						<a href="#">系統管理</a>
 						<ul>
@@ -52,9 +51,17 @@
 							</li>
 						</ul>
 					</li>
+					
+					<li style="float:right;">
+						姓名:${session.empName}
+					</li>
+					<li style="float:right;">
+						<a href="${request.contextPath}/login/logout">登出</a>
+					</li>
 				</ul>
 			</nav>
-			<aside> <span>&gt;&gt;</span> 首頁 </aside>
+			<aside> <span>&gt;&gt;</span> 首頁 </aside>			
+			</g:if>
 			<section>
 				<g:layoutBody />
 			</section>

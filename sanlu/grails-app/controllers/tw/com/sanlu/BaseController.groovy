@@ -13,10 +13,19 @@ import java.util.concurrent.ThreadPoolExecutor.AbortPolicy;
  */
 abstract class BaseController {
 	def beforeInterceptor ={
-		def res = [:]
-		params.keySet().each (){
-			res[it] = params.get(it);
+		if(session.empLevel){
+			def res = [:]
+
+			params.keySet().each (){
+				res[it] = params.get(it);
+			}
+			params.responseJSON = res as JSON
+		}else{
+			if(params.controller != "main"){
+				//redirect(controller:"main",action:"index")
+			}else if(params.action!="login"){
+				//redirect(controller:"main",action:"login")
+			}
 		}
-		params.responseJSON = res as JSON; 
 	}
 }

@@ -2,5 +2,8 @@ package tw.com.sanlu
 
 class MainController extends BaseController {
 
-    def index = { }
+   def index = {	   		
+	}
+   
+   def view ={}
 }
