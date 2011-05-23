@@ -33,7 +33,7 @@
 					<li>
 						<a href="#">報表</a>
 					</li>
-					
+					<g:if test="${session.empLevel.equals(1)}">
 					<li>
 						<a href="#">系統管理</a>
 						<ul>
@@ -51,7 +51,7 @@
 							</li>
 						</ul>
 					</li>
-					
+					</g:if>
 					<li style="float:right;">
 						姓名:${session.empName}
 					</li>

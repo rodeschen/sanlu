@@ -184,10 +184,10 @@
             });
         </script>
         <g:if test="${!session.empLevel}">
-            ${flash.message}             
+                         
                 <fieldset>
                     <legend>
-                        登入 
+                        登入 :${flash.message}
                     </legend>
                     <div class="field-row">
                         <span class="th1">帳號：</span>

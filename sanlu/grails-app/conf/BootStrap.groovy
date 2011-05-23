@@ -21,7 +21,7 @@ class BootStrap {
 							empName:"emp1",
 							password:"1234",
 							hireDate:new Date(),
-							empLevel:5,
+							empLevel:1,
 							gender:"M")
 					emp1.save()
 					def emp2= new Employee(
@@ -29,7 +29,7 @@ class BootStrap {
 							empName:"emp2",
 							password:"1234",
 							hireDate:new Date(),
-							empLevel:5,
+							empLevel:2,
 							gender:"M")
 					emp2.save()
 					def emp3 = new Employee(
