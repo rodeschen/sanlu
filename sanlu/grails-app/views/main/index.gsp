@@ -6,7 +6,6 @@
 	<body>
 		<script>
 			$(document).ready( function() {
-				var contextRoot = "${request.contextPath}";
 				var grid1 = $("#grid1").jqGrid({
 					url: contextRoot + "/project/query",
 					datatype: "json",

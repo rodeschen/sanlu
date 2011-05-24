@@ -4,7 +4,8 @@
 		<meta name="layout" content="main" />
 	</head>
 	<body>
-		<script>
+		<script type=text/javascript>
+			var contextRoot = "${request.contextPath}";
 			$(document).ready(function(){
 				API.loadPage("${request.contextPath}/main");
 			})

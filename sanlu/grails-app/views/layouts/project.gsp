@@ -14,7 +14,6 @@
 		<script src="${resource(dir:'js/function',file:'chineseCalendar.js')}"></script>
 		<script src="${resource(dir:'js/base',file:'base.js')}"></script>
 		<script type="text/javascript">
-		    var contextRoot = "${request.contextPath}";
 			var responseJSON = ${rjson};
        </script>
 		<g:layoutHead />
