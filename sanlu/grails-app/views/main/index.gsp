@@ -157,11 +157,9 @@
 						}
 					})
 				});
-				
 			});
 		</script>
 		<g:if test="${!session.empLevel}">
-
 			<g:form name="loginForm" url="[action:'login',controller:'login']">
 				<fieldset>
 					<legend>

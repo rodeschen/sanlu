@@ -53,10 +53,10 @@
 					</li>
 					</g:if>
 					<li style="float:right;">
-						姓名:${session.empName}
+						<a id="logout" href="${request.contextPath}/login/logout">登出</a>
 					</li>
 					<li style="float:right;">
-						<a href="${request.contextPath}/login/logout">登出</a>
+						姓名:${session.empName}
 					</li>
 				</ul>
 			</nav>

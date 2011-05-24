@@ -127,6 +127,9 @@ var API = {
 $(document).ready( function() {
 	var section = $("section"), aside = $("aside");
 	$("#nav  li > a").click( function(event) {
+		if($(this).prop("id") == "logout"){
+			return;
+		}
 		var $this = $(this), list = "", parent;
 		if ($this.attr("href") && $this.attr("href") != "#" && !$this.parent().is(".current")) {
 			$("#nav").find("li").removeClass("current");
