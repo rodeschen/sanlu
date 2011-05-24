@@ -24,13 +24,13 @@ class LoginController extends BaseController {
 			flash.message = "帳號或密碼不正確"
 			
 		}		
-		redirect(controller:"main",action:"index")
+		redirect(uri:"/")
 	}
 	
 	def logout = {
 			session.empName =null
 			session.empNo =null
 			session.empLevel =null
-			redirect(action:"index")
+			redirect(uri:"/")
 		}
 }
