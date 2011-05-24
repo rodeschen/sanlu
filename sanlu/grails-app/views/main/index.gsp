@@ -157,27 +157,7 @@
 						}
 					})
 				});
-				$("#confirm").click( function() {
-					var id = $("#id");
-					var pw = $("#pw");
-					if (!id.val()) {
-						return alert("請先輸入帳號");
-					} else if (!pw.val()) {
-						return alert("請先輸入密碼");
-					} else {
-						$.ajax({
-							type: "POST",
-							url: contextRoot + "/login/login",
-							data: {
-								'id': id.val(),
-								'pw': pw.val()
-							},
-							success: function(msg) {
-								//alert("登入成功");
-							}
-						})
-					}
-				});
+				
 			});
 		</script>
 		<g:if test="${!session.empLevel}">
@@ -190,13 +170,13 @@
 					<div class="field-row">
 						<span class="th1">帳號：</span>
 						<span>
-							<input type="text" id="id" name="id" placeholder="帳號" />
+							<input type="text" id="id" name="id" placeholder="帳號" required />
 						</span>
 					</div>
 					<div class="field-row">
 						<span class="th1">密碼：</span>
 						<span>
-							<input type="password" id="pw" name="pw" placeholder="密碼" />
+							<input type="password" id="pw" name="pw" placeholder="密碼" required />
 						</span>
 					</div>
 					<div class="field-row">
