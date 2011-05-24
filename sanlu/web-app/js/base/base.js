@@ -6,7 +6,7 @@
 		rowNum: 50,
 		scroll: 1,
 		hidegrid: false,
-		datatype: "json",
+		datatype: "json"
 	})
 	var _jqGrid = $.fn.jqGrid;
 	$.fn.jqGrid = function() {
