@@ -20,7 +20,7 @@ abstract class BaseController {
 				res[it] = params.get(it);
 			}
 			params.responseJSON = res as JSON
-		}else if(!"main".equals(params.controller)){
+		}else if(!"main".equals(params.controller) && !"login".equals(params.controller)){
 			redirect(controller:"main",action:"index")
 		}
 	}
