@@ -12,7 +12,12 @@ import java.util.concurrent.ThreadPoolExecutor.AbortPolicy;
  *
  */
 abstract class BaseController {
-	def manageUrl = ["product","funeraler","funeralercompany","employee"]
+	def manageUrl = [
+		"product",
+		"funeraler",
+		"funeralercompany",
+		"employee"
+	]
 	def beforeInterceptor ={
 		if(manageUrl.contains(params.controller)?1==session.empLevel:session.empLevel ){
 			def res = [:]
@@ -21,7 +26,11 @@ abstract class BaseController {
 			}
 			params.responseJSON = res as JSON
 		}else if(!"main".equals(params.controller) && !"login".equals(params.controller)){
-			redirect(controller:"main",action:"index")
+			if(params.action){
+				redirect(controller:"main",action:"index")
+			}else{
+				redirect(uri:"/")
+			}
 		}
 	}
 }
