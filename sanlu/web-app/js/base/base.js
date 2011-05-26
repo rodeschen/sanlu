@@ -84,7 +84,7 @@ var API = {
 	},
 	loadInit : function() {
 		var $this = $(this);
-		$this.find("button").button();
+		$this.find("button,.button").button();
 	},
 	formSubmit : function(settings) {
 		settings = $.extend(true, {

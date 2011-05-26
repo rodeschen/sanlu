@@ -261,3 +261,20 @@ button {
 
 .field-row span.td1{
 }
+
+
+.hide{ display:none;}
+
+.dialog .dialog-body{
+	background:#F1F1F1;
+}
+
+#fancybox-outer,#fancybox-content,.dialog-body{
+	-webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+}
+
+.fancybox-bg{
+	display:none;
+}
