@@ -9,7 +9,7 @@
         <g:if test="${!session.empLevel}">
             <div>
                 <g:form name="loginForm" url="[action:'login',controller:'login']">
-                    <fieldset style="width:300px;margin:80px auto 0;">
+                    <fieldset style="width:330px;margin:80px auto 0;">
                         <!--  <legend>
                         登入
                         </legend>-->
