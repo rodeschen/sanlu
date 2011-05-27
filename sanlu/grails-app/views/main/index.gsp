@@ -81,7 +81,7 @@
                             <div class="field-row">
                                 <span class="th1">禮儀公司：</span>
                                 <span>
-                                    <select id="projectName" name="projectName" requried>
+                                    <select id="funeralCompany" name="funeralCompany" requried>
                                         <option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
                                     </select>
                                 </span>
@@ -89,7 +89,7 @@
                             <div class="field-row">
                                 <span class="th1">禮儀師：</span>
                                 <span>
-                                    <select id="projectName" name="projectName" required>
+                                    <select id="funeraler" name="funeraler" required>
                                         <option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
                                     </select>
                                 </span>
@@ -261,8 +261,7 @@
                             })
                         });
                     });
-                    
-                    
+                                        
                     $(add).fancybox({
                         'titlePosition': 'inside',
                         'transitionIn': 'elastic',
@@ -272,6 +271,32 @@
                     $(pclose).click(function(){
                         $.fancybox.close();
                     });
+
+                    //下拉選單
+					//禮儀公司
+                    $.ajax({
+						type: "POST",
+						url: contextRoot + "/combobox/funeralCompany",
+						success: function(map) {
+							populateDropdown($('#funeralCompany'),map);
+						}
+					})
+					//禮儀師
+					$.ajax({
+						type: "POST",
+						url: contextRoot + "/combobox/funeraler",
+						success: function(map) {
+							populateDropdown($('#funeraler'),map);
+						}
+					})
+					//put下拉選單
+					function populateDropdown(select, data) {   
+                        select.html('');   
+                        $.each(data, function(id, option) {  
+                            console.log(option); 
+                            select.append($('<option></option>').val(id).html(option));   
+                        });          
+                    }   
                 });
             </script>
         </g:else>

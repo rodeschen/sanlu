@@ -4,11 +4,22 @@ import grails.converters.JSON
 
 class ComboboxController extends BaseController {
 
-	def funeral = {
+	//禮儀公司
+	def funeralCompany = {
 		def l = FuneralCompany.findAll()
 		def res = [:]
 		l?.each(){
 			res[it.id] = it.funeralCompanyName
+		}
+		render res as JSON
+	}
+	
+	//禮儀師
+	def funeraler = {
+		def l = Funeraler.findAll()
+		def res = [:]
+		l?.each(){
+			res[it.id] = it.funeralerName
 		}
 		render res as JSON
 	}

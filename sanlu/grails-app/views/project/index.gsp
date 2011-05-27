@@ -17,7 +17,7 @@
 			<div class="field-row">
 				<span class="th1">禮儀公司：</span>
 				<span>
-					<select  id="projectName" name="projectName">
+					<select  id="funeralCompany" name="funeralCompany">
 						<option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
 					</select>
 				</span>
@@ -25,7 +25,7 @@
 			<div class="field-row">
 				<span class="th1">禮儀師：</span>
 				<span>
-					<select  id="projectName" name="projectName">
+					<select  id="funeraler" name="funeraler">
 						<option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
 					</select>
 				</span>
@@ -157,6 +157,30 @@
 							}
 						})
 					});
+					//下拉選單
+					//禮儀公司
+                    $.ajax({
+						type: "POST",
+						url: contextRoot + "/combobox/funeralCompany",
+						success: function(map) {
+							populateDropdown($('#funeralCompany'),map);
+						}
+					})
+					//禮儀師
+					$.ajax({
+						type: "POST",
+						url: contextRoot + "/combobox/funeraler",
+						success: function(map) {
+							populateDropdown($('#funeraler'),map);
+						}
+					})
+					//put下拉選單
+					function populateDropdown(select, data) {   
+                        select.html('');   
+                        $.each(data, function(id, option) {  
+                            select.append($('<option></option>').val(id).html(option));   
+                        });          
+                    }   
 				});
 			</script>
 	</body>
