@@ -6,7 +6,7 @@
 <body>
 	<g:if test="${!session.empLevel}">
 	${flash.message} 
-	<g:form name="loginForm" url="[action:'login',controller:'login']">
+	<g:form name="loginForm" url="[action:'login',controller:'login']" autocomplete="off" novalidate="novalidate">
 		<fieldset>
 			<legend> 登入 </legend>
 			<div class="field-row">

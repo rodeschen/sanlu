@@ -163,24 +163,17 @@
 						type: "POST",
 						url: contextRoot + "/combobox/funeralCompany",
 						success: function(map) {
-							populateDropdown($('#funeralCompany'),map);
+							$('#funeralCompany').setDropdown(map);
 						}
-					})
+					});
 					//禮儀師
 					$.ajax({
 						type: "POST",
 						url: contextRoot + "/combobox/funeraler",
 						success: function(map) {
-							populateDropdown($('#funeraler'),map);
+							$('#funeraler').setDropdown(map);
 						}
-					})
-					//put下拉選單
-					function populateDropdown(select, data) {   
-                        select.html('');   
-                        $.each(data, function(id, option) {  
-                            select.append($('<option></option>').val(id).html(option));   
-                        });          
-                    }   
+					});
 				});
 			</script>
 	</body>
