@@ -7,7 +7,7 @@
 		scroll: 1,
 		hidegrid: false,
 		datatype: "json"
-	})
+	});
 	var _jqGrid = $.fn.jqGrid;
 	$.fn.jqGrid = function() {
 		if (!arguments.length) {
@@ -58,13 +58,29 @@
 		}
 		//
 		return _jqGrid.apply(this.is("table") ? $(this) : $(this.find("table")), arguments);
-	}
+	};
 	$.extend($.fn.jqGrid,_jqGrid);
 })(jQuery);
 $.ajaxSetup({
 	jsonp: null,
 	jsonpCallback: null
 });
+
+$.extend($.fn, {
+	//put下拉選單
+	setDropdown : function (data,append) {
+		!append && this.html('');
+		var $this = this;
+		$.each(data, function(value, text) {
+			$this.append($('<option></option>').val(value).text(text));
+		});
+	}
+})
+
+/**
+ * override validationEngine
+ */
+
 //APIS
 var API = {
 	loadPage: function(href) {
@@ -85,30 +101,32 @@ var API = {
 	loadInit : function() {
 		var $this = $(this);
 		$this.find("button,.button").button();
+		$this.find("form").each( function() {
+			$(this).validationEngine();
+		})
 	},
 	formSubmit : function(settings) {
 		settings = $.extend(true, {
-            data: {},
-            type: 'POST',
-            url: "",
-            target: "_target"
-        }, settings ||
-        {});
-        var obj = $('<form style="display:none" />');
-        obj.attr({
-            action: settings.url,
-            target: settings.target,
-            method: settings.type
-        });
-        for (var key in settings.data) {
-            obj.append('<input type="hidden" name="' + key + '" id="' + key +
-            '" value=\'' +
-             settings.data[key] +
-            '\' />');
-        }
-        $('body').append(obj);
-        obj.submit();
-        obj.empty().remove();
+			data: {},
+			type: 'POST',
+			url: "",
+			target: "_target"
+		}, settings || {});
+		var obj = $('<form style="display:none" />');
+		obj.attr({
+			action: settings.url,
+			target: settings.target,
+			method: settings.type
+		});
+		for (var key in settings.data) {
+			obj.append('<input type="hidden" name="' + key + '" id="' + key +
+			'" value=\'' +
+			settings.data[key] +
+			'\' />');
+		}
+		$('body').append(obj);
+		obj.submit();
+		obj.empty().remove();
 	},
 	openCalendar : function(s) {
 		debugger;
@@ -127,7 +145,7 @@ var API = {
 $(document).ready( function() {
 	var section = $("section"), aside = $("aside");
 	$("#nav  li > a").click( function(event) {
-		if($(this).prop("id") == "logout"){
+		if($(this).prop("id") == "logout") {
 			return;
 		}
 		var $this = $(this), list = "", parent;
