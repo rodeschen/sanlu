@@ -51,7 +51,7 @@
 								<hr />
 							</li>
 							<li>
-								<a href="${request.contextPath}/product/funeralcompany">員工管理</a>
+								<a href="${request.contextPath}/manager/employee">員工管理</a>
 							</li>
 						</ul>
 					</li>

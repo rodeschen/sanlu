@@ -1,7 +1,7 @@
 <html>
 <head>
 <title>登入</title>
-<meta name="layout" content="login" />
+<meta name="layout" content="main" />
 </head>
 <body>
 	<g:if test="${!session.empLevel}">
@@ -25,7 +25,7 @@
 			</div>
 		</fieldset>
 		<div>
-			<button id="confirm">確定</button>
+			<button id="confirm" >確定</button>
 		</div>
 	</g:form>
 	</g:if>

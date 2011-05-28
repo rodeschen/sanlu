@@ -19,25 +19,28 @@ class BootStrap {
 					def emp1 = new Employee(
 							empNo:"00001",
 							empName:"emp1",
-							password:"1234",
+							password:"1234".encodeAsMD5(),
 							hireDate:new Date(),
 							empLevel:1,
+							isLeft:false,
 							gender:"M")
 					emp1.save()
 					def emp2= new Employee(
 							empNo:"00002",
 							empName:"emp2",
-							password:"1234",
+							password:"1234".encodeAsMD5(),
 							hireDate:new Date(),
 							empLevel:2,
+							isLeft:false,
 							gender:"M")
 					emp2.save()
 					def emp3 = new Employee(
 							empNo:"00003",
 							empName:"emp3",
-							password:"1234",
+							password:"1234".encodeAsMD5(),
 							hireDate:new Date(),
 							empLevel:5,
+							isLeft:true,
 							gender:"M")
 					emp3.save()
 					//init 禮儀公司

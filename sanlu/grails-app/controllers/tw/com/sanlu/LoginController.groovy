@@ -11,7 +11,7 @@ class LoginController extends BaseController {
 
 	def login = {
 		def userId = params.get("id")
-		def pw = params.get("pw")
+		def pw = params.get("pw").encodeAsMD5()
 		Employee employee = Employee.findByEmpNameAndPassword(userId,pw)
 		if(employee){
 			log.debug userId+" login sucess"

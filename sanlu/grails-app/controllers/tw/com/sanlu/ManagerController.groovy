@@ -7,4 +7,6 @@ class ManagerController extends BaseController {
 	def funeralcompany = {}
 	
 	def product ={}
+	
+	def employee={}
 }

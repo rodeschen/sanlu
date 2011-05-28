@@ -16,12 +16,13 @@ class Employee {
 	Integer empLevel
 	//性別
 	String gender
-
+	//已離職
+	Boolean isLeft 
 	static constraints = {
 		empNo minSize:5,maxSize:5,blank:false, unique:true
 		empName maxSize:8,blank:false
 		empLevel size:1,range:0..5
 		password minSize:4,password:true
-		gender(inList:["M", "F"])
+		gender(inList:["M", "F"])		
 	}
 }

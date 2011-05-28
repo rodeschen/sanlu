@@ -48,7 +48,7 @@
                 },
                 "equals": {
                     "regex": "none",
-                    "alertText": "* Fields do not match"
+                    "alertText": "* 密碼與確認密碼不符<BR>&nbsp;&nbsp;請重新輸入"
                 },
                 "phone": {
                     // credit: jquery.h5validate.js / orefalo

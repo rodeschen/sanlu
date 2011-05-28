@@ -241,17 +241,17 @@
                         });
                     });
                     
-                    $(add).fancybox({
+                    $("#add").fancybox({
                         'titlePosition': 'inside',
                         'transitionIn': 'elastic',
                         'transitionOut': 'elastic',
                         onClosed: function(){
-                            addForm.reset();
+                        	$("#addForm").reset();
                         }
                     });
                     
-                    $(padd).click(function(){
-                        if ($(addForm).validationEngine('validate')) {
+                    $("#padd").click(function(){
+                        if ($("#addForm").validationEngine('validate')) {
                             $.ajax({
                                 url: contextRoot + "/project/addAction",
                                 data: $(addForm).serializeData(),
@@ -264,7 +264,7 @@
                         }
                     });
                     
-                    $(pclose).click(function(){
+                    $("#pclose").click(function(){
                         $.fancybox.close();
                     });
                     //下拉選單

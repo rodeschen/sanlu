@@ -15,8 +15,8 @@ class ComboboxController extends BaseController {
 	}
 	
 	//禮儀師
-	def funeraler = {
-		def l = Funeraler.findAll()
+	def funeraler = {			
+		def l = Funeraler.findByFuneralCommpany(FuneralCompany.findById(params.get("id")))
 		def res = [:]
 		l?.each(){
 			res[it.id] = it.funeralerName
