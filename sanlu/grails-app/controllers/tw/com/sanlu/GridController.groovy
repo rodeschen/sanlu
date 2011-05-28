@@ -95,4 +95,14 @@ abstract class GridController extends BaseController {
 		}
 	}
 	def modifyAction={}
+	
+	def insert={
+		try{			
+			insertAction()
+		}catch(Exception e){
+			log.error e.printStackTrace()
+			render(status: 400, contentType:"text/json", text: e.dump())
+		}
+	}
+	def insertAction={}
 }

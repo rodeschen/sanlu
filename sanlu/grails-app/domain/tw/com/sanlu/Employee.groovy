@@ -17,7 +17,7 @@ class Employee {
 	//性別
 	String gender
 	//已離職
-	Boolean isLeft 
+	Boolean isLeft =false
 	static constraints = {
 		empNo minSize:5,maxSize:5,blank:false, unique:true
 		empName maxSize:8,blank:false

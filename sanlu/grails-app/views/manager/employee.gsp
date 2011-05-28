@@ -13,9 +13,6 @@
                 <button id="modify1">
                     修改
                 </button>
-                <button id="delete1">
-                    刪除
-                </button>
                 <a id="pwReset" href="#pwResetdialog" class="button">密碼重設</a>
             </div>
             <div id="grid1" />
@@ -58,7 +55,11 @@
                             </div>
                             <div class="field-row">
                                 <span class="th1">姓別：</span>
-                                <span><input type="text" id="gender" name="gender" placeholder="姓別" class="validate[required]"/></span>
+                                <span><select id="gender" name="gender" class="validate[required]">
+                                        <option value="M">男</option>
+                                        <option value="W">女</option>
+                                    </select>
+								</span>								
                             </div>
                             <div class="field-row">
                                 <span class="th1">雇用日期：</span>
@@ -68,8 +69,8 @@
                                 <span class="th1">已離職：</span>
                                 <span>
                                     <select id="isLeft" name="isLeft" class="validate[required]">
-                                        <option value="0">否</option>
-                                        <option value="1">是</option>
+                                        <option value="false">否</option>
+                                        <option value="true">是</option>
                                     </select>
                                 </span>
                             </div>
@@ -153,22 +154,6 @@
                     caption: "Manipulating Array Data"
                 });
                 
-                $("#delete1").click(function(){
-                    var selrow = grid1.jqGrid('getGridParam', 'selrow');
-                    if (!selrow) {
-                        alert("請先選擇刪除列");
-                    }
-                    var id = grid1.getRowData(selrow);
-                    $.ajax({
-                        type: "POST",
-                        url: contextRoot + "/employee/delete",
-                        data: id,
-                        success: function(msg){
-                            grid1.trigger("reloadGrid");
-                            alert("刪除成功");
-                        }
-                    })
-                });
                 $("#modify1").click(function(){
                     var selrow = grid1.jqGrid('getGridParam', 'selrow');
                     if (!selrow) {
@@ -233,10 +218,11 @@
                 $("#padd1").click(function(){
                     if ($("#addForm").validationEngine('validate')) {
                         $.ajax({
-                            type: "POST",
                             url: contextRoot + "/employee/insert",
-                            data: id,
+                            data: $("#addForm").serializeData(),
                             success: function(msg){
+								$.fancybox.close();
+								grid1.trigger("reloadGrid");
                                 alert("員工新增成功");
                             }
                         })
