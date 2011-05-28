@@ -105,7 +105,7 @@
                         //multiboxonly:true,
                         autowidth: true,
                         pager: true,
-                        multiselect: true,
+                        // multiselect: true,
                         colModel: [{
                             name: 'id',
                             index: 'id',
@@ -161,7 +161,10 @@
                         }],
                         ondblClickRow: function(id){
                             var data = grid1.getRowData(id);
-                            
+                            API.openProject({
+                                id: data.id,
+                                data: data
+                            });
                         }
                     });
                     
@@ -250,17 +253,22 @@
                         }
                     });
                     
-                    $("#padd").click(function(){
-                        if ($("#addForm").validationEngine('validate')) {
+                    $(padd).click(function(){
+                        if ($(addForm).validationEngine('validate')) {
+                            var id = "";
                             $.ajax({
+                                async: false,
                                 url: contextRoot + "/project/addAction",
-                                data: $(addForm).serializeData(),
-                                success: function(res){
-                                    API.openProject({
-                                        id: res.id
-                                    });
-                                }
+                                data: $(addForm).serializeData()
+                            }).done(function(res){
+                                id = res.id;
                             });
+                            if (id) {
+                                API.openProject({
+                                    id: id
+                                });
+                                $.fancybox.close();
+                            }
                         }
                     });
                     
@@ -290,9 +298,6 @@
                             }
                         })
                     });
-                    
-                    
-                    
                 });
             </script>
         </g:else>

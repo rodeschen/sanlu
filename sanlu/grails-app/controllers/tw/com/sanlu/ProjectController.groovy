@@ -48,7 +48,12 @@ class ProjectController extends GridController {
 	}
 
 	def addAction = {
-		def res = ["id" : 1]
+		def project = new Project();
+		project.projectName = params.projectName
+		project.funeralCompany = FuneralCompany.findById(params.funeralCompany)
+		project.funeraler = Funeraler.findById(params.funeraler)
+		project.save()
+		def res = ["id" : project.id]
 		render res as JSON
 	}
 

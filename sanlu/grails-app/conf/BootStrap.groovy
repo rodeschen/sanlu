@@ -231,6 +231,7 @@ class BootStrap {
 					//init Project
 					def project1 = new Project(
 							projectName:"projectName",
+							funeralCompany : fCom,
 							funeraler:funer,
 							inDate:new Date(99,12,1,10,00,00),
 							outDate:new Date(100,12,1,10,00,00),

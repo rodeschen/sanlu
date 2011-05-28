@@ -156,9 +156,10 @@ var API = {
         })
     },
     openProject: function(s){
+		//debugger;
         API.formSubmit({
             url: contextRoot + "/project",
-            target: "_blank",
+            target: s.id,
             data: $.extend(s.data || {}, {
                 id: s.id
             })

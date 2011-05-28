@@ -10,7 +10,9 @@ import java.util.Date;
 class Project {
 	//案名
 	String projectName
-	//禮儀公司/禮儀師
+	//禮儀公司
+	FuneralCompany funeralCompany
+	//禮儀師
 	Funeraler funeraler
 	//入館日期
 	Date inDate

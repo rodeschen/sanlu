@@ -18,6 +18,7 @@ class LoginController extends BaseController {
 			session.empName =employee.empName
 			session.empNo =employee.empNo
 			session.empLevel =employee.empLevel
+			session.employee = employee
 			
 		}else{
 		log.debug userId+" login fail."
