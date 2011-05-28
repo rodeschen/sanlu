@@ -2,6 +2,7 @@ package tw.com.sanlu
 import grails.converters.JSON
 import java.sql.Timestamp
 import java.text.DateFormat
+import java.text.SimpleDateFormat
 
 import org.codehaus.groovy.grails.web.json.JSONObject
 
@@ -48,11 +49,19 @@ class ProjectController extends GridController {
 	}
 
 	def addAction = {
+		
+		DateFormat df = new SimpleDateFormat("yyyy-M-d");
 		def project = new Project();
 		project.projectName = params.projectName
-		project.funeralCompany = FuneralCompany.findById(params.funeralCompany)
-		project.funeraler = Funeraler.findById(params.funeraler)
+		project.funeralCompany = FuneralCompany.findById(params.long("funeralCompany"))
+		project.funeraler = Funeraler.findById(params.long("funeraler"))
+		project.emp = Employee.findById(params.long("employee"))
+		project.inDate = df.parse(params.inDate)
 		project.save()
+		if(project.hasErrors()){
+			println project.errors;
+		}
+		
 		def res = ["id" : project.id]
 		render res as JSON
 	}

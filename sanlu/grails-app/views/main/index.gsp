@@ -84,6 +84,18 @@
                                     </select>
                                 </span>
                             </div>
+                            <div class="field-row">
+                                <span class="th1">承辦業務：</span>
+                                <span>
+                                    <select id="employee" name="employee" class="validate[required]">
+                                        <option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+                                    </select>
+                                </span>
+                            </div>
+                            <div class="field-row">
+                                <span class="th1">入館日期：</span>
+                                <span><input type="text" class="validate[required] date" id="inDate" name="inDate" size="10" /></span>
+                            </div>
                             <div style="text-align:center;">
                                 <button id="padd" type="button">
                                     確定
@@ -249,17 +261,17 @@
                         'transitionIn': 'elastic',
                         'transitionOut': 'elastic',
                         onClosed: function(){
-                        	$("#addForm").reset();
+                            addForm.reset();
                         }
                     });
                     
-                    $(padd).click(function(){
-                        if ($(addForm).validationEngine('validate')) {
+                    $("#padd").click(function(){
+                        if ($("#addForm").validationEngine('validate')) {
                             var id = "";
                             $.ajax({
                                 async: false,
                                 url: contextRoot + "/project/addAction",
-                                data: $(addForm).serializeData()
+                                data: $("#addForm").serializeData()
                             }).done(function(res){
                                 id = res.id;
                             });
@@ -291,13 +303,23 @@
                             type: "POST",
                             url: contextRoot + "/combobox/funeraler",
                             data: {
-                                funeralCompany: $(this).val()
+                                id: $(this).val()
                             },
                             success: function(map){
                                 $('#funeraler').setDropdown(map);
                             }
                         })
                     });
+                    
+                    //所有員工
+                    $.ajax({
+                        type: "POST",
+                        url: contextRoot + "/combobox/employee",
+                        success: function(map){
+                            $('#employee').setDropdown(map);
+                        }
+                    });
+                    
                 });
             </script>
         </g:else>

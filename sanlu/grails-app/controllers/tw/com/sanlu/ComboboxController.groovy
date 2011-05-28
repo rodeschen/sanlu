@@ -13,13 +13,23 @@ class ComboboxController extends BaseController {
 		}
 		render res as JSON
 	}
-	
+
 	//禮儀師
-	def funeraler = {			
+	def funeraler = {
 		def l = Funeraler.findByFuneralCommpany(FuneralCompany.findById(params.get("id")))
 		def res = [:]
 		l?.each(){
 			res[it.id] = it.funeralerName
+		}
+		render res as JSON
+	}
+
+
+	def employee ={
+		def l = Employee.findAll()
+		def res = [:]
+		l?.each(){
+			res[it.empNo] = it.empName
 		}
 		render res as JSON
 	}

@@ -279,3 +279,7 @@ button {
 .fancybox-bg{
 	display:none;
 }
+
+#ui-datepicker-div{
+	font-size:11px;
+}

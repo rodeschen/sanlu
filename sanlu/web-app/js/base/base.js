@@ -122,6 +122,14 @@ var API = {
         $this.find("form").each(function(){
             $(this).validationEngine({});
         })
+        $this.find(".date").datepicker({
+            dateFormat: 'yy-mm-dd',
+            showButtonPanel: true,
+            showOn: "button",
+            buttonImage: "/sanlu/images/calendar.gif",
+            buttonImageOnly: true,
+            showOn: 'both'
+        });
     },
     formSubmit: function(settings){
         settings = $.extend(true, {
@@ -156,7 +164,7 @@ var API = {
         })
     },
     openProject: function(s){
-		//debugger;
+        //debugger;
         API.formSubmit({
             url: contextRoot + "/project",
             target: s.id,

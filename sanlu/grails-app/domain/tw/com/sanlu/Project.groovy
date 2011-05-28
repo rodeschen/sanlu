@@ -23,11 +23,11 @@ class Project {
 	//備註
 	String memo
 	//消費總金額
-	BigDecimal sallingTotal
+	BigDecimal sallingTotal = BigDecimal.ZERO 
 	//內帳銷售總金額
-	BigDecimal total
+	BigDecimal total = BigDecimal.ZERO 
 	//成本總金額
-	BigDecimal costTotal
+	BigDecimal costTotal = BigDecimal.ZERO 
 	//最後修改日期
 	Date lastUpdated
 	//結帳日期
@@ -44,8 +44,10 @@ class Project {
 		outDate(validator: { val, obj ->
 			val?.after(obj.inDate)
 		})
+		outDate nullable:true
 		closingDate nullable:true
 		closer nullable:true
+		
 		
 	}
 }
