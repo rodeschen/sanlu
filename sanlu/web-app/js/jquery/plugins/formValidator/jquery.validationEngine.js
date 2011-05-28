@@ -299,6 +299,7 @@
                         }, 1100);
                     }
                 }
+
                 return false;
             }
             return true;
@@ -920,6 +921,7 @@
          * @param {Map} options user options
          */
         _showPrompt: function(field, promptText, type, ajaxed, options, ajaxform) {
+
             var prompt = methods._getPrompt(field);
 			// The ajax submit errors are not see has an error in the form,
 			// When the form errors are returned, the engine see 2 bubbles, but those are ebing closed by the engine at the same time
@@ -929,6 +931,9 @@
                 methods._updatePrompt(field, prompt, promptText, type, ajaxed, options);
             else
                 methods._buildPrompt(field, promptText, type, ajaxed, options);
+                
+           setTimeout(function(){$(field).validationEngine('hide')},3000)
+            
         },
         /**
          * Builds and shades a prompt for the given field.
@@ -993,7 +998,6 @@
                 "marginTop": pos.marginTopSize,
                 "opacity": 0
             });
-
             return prompt.animate({
                 "opacity": 0.87
             });
