@@ -102,7 +102,9 @@ var API = {
 		var $this = $(this);
 		$this.find("button,.button").button();
 		$this.find("form").each( function() {
-			$(this).validationEngine();
+			$(this).validationEngine({
+				//onValidationComplete:function(){alert("XXX")}
+			});
 		})
 	},
 	formSubmit : function(settings) {
@@ -129,7 +131,6 @@ var API = {
 		obj.empty().remove();
 	},
 	openCalendar : function(s) {
-		debugger;
 		API.formSubmit({
 			url:contextRoot+"/project",
 			target:s.id,
