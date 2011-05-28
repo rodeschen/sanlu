@@ -17,7 +17,7 @@
 		<script type="text/javascript" src="${resource(dir:'js/jquery/plugins/fancybox',file:'jquery.fancybox-1.3.4.js')}"></script>
 		<script type="text/javascript" src="${resource(dir:'js/jquery/plugins/formValidator/languages',file:'jquery.validationEngine-tw.js')}"></script>
 		<script type="text/javascript" src="${resource(dir:'js/jquery/plugins/formValidator',file:'jquery.validationEngine.js')}"></script>
-		<script src="${resource(dir:'js/base',file:'base.js')}"></script>
+		<script type="text/javascript" src="${resource(dir:'js/base',file:'base.js')}"></script>
 		<g:layoutHead />
 			<!--<g:javascript library="application" />-->
 			<style>

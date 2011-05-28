@@ -13,7 +13,7 @@ import org.codehaus.groovy.grails.web.json.JSONObject
 class ProjectController extends GridController {
 
 	def index = {
-		[rjson : params.responseJSON.toString()] 
+		[rjson : params.responseJSON.toString()]
 	}
 	def queryAction = {
 
@@ -45,6 +45,11 @@ class ProjectController extends GridController {
 	}
 	public int getCountRow(params){
 		Project.count()
+	}
+
+	def addAction = {
+		def res = ["id" : 1]
+		render res as JSON
 	}
 
 	def deleteAction = {
