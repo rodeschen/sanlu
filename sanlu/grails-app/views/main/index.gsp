@@ -1,25 +1,29 @@
 <html>
-    <head>
-        <title>首頁</title>
-        <meta name="layout" content="inner" />
-    </head>
-    <body>
-        ${flash.message} 
-        <g:if test="${!session.empLevel}">
-            <div>
-                <g:form name="loginForm" url="[action:'login',controller:'login']" autocomplete="off" novalidate="novalidate">
-                    <fieldset style="width:330px;margin:80px auto 0;">
-                        <!--  <legend>
+<head>
+<title>首頁</title>
+<meta name="layout" content="inner" />
+</head>
+<body>
+	${flash.message}
+	<g:if test="${!session.empLevel}">
+		<div>
+			<g:form name="loginForm" url="[action:'login',controller:'login']"
+				autocomplete="off" novalidate="novalidate">
+				<fieldset style="width: 330px; margin: 80px auto 0;">
+					<!--  <legend>
                         登入
                         </legend>-->
-                        <div class="field-row">
-                            <span class="th1">帳號：</span>
-                            <span><input type="text" id="id" name="id" placeholder="帳號" class="validate[required]"/></span>
-                        </div>
-                        <div class="field-row">
-                            <span class="th1">密碼：</span>
-                            <span><input type="password" id="pw" name="pw" placeholder="密碼" class="validate[required]"/></span>
-                        </div><!--
+					<div class="field-row">
+						<span class="th1">帳號：</span> <span><input type="text"
+							id="id" name="id" placeholder="帳號" class="validate[required]" />
+						</span>
+					</div>
+					<div class="field-row">
+						<span class="th1">密碼：</span> <span><input type="password"
+							id="pw" name="pw" placeholder="密碼" class="validate[required]" />
+						</span>
+					</div>
+					<!--
                         <div class="field-row">
                         <span class="th1">分館：</span>
                         <span>
@@ -29,86 +33,74 @@
                         </span>
                         </div>
                         -->
-                        <div style="padding-left:50%">
-                            <button id="confirm" type="submit">
-                                登入
-                            </button>
-                        </div>
-                    </fieldset>
-                </g:form>
-            </div>
-        </g:if>
-        <g:else>
-            <fieldset>
-                <legend>
-                    進行中專案
-                </legend>
-                <div>
-                    <a id="add" href="#pdialog" class="button">新增</a>
-                    <button id="modify">
-                        修改
-                    </button>
-                    <button id="delete">
-                        刪除
-                    </button>
-                </div>
-                <div id="grid1"/>
-            </fieldset>
-            <fieldset>
-                <legend>
-                    場地清單
-                </legend>
-                <div id="grid2"/>
-            </fieldset><!-- dialog -->
-            <div class="hide">
-                <div id="pdialog" class="dialog" style="display:block;width:400px;">
-                    <g:form name="addForm" id="addForm" onsubmit="return false;" autocomplete="off" novalidate="novalidate">
-                        <div class="dialog-body">
-                            <div class="field-row">
-                                <span class="th1">案名：</span>
-                                <span><input type="text" id="projectName" name="projectName" placeholder="姓名" class="validate[required]"/></span>
-                            </div>
-                            <div class="field-row">
-                                <span class="th1">禮儀公司：</span>
-                                <span>
-                                    <select id="funeralCompany" name="funeralCompany" class="validate[required]">
-                                        <option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
-                                    </select>
-                                </span>
-                            </div>
-                            <div class="field-row">
-                                <span class="th1">禮儀師：</span>
-                                <span>
-                                    <select id="funeraler" name="funeraler" class="validate[required]">
-                                        <option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
-                                    </select>
-                                </span>
-                            </div>
-                            <div class="field-row">
-                                <span class="th1">承辦業務：</span>
-                                <span>
-                                    <select id="employee" name="employee" class="validate[required]">
-                                        <option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
-                                    </select>
-                                </span>
-                            </div>
-                            <div class="field-row">
-                                <span class="th1">入館日期：</span>
-                                <span><input type="text" class="validate[required] date" id="inDate" name="inDate" size="10" /></span>
-                            </div>
-                            <div style="text-align:center;">
-                                <button id="padd" type="button">
-                                    確定
-                                </button>
-                                <button id="pclose" type="button">
-                                    取消
-                                </button>
-                            </div>
-                        </div>
-                    </g:form>
-                </div>
-            </div>
-            <script type="text/javascript">
+					<div style="padding-left: 50%">
+						<button id="confirm" type="submit">登入</button>
+					</div>
+				</fieldset>
+			</g:form>
+		</div>
+	</g:if>
+	<g:else>
+		<fieldset>
+			<legend> 進行中專案 </legend>
+			<div>
+				<a id="add" href="#pdialog" class="button">新增</a>
+				<button id="modify">修改</button>
+				<button id="delete">刪除</button>
+			</div>
+			<div id="grid1" />
+		</fieldset>
+		<fieldset>
+			<legend> 場地清單 </legend>
+			<div id="grid2" />
+		</fieldset>
+		<!-- dialog -->
+		<div class="hide">
+			<div id="pdialog" class="dialog"
+				style="display: block; width: 400px;">
+				<g:form name="addForm" id="addForm" onsubmit="return false;"
+					autocomplete="off" novalidate="novalidate">
+					<div class="dialog-body">
+						<div class="field-row">
+							<span class="th1">案名：</span> <span><input type="text"
+								id="projectName" name="projectName" placeholder="姓名"
+								class="validate[required]" />
+							</span>
+						</div>
+						<div class="field-row">
+							<span class="th1">禮儀公司：</span> <span> <select
+								id="funeralCompany" name="funeralCompany"
+								class="validate[required]">
+									<option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+							</select> </span>
+						</div>
+						<div class="field-row">
+							<span class="th1">禮儀師：</span> <span> <select
+								id="funeraler" name="funeraler" class="validate[required]">
+									<option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+							</select> </span>
+						</div>
+						<div class="field-row">
+							<span class="th1">承辦業務：</span> <span> <select
+								id="employee" name="employee" class="validate[required]">
+									<option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+							</select> </span>
+						</div>
+						<div class="field-row">
+							<span class="th1">入館日期：</span> <span><input type="text"
+								class="validate[required] date" id="inDate" name="inDate"
+								size="10" />
+							</span>
+						</div>
+						<div style="text-align: center;">
+							<button id="padd" type="button">確定</button>
+							<button id="pclose" type="button">取消</button>
+						</div>
+					</div>
+				</g:form>
+			</div>
+		</div>
+		<script type="text/javascript">
                 $(document).ready(function(){
                     var grid1 = $("#grid1").jqGrid({
                         url: contextRoot + "/project/query",
@@ -298,17 +290,20 @@
                     });
                     
                     $('#funeralCompany').change(function(){
-                        //禮儀師
-                        $.ajax({
-                            type: "POST",
-                            url: contextRoot + "/combobox/funeraler",
-                            data: {
-                                id: $(this).val()
-                            },
-                            success: function(map){
-                                $('#funeraler').setDropdown(map);
-                            }
-                        })
+                    	if($(this).val()){                         
+                            $.ajax({
+                                type: "POST",
+                                url: contextRoot + "/combobox/funeraler",
+                                data: {
+                                    id: $(this).val()
+                                },
+                                success: function(map){
+                                    $('#funeraler').setDropdown(map);
+                                }
+                            })
+                            }else{
+                            	$('#funeraler').html('')
+                                }
                     });
                     
                     //所有員工
@@ -322,6 +317,6 @@
                     
                 });
             </script>
-        </g:else>
-    </body>
+	</g:else>
+</body>
 </html>

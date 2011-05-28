@@ -1,53 +1,37 @@
 <html>
-	<head>
-		<title>專案</title>
-		<meta name="layout" content="project" />
-	</head>
-	<body>
-		<fieldset>
-			<legend>
-				專案資訊
-			</legend>
-			<div class="field-row">
-				<span class="th1">案名：</span>
-				<span>
-					<input type="text" id="projectName" name="projectName" placeholder="姓名" />
-				</span>
-			</div>
-			<div class="field-row">
-				<span class="th1">禮儀公司：</span>
-				<span>
-					<select  id="funeralCompany" name="funeralCompany">
-						<option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
-					</select>
-				</span>
-			</div>
-			<div class="field-row">
-				<span class="th1">禮儀師：</span>
-				<span>
-					<select  id="funeraler" name="funeraler">
-						<option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
-					</select>
-				</span>
-			</div>
-		</fieldset>
-		<div>
-			<button id="add1">
-				新增
-			</button>
-			<button id="modify1">
-				修改
-			</button>
-			<button id="delete1">
-				刪除
-			</button>
-			<button id="calendar" style="float:right;">
-				專案行事曆
-			</button>
+<head>
+<title>專案</title>
+<meta name="layout" content="project" />
+</head>
+<body>
+	<fieldset>
+		<legend> 專案資訊 </legend>
+		<div class="field-row">
+			<span class="th1">案名：</span> <span> <input type="text"
+				id="projectName" name="projectName" placeholder="姓名" /> </span>
 		</div>
-		<div style="padding-bottom:10px" id="grid1"/>
+		<div class="field-row">
+			<span class="th1">禮儀公司：</span> <span> <select
+				id="funeralCompany" name="funeralCompany">
+					<option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+			</select> </span>
+		</div>
+		<div class="field-row">
+			<span class="th1">禮儀師：</span> <span> <select id="funeraler"
+				name="funeraler">
+					<option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+			</select> </span>
+		</div>
+	</fieldset>
+	<div>
+		<button id="add1">新增</button>
+		<button id="modify1">修改</button>
+		<button id="delete1">刪除</button>
+		<button id="calendar" style="float: right;">專案行事曆</button>
+	</div>
+	<div style="padding-bottom: 10px" id="grid1" />
 
-			<script>
+	<script>
 				$(document).ready( function() {
 					
 					var grid1 = $("#grid1").jqGrid({
@@ -167,14 +151,21 @@
 						}
 					});
 					//禮儀師
-					$.ajax({
-						type: "POST",
-						url: contextRoot + "/combobox/funeraler",
-						success: function(map) {
-							$('#funeraler').setDropdown(map);
-						}
-					});
+                    $('#funeralCompany').change(function(){
+                        if($(this).val()){                        
+                        $.ajax({
+                            type: "POST",
+                            url: contextRoot + "/combobox/funeraler",
+                            data: {
+                                id: $(this).val()
+                            },
+                            success: function(map){
+                                $('#funeraler').setDropdown(map);
+                            }
+                        })
+                        }else{$('#funeraler').html('')}
+                    });
 				});
 			</script>
-	</body>
+</body>
 </html>
