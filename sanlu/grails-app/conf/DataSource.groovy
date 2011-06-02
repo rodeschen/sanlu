@@ -3,7 +3,7 @@ dataSource {
 	driverClassName = "com.mysql.jdbc.Driver"
 	username = "root"
 	password = ""
-	logSql = false	
+	logSql = true	
 }
 hibernate {
 	cache.use_second_level_cache=true
@@ -16,21 +16,18 @@ environments {
 		dataSource {
 			dbCreate = "create-drop" // one of 'create', 'create-drop','update'
 			url = "jdbc:mysql://localhost/sanlu?useUnicode=true&characterEncoding=UTF-8"
-			loggingSql = true  
 		}
 	}
 	test {
 		dataSource {
 			dbCreate = "create-drop"
 			url = "jdbc:mysql://localhost/sanlu?useUnicode=true&characterEncoding=UTF-8"
-			loggingSql = true
 		}
 	}
 	production {
 		dataSource {
 			dbCreate = "create-drop"
 			url = "jdbc:mysql://localhost/sanlu?useUnicode=true&characterEncoding=UTF-8"
-			loggingSql = true
 		}
 	}
 }
