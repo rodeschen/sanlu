@@ -10,9 +10,7 @@
             </legend>
             <div>
                 <a id="add1" href="#pdialog" class="button">新增</a>
-                <button id="modify1">
-                    修改
-                </button>
+                <a id="modify1" href="#pdialog" class="button">修改</a>
                 <a id="pwReset" href="#pwResetdialog" class="button">密碼重設</a>
             </div>
             <div id="grid1" />
@@ -51,15 +49,16 @@
                         <div class="dialog-body">
                             <div class="field-row">
                                 <span class="th1">員工姓名：</span>
-                                <span><input type="text" id="empName" name="empName" placeholder="姓名" class="validate[required]"/></span>
+                                <span><input type="text" id="empName" name="empName" placeholder="姓名" class="validate[required]"/></span><input id="id" name="id" type="text" class="hide" />
                             </div>
                             <div class="field-row">
                                 <span class="th1">姓別：</span>
-                                <span><select id="gender" name="gender" class="validate[required]">
+                                <span>
+                                    <select id="gender" name="gender" class="validate[required]">
                                         <option value="M">男</option>
-                                        <option value="W">女</option>
+                                        <option value="F">女</option>
                                     </select>
-								</span>								
+                                </span>
                             </div>
                             <div class="field-row">
                                 <span class="th1">雇用日期：</span>
@@ -126,7 +125,10 @@
                         header: "姓別",
                         name: 'gender',
                         index: 'gender',
-                        width: 20
+                        width: 20,
+                        formatter: function(el, cellval, opts){
+                            return el == 'M' ? "男" : "女";
+                        }
                     }, {
                         header: "雇用日期",
                         name: 'hireDate',
@@ -152,26 +154,6 @@
                         hasPlace: false
                     },
                     caption: "Manipulating Array Data"
-                });
-                
-                $("#modify1").click(function(){
-                    var selrow = grid1.jqGrid('getGridParam', 'selrow');
-                    if (!selrow) {
-                        alert("請先選擇修改列");
-                    }
-                    var id = grid1.getRowData(selrow);
-                    $.ajax({
-                        type: "POST",
-                        url: contextRoot + "/employee/modify",
-                        data: {
-                            columnParam: JSON.stringify(grid1.jqGrid('getGridParam', 'colModel')),
-                            data: JSON.stringify(id)
-                        },
-                        success: function(msg){
-                            grid1.trigger("reloadGrid");
-                            alert("修改成功");
-                        }
-                    })
                 });
                 $("#pwReset").fancybox({
                     'titlePosition': 'inside',
@@ -208,22 +190,43 @@
                 $("#pclose2").click(function(){
                     $.fancybox.close();
                 });
-                
-                $("#add1").fancybox({
-                    'titlePosition': 'inside',
-                    'transitionIn': 'elastic',
-                    'transitionOut': 'elastic'
+                var action;
+                $("#add1,#modify1").each(function(){
+                    $(this).fancybox({
+                        action: $(this).prop("id"),
+                        onStart: function(){
+                            action = this.action;
+                            if (action == "modify1") {
+                                var selrow = grid1.jqGrid('getGridParam', 'selrow');
+                                if (!selrow) {
+                                    alert("請先選擇修改列");
+                                    return false;
+                                }
+                                var id = grid1.getRowData(selrow);
+                                $("#id").val(id.id);
+                                $("#empNo").val(id.empNo);
+                                $("#empName").val(id.empName);
+                                $("#gender").val('男' == id.gender ? 'M' : 'F');
+                                $("#hireDate").val(id.hireDate);
+                                $("#isLeft").val(id.isLeft);
+                                $("#empLevel").val(id.empLevel);
+                            }
+                        },
+                        'titlePosition': 'inside',
+                        'transitionIn': 'elastic',
+                        'transitionOut': 'elastic'
+                    });
                 });
                 
                 $("#padd1").click(function(){
                     if ($("#addForm").validationEngine('validate')) {
                         $.ajax({
-                            url: contextRoot + "/employee/insert",
+                            url: contextRoot + "/employee/" + (action == "add1" ? "insert" : "modify"),
                             data: $("#addForm").serializeData(),
                             success: function(msg){
-								$.fancybox.close();
-								grid1.trigger("reloadGrid");
-                                alert("員工新增成功");
+                                $.fancybox.close();
+                                grid1.trigger("reloadGrid");
+                                alert("員工" + (action == "add1" ? "新增" : "修改") + "成功");
                             }
                         })
                     }

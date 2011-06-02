@@ -16,11 +16,12 @@ import java.util.Date;
 public class Utility {
 	public final static SimpleDateFormat ADFormat = new SimpleDateFormat(
 			"yyyy-MM-dd HH:mm");
-	public final static DateFormat shortFormat = DateFormat.getDateTimeInstance(DateFormat.SHORT,
-			DateFormat.SHORT);
+	public final static DateFormat shortFormat = DateFormat
+			.getDateTimeInstance();
+	public final static SimpleDateFormat dateFormat = new SimpleDateFormat(
+			"yyyy-MM-dd");
 
-	
-	public static Date stringToDate(String date,String formatter){
+	public static Date stringToDate(String date, String formatter) {
 		SimpleDateFormat sdf = new SimpleDateFormat(formatter);
 		try {
 			return sdf.parse(date);
@@ -29,12 +30,12 @@ public class Utility {
 			return new Date();
 		}
 	}
-	
-	public static String dateToString(Date date,String formatter){
+
+	public static String dateToString(Date date, String formatter) {
 		SimpleDateFormat sdf = new SimpleDateFormat(formatter);
 		return sdf.format(date);
 	}
-	
+
 	/**
 	 * 西元轉民國
 	 * 

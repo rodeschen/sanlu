@@ -26,8 +26,7 @@ class EmployeeController extends GridController{
 					tmp = tmp.getAt(i)
 				}
 				if(tmp instanceof Timestamp){
-
-					tmp= Utility.shortFormat.format(tmp)
+					tmp= Utility.dateFormat.format(tmp).replace("/","-")
 				}
 				o.add tmp
 			}
@@ -40,24 +39,35 @@ class EmployeeController extends GridController{
 		Employee.count()
 	}
 	def modifyAction={
-		def emp = Employee.findById(id)
+		def emp = Employee.findById(params.long("id"))
 		if(!emp) {
 			return println("無法修改")
 		}
 
-		new JSONObject(params.data).each(){
-			switch( it.key ){
-				case 'empNo':
+		def ids = [
+			"empName",
+			"gender",
+			"empLevel",
+			"hireDate"
+		]
+		ids.each(){
+			switch( it ){
 				case 'empName':
 				case 'gender':
-				case 'password':
-				case 'hireDate':
+					emp.putAt it,params.get(it)
+					break
 				case 'empLevel':
-					emp.putAt it.key,it.value
+					emp.putAt it,params.int(it)
+					break
+				case 'hireDate':
+					emp.putAt it,new Date(Integer.parseInt(params.get(it).substring(0,4))-1900,Integer.parseInt(params.get(it).substring(5,7)),Integer.parseInt(params.get(it).substring(8,10)),00,00,00)
 					break
 			}
 		}
 		emp.save()
+		if(emp.hasErrors()){
+			println emp.errors
+		}
 		def res = ["IsSuccess" : true]
 		render res as JSON
 	}
@@ -75,10 +85,10 @@ class EmployeeController extends GridController{
 	}
 
 	def insertAction={
-		int count = Employee.executeQuery("select max(id) from Employee")[0]		
+		int count = Employee.executeQuery("select max(id) from Employee")[0]
 		String h = params.hireDate
 		println params.int("empLevel")
-		Date hireDate = new Date(Integer.parseInt(h.substring(0,4)),Integer.parseInt(h.substring(5,7)),Integer.parseInt(h.substring(8,10)),00,00,00)
+		Date hireDate = new Date(Integer.parseInt(h.substring(0,4))-1900,Integer.parseInt(h.substring(5,7)),Integer.parseInt(h.substring(8,10)),00,00,00)
 		def emp = new Employee(
 				empNo:String.format("%05d", ++count),
 				empName:params.empName,

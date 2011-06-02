@@ -85,9 +85,13 @@ abstract class GridController extends BaseController {
 
 	def modify={
 		try{
-			columns = getColumns(new JSONArray(params.get("columnParam")));
-			def data = new JSONObject(params.get("data"))
-			id  = data.containsKey("id")?data.getLong("id"):null
+			if(params.containsKey("columnParam")){
+				columns = getColumns(new JSONArray(params.columnParam));
+			}
+			if(params.containsKey("data")){
+				def data = new JSONObject(params.data)
+				id  = data.containsKey("id")?data.getLong("id"):null
+			}
 			modifyAction()
 		}catch(Exception e){
 			log.error e.printStackTrace()
@@ -95,9 +99,9 @@ abstract class GridController extends BaseController {
 		}
 	}
 	def modifyAction={}
-	
+
 	def insert={
-		try{			
+		try{
 			insertAction()
 		}catch(Exception e){
 			log.error e.printStackTrace()
