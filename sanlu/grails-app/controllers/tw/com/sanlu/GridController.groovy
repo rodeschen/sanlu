@@ -37,6 +37,7 @@ abstract class GridController extends BaseController {
 
 			if (params.containsKey(GridEnum.SORTCOLUMN.getCode())) {
 				sortBy = params.get(GridEnum.SORTCOLUMN.getCode())
+				sortBy = sortBy?sortBy:null
 				isAsc = GridEnum.SORTASC.getCode().equals(
 						params.get(GridEnum.SORTTYPE.getCode()))
 			}
