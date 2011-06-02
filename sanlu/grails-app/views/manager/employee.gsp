@@ -187,7 +187,7 @@
                         })
                     }
                 });
-                $("#pclose2").click(function(){
+                $("#pclose2,#pclose1").click(function(){
                     $.fancybox.close();
                 });
                 var action;
@@ -230,9 +230,6 @@
                             }
                         })
                     }
-                });
-                $("#pclose2").click(function(){
-                    $.fancybox.close();
                 });
             });
         </script>

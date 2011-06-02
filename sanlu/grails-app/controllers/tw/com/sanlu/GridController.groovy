@@ -14,6 +14,7 @@ import java.util.concurrent.ThreadPoolExecutor.AbortPolicy;
 abstract class GridController extends BaseController {
 	public int page = 0, pageRows = 0, startRow = 0, rowCount = 0, pagerows = 0
 	def id ,sortBy,columns=[]
+	boolean isAsc
 
 
 	public boolean pages,isAsc
@@ -34,10 +35,10 @@ abstract class GridController extends BaseController {
 				columns = getColumns(params.get(GridEnum.COL_PARAM.getCode()));
 			}
 
-			if (params.containsKey(GridEnum.SORTCOLUMN)) {
+			if (params.containsKey(GridEnum.SORTCOLUMN.getCode())) {
 				sortBy = params.get(GridEnum.SORTCOLUMN.getCode())
-				boolean isAsc = GridEnum.SORTASC.getCode().equals(
-						params.boolean(GridEnum.SORTTYPE.getCode()))
+				isAsc = GridEnum.SORTASC.getCode().equals(
+						params.get(GridEnum.SORTTYPE.getCode()))
 			}
 
 			result.put(GridEnum.PAGEROWS.getCode(),queryAction())
