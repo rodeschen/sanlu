@@ -6,7 +6,10 @@
         rowNum: 50,
         scroll: 1,
         hidegrid: false,
-        datatype: "json"
+        datatype: "json",
+        height: 150,
+        rownumbers: true,
+        mtype: 'POST'
     });
     var _jqGrid = $.fn.jqGrid;
     $.fn.jqGrid = function(){
