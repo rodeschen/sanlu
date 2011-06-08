@@ -160,9 +160,10 @@ var API = {
     openCalendar: function(s){
         API.formSubmit({
             url: contextRoot + "/calendar",
-            target: s.id,
+            target: s.id + "calendar",
             data: $.extend(s.data || {}, {
-                type: s.type
+                type: s.type,
+                id : s.id
             })
         })
     },

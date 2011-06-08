@@ -141,6 +141,13 @@
 							}
 						})
 					});
+					
+					$("#calendar").click(function(){
+						API.openCalendar({
+							id:responseJSON.id,
+							type:"p"
+						})
+					});
 					//下拉選單
 					//禮儀公司
                     $.ajax({

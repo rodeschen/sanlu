@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 class CalendarController extends BaseController {
 	def index = {
-		// redirect(action: "list", params: params)
+		[rjson : params.responseJSON.toString()]
 	}
 
 	def list = {
@@ -48,9 +48,9 @@ class CalendarController extends BaseController {
 			date.properties = params
 			date.save()
 		}else{
-			new ChineseDateStatus(params).save()
+			date = new ChineseDateStatus(params).save()
 		}
-		render params as JSON
+		render date as JSON
 	}
 
 	def querychdatestatus ={
@@ -63,7 +63,22 @@ class CalendarController extends BaseController {
 	}
 	def query={
 		def startAndEnd = calCalendar();
-		def billDetails = BillDetail.findAllByStartTimeBetween(startAndEnd.start,startAndEnd.end)
+		//def billDetails = BillDetail.findAllByStartTimeBetween(startAndEnd.start,startAndEnd.end)
+		def bList = BillDetail.createCriteria()
+		def billDetails = bList.list{
+			and{
+				between('startTime',startAndEnd.start,startAndEnd.end)
+				if(params.type == 'p'){
+					project{ eq('id',params.id?params.long("id"):"") }
+				}else if (params.type == "l"){
+					place{ eq('id',params.id?params.long("id"):"") }
+				}
+			}
+		}
+		//if(BillDetail.hasErrors()){
+		//	println bList.errors;
+		//}
+		//def billDetails = BillDetail.findAllByStartTimeBetween(startAndEnd.start,startAndEnd.end)
 		def events = []
 		def event
 		def cal1 = Calendar.getInstance();
@@ -85,14 +100,11 @@ class CalendarController extends BaseController {
 			cal2.set Calendar.HOUR_OF_DAY, 0
 			cal2.set Calendar.MINUTE, 0
 			cal2.set Calendar.SECOND, 0
-			System.out.println  cal1.getTime()
-			System.out.println  cal2.getTime()
-			System.out.println  cal2.compareTo(cal1)
 			event.add cal2.compareTo(cal1) > 0 ?1:0//crossday (multiDay) 0 1
 			event.add 0                           // recurring 0 1
-			event.add 4                           // color 0..21
+			event.add billDetail.color            // color 0..21
 			event.add 0                           // editable 0 1
-			event.add billDetail.location         //location
+			event.add billDetail.place?.placeName        //location
 			event.add ""                          //people(String)
 			events.add event
 		}

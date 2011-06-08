@@ -8,10 +8,14 @@
 			</title>
 			<script type="text/javascript">
 				var contextRoot = "${request.contextPath}";
-				var cc = $.parseJSON( );
+				
 				$(document).ready( function() {
-					var view = "week";
+					var view = "month";
 					var op = {
+						view: view,
+						extParam : (function(){
+							return [{name:"id",value:responseJSON.id},{name:"type",value:responseJSON.type}]
+						})(),
 						contextRoot: contextRoot,
 						url : contextRoot + "/calendar/query",
 						showday: new Date(),
