@@ -61,6 +61,7 @@ class CalendarController extends BaseController {
 		}
 		render res as JSON
 	}
+	
 	def query={
 		def startAndEnd = calCalendar();
 		//def billDetails = BillDetail.findAllByStartTimeBetween(startAndEnd.start,startAndEnd.end)

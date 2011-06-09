@@ -7,11 +7,9 @@
         <script>
             $(document).ready(function(){
                 var grid1 = $("#grid1").jqGrid({
-                    url: contextRoot + "/funeralCompany/query",
-                    datatype: "json",
-                    height: "auto",
-                    autowidth: true,
+                    url: contextRoot + "/funeralCompany/queryAll",
                     pager: true,
+                    caption: "禮儀公司清單",
                     colModel: [{
                         name: 'id',
                         index: 'id',
@@ -57,16 +55,14 @@
                             },
                             datatype: "json"
                         }).trigger("reloadGrid");
-                    },
-                    caption: "Manipulating Array Data"
+                    }
                 });
                 
                 var grid2 = $("#grid2").jqGrid({
-                    url: contextRoot + "/funeraler/query",
+                    url: contextRoot + "/funeraler/queryByComp",
                     datatype: "local",
-                    height: "auto",
-                    autowidth: true,
                     pager: true,
+                    caption: "禮儀師清單",
                     colModel: [{
                         name: 'id',
                         index: 'id',
@@ -103,8 +99,7 @@
                         name: 'lastModifyBy.empName',
                         index: 'lastModifyBy.empName',
                         width: 80
-                    }],
-                    caption: "Manipulating Array Data"
+                    }]
                 });
                 
                 $("#delete1").click(function(){

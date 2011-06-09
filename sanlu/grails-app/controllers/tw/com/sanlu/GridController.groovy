@@ -1,9 +1,13 @@
 package tw.com.sanlu
 
-import org.codehaus.groovy.grails.web.json.JSONArray;
-import org.codehaus.groovy.grails.web.json.JSONObject;
 import grails.converters.JSON
-import java.util.concurrent.ThreadPoolExecutor.AbortPolicy;
+
+import java.sql.Timestamp
+
+import org.codehaus.groovy.grails.web.json.JSONArray
+import org.codehaus.groovy.grails.web.json.JSONObject
+
+import tw.com.sanlu.annotation.GridQuery
 
 
 /**
@@ -13,11 +17,18 @@ import java.util.concurrent.ThreadPoolExecutor.AbortPolicy;
  */
 abstract class GridController extends BaseController {
 	public int page = 0, pageRows = 0, startRow = 0, rowCount = 0, pagerows = 0
-	def id ,sortBy,columns=[]
-	boolean isAsc
-
-
+	def id ,sortBy,columns=[],rowData,format
 	public boolean pages,isAsc
+
+	def beforeInterceptor = {
+		super.beforeInterceptor.call()
+		def action = delegate.class.declaredFields.find{it.name == actionName}
+		if(action && action.isAnnotationPresent(GridQuery)){
+			params.delegateAction = actionName
+			query()
+			return false
+		}
+	}
 
 	def index = {
 	}
@@ -31,8 +42,33 @@ abstract class GridController extends BaseController {
 				page = params.int(GridEnum.PAGE.getCode())
 				pageRows = params.int(GridEnum.PAGEROWS.getCode())
 				startRow = (page - 1) * pageRows;
-				rowCount = getCountRow(params)
+				//rowCount = getCountRow(params)
 				columns = getColumns(params.get(GridEnum.COL_PARAM.getCode()));
+			}
+			def res = delegate."${params.delegateAction}"()
+			rowData = res["rowData"]
+			rowCount = res["rowCount"]
+			format = res["format"]
+			def rows=[]
+			for (data in rowData) {
+				def o=[]
+				def row = [:]
+				columns.each(){
+					def obj = it.split('\\.')
+					def tmp = data
+
+					for(i in obj){
+						tmp = tmp.getAt(i)
+					}
+					if(tmp instanceof Timestamp){
+						tmp = Utility.shortFormat.format(tmp)
+					}
+                    //format ????
+					//tmp = format?(format.containsKey(it)?format[it](tmp):tmp):tmp
+					o.add tmp
+				}
+				row.put(GridEnum.CELL.getCode(),o)
+				rows.add row
 			}
 
 			if (params.containsKey(GridEnum.SORTCOLUMN.getCode())) {
@@ -41,8 +77,7 @@ abstract class GridController extends BaseController {
 				isAsc = GridEnum.SORTASC.getCode().equals(
 						params.get(GridEnum.SORTTYPE.getCode()))
 			}
-
-			result.put(GridEnum.PAGEROWS.getCode(),queryAction())
+			result.put(GridEnum.PAGEROWS.getCode(),rows)
 			result.put(GridEnum.PAGE.getCode(),page)
 			result.put(GridEnum.TOTAL.getCode(),rowCount.intdiv(pageRows)
 					+ (rowCount % pageRows > 0 ? 1 : 0))
@@ -53,8 +88,6 @@ abstract class GridController extends BaseController {
 			render(status: 400, contentType:"text/json", text: e.dump())
 		}
 	}
-	def queryAction={}
-	public abstract int getCountRow(params)
 
 	/**
 	 * 取得iGrid中的Column Name

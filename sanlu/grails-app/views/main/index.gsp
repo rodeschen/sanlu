@@ -103,12 +103,11 @@
 		<script type="text/javascript">
                 $(document).ready(function(){
                     var grid1 = $("#grid1").jqGrid({
-                        url: contextRoot + "/project/queryAction",
+                        url: contextRoot + "/project/queryNonClose",
                         datatype: "json",
-                        height: "auto",
+        				mtype: 'POST',
 						caption: "當日出館或未出館專案",
                         //multiboxonly:true,
-                        autowidth: true,
                         pager: true,
                         // multiselect: true,
                         colModel: [{
@@ -121,7 +120,13 @@
                             index: 'projectName',
                             width: 60
                         }, {
-                            header: "禮儀公司/禮儀師",
+                            header: "禮儀公司",
+                            name: 'funeralCompany.funeralCompanyName',
+                            index: 'funeralCompany.funeralCompanyName',
+                            width: 80
+                        
+                        }, {
+                            header: "禮儀師",
                             name: 'funeraler.funeralerName',
                             index: 'funeraler.funeralerName',
                             width: 80
@@ -174,44 +179,27 @@
                     });
                     
                     var grid2 = $("#grid2").jqGrid({
-                        datatype: "local",
-                        height: "auto",
-                        autowidth: true,
-                        //caption: "場地列表",
+                        url: contextRoot + "/product/queryPlace",
+                        caption: "場地",
                         pager: true,
                         colModel: [{
                             name: 'id',
                             index: 'id',
-                            width: 60
+                            width: 60,
+                            hidden:true
                         }, {
-                            name: 'invdate',
-                            index: 'invdate',
+                            header: "場地名",
+                            name: 'placeName',
+                            index: 'placeName',
                             width: 90
-                        }, {
-                            name: 'name',
-                            index: 'name',
-                            width: 500
-                        }, {
-                            name: 'amount',
-                            index: 'amount',
-                            width: 80,
-                            align: "right"
-                        }, {
-                            name: 'tax',
-                            index: 'tax',
-                            width: 80,
-                            align: "right"
-                        }, {
-                            name: 'total',
-                            index: 'total',
-                            width: 80,
-                            align: "right"
-                        }, {
-                            name: 'note',
-                            index: 'note',
-                            width: 150,
-                            sortable: false
-                        }]
+                        }],
+                        ondblClickRow: function(id){
+                            var data = grid2.getRowData(id);
+                            API.openCalendar({
+                                id: data.id,
+                                type:"l"
+                            });
+                        }
                     });
                     
                     $("#delete").click(function(){

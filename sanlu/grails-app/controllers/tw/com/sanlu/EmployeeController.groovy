@@ -6,38 +6,22 @@ import java.sql.Timestamp
 
 import org.codehaus.groovy.grails.web.json.JSONObject
 
+import tw.com.sanlu.annotation.GridQuery;
+
 /**
  * 員工管理
  * @author rick
  *
  */
 class EmployeeController extends GridController{
-	def queryAction = {
-		def rows=[]
-		def emps = Employee.list(max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc")
-		for (emp in emps) {
-			def row = [:]
-			def o=[]
-			columns.each(){
-				def obj = it.split('\\.')
-				def tmp = emp
 
-				for(i in obj){
-					tmp = tmp.getAt(i)
-				}
-				if(tmp instanceof Timestamp){
-					tmp= Utility.dateFormat.format(tmp).replace("/","-")
-				}
-				o.add tmp
-			}
-			row.put(GridEnum.CELL.getCode(),o)
-			rows.add row
-		}
-		return rows
+	@GridQuery
+	def queryAll = {
+		["rowData":Employee.list(max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc"),
+					"rowCount":Employee.count()]
 	}
-	public int getCountRow(params){
-		Employee.count()
-	}
+
+
 	def modifyAction={
 		def emp = Employee.findById(params.long("id"))
 		if(!emp) {

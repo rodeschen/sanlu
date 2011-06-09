@@ -13,7 +13,9 @@
                 <a id="modify1" href="#pdialog" class="button">修改</a>
                 <a id="pwReset" href="#pwResetdialog" class="button">密碼重設</a>
             </div>
-            <div id="grid1" />
+            <div style="margin-top:5px;" id="grid1" />
+            
+            <!-- dialog -->
             <div class="hide">
                 <div id="pwResetdialog" class="dialog" style="display:block;width:400px;">
                     <g:form name="pwResetForm" id="pwResetForm" onsubmit="return false;" autocomplete="off" novalidate="novalidate">
@@ -42,7 +44,6 @@
                     </g:form>
                 </div>
             </div>
-            <!-- dialog -->
             <div class="hide">
                 <div id="pdialog" class="dialog" style="display:block;width:400px;">
                     <g:form name="addForm" id="addForm" onsubmit="return false;" autocomplete="off" novalidate="novalidate">
@@ -101,11 +102,9 @@
         <script>
             $(document).ready(function(){
                 var grid1 = $("#grid1").jqGrid({
-                    url: contextRoot + "/employee/query",
-                    datatype: "json",
-                    height: "auto",
-                    autowidth: true,
+                    url: contextRoot + "/employee/queryAll",
                     pager: true,
+                    caption: "員工清單",
                     colModel: [{
                         name: 'id',
                         index: 'id',
@@ -152,8 +151,7 @@
                     sortname: 'empNo',
                     postData: {
                         hasPlace: false
-                    },
-                    caption: "Manipulating Array Data"
+                    }
                 });
                 $("#pwReset").fancybox({
                     'titlePosition': 'inside',

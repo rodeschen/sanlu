@@ -7,11 +7,13 @@
         <script>
             $(document).ready(function(){
                 var grid1 = $("#grid1").jqGrid({
-                    url: contextRoot + "/product/query",
+                    url: contextRoot + "/product/queryProduct",
                     datatype: "json",
                     height: "auto",
                     autowidth: true,
                     pager: true,
+                    sortname: 'productNo',
+                    caption: "產品清單",
                     colModel: [{
                         name: 'id',
                         index: 'id',
@@ -68,20 +70,22 @@
                         name: 'lastModifyBy.empName',
                         index: 'lastModifyBy.empName',
                         width: 30
-                    }],
-                    sortname: 'productNo',
-                    postData: {
-                        hasPlace: false
-                    },
-                    caption: "Manipulating Array Data"
+                    }]
                 });
                 
                 var grid2 = $("#grid2").jqGrid({
-                    url: contextRoot + "/product/query",
+                    url: contextRoot + "/product/queryPlaceProduct",
                     datatype: "json",
                     height: "auto",
                     autowidth: true,
                     pager: true,
+                    grouping: true,
+                    groupingView: {
+                        groupField: ['product.productName'],
+                        groupColumnShow: [false]
+                    },
+                    sortname: 'productName',
+                    caption: "產品清單",
                     colModel: [{
                         name: 'product.id',
                         index: 'product.id',
@@ -141,17 +145,7 @@
                         name: 'product.lastModifyBy.empName',
                         index: 'product.lastModifyBy.empName',
                         width: 30
-                    }],
-                    grouping: true,
-                    groupingView: {
-                        groupField: ['product.productName'],
-                        groupColumnShow: [false]
-                    },
-                    postData: {
-                        hasPlace: true
-                    },
-                    sortname: 'productName',
-                    caption: "Manipulating Array Data"
+                    }]
                 });
                 
                 

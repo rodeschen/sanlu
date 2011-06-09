@@ -4,43 +4,32 @@ import grails.converters.JSON
 import java.sql.Timestamp
 import org.codehaus.groovy.grails.web.json.JSONObject
 
+import tw.com.sanlu.annotation.GridQuery;
+
 /**
  * 商品管理
  * @author rickhuang
  *
  */
 class ProductController extends GridController{
-	def queryAction = {
-		def rows=[]
-		boolean hasPlace = params.boolean("hasPlace")
-
-		//Project.findAll("from Project as p where p.outDate is null or p.outDate > day(current_date()) "+(sortBy?"order by "+sortBy+(isAsc?" asc":" desc"):""),[max:pageRows,offset:startRow])
-		def products = hasPlace?ProductLinkPlace.list(max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc"): Product.findAllByHasPlace(false,[max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc"])
-		//println hasPlace + products.size()
-		for (product in products) {
-			def row = [:]
-			def o=[]
-			columns.each(){
-				def obj = it.split('\\.')
-				def tmp = product
-
-				for(i in obj){
-					tmp = tmp.getAt(i)
-				}
-				if(tmp instanceof Timestamp){
-
-					tmp= Utility.shortFormat.format(tmp)
-				}
-				o.add tmp
-			}
-			row.put(GridEnum.CELL.getCode(),o)
-			rows.add row
-		}
-		return rows
+	
+	@GridQuery
+	def queryPlace = {
+		["rowData":Place.list(max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc"),
+		 "rowCount":Place.count()]
 	}
-	public int getCountRow(params){
-		ProductLinkPlace.count()
+	@GridQuery
+	def queryProduct = {
+		["rowData":Product.findAllByHasPlace(false,[max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc"]),
+			"rowCount":Product.countByHasPlace(false)]
 	}
+	@GridQuery
+	def queryPlaceProduct = {
+		["rowData":ProductLinkPlace.list(max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc"),
+			"rowCount":ProductLinkPlace.count()]
+	}
+	
+
 
 	def deleteAction = {
 		boolean hasPlace = params.boolean("hasPlace")

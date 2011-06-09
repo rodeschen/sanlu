@@ -6,42 +6,24 @@ import java.sql.Timestamp
 
 import org.codehaus.groovy.grails.web.json.JSONObject
 
+import tw.com.sanlu.annotation.GridQuery;
+
 /**
  * 禮儀師
  * @author rick
  *
  */
 class FuneralerController extends GridController{
-	def queryAction = {
-		def rows=[]
 
-		//def funeralers = Funeraler.list(max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc")
+
+	@GridQuery
+	def queryByComp = {
 		def company = FuneralCompany.findById(params.long("funeralCompanyId"))
-		def funeralers = Funeraler.findByFuneralCommpany(company,[max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc"])
-		for (funeraler in funeralers) {
-			def o=[]
-			def row = [:]
-			columns.each(){
-				def obj = it.split('\\.')
-				def tmp = funeraler
-
-				for(i in obj){
-					tmp = tmp.getAt(i)
-				}
-				if(tmp instanceof Timestamp){
-
-					tmp=Utility.shortFormat.format(tmp)
-				}
-				o.add tmp
-			}
-			row.put(GridEnum.CELL.getCode(),o)
-			rows.add row
-		}
-		return rows
+		["rowData":Funeraler.findByFuneralCommpany(company,[max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc"]),
+					"rowCount":Funeraler.countByFuneralCommpany(company)]
 	}
-	public int getCountRow(params){
-		Funeraler.count()
-	}
+
+
 
 	def deleteAction = {
 		def funeraler = Funeraler.findById(id)
