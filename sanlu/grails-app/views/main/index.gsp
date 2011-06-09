@@ -6,6 +6,9 @@
 <body>
 	${flash.message}
 	<g:if test="${!session.empLevel}">
+	<script type="text/javascript">
+		$("nav,aside").remove();
+	</script>
 		<div>
 			<g:form name="loginForm" url="[action:'login',controller:'login']"
 				autocomplete="off" novalidate="novalidate">
