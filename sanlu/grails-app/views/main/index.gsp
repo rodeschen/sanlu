@@ -103,9 +103,10 @@
 		<script type="text/javascript">
                 $(document).ready(function(){
                     var grid1 = $("#grid1").jqGrid({
-                        url: contextRoot + "/project/query",
+                        url: contextRoot + "/project/queryAction",
                         datatype: "json",
                         height: "auto",
+						caption: "當日出館或未出館專案",
                         //multiboxonly:true,
                         autowidth: true,
                         pager: true,
