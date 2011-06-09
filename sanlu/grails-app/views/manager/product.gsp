@@ -8,9 +8,6 @@
             $(document).ready(function(){
                 var grid1 = $("#grid1").jqGrid({
                     url: contextRoot + "/product/queryProduct",
-                    datatype: "json",
-                    height: "auto",
-                    autowidth: true,
                     pager: true,
                     sortname: 'productNo',
                     caption: "產品清單",
@@ -75,9 +72,6 @@
                 
                 var grid2 = $("#grid2").jqGrid({
                     url: contextRoot + "/product/queryPlaceProduct",
-                    datatype: "json",
-                    height: "auto",
-                    autowidth: true,
                     pager: true,
                     grouping: true,
                     groupingView: {
