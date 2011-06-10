@@ -89,7 +89,7 @@
         <script>
             $(document).ready(function(){
                 var grid1 = $("#grid1").jqGrid({
-                    url: contextRoot + "/project/query",
+                    url: contextRoot + "/project/queryNonClose",
                     height: 250,
                     caption: "商品使用清單",
                     //multiboxonly:true,
