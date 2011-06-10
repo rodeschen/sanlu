@@ -64,7 +64,7 @@ abstract class GridController extends BaseController {
 						tmp = Utility.shortFormat.format(tmp)
 					}
                     //format ????
-					//tmp = format?(format.containsKey(it)?format[it](tmp):tmp):tmp
+					tmp = format?(format.containsKey(it)?format[it](tmp):tmp):tmp
 					o.add tmp
 				}
 				row.put(GridEnum.CELL.getCode(),o)

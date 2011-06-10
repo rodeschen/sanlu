@@ -26,7 +26,7 @@ class ProjectController extends GridController {
 		def rowCount = Project.countByClosingDateOrClosingDateIsNull(new Date());
 		def projects = Project.findAllByClosingDateOrClosingDateIsNull(new Date(),[max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc"])
 
-		return ["rowData":projects,"rowCount":rowCount]
+		return ["rowData":projects,"rowCount":rowCount,"format":["projectName":{str -> return "$str xxxxccc"}]]
 	}
 
 	
