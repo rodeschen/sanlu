@@ -28,7 +28,7 @@ class ProjectController extends GridController {
 
 		//format
 		//return ["rowData":projects,"rowCount":rowCount,"format":["projectName":{str -> return "$str xxxxccc"}]]
-		["rowData":projects,"rowCount":rowCount,"format":["projectName":{str -> return "$str xxxxccc"}]]
+		["rowData":projects,"rowCount":rowCount]
 	}
 
 	
