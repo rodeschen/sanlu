@@ -16,7 +16,7 @@
                 <div class="field-row">
                     <span class="th1">禮儀公司：</span>
                     <span>
-                        <select id="funeralCompany" name="funeralCompany">
+                        <select id="funeralCompany" name="funeralCompany" class="validate[required]">
                             <option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
                         </select>
                     </span>
@@ -58,9 +58,11 @@
                 <div class="field-row">
                     <span class="th1">地址：</span>
                     <span>
+                    		縣市
                         <select id="contactAddrCity" name="contactAddrCity">
                             <option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
                         </select>
+                        	鄉鎮市區
                         <select id="contactAddrArea" name="contactAddrArea">
                             <option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
                         </select>
@@ -224,6 +226,15 @@
                     }
                     else {
                         $('#funeraler').html('')
+                    }
+                });
+
+                //承辦業務
+                $.ajax({
+                    type: "POST",
+                    url: contextRoot + "/combobox/employee",
+                    success: function(map){
+                        $('#employee').setDropdown(map);
                     }
                 });
             });

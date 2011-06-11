@@ -27,9 +27,9 @@ grails.project.dependency.resolution = {
     }
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
-
-        // runtime 'mysql:mysql-connector-java:5.1.13'
 		//compile 'org.eclipse.jetty:jetty-websocket:8.0.0.M2'
+        runtime 'mysql:mysql-connector-java:5.1.15'		
+		compile 'net.sourceforge.jexcelapi:jxl:2.6.12'
 		grails.plugin.repos.discovery.jetty7Repository="http://grails-jetty7.googlecode.com/svn/"
     }
 }
