@@ -1,94 +1,75 @@
 <html>
-    <head>
-        <title>專案</title>
-        <meta name="layout" content="project" />
-    </head>
-    <body>
-        <span style="display:inline-block;width:460px">
-            <fieldset>
-                <legend>
-                    專案資訊 
-                </legend>
-                <div class="field-row">
-                    <span class="th1">案名：</span>
-                    <span><input type="text" id="projectName" name="projectName" placeholder="姓名" /></span>
-                </div>
-                <div class="field-row">
-                    <span class="th1">禮儀公司：</span>
-                    <span>
-                        <select id="funeralCompany" name="funeralCompany" class="validate[required]">
-                            <option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
-                        </select>
-                    </span>
-                </div>
-                <div class="field-row">
-                    <span class="th1">禮儀師：</span>
-                    <span>
-                        <select id="funeraler" name="funeraler" class="validate[required]">
-                            <option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
-                        </select>
-                    </span>
-                </div>
-                <div class="field-row">
-                    <span class="th1">承辦業務：</span>
-                    <span>
-                        <select id="employee" name="employee" class="validate[required]">
-                            <option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
-                        </select>
-                    </span>
-                </div>
-                <div class="field-row">
-                    <span class="th1">入館日期：</span>
-                    <span><input type="text" class="validate[required] date" id="inDate" name="inDate" size="10" /></span>
-                </div>
-            </fieldset>
-        </span><span style="padding-left:15px;display:inline-block;width:460px">
-            <fieldset>
-                <legend>
-                    家屬資訊 
-                </legend>
-                <div class="field-row">
-                    <span class="th1">聯絡人：</span>
-                    <span><input type="text" id="contact" name="contact" placeholder="" /></span>
-                </div>
-                <div class="field-row">
-                    <span class="th1">電話：</span>
-                    <span><input type="text" id="contactPhone" name="contactPhone" placeholder="" /></span>
-                </div>
-                <div class="field-row">
-                    <span class="th1">地址：</span>
-                    <span>
-                    		縣市
-                        <select id="contactAddrCity" name="contactAddrCity">
-                            <option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
-                        </select>
-                        	鄉鎮市區
-                        <select id="contactAddrArea" name="contactAddrArea">
-                            <option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
-                        </select>
-                    </span>
-                    <br/>
-                    <span class="th1">&nbsp;</span>
-                    <span><input type="text" id="contactAddr" name="contactAddr" placeholder="" size="40" /></span>
-                </div>
-            </fieldset>
-        </span>
-        <div>
-            <button id="add1">
-                新增
-            </button>
-            <button id="modify1">
-                修改
-            </button>
-            <button id="delete1">
-                刪除
-            </button>
-            <button id="calendar" style="float: right;">
-                專案行事曆
-            </button>
-        </div>
-        <div style="padding-bottom: 10px" id="grid1" />
-        <script>
+<head>
+<title>專案</title>
+<meta name="layout" content="project" />
+</head>
+<body>
+	<span style="display: inline-block; width: 460px">
+		<fieldset>
+			<legend> 專案資訊 </legend>
+			<div class="field-row">
+				<span class="th1">案名：</span> <span><input type="text"
+					id="projectName" name="projectName" placeholder="姓名" />
+				</span>
+			</div>
+			<div class="field-row">
+				<span class="th1">禮儀公司：</span> <span> <select
+					id="funeralCompany" name="funeralCompany"
+					class="validate[required]">
+						<option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+				</select> </span>
+			</div>
+			<div class="field-row">
+				<span class="th1">禮儀師：</span> <span> <select id="funeraler"
+					name="funeraler" class="validate[required]">
+						<option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+				</select> </span>
+			</div>
+			<div class="field-row">
+				<span class="th1">承辦業務：</span> <span> <select id="employee"
+					name="employee" class="validate[required]">
+						<option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+				</select> </span>
+			</div>
+			<div class="field-row">
+				<span class="th1">入館日期：</span> <span><input type="text"
+					class="validate[required] date" id="inDate" name="inDate" size="10" />
+				</span>
+			</div>
+		</fieldset> </span>
+	<span style="padding-left: 15px; display: inline-block; width: 460px">
+		<fieldset>
+			<legend> 家屬資訊 </legend>
+			<div class="field-row">
+				<span class="th1">聯絡人：</span> <span><input type="text"
+					id="contact" name="contact" placeholder="" />
+				</span>
+			</div>
+			<div class="field-row">
+				<span class="th1">電話：</span> <span><input type="text"
+					id="contactPhone" name="contactPhone" placeholder="" />
+				</span>
+			</div>
+			<div class="field-row">
+				<span class="th1">地址：</span> <span>  <select
+					id="contactAddrCity" name="contactAddrCity">
+						<option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+				</select> 縣/市 <select id="contactAddrArea" name="contactAddrArea">
+						<option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+				</select> 鄉鎮市區 </span> <br /> <span class="th1">&nbsp;</span> <span><input
+					type="text" id="contactAddr" name="contactAddr" placeholder=""
+					size="40" />
+				</span>
+			</div>
+		</fieldset> </span>
+	<div>
+		<button id="add1">新增</button>
+		<button id="modify1">修改</button>
+		<button id="delete1">刪除</button>
+		<button id="calendar" style="float: right;">專案行事曆</button>
+	</div>
+	<div style="padding-bottom: 10px" id="grid1" />
+	<script>
             $(document).ready(function(){
                 var grid1 = $("#grid1").jqGrid({
                     url: contextRoot + "/project/queryNonClose",
@@ -237,7 +218,37 @@
                         $('#employee').setDropdown(map);
                     }
                 });
+                var addrMap;
+                //city
+                $.ajax({
+                    type: "POST",
+                    url: contextRoot + "/combobox/city",
+                    success: function(map){
+                        addrMap = map;
+                        var cityMap={};              
+                        $.each(addrMap, function(value, text) {                        	
+                        	cityMap[value]=value;
+                		});
+                        $('#contactAddrCity').setDropdown(cityMap);
+                    }
+                });
+
+                //cityArea
+                $('#contactAddrCity').change(function(){
+                    if ($(this).val()) {
+                       var val = $(this).val();
+                       var areaMap = {};
+                       $.each(addrMap[val],function(index,value){
+                    	   areaMap[value]=value;
+                       });      
+                       $('#contactAddrArea').setDropdown(areaMap);                 
+                    }
+                    else {
+                        $('#contactAddrArea').html('')
+                    }
+                });
+                
             });
         </script>
-    </body>
+</body>
 </html>
