@@ -39,27 +39,12 @@ class ComboboxController extends BaseController {
 		render res as JSON
 	}
 
-	//地址
-	Map<String, List<String>> addrMap=null;
+	//地址	
+	private static Map<String, List<String>> addrMap;
 	def city={
-		def res = [:]
 		if(addrMap==null){
 			addrMap = ExcelUtility.handleAddrExcel("addr.xls")
 		}
-		addrMap?.each(){
-			res[it.key] = it.value
-		}
-		render res as JSON
-	}
-
-	def cityArea={
-		def res = [:]
-		if(params.city){
-			def area = addrMap.get(params.city)
-			area?.each(){
-				res[it.key] = it.key
-			}
-		}
-		render res as JSON
+		render addrMap as JSON
 	}
 }
