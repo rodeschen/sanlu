@@ -81,6 +81,7 @@ $.extend($.fn, {
 		$.each(data, function(value, text) {
 			$this.append($('<option></option>').val(value).text(text));
 		});
+		return this;
 	},
 	serializeData: function() {
 		var res = {}, fields = this.find(":input").serializeArray();

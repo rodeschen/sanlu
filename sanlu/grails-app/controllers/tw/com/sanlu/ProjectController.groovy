@@ -1,5 +1,6 @@
 package tw.com.sanlu
 import grails.converters.JSON
+import grails.web.JSONBuilder
 
 import java.text.DateFormat
 import java.text.SimpleDateFormat
@@ -31,17 +32,29 @@ class ProjectController extends GridController {
 		["rowData":projects,"rowCount":rowCount]
 	}
 
-	
+	def queryid = {
+		def project = Project.findById(params.long("id"))
+		def res = [:] << 
+		[projectName:project.projectName,
+		 inDate:project.inDate?.format("yyyy-MM-dd"),
+		 inHour:project.inDate?.format("HH"),
+		 inMin: project.inDate?.format("mm"),
+		 funeralCompany:project.funeralCompany.id,
+		 funeraler:project.funeraler.id,
+		 employee:project.emp.empNo]
+		
+		render res as JSON
+	}
 	
 	def addAction = {
 		
-		DateFormat df = new SimpleDateFormat("yyyy-M-d");
+		DateFormat df = new SimpleDateFormat("yyyy-M-d HH:mm");
 		def project = new Project();
 		project.projectName = params.projectName
 		project.funeralCompany = FuneralCompany.findById(params.long("funeralCompany"))
 		project.funeraler = Funeraler.findById(params.long("funeraler"))
 		project.emp = Employee.findById(params.long("employee"))
-		project.inDate = df.parse(params.inDate)
+		project.inDate = df.parse(params.inDate + " " + params.inHour + ":" + params.inMin)
 		project.save()
 		if(project.hasErrors()){
 			println project.errors;

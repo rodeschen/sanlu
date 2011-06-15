@@ -34,12 +34,19 @@ class Project {
 	Date closingDate
 	//結帳人員
 	Employee closer
-
+	//聯絡人
+	String contact
+	//聯絡電話
+	String contactPhone
+    //地址
+	String contactAddrCity
+	String contactAddrArea
+	String contactAddr
 	static hasMany = [bill:BillDetail]
 
 
 	static constraints = {
-		projectName maxSize:20
+		projectName maxSize:40
 		memo nullable:true
 		outDate(validator: { val, obj ->
 			val?.after(obj.inDate)
@@ -47,7 +54,11 @@ class Project {
 		outDate nullable:true
 		closingDate nullable:true
 		closer nullable:true
-		
+		contact maxSize:40,nullable:true
+		contactPhone maxSize:20,nullable:true
+		contactAddrCity maxSize:12,nullable:true
+		contactAddrArea maxSize:12,nullable:true
+		contactAddr maxSize:100,nullable:true
 		
 	}
 }
