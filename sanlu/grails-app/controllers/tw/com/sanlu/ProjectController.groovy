@@ -15,16 +15,15 @@ import tw.com.sanlu.annotation.GridQuery
  *
  */
 class ProjectController extends GridController {
-	
-	
+
+
 	def index = {
 		[rjson : params.responseJSON.toString()]
 	}
 	@GridQuery
 	def queryNonClose = {
-		def rows=[] 
-		
-		def rowCount = Project.countByClosingDateOrClosingDateIsNull(new Date());
+		def rows=[]
+		def rowCount = Project.countByClosingDateOrClosingDateIsNull(new Date())
 		def projects = Project.findAllByClosingDateOrClosingDateIsNull(new Date(),[max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc"])
 
 		//format
@@ -34,20 +33,27 @@ class ProjectController extends GridController {
 
 	def queryid = {
 		def project = Project.findById(params.long("id"))
-		def res = [:] << 
-		[projectName:project.projectName,
-		 inDate:project.inDate?.format("yyyy-MM-dd"),
-		 inHour:project.inDate?.format("HH"),
-		 inMin: project.inDate?.format("mm"),
-		 funeralCompany:project.funeralCompany.id,
-		 funeraler:project.funeraler.id,
-		 employee:project.emp.empNo]
-		
+		def res = [:] <<
+				[id:project.id,
+					projectName:project.projectName,
+					inDate:project.inDate?.format("yyyy-MM-dd"),
+					inHour:project.inDate?.format("HH"),
+					inMin: project.inDate?.format("mm"),
+					funeralCompany:project.funeralCompany.id,
+					funeraler:project.funeraler.id,
+					employee:project.emp.empNo,
+					contact:project.contact,
+					contactPhone:project.contactPhone,
+					contactAddrCity:project.contactAddrCity,
+					contactAddrArea:project.contactAddrArea,
+					contactAddr:project.contactAddr,
+					memo:project.memo]
+
 		render res as JSON
 	}
-	
+
 	def addAction = {
-		
+
 		DateFormat df = new SimpleDateFormat("yyyy-M-d HH:mm");
 		def project = new Project();
 		project.projectName = params.projectName
@@ -59,9 +65,30 @@ class ProjectController extends GridController {
 		if(project.hasErrors()){
 			println project.errors;
 		}
-		
+
 		def res = ["id" : project.id]
 		render res as JSON
+	}
+
+	def updateAction = {
+		def project = Project.findById(params.id)
+		if(project){
+			DateFormat df = new SimpleDateFormat("yyyy-M-d HH:mm");
+			project.projectName = params.projectName
+			project.funeralCompany = FuneralCompany.findById(params.long("funeralCompany"))
+			project.funeraler = Funeraler.findById(params.long("funeraler"))
+			project.emp = Employee.findById(params.long("employee"))
+			project.inDate = df.parse(params.inDate + " " + params.inHour + ":" + params.inMin)
+			project.contact = params.contact
+			project.contactPhone = params.contactPhone
+			project.contactAddrCity = params.contactAddrCity
+			project.contactAddrArea = params.contactAddrArea
+			project.contactAddr = params.contactAddr
+			project.memo = params.memo
+			project.save()
+		}
+		
+		render [:] as JSON
 	}
 
 	def deleteAction = {
