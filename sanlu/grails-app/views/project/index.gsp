@@ -153,10 +153,10 @@
 		<div>
 			<button id="add1">
 				新增
-			</button>
+			</button><!--
 			<button id="modify1">
 				修改
-			</button>
+			</button>-->
 			<button id="delete1">
 				刪除
 			</button>
@@ -236,61 +236,74 @@
 						document.title = json.projectName + " - 專案";
 					});
 					var grid1 = $("#grid1").jqGrid({
-						url: contextRoot + "/project/queryNonClose",
-						height: 250,
+						url: contextRoot + "/project/queryDetail",
+						height: 200,
+						postData:{
+							id:responseJSON.id
+						},
 						caption: "商品使用清單",
 						//multiboxonly:true,
 						autowidth: true,
 						pager: true,
-						multiselect: true,
 						colModel: [{
 							name: 'id',
 							index: 'id',
 							hidden: true
 						},{
-							header: "案名",
-							name: 'projectName',
-							index: 'projectName',
+							header: "品名",
+							name: 'productName',
+							index: 'product.productName',
 							width: 60
 						},{
-							header: "禮儀公司/禮儀師",
-							name: 'funeraler.funeralerName',
-							index: 'funeraler.funeralerName',
-							width: 80
+							header: "單價",
+							name: 'price',
+							index: 'price',
+							width: 80,
+							align: "right",
+                            formatter: "currency"
 
 						},{
-							header: "進館日期",
-							name: 'inDate',
-							index: 'inDate',
-							width: 130
-						},{
-							header: "出館日期",
-							name: 'outDate',
-							index: 'outDate',
-							width: 130
-						},{
-							header: "承辦業務",
-							name: 'emp.empName',
-							index: 'emp.empName',
-							width: 80
-						},{
-							header: "消費總金額",
-							name: 'sallingTotal',
-							index: 'sallingTotal',
+							header: "賣價(調整後單價)",
+							name: 'modifiedPrice',
+							index: 'modifiedPrice',
 							width: 80,
-							align: "right"
+							align: "right",
+                            formatter: "currency"
+
 						},{
-							header: "內帳銷售總金額",
-							name: 'total',
-							index: 'total',
+							header: "數量",
+							name: 'quantity',
+							index: 'quantity',
 							width: 80,
-							align: "right"
+							align: "right",
+                            formatter: "currency"
 						},{
-							header: "備註",
-							name: 'memo',
-							index: 'memo',
-							width: 150,
-							sortable: false
+							header: "小計",
+							name: 'amount',
+							index: 'amount',
+							width: 80,
+							align: "right",
+                            formatter: "currency"
+
+						},{
+							header: "使用場地",
+							name: 'placeName‧',
+							index: 'place.placeName',
+							width: 80,
+                            align: "center"
+						},{
+							header: "建立人",
+							name: 'lastModifyBy.empName',
+							index: 'lastModifyBy.empName',
+							width: 80,
+                            align: "center"
+
+						},{
+							header: "建立日期",
+							name: 'lastUpdated',
+							index: 'lastUpdated',
+							width: 130,
+                            align: "center"
 						}],
 						ondblClickRow: function(id) {
 							var data = grid1.getRowData(id);
@@ -350,6 +363,8 @@
 							$.ajax({
 								url: contextRoot + "/project/updateAction",
 								data: $("#addForm").serializeData()
+							}).done(function(){
+								opener.$("#projectGrid").trigger("reloadGrid");
 							});
 						}
 					})

@@ -88,7 +88,7 @@ class CalendarController extends BaseController {
 			//[id,text,startDate,endDate,isallday,crossday,recurring,color,editable,local,?]
 			event = []
 			event.add billDetail.id               //oid
-			event.add billDetail.description      //description
+			event.add billDetail.product.productName      //description
 			event.add billDetail.startTime        //startTime
 			event.add billDetail.endTime          //endTime
 			event.add 0                           //isAllDay 0 1

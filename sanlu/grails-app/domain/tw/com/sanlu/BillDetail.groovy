@@ -31,16 +31,12 @@ class BillDetail {
 	//最後修改人
 	Employee lastModifyBy
 
-	String location
-	String description
 	String color
 
 	static belongsTo =[project:Project]
 
 	static constraints = {
 		color nullable:true
-		description nullable:true
-		location nullable:true	
 		place nullable:true
 	}
 }

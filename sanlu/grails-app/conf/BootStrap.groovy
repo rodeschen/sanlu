@@ -230,7 +230,7 @@ class BootStrap {
 
 					//init Project
 					def project1 = new Project(
-							projectName:"projectName",
+							projectName:"張一二",
 							funeralCompany : fCom,
 							funeraler:funer,
 							inDate:new Date(99,12,1,10,00,00),
@@ -253,8 +253,6 @@ class BootStrap {
 							price:550,
 							color:1,
 							place:place8,
-							description:"法會",
-							location:"大忠聽",
 							modifiedPrice:500,
 							costPrice:300,
 							modifiedCostPrice:300,
@@ -275,8 +273,6 @@ class BootStrap {
 							place:place4,
 							modifiedPrice:500,
 							costPrice:300,
-							description:"助念",
-							location:"至正廳",
 							modifiedCostPrice:300,
 							lastModifyBy:emp2,
 							project:project1

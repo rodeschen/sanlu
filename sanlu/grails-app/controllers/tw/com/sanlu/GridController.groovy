@@ -45,6 +45,12 @@ abstract class GridController extends BaseController {
 				//rowCount = getCountRow(params)
 				columns = getColumns(params.get(GridEnum.COL_PARAM.getCode()));
 			}
+			if (params.containsKey(GridEnum.SORTCOLUMN.getCode())) {
+				sortBy = params.get(GridEnum.SORTCOLUMN.getCode())
+				sortBy = sortBy?sortBy:null
+				isAsc = GridEnum.SORTASC.getCode().equals(
+						params.get(GridEnum.SORTTYPE.getCode()))
+			}
 			def res = delegate."${params.delegateAction}"()
 			rowData = res["rowData"]
 			rowCount = res["rowCount"]
@@ -58,25 +64,24 @@ abstract class GridController extends BaseController {
 					def tmp = data
 
 					for(i in obj){
-						tmp = tmp.getAt(i)
+						try{
+							tmp = tmp.getAt(i)
+						}catch(e){
+							tmp = ""
+						}
 					}
 					if(tmp instanceof Timestamp){
 						tmp = Utility.shortFormat.format(tmp)
 					}
-                    //format ????
-					tmp = format?(format.containsKey(it)?format[it](tmp):tmp):tmp
+					//format ????
+					tmp = format?(format.containsKey(it)?format[it](tmp,data):tmp):tmp
 					o.add tmp
 				}
 				row.put(GridEnum.CELL.getCode(),o)
 				rows.add row
 			}
 
-			if (params.containsKey(GridEnum.SORTCOLUMN.getCode())) {
-				sortBy = params.get(GridEnum.SORTCOLUMN.getCode())
-				sortBy = sortBy?sortBy:null
-				isAsc = GridEnum.SORTASC.getCode().equals(
-						params.get(GridEnum.SORTTYPE.getCode()))
-			}
+
 			result.put(GridEnum.PAGEROWS.getCode(),rows)
 			result.put(GridEnum.PAGE.getCode(),page)
 			result.put(GridEnum.TOTAL.getCode(),rowCount.intdiv(pageRows)

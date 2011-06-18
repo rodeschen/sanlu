@@ -31,6 +31,43 @@ class ProjectController extends GridController {
 		["rowData":projects,"rowCount":rowCount]
 	}
 
+	@GridQuery
+	def queryDetail = {
+		def rows=[]
+
+		def bList = BillDetail.createCriteria()
+		def rowCount = bList.count{
+			project{ eq('id',params.id?params.long("id"):"") }
+		}
+		
+		bList = BillDetail.createCriteria()
+		def projects = bList.list{
+			project{ eq('id',params.id?params.long("id"):"") }
+			firstResult (startRow)
+			maxResults(pageRows)
+			if(sortBy){
+				switch(sortBy){
+					case "product.productName" :
+						product{
+							order("productName",isAsc?"asc":"desc")
+						}
+					break;
+					case "place.placeName" :
+					    place{
+							order("placeName",isAsc?"asc":"desc")
+						}
+					break;
+					default:
+						order(sortBy,isAsc?"asc":"desc")
+				}
+			}
+		}
+
+		//format
+		//return ["rowData":projects,"rowCount":rowCount,"format":["projectName":{str -> return "$str xxxxccc"}]]
+		["rowData":projects,"rowCount":rowCount,format:["amount":{str , data -> return data.modifiedPrice * data.quantity}]]
+	}
+
 	def queryid = {
 		def project = Project.findById(params.long("id"))
 		def res = [:] <<
@@ -87,7 +124,7 @@ class ProjectController extends GridController {
 			project.memo = params.memo
 			project.save()
 		}
-		
+
 		render [:] as JSON
 	}
 

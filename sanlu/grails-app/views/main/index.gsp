@@ -51,11 +51,11 @@
 				<button id="modify">修改</button>
 				<button id="delete">刪除</button>
 			</div>
-			<div id="grid1" />
+			<div id="projectGrid" />
 		</fieldset>
 		<fieldset>
 			<legend> 場地清單 </legend>
-			<div id="grid2" />
+			<div id="palceGrid" />
 		</fieldset>
 		<!-- dialog -->
 		<div class="hide">
@@ -149,7 +149,8 @@
 		</div>
 		<script type="text/javascript">
                 $(document).ready(function(){
-                    var grid1 = $("#grid1").jqGrid({
+                	window.name = "main"; 
+                    var grid1 = $("#projectGrid").jqGrid({
                         url: contextRoot + "/project/queryNonClose",
                         datatype: "json",
         				mtype: 'POST',
@@ -225,7 +226,7 @@
                         }
                     });
                     
-                    var grid2 = $("#grid2").jqGrid({
+                    var grid2 = $("#palceGrid").jqGrid({
                         url: contextRoot + "/product/queryPlace",
                         caption: "場地",
                         pager: true,
@@ -307,6 +308,7 @@
                                 API.openProject({
                                     id: id
                                 });
+                                grid1.trigger("reloadGrid");
                                 $.fancybox.close();
                             }
                         }
