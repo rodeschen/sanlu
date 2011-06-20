@@ -505,7 +505,7 @@
 				gridcontainer.find("td[abbr]").each(function(){
 					$(this).find(".monthdayshow").removeClass("good normal bad").addClass(json[$(this).attr("abbr")] || "normal");
 				}).click(function(){
-					gridcontainer.swtichView("week").gotoDate(parseDate($(this).attr("abbr")));
+					gridcontainer.gotoDate(parseDate($(this).attr("abbr"))).swtichView("week");
 					$("#caltoolbar").find("#showweekbtn").addClass("fcurrent")
 					.end().find("#showmonthbtn").removeClass("fcurrent");
 				});
