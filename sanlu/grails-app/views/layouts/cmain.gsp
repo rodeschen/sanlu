@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<title>
-			<g:layoutTitle default="Calendar" />
+			<g:layoutTitle default="行事曆" />
 		</title>
 		<link rel="stylesheet" href="${resource(dir:'js/jquery/plugins/wdcalendar/css',file:'calendar.css')}" />
 		<link rel="stylesheet" href="${resource(dir:'js/jquery/plugins/wdcalendar/css',file:'dp.css')}" />
