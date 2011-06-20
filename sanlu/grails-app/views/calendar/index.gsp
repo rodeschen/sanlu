@@ -3,9 +3,6 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<meta name="layout" content="cmain" />
 		<g:set var="entityName" value="${message(code: 'calendar.label', default: 'Calendar')}" />
-			<title>
-				<g:message code="default.list.label" args="[entityName]" />
-			</title>
 			<script type="text/javascript">
 				var contextRoot = "${request.contextPath}";
 				
@@ -106,6 +103,7 @@
 							$(this).removeClass("fcurrent");
 						})
 						$(this).addClass("fcurrent");
+						calendar.gotoDate();
 						calendar.swtichView("week");
 
 					});
