@@ -71,7 +71,6 @@ class EmployeeController extends GridController{
 	def insertAction={
 		int count = Employee.executeQuery("select max(id) from Employee")[0]
 		String h = params.hireDate
-		println params.int("empLevel")
 		Date hireDate = new Date(Integer.parseInt(h.substring(0,4))-1900,Integer.parseInt(h.substring(5,7)),Integer.parseInt(h.substring(8,10)),00,00,00)
 		def emp = new Employee(
 				empNo:String.format("%05d", ++count),

@@ -12,24 +12,52 @@ import tw.com.sanlu.annotation.GridQuery;
  *
  */
 class ProductController extends GridController{
-	
+
 	@GridQuery
 	def queryPlace = {
 		["rowData":Place.list(max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc"),
-		 "rowCount":Place.count()]
+					"rowCount":Place.count()]
 	}
 	@GridQuery
 	def queryProduct = {
 		["rowData":Product.findAllByHasPlace(false,[max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc"]),
-			"rowCount":Product.countByHasPlace(false)]
+					"rowCount":Product.countByHasPlace(false)]
 	}
 	@GridQuery
 	def queryPlaceProduct = {
 		["rowData":ProductLinkPlace.list(max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc"),
-			"rowCount":ProductLinkPlace.count()]
+					"rowCount":ProductLinkPlace.count()]
 	}
-	
 
+	def insertAction={
+		boolean hasPlace = params.boolean("hasPlace")
+		//def productLinkPlace = hasPlace?ProductLinkPlace.findByPlaceAndProduct(Place.findById(params.get("place.id")),Product.findById(params.get("product.id"))):Product.findById(id)
+
+		int count = hasPlace?ProductLinkPlace.executeQuery("select max(id) from ProductLinkPlace")[0]:Product.executeQuery("select max(id) from Product")[0]
+//		if(hasPlace){
+//		}else{
+			def product = new Product(
+					productNo:String.format("%06d", ++count),
+					productName:params.productName,
+					totalQuantity:params.int("totalQuantity"),
+					price:new BigDecimal(params.price),
+					sallingPrice:new BigDecimal(params.sallingPrice),
+					costPrice:new BigDecimal(params.costPrice),
+					timeType:params.timeType,
+					unit:params.unit,
+					hasPlace:params.boolean("hasPlace"),
+					lastModifyBy:session.employee)
+					
+			product.save()
+			if(product.hasErrors()){
+				println product.errors
+			}
+//		}
+
+
+		def res = ["IsSuccess" : true]
+		render res as JSON
+	}
 
 	def deleteAction = {
 		boolean hasPlace = params.boolean("hasPlace")
@@ -46,7 +74,7 @@ class ProductController extends GridController{
 	def modifyAction={
 		boolean hasPlace = params.boolean("hasPlace")
 		def productLinkPlace
-		def json = new JSONObject(params.get("data"))		
+		def json = new JSONObject(params.get("data"))
 		log.debug hasPlace
 		if(hasPlace){
 			productLinkPlace = ProductLinkPlace.findByPlaceAndProduct(Place.findById(json.getString("place.id")),Product.findById(json.getString("product.id")))
@@ -82,10 +110,8 @@ class ProductController extends GridController{
 					(keyNames.size() >1? tmp:productLinkPlace).putAt keyName,it.value
 			}
 		}
-		Employee emp = Employee.findByEmpNo("00002")
-		if(emp){
-			productLinkPlace.setLastModifyBy emp
-		}
+		productLinkPlace.setLastModifyBy session.employee
+		
 		productLinkPlace.save()
 		def res = ["IsSuccess" : true]
 		render res as JSON

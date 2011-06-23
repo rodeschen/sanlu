@@ -21,7 +21,7 @@ class CalendarController extends BaseController {
 	def add ={
 		DateFormat df = new SimpleDateFormat("yyyy-M-d HH:mm");
 		def project1 = Project.findByProjectName("projectName")
-		def emp2 = Employee.findByEmpNo("00002")
+		def emp2 = session.employee
 		def hall = Product.findByProductName("大忠廳")
 		System.out.println params.startTime
 		def cal= new BillDetail(

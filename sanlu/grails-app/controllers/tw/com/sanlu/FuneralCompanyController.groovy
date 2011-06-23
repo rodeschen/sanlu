@@ -47,10 +47,8 @@ class FuneralCompanyController extends GridController{
 					break
 			}
 		}
-		Employee emp = Employee.findByEmpNo("00002")
-		if(emp){
-			company.setLastModifyBy emp
-		}
+		company.setLastModifyBy session.employee
+
 		company.save()
 		def res = ["IsSuccess" : true]
 		render res as JSON
