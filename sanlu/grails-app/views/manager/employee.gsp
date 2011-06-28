@@ -101,6 +101,7 @@
         </fieldset>
         <script>
             $(document).ready(function(){
+				
                 var grid1 = $("#grid1").jqGrid({
                     url: contextRoot + "/employee/queryAll",
                     pager: true,
@@ -212,15 +213,18 @@
                         },
                         'titlePosition': 'inside',
                         'transitionIn': 'elastic',
-                        'transitionOut': 'elastic'
+                        'transitionOut': 'elastic',
+						onClosed: function(){
+                            addForm.reset();
+                        }
                     });
                 });
                 
                 $("#padd1").click(function(){
-                    if ($("#addForm").validationEngine('validate')) {
+                    if ($('#addForm').validationEngine('validate')) {
                         $.ajax({
                             url: contextRoot + "/employee/" + (action == "add1" ? "insert" : "modify"),
-                            data: $("#addForm").serializeData(),
+                            data: $('#addForm').serializeData(),
                             success: function(msg){
                                 $.fancybox.close();
                                 grid1.trigger("reloadGrid");

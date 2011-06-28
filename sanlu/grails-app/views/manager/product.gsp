@@ -6,6 +6,7 @@
     <body>
         <script>
             $(document).ready(function(){
+                //var addForm = $("#addForm");
                 var grid1 = $("#grid1").jqGrid({
                     url: contextRoot + "/product/queryProduct",
                     pager: true,
@@ -165,6 +166,7 @@
                         action: $(this).prop("id"),
                         onStart: function(){
                             action = this.action;
+                            $("#hasPlace").val(action.indexOf('2') > -1);
                             if (action == "modify1") {
                                 var selrow = grid1.jqGrid('getGridParam', 'selrow');
                                 if (!selrow) {
@@ -172,7 +174,8 @@
                                     return false;
                                 }
                                 var id = grid1.getRowData(selrow);
-                                $("#productNo").html(id.productNo);
+                                $("#id").val(id.id);
+                                $("#productNo").val(id.productNo);
                                 $("#productName").val(id.productName);
                                 $("#totalQuantity").val(id.totalQuantity);
                                 $("#price").val(id.price);
@@ -180,19 +183,25 @@
                                 $("#costPrice").val(id.costPrice);
                                 $("#timeType").val(id.timeType);
                                 $("#unit").val(id.unit);
-                                $("#hasPlace").val('是' == id.hasPlace);
+                                
                             }
                         },
                         'titlePosition': 'inside',
                         'transitionIn': 'elastic',
-                        'transitionOut': 'elastic'
+                        'transitionOut': 'elastic',
+                        onClosed: function(){
+                            addForm.reset();
+                        }
                     });
                 });
                 $("#padd1").click(function(){
-                    if ($("#addForm").validationEngine('validate')) {
+                    if ($('#addForm').validationEngine('validate')) {
                         $.ajax({
-                            url: contextRoot + "/product/" + (action == "add1" ? "insert" : "modify"),                            
-                            data: $("#addForm").serializeData(),
+                            url: contextRoot + "/product/" + (action == "add1" ? "insert" : "modify"),
+                            data: {
+                                columnParam: JSON.stringify(grid1.jqGrid('getGridParam', 'colModel')),
+                                data: JSON.stringify($("#addForm").serializeData())
+                            },
                             success: function(msg){
                                 $.fancybox.close();
                                 grid1.trigger("reloadGrid");
@@ -202,26 +211,26 @@
                     }
                 });
                 /*
-                $("#modify1").click(function(){
-                    var selrow = grid1.jqGrid('getGridParam', 'selrow');
-                    if (!selrow) {
-                        alert("請先選擇修改列");
-                    }
-                    var id = grid1.getRowData(selrow);
-                    $.ajax({
-                        type: "POST",
-                        url: contextRoot + "/product/modify",
-                        data: {
-                            columnParam: JSON.stringify(grid1.jqGrid('getGridParam', 'colModel')),
-                            data: JSON.stringify(id)
-                        },
-                        success: function(msg){
-                            grid1.trigger("reloadGrid");
-                            alert("修改成功");
-                        }
-                    })
-                });
-                */
+                 $("#modify1").click(function(){
+                 var selrow = grid1.jqGrid('getGridParam', 'selrow');
+                 if (!selrow) {
+                 alert("請先選擇修改列");
+                 }
+                 var id = grid1.getRowData(selrow);
+                 $.ajax({
+                 type: "POST",
+                 url: contextRoot + "/product/modify",
+                 data: {
+                 columnParam: JSON.stringify(grid1.jqGrid('getGridParam', 'colModel')),
+                 data: JSON.stringify(id)
+                 },
+                 success: function(msg){
+                 grid1.trigger("reloadGrid");
+                 alert("修改成功");
+                 }
+                 })
+                 });
+                 */
                 $("#delete2").click(function(){
                     var selrow = grid2.jqGrid('getGridParam', 'selrow');
                     if (!selrow) {
@@ -254,8 +263,8 @@
                         url: contextRoot + "/product/modify",
                         data: {
                             columnParam: JSON.stringify(grid2.jqGrid('getGridParam', 'colModel')),
-                            data: JSON.stringify(id),							
-							hasPlace: true
+                            data: JSON.stringify(id),
+                            hasPlace: true
                         },
                         success: function(msg){
                             grid2.trigger("reloadGrid");
@@ -273,8 +282,8 @@
                 一般類商品 
             </legend>
             <div>
-            	<a id="add1" href="#pdialog" class="button">新增商品</a>
-                <a id="modify1" href="#pdialog" class="button">進貨</a>				
+                <a id="add1" href="#pdialog" class="button">新增商品</a>
+                <a id="modify1" href="#pdialog" class="button">進貨</a>
                 <button id="delete1">
                     刪除商品
                 </button>
@@ -299,66 +308,66 @@
             <div id="grid2" />
         </fieldset>
         <div class="hide">
-                <div id="pdialog" class="dialog" style="display:block;width:400px;">
-                    <g:form name="addForm" id="addForm" onsubmit="return false;" autocomplete="off" novalidate="novalidate">
-                        <div class="dialog-body">
-                        	<div class="field-row">
-                                <span class="th1">商品代號：</span>
-                                <span><label id="productNo" ></label></span>
-                            </div>
-                            <div class="field-row">
-                                <span class="th1">產品名稱：</span>
-                                <span><input type="text" id="productName" name="productName" placeholder="產品名稱" class="validate[required]"/></span>
-                            </div>
-                            <div class="field-row">
-                                <span class="th1">庫存數量：</span>
-                                <span><input type="text" id="totalQuantity" name="totalQuantity" placeholder="庫存數量" class="validate[required]"/></span>
-                            </div>
-                            <div class="field-row">
-                                <span class="th1">內帳銷售單價：</span>
-                                <span><input type="text" id="price" name="price" placeholder="內帳銷售單價" class="validate[required]"/></span>
-                            </div>
-                            <div class="field-row">
-                                <span class="th1">銷售單價：</span>
-                                <span><input type="text" id="sallingPrice" name="sallingPrice" placeholder="銷售單價" class="validate[required]"/></span>
-                            </div>
-                            <div class="field-row">
-                                <span class="th1">成本單價：</span>
-                                <span><input type="text" id="costPrice" name="costPrice" placeholder="成本單價" class="validate[required]"/></span>
-                            </div>
-                            <div class="field-row">
-                                <span class="th1">時間類型：</span>
-                                <span>
-                                    <select id="timeType" name="timeType" class="validate[required]">
-                                        <option value="1">小時</option>
-                                        <option value="2">天</option>
-                                    </select>
-                                </span>                                
-                            </div>
-                            <div class="field-row">
-                                <span class="th1">計價單位：</span>
-                                <span><input type="text" id="unit" name="unit" placeholder="計價單位" class="validate[required]"/></span>
-                            </div>
-                            <div class="field-row">
-                                <span class="th1">是否為場地類商品：</span>
-                                <span>
-                                    <select id="hasPlace" name="hasPlace" class="validate[required]">
-                                        <option value="false">否</option>
-                                        <option value="true">是</option>
-                                    </select>
-                                </span>
-                            </div>
-                            <div style="text-align:center;">
-                                <button id="padd1" type="button">
-                                    確定
-                                </button>
-                                <button id="pclose1" type="button">
-                                    取消
-                                </button>
-                            </div>
+            <div id="pdialog" class="dialog" style="display:block;width:400px;">
+                <g:form name="addForm" id="addForm" onsubmit="return false;" autocomplete="off" novalidate="novalidate">
+                    <div class="dialog-body">
+                        <div class="field-row">
+                            <span class="th1">商品代號：</span>
+                            <span><span><input type="text" id="productNo" name="productNo" readonly='readonly' /><input type="hidden" id="id" name="id" /></span></span>
                         </div>
-                    </g:form>
-                </div>
+                        <div class="field-row">
+                            <span class="th1">產品名稱：</span>
+                            <span><input type="text" id="productName" name="productName" placeholder="產品名稱" class="validate[required]"/></span>
+                        </div>
+                        <div class="field-row">
+                            <span class="th1">庫存數量：</span>
+                            <span><input type="text" id="totalQuantity" name="totalQuantity" placeholder="庫存數量" class="validate[required]"/></span>
+                        </div>
+                        <div class="field-row">
+                            <span class="th1">內帳單價：</span>
+                            <span><input type="text" id="price" name="price" placeholder="內帳單價" class="validate[required]"/></span>
+                        </div>
+                        <div class="field-row">
+                            <span class="th1">銷售單價：</span>
+                            <span><input type="text" id="sallingPrice" name="sallingPrice" placeholder="銷售單價" class="validate[required]"/></span>
+                        </div>
+                        <div class="field-row">
+                            <span class="th1">成本單價：</span>
+                            <span><input type="text" id="costPrice" name="costPrice" placeholder="成本單價" class="validate[required]"/></span>
+                        </div>
+                        <div class="field-row">
+                            <span class="th1">時間類型：</span>
+                            <span>
+                                <select id="timeType" name="timeType" class="validate[required]">
+                                    <option value="1">小時</option>
+                                    <option value="2">天</option>
+                                </select>
+                            </span>
+                        </div>
+                        <div class="field-row">
+                            <span class="th1">計價單位：</span>
+                            <span><input type="text" id="unit" name="unit" placeholder="計價單位" class="validate[required]"/></span>
+                        </div>
+                        <div class="hide">
+                            <span class="th1">是否為場地類商品：</span>
+                            <span>
+                                <select id="hasPlace" name="hasPlace">
+                                    <option value="false">否</option>
+                                    <option value="true">是</option>
+                                </select>
+                            </span>
+                        </div>
+                        <div style="text-align:center;">
+                            <button id="padd1" type="button">
+                                確定
+                            </button>
+                            <button id="pclose1" type="button">
+                                取消
+                            </button>
+                        </div>
+                    </div>
+                </g:form>
             </div>
+        </div>
     </body>
 </html>

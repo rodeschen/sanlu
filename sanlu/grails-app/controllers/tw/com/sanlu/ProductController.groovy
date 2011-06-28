@@ -30,29 +30,30 @@ class ProductController extends GridController{
 	}
 
 	def insertAction={
-		boolean hasPlace = params.boolean("hasPlace")
+		
 		//def productLinkPlace = hasPlace?ProductLinkPlace.findByPlaceAndProduct(Place.findById(params.get("place.id")),Product.findById(params.get("product.id"))):Product.findById(id)
-
+		def json = new JSONObject(params.get("data"))
+		boolean hasPlace = json.getBoolean("hasPlace")
 		int count = hasPlace?ProductLinkPlace.executeQuery("select max(id) from ProductLinkPlace")[0]:Product.executeQuery("select max(id) from Product")[0]
-//		if(hasPlace){
-//		}else{
-			def product = new Product(
-					productNo:String.format("%06d", ++count),
-					productName:params.productName,
-					totalQuantity:params.int("totalQuantity"),
-					price:new BigDecimal(params.price),
-					sallingPrice:new BigDecimal(params.sallingPrice),
-					costPrice:new BigDecimal(params.costPrice),
-					timeType:params.timeType,
-					unit:params.unit,
-					hasPlace:params.boolean("hasPlace"),
-					lastModifyBy:session.employee)
-					
-			product.save()
-			if(product.hasErrors()){
-				println product.errors
-			}
-//		}
+		//		if(hasPlace){
+		//		}else{
+		def product = new Product(
+				productNo:String.format("%06d", ++count),
+				productName:json.getString("productName"),
+				totalQuantity:new BigDecimal(json.getInt("totalQuantity")),
+				price:new BigDecimal(json.getString("price")),
+				sallingPrice:new BigDecimal(json.getString("sallingPrice")),
+				costPrice:new BigDecimal(json.getString("costPrice")),
+				timeType:json.getString("timeType"),
+				unit:json.getString("unit"),
+				hasPlace: json.getBoolean("hasPlace"),
+				lastModifyBy:session.employee)
+
+		product.save()
+		if(product.hasErrors()){
+			println product.errors
+		}
+		//		}
 
 
 		def res = ["IsSuccess" : true]
@@ -72,23 +73,22 @@ class ProductController extends GridController{
 		render res as JSON
 	}
 	def modifyAction={
-		boolean hasPlace = params.boolean("hasPlace")
+
 		def productLinkPlace
 		def json = new JSONObject(params.get("data"))
+		boolean hasPlace = json.getBoolean("hasPlace")
 		log.debug hasPlace
 		if(hasPlace){
 			productLinkPlace = ProductLinkPlace.findByPlaceAndProduct(Place.findById(json.getString("place.id")),Product.findById(json.getString("product.id")))
 		}else{
 			productLinkPlace= Product.findById(id)
 		}
-		log.debug productLinkPlace
 		if(!productLinkPlace) {
 			return println("無法修改")
 		}
-
+		def tmp
 		json.each(){
-			def keyNames = it.key.split('\\.')
-			def tmp = productLinkPlace
+			def keyNames = it.key.split('\\.')			
 			int i=0
 			for(i=0;i<keyNames.size()-1;i++){
 				tmp = i==0?productLinkPlace.getAt(keyNames[i]):tmp.getAt(keyNames[i])
@@ -96,9 +96,7 @@ class ProductController extends GridController{
 			def keyName = keyNames[i]
 			switch(keyName){
 				case 'lastUpdated':
-					break
-				case 'outDate':
-					(keyNames.size() >1? tmp:productLinkPlace).putAt keyName,Utility.shortFormat.parse(it.value)
+				case 'id':
 					break
 				case 'price':
 				case 'sallingPrice':
@@ -106,12 +104,15 @@ class ProductController extends GridController{
 				case 'totalQuantity':
 					(keyNames.size() >1? tmp:productLinkPlace).putAt keyName,new BigDecimal(it.value)
 					break
+				case 'hasPlace':
+				(keyNames.size() >1? tmp:productLinkPlace).putAt keyName,new Boolean(it.value)
+					break
 				default:
 					(keyNames.size() >1? tmp:productLinkPlace).putAt keyName,it.value
 			}
 		}
 		productLinkPlace.setLastModifyBy session.employee
-		
+
 		productLinkPlace.save()
 		def res = ["IsSuccess" : true]
 		render res as JSON
