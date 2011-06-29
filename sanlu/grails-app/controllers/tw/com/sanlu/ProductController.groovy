@@ -62,6 +62,7 @@ class ProductController extends GridController{
 
 	def deleteAction = {
 		boolean hasPlace = params.boolean("hasPlace")
+		println id
 		def productLinkPlace = hasPlace?ProductLinkPlace.findByPlaceAndProduct(Place.findById(params.get("place.id")),Product.findById(params.get("product.id"))):Product.findById(id)
 
 		def res = ["IsSuccess" : true]
