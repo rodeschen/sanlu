@@ -78,7 +78,8 @@ class ProductController extends GridController{
 		def productLinkPlace
 		def json = new JSONObject(params.get("data"))
 		boolean hasPlace = json.getBoolean("hasPlace")
-		log.debug hasPlace
+		println json.getString("place.id")
+		println json.getString("product.id")
 		if(hasPlace){
 			productLinkPlace = ProductLinkPlace.findByPlaceAndProduct(Place.findById(json.getString("place.id")),Product.findById(json.getString("product.id")))
 		}else{

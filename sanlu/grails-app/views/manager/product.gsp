@@ -6,7 +6,6 @@
     <body>
         <script>
                         $(document).ready(function(){
-                            //var addForm = $("#addForm");
                             var grid1 = $("#grid1").jqGrid({
                                 url: contextRoot + "/product/queryProduct",
                                 pager: true,
@@ -175,27 +174,35 @@
                                     action: $(this).prop("id"),
                                     onStart: function(){
                                         action = this.action;
-                                        $("#hasPlace").val(action.indexOf('2') > -1);
-                                        $("#totalDiv")[action.indexOf('2') > -1 ? 'hide' : 'show']();
-                                        $("#pSpan")[action.indexOf('2') > -1 ? 'hide' : 'show']();
-                                        $("#sSpan")[action.indexOf('2') > -1 ? 'show' : 'hide']();
+										var hasPlace = action.indexOf('2') > -1;
+										var grid = (hasPlace ? grid2 : grid1);
+                                        $("#hasPlace").val(hasPlace);
+                                        $("#totalDiv")[hasPlace ? 'hide' : 'show']();
+                                        $("#pSpan")[hasPlace ? 'hide' : 'show']();
+                                        $("#sSpan")[hasPlace > -1 ? 'show' : 'hide']();
                                         if (action == "modify1" || action == "modify2") {
-                                            var selrow = (action.indexOf('2') > -1 ? grid2 : grid1).jqGrid('getGridParam', 'selrow');
+                                            var selrow = grid.jqGrid('getGridParam', 'selrow');
                                             if (!selrow) {
                                                 alert("請先選擇修改列");
                                                 return false;
                                             }
-											alert(selrow);
-                                            var id = grid1.getRowData(selrow);
-                                            $("#id").val(id.id);
-                                            $("#productNo").val(id.productNo);
-                                            $("#productName").val(id.productName);
+											
+                                            var id = grid.getRowData(selrow);											
+                                            $("#id").val(id['product.productNo']);
+                                            $("#productNo").val(hasPlace?id['product.productNo']:id.productNo);
+                                            $("#productName").val(hasPlace?id['place.placeName']:id.productName);
                                             $("#totalQuantity").val(id.totalQuantity);
                                             $("#price").val(id.price);
                                             $("#sallingPrice").val(id.sallingPrice);
                                             $("#costPrice").val(id.costPrice);
-                                            $("#timeType").val(id.timeType);
-                                            $("#unit").val(id.unit);
+                                            $("#timeType").val(hasPlace?id['product.timeType']:id.timeType);
+                                            $("#unit").val(hasPlace?id['product.unit']:id.unit);
+											if(hasPlace){
+												$("#hasPlace").val(hasPlace);
+												$("#place.id").val(id['place.id']);
+												$("#product.id").val(id['product.id']);
+											}
+											
                                         }
                                     },
                                     'titlePosition': 'inside',
@@ -261,7 +268,7 @@
                     <div class="dialog-body">
                         <div class="field-row">
                             <span class="th1">商品代號：</span>
-                            <span><span><input type="text" id="productNo" name="productNo" readonly='readonly' /><input type="hidden" id="id" name="id" /></span></span>
+                            <span><span><input type="text" id="productNo" name="productNo" readonly='readonly' /></span></span>
                         </div>
                         <div class="field-row">
                             <span class="th1" id="pSpan">產品名稱：</span>
@@ -299,12 +306,11 @@
                         </div>
                         <div class="hide">
                             <span class="th1">是否為場地類商品：</span>
-                            <span>
-                                <select id="hasPlace" name="hasPlace">
-                                    <option value="false">否</option>
-                                    <option value="true">是</option>
-                                </select>
+                            <span><input type="text" id="hasPlace" name="hasPlace" />
                             </span>
+							<input type="hidden" id="id" name="id" />
+							<input type="hidden" id="place.id" name="place.id" />
+							<input type="hidden" id="product.id" name="product.id" />							
                         </div>
                         <div style="text-align:center;">
                             <button id="padd1" type="button">
