@@ -6,9 +6,9 @@
 <body>
 	${flash.message}
 	<g:if test="${!session.empLevel}">
-	<script type="text/javascript">
-		$("nav,aside").remove();
-	</script>
+		<script type="text/javascript">
+                $("nav,aside").remove();
+            </script>
 		<div>
 			<g:form name="loginForm" url="[action:'login',controller:'login']"
 				autocomplete="off" novalidate="novalidate">
@@ -55,6 +55,11 @@
 		</fieldset>
 		<fieldset>
 			<legend> 場地清單 </legend>
+			<div>
+				<a id="add2" href="#pdialog2" class="button">新增</a> <a id="modify2"
+					href="#pdialog2" class="button">修改</a>
+				<button id="delete2">刪除</button>
+			</div>
 			<div id="palceGrid" />
 		</fieldset>
 		<!-- dialog -->
@@ -96,8 +101,8 @@
 							</span>
 						</div>
 						<div class="field-row">
-							<span class="th1">時間：</span> <span>
-								<select id="inHour" name="inHour">
+							<span class="th1">時間：</span> <span> <select id="inHour"
+								name="inHour">
 									<option value="00">00</option>
 									<option value="01">01</option>
 									<option value="02">02</option>
@@ -122,8 +127,7 @@
 									<option value="21">21</option>
 									<option value="22">22</option>
 									<option value="23">23</option>
-								</select>
-								：<select id="inMin" name="inMin">
+							</select> ： <select id="inMin" name="inMin">
 									<option value="00">00</option>
 									<option value="05">05</option>
 									<option value="10">10</option>
@@ -136,8 +140,7 @@
 									<option value="45">45</option>
 									<option value="50">50</option>
 									<option value="55">55</option>
-								</select>
-							</span>
+							</select> </span>
 						</div>
 						<div style="text-align: center;">
 							<button id="padd" type="button">確定</button>
@@ -146,15 +149,33 @@
 					</div>
 				</g:form>
 			</div>
+			<div id="pdialog2" class="dialog2"
+				style="display: block; width: 400px;">
+				<g:form name="addForm2" id="addForm2" onsubmit="return false;"
+					autocomplete="off" novalidate="novalidate">
+					<div class="dialog-body">
+						<div class="field-row">
+							<span class="th1" id="sSpan">場地名稱：</span> <span><input
+								type="text" id="placeName" name="placeName" placeholder="場地名稱"
+								class="validate[required]" />
+							</span><input type="hidden" id="id" name="id" />
+						</div>
+						<div style="text-align: center;">
+							<button id="padd2" type="button">確定</button>
+							<button id="pclose2" type="button">取消</button>
+						</div>
+					</div>
+				</g:form>
+			</div>
 		</div>
 		<script type="text/javascript">
                 $(document).ready(function(){
-                	window.name = "main"; 
+                    window.name = "main";
                     var grid1 = $("#projectGrid").jqGrid({
                         url: contextRoot + "/project/queryNonClose",
                         datatype: "json",
-        				mtype: 'POST',
-						caption: "當日出館或未出館專案",
+                        mtype: 'POST',
+                        caption: "當日出館或未出館專案",
                         //multiboxonly:true,
                         pager: true,
                         // multiselect: true,
@@ -227,14 +248,14 @@
                     });
                     
                     var grid2 = $("#palceGrid").jqGrid({
-                        url: contextRoot + "/product/queryPlace",
+                        url: contextRoot + "/place/queryPlace",
                         caption: "場地",
                         pager: true,
                         colModel: [{
                             name: 'id',
                             index: 'id',
                             width: 60,
-                            hidden:true
+                            hidden: true
                         }, {
                             header: "場地名",
                             name: 'placeName',
@@ -245,7 +266,7 @@
                             var data = grid2.getRowData(id);
                             API.openCalendar({
                                 id: data.id,
-                                type:"l"
+                                type: "l"
                             });
                         }
                     });
@@ -314,8 +335,72 @@
                         }
                     });
                     
-                    $("#pclose").click(function(){
+                    $("#pclose,#pclose2").click(function(){
                         $.fancybox.close();
+                    });
+                    
+                    $("#delete2").click(function(){
+                        var selrow = grid2.jqGrid('getGridParam', 'selrow');
+                        if (!selrow) {
+                            alert("請先選擇刪除列");
+                            return;
+                        }
+                        if (!confirm("確定要刪除?")) {
+                            return;
+                        }
+                        var data = grid2.getRowData(selrow);
+                        $.ajax({
+                            type: "POST",
+                            url: contextRoot + "/place/delete",
+                            data: data,
+                            success: function(msg){
+                                grid2.trigger("reloadGrid");
+                                alert("刪除成功");
+                            }
+                        })
+                    });                    
+                    var action;
+                    $("#add2,#modify2").each(function(){
+                        $(this).fancybox({
+                            action: $(this).prop("id"),
+                            onStart: function(){
+                                action = this.action;
+                                if (action == "modify2") {
+                                    var selrow = grid2.jqGrid('getGridParam', 'selrow');
+                                    if (!selrow) {
+                                        alert("請先選擇修改列");
+                                        return false;
+                                    }
+                                    var id = grid2.getRowData(selrow);
+                                    $("#id").val(id.id);
+                                    $("#placeName").val(id.placeName);
+                                }
+                            },
+                            'titlePosition': 'inside',
+                            'transitionIn': 'elastic',
+                            'transitionOut': 'elastic',
+                            onClosed: function(){
+                                addForm2.reset();
+                            }
+                        });
+                    });
+                    
+                    $("#padd2").click(function(){
+                    
+                        if ($("#addForm2").validationEngine('validate')) {
+                            var id = "";
+                            $.ajax({
+                                async: false,
+								url: contextRoot + "/place/" + (action == "add2" ? "insert" : "modify"),
+                                data: $("#addForm2").serializeData(),
+                                success: function(msg){
+                                $.fancybox.close();
+                                grid2.trigger("reloadGrid");
+                                alert("場地" + (action == "add1" ? "新增" : "修改") + "成功");
+                            }
+                            });
+							
+                        }
                     });
                     //下拉選單
                     //禮儀公司
@@ -328,7 +413,7 @@
                     });
                     
                     $('#funeralCompany').change(function(){
-                    	if($(this).val()){                         
+                        if ($(this).val()) {
                             $.ajax({
                                 type: "POST",
                                 url: contextRoot + "/combobox/funeraler",
@@ -339,9 +424,10 @@
                                     $('#funeraler').setDropdown(map);
                                 }
                             })
-                            }else{
-                            	$('#funeraler').html('')
-                                }
+                        }
+                        else {
+                            $('#funeraler').html('')
+                        }
                     });
                     
                     //所有員工
@@ -355,6 +441,6 @@
                     
                 });
             </script>
-	</g:else>
-</body>
+        </g:else>
+    </body>
 </html>

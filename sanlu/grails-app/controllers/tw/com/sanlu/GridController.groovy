@@ -130,7 +130,7 @@ abstract class GridController extends BaseController {
 			}
 			if(params.containsKey("data")){
 				def data = new JSONObject(params.data)
-				id  = data.containsKey("id")?data.getLong("id"):null
+				id  = data.containsKey("id")&&data.get("id")?data.getLong("id"):null
 			}
 			modifyAction()
 		}catch(Exception e){

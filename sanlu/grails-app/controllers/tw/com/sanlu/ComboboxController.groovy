@@ -47,4 +47,14 @@ class ComboboxController extends BaseController {
 		}
 		render addrMap as JSON
 	}
+	
+	//場地
+	def place ={
+		def l = Place.findAll()
+		def res = [:]
+		l?.each(){
+			res[it.id] = it.placeName
+		}
+		render res as JSON
+	}
 }

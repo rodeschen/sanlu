@@ -14,11 +14,6 @@ import tw.com.sanlu.annotation.GridQuery;
 class ProductController extends GridController{
 
 	@GridQuery
-	def queryPlace = {
-		["rowData":Place.list(max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc"),
-					"rowCount":Place.count()]
-	}
-	@GridQuery
 	def queryProduct = {
 		["rowData":Product.findAllByHasPlace(false,[max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc"]),
 					"rowCount":Product.countByHasPlace(false)]
@@ -30,7 +25,7 @@ class ProductController extends GridController{
 	}
 
 	def insertAction={
-		
+
 		//def productLinkPlace = hasPlace?ProductLinkPlace.findByPlaceAndProduct(Place.findById(params.get("place.id")),Product.findById(params.get("product.id"))):Product.findById(id)
 		def json = new JSONObject(params.get("data"))
 		boolean hasPlace = json.getBoolean("hasPlace")
@@ -62,8 +57,8 @@ class ProductController extends GridController{
 
 	def deleteAction = {
 		boolean hasPlace = params.boolean("hasPlace")
-		println id
-		def productLinkPlace = hasPlace?ProductLinkPlace.findByPlaceAndProduct(Place.findById(params.get("place.id")),Product.findById(params.get("product.id"))):Product.findById(id)
+
+		def productLinkPlace = hasPlace?ProductLinkPlace.findByPlaceAndProduct(Place.findById(params.get("placeId")),Product.findById(params.get("productId"))):Product.findById(id)
 
 		def res = ["IsSuccess" : true]
 		if(productLinkPlace){
@@ -74,45 +69,68 @@ class ProductController extends GridController{
 		render res as JSON
 	}
 	def modifyAction={
-
 		def productLinkPlace
 		def json = new JSONObject(params.get("data"))
 		boolean hasPlace = json.getBoolean("hasPlace")
-		println json.getString("place.id")
-		println json.getString("product.id")
+		println(json.getString("placeId"))
 		if(hasPlace){
-			productLinkPlace = ProductLinkPlace.findByPlaceAndProduct(Place.findById(json.getString("place.id")),Product.findById(json.getString("product.id")))
+			productLinkPlace = ProductLinkPlace.findByPlaceAndProduct(Place.findById(json.getString("OplaceId")),Product.findById(json.getString("OproductId")))
 		}else{
 			productLinkPlace= Product.findById(id)
 		}
 		if(!productLinkPlace) {
 			return println("無法修改")
 		}
-		def tmp
-		json.each(){
-			def keyNames = it.key.split('\\.')			
-			int i=0
-			for(i=0;i<keyNames.size()-1;i++){
-				tmp = i==0?productLinkPlace.getAt(keyNames[i]):tmp.getAt(keyNames[i])
+		if(hasPlace){
+			def place = productLinkPlace.getPlace();
+			def product = productLinkPlace.getProduct();
+			json.each(){
+				def keyName = it.key
+				switch(keyName){
+					case 'placeName':
+						place.putAt keyName,it.value
+						break
+					case 'price':
+					case 'sallingPrice':
+					case 'costPrice':
+						productLinkPlace.putAt keyName,new BigDecimal(it.value)
+						break					
+					case 'hasPlace':
+						product.putAt keyName,new Boolean(it.value)
+						break
+					case 'timeType':
+					case 'unit':
+						product.putAt keyName,it.value
+						break
+					default:
+						break
+				}
 			}
-			def keyName = keyNames[i]
-			switch(keyName){
-				case 'lastUpdated':
-				case 'id':
-					break
-				case 'price':
-				case 'sallingPrice':
-				case 'costPrice':
-				case 'totalQuantity':
-					(keyNames.size() >1? tmp:productLinkPlace).putAt keyName,new BigDecimal(it.value)
-					break
-				case 'hasPlace':
-				(keyNames.size() >1? tmp:productLinkPlace).putAt keyName,new Boolean(it.value)
-					break
-				default:
-					(keyNames.size() >1? tmp:productLinkPlace).putAt keyName,it.value
+		}else{
+			json.each(){
+				def keyName = it.key
+				switch(keyName){
+					case 'lastUpdated':
+					case 'id':
+					case 'productNo':
+					case 'placeId':
+					case 'productId':
+						break
+					case 'price':
+					case 'sallingPrice':
+					case 'costPrice':
+					case 'totalQuantity':
+						productLinkPlace.putAt keyName,new BigDecimal(it.value)
+						break
+					case 'hasPlace':
+						productLinkPlace.putAt keyName,new Boolean(it.value)
+						break
+					default:
+						productLinkPlace.putAt keyName,it.value
+				}
 			}
 		}
+
 		productLinkPlace.setLastModifyBy session.employee
 
 		productLinkPlace.save()
