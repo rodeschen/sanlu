@@ -15,40 +15,59 @@ class ProductController extends GridController{
 
 	@GridQuery
 	def queryProduct = {
-		["rowData":Product.findAllByHasPlace(false,[max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc"]),
-					"rowCount":Product.countByHasPlace(false)]
+		["rowData":Product.list(max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc"),
+					"rowCount":Product.count()]
 	}
 	@GridQuery
 	def queryPlaceProduct = {
-		["rowData":ProductLinkPlace.list(max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc"),
+		["rowData":ProductLinkPlace.findAllByProduct(Product.findById(params.get("product.id")),[max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc"]),
 					"rowCount":ProductLinkPlace.count()]
 	}
 
 	def insertAction={
 
-		//def productLinkPlace = hasPlace?ProductLinkPlace.findByPlaceAndProduct(Place.findById(params.get("place.id")),Product.findById(params.get("product.id"))):Product.findById(id)
 		def json = new JSONObject(params.get("data"))
-		boolean hasPlace = json.getBoolean("hasPlace")
-		int count = hasPlace?ProductLinkPlace.executeQuery("select max(id) from ProductLinkPlace")[0]:Product.executeQuery("select max(id) from Product")[0]
-		//		if(hasPlace){
-		//		}else{
-		def product = new Product(
-				productNo:String.format("%06d", ++count),
-				productName:json.getString("productName"),
-				totalQuantity:new BigDecimal(json.getInt("totalQuantity")),
-				price:new BigDecimal(json.getString("price")),
-				sallingPrice:new BigDecimal(json.getString("sallingPrice")),
-				costPrice:new BigDecimal(json.getString("costPrice")),
-				timeType:json.getString("timeType"),
-				unit:json.getString("unit"),
-				hasPlace: json.getBoolean("hasPlace"),
-				lastModifyBy:session.employee)
+		boolean isNomal = new Boolean(params.get("isNomal"))
+		int count = isNomal?Product.executeQuery("select max(id) from Product")[0]:0
+		boolean hasPlace = "T".equals( json.getString("hasPlace"))
+		def product = null
 
+		if(isNomal){
+			if(hasPlace){
+				product = new Product(
+						productNo:String.format("%06d", ++count),
+						productName:json.getString("productName"),
+						totalQuantity:new BigDecimal(json.getInt("totalQuantity")),
+						unit:json.getString("unit"),
+						hasPlace:"T".equals( json.getString("hasPlace")),
+						lastModifyBy:session.employee)
+			}else{
+				product = new Product(
+						productNo:String.format("%06d", ++count),
+						productName:json.getString("productName"),
+						totalQuantity:new BigDecimal(json.getInt("totalQuantity")),
+						price:new BigDecimal(json.getString("price")),
+						sallingPrice:new BigDecimal(json.getString("sallingPrice")),
+						costPrice:new BigDecimal(json.getString("costPrice")),
+						unit:json.getString("unit"),
+						hasPlace:"T".equals( json.getString("hasPlace")),
+						lastModifyBy:session.employee)
+			}
+		}else{
+			println json.getString("productId")
+			println json.getString("placeId")
+			product = new ProductLinkPlace(
+					product : Product.findById(json.getString("productId")),
+					place : Place.findById(json.getString("placeId")),
+					price:new BigDecimal(json.getString("price")),
+					sallingPrice:new BigDecimal(json.getString("sallingPrice")),
+					costPrice:new BigDecimal(json.getString("costPrice")),
+					lastModifyBy:session.employee)
+		}
 		product.save()
 		if(product.hasErrors()){
 			println product.errors
 		}
-		//		}
 
 
 		def res = ["IsSuccess" : true]
@@ -56,9 +75,9 @@ class ProductController extends GridController{
 	}
 
 	def deleteAction = {
-		boolean hasPlace = params.boolean("hasPlace")
+		boolean isNomal = new Boolean(params.get("isNomal"))
 
-		def productLinkPlace = hasPlace?ProductLinkPlace.findByPlaceAndProduct(Place.findById(params.get("placeId")),Product.findById(params.get("productId"))):Product.findById(id)
+		def productLinkPlace = !isNomal?ProductLinkPlace.findByPlaceAndProduct(Place.findById(params.get("place.id")),Product.findById(params.get("product.id"))):Product.findById(id)
 
 		def res = ["IsSuccess" : true]
 		if(productLinkPlace){
@@ -71,9 +90,10 @@ class ProductController extends GridController{
 	def modifyAction={
 		def productLinkPlace
 		def json = new JSONObject(params.get("data"))
-		boolean hasPlace = json.getBoolean("hasPlace")
-		println(json.getString("placeId"))
-		if(hasPlace){
+
+		boolean isNomal = new Boolean(params.get("isNomal"))
+
+		if(!isNomal){
 			productLinkPlace = ProductLinkPlace.findByPlaceAndProduct(Place.findById(json.getString("OplaceId")),Product.findById(json.getString("OproductId")))
 		}else{
 			productLinkPlace= Product.findById(id)
@@ -81,32 +101,34 @@ class ProductController extends GridController{
 		if(!productLinkPlace) {
 			return println("無法修改")
 		}
-		if(hasPlace){
+		if(!isNomal){
+			//場地
 			def place = productLinkPlace.getPlace();
 			def product = productLinkPlace.getProduct();
 			json.each(){
 				def keyName = it.key
 				switch(keyName){
-					case 'placeName':
-						place.putAt keyName,it.value
+					case 'placeId':
+						if(place.getId()!=it.value){
+							productLinkPlace.putAt "place",Place.findById(it.value)
+						}
+						break
+					case 'productId':
+						if(product.getId()!=it.value){
+							productLinkPlace.putAt "product",Product.findById(it.value)
+						}
 						break
 					case 'price':
 					case 'sallingPrice':
 					case 'costPrice':
 						productLinkPlace.putAt keyName,new BigDecimal(it.value)
-						break					
-					case 'hasPlace':
-						product.putAt keyName,new Boolean(it.value)
-						break
-					case 'timeType':
-					case 'unit':
-						product.putAt keyName,it.value
 						break
 					default:
 						break
 				}
 			}
 		}else{
+			//產品
 			json.each(){
 				def keyName = it.key
 				switch(keyName){
@@ -115,6 +137,8 @@ class ProductController extends GridController{
 					case 'productNo':
 					case 'placeId':
 					case 'productId':
+					case 'OproductId':
+					case 'OplaceId':
 						break
 					case 'price':
 					case 'sallingPrice':
@@ -123,7 +147,7 @@ class ProductController extends GridController{
 						productLinkPlace.putAt keyName,new BigDecimal(it.value)
 						break
 					case 'hasPlace':
-						productLinkPlace.putAt keyName,new Boolean(it.value)
+						productLinkPlace.putAt keyName,new Boolean("T".equals(it.value))
 						break
 					default:
 						productLinkPlace.putAt keyName,it.value
@@ -154,7 +178,7 @@ class ProductController extends GridController{
 				case 'sallingPrice':
 				case 'costPrice':
 				case 'totalQuantity':
-					obj.putAt keyNames,new BigDecimal( val)
+					obj.putAt keyNames,new BigDecimal(val)
 					break
 				default:
 					obj.putAt keyNames,val

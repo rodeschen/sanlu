@@ -21,7 +21,7 @@ class Product {
 	//成本單價
 	BigDecimal costPrice
 	//時間類型
-	String timeType
+	//String timeType
 	//計價單位
 	String unit
 	//是否為場地類商品
@@ -38,7 +38,7 @@ class Product {
 	static constraints = {
 		productNo maxSize:6
 		productName maxSize:60, unique:true
-		timeType maxSize:10
+		//timeType maxSize:10
 		unit maxSize:10
 		totalQuantity nullable:true
 		price nullable:true

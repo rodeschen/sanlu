@@ -128,7 +128,7 @@ class BootStrap {
 							price:100,
 							sallingPrice:200,
 							costPrice:50,
-							timeType:1,
+							//timeType:1,
 							unit:"場",
 							lastModifyBy:emp1,
 							hasPlace:true)
@@ -159,7 +159,7 @@ class BootStrap {
 							price:100,
 							sallingPrice:200,
 							costPrice:50,
-							timeType:1,
+							//timetype:1,
 							unit:"場",
 							lastModifyBy:emp1,
 							hasPlace:true)
@@ -191,7 +191,7 @@ class BootStrap {
 							price:100,
 							sallingPrice:200,
 							costPrice:50,
-							timeType:1,
+							//timetype:1,
 							lastModifyBy:emp1,
 							unit:"對",
 							hasPlace:false
@@ -204,7 +204,7 @@ class BootStrap {
 							price:200,
 							sallingPrice:500,
 							costPrice:100,
-							timeType:1,
+							//timetype:1,
 							lastModifyBy:emp1,
 							unit:"組",
 							hasPlace:false
@@ -221,7 +221,7 @@ class BootStrap {
 							price:400,
 							sallingPrice:800,
 							costPrice:500,
-							timeType:1,
+							//timetype:1,
 							lastModifyBy:emp1,
 							unit:"節",
 							hasPlace:false
