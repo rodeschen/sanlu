@@ -188,6 +188,7 @@
                 var hasPlace = $("#hasPlace"), placeId = $("#placeId"), productName = $('#productName'), productId = $('#productId');
                 var action = "";
                 $("#add1,#modify1,#add2,#modify2").each(function(){
+					//newgrid.jqGrid('getGridParam', 'selrow'); get row id
                     $(this).fancybox({
                         action: $(this).prop("id"),
                         onStart: function(){
