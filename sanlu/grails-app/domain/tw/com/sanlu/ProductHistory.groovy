@@ -12,8 +12,12 @@ class ProductHistory {
 	Product product
 	//使用專案
 	Project project
+	//進貨日期
+	Date date
+	//進貨廠商
+	String vendor
 	//進貨數量/使用數量
-	BigDecimal usedQuantity
+	BigDecimal quantity
 	//庫存數量
 	Integer totalQuantity	
 	//最後修改時間
@@ -22,5 +26,6 @@ class ProductHistory {
 	Employee lastModifyBy
     static constraints = {
 		project nullable:true
+		vendor nullable:true
     }
 }

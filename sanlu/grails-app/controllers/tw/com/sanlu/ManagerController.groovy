@@ -9,4 +9,6 @@ class ManagerController extends BaseController {
 	def product ={}
 	
 	def employee={}
+	
+	def purchase={}
 }

@@ -45,17 +45,15 @@ class ProductController extends GridController{
 				product = new Product(
 						productNo:String.format("%06d", ++count),
 						productName:json.getString("productName"),
-						totalQuantity:new BigDecimal(json.getInt("totalQuantity")),
+						//totalQuantity:new BigDecimal(json.getInt("totalQuantity")),
 						price:new BigDecimal(json.getString("price")),
 						sallingPrice:new BigDecimal(json.getString("sallingPrice")),
-						costPrice:new BigDecimal(json.getString("costPrice")),
+						//costPrice:new BigDecimal(json.getString("costPrice")),
 						unit:json.getString("unit"),
 						hasPlace:"T".equals( json.getString("hasPlace")),
 						lastModifyBy:session.employee)
 			}
 		}else{
-			println json.getString("productId")
-			println json.getString("placeId")
 			product = new ProductLinkPlace(
 					product : Product.findById(json.getString("productId")),
 					place : Place.findById(json.getString("placeId")),
@@ -77,11 +75,15 @@ class ProductController extends GridController{
 	def deleteAction = {
 		boolean isNomal = new Boolean(params.get("isNomal"))
 
-		def productLinkPlace = !isNomal?ProductLinkPlace.findByPlaceAndProduct(Place.findById(params.get("place.id")),Product.findById(params.get("product.id"))):Product.findById(id)
-
+		//def productLinkPlace = !isNomal?ProductLinkPlace.findByPlaceAndProduct(Place.findById(params.get("place.id")),Product.findById(params.get("product.id"))):Product.findById(id)
+		def productLinkPlace = !isNomal?ProductLinkPlace.findById(id):Product.findById(id)
 		def res = ["IsSuccess" : true]
 		if(productLinkPlace){
 			productLinkPlace.delete()
+			if(productLinkPlace.hasErrors()){
+				println productLinkPlace.errors
+				render(status: 400, contentType:"text/json", productLinkPlace.errors)
+			}
 		}else{
 			res =["IsSuccess" : false]
 		}
@@ -94,7 +96,7 @@ class ProductController extends GridController{
 		boolean isNomal = new Boolean(params.get("isNomal"))
 
 		if(!isNomal){
-			productLinkPlace = ProductLinkPlace.findByPlaceAndProduct(Place.findById(json.getString("OplaceId")),Product.findById(json.getString("OproductId")))
+			productLinkPlace = ProductLinkPlace.findById(id)
 		}else{
 			productLinkPlace= Product.findById(id)
 		}
@@ -137,13 +139,11 @@ class ProductController extends GridController{
 					case 'productNo':
 					case 'placeId':
 					case 'productId':
-					case 'OproductId':
-					case 'OplaceId':
 						break
 					case 'price':
 					case 'sallingPrice':
-					case 'costPrice':
-					case 'totalQuantity':
+					//case 'costPrice':
+					//case 'totalQuantity':
 						productLinkPlace.putAt keyName,new BigDecimal(it.value)
 						break
 					case 'hasPlace':
@@ -184,6 +184,33 @@ class ProductController extends GridController{
 					obj.putAt keyNames,val
 			}
 		}
+	}
+
+	def purchase={
+
+		def product = Product.findById(params.normalProduct)
+		def purchaseQuantity = new BigDecimal(params.purchaseQuantity)
+		//原庫存數量 * 原成本單價 + 進貨數量 * 進貨單價
+		def totalCost = (product.totalQuantity?product.totalQuantity.multiply(product.costPrice):BigDecimal.ZERO).plus(purchaseQuantity.multiply(new BigDecimal(params.purchasePrice)))
+			
+		product.totalQuantity = (product.totalQuantity?product.totalQuantity:BigDecimal.ZERO).plus(purchaseQuantity)
+		
+		product.costPrice = totalCost.divide(product.totalQuantity,2,BigDecimal.ROUND_HALF_UP)
+		
+		product.save()
+		
+		def productHistory =new ProductHistory(
+			product:product,
+			project:Project.findById(params.project),
+			quantity:purchaseQuantity,
+			date:new Date(Integer.parseInt(params.date.substring(0,4))-1900,Integer.parseInt(params.date.substring(5,7)),Integer.parseInt(params.date.substring(8,10)),00,00,00),
+			totalQuantity:product.totalQuantity,
+			vendor:params.vendor,
+			LastModifyBy: session.employee
+			)
+		productHistory.save()
+		def res = ["IsSuccess" : true]
+		render res as JSON
 	}
 }
 

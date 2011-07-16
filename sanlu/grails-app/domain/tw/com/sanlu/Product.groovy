@@ -26,6 +26,8 @@ class Product {
 	String unit
 	//是否為場地類商品
 	boolean hasPlace
+	//是否為代叫項目
+	boolean isAgency
 	//最後修改日期
 	Date lastUpdated
 	//最後修改人員
@@ -45,5 +47,6 @@ class Product {
 		sallingPrice nullable:true
 		costPrice nullable:true
 		hasPlace nullable:true
+		isAgency nullable:true
 	}
 }

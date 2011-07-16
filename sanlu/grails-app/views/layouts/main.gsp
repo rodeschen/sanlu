@@ -35,8 +35,24 @@
 						<a href="${request.contextPath}/main">首頁</a>
 					</li>
 					<li>
-						<a href="#">報表</a>
+						<a href="#">商品</a>
+						<ul>
+							<li>
+								<a href="${request.contextPath}/manager/purchase">商品進貨</a>
+							</li>
+						</ul>
 					</li>
+					<li>
+						<a href="#">報表</a>
+						<ul>
+							<li>
+								<a href="${request.contextPath}/excel/agency" target="_blank">品項代叫報表</a>
+							</li>
+							<li>
+								<a href="${request.contextPath}/excel/goods" target="_blank">商品提出明細</a>
+							</li>
+						</ul>
+					</li>					
 					<g:if test="${session.empLevel.equals(1)}">
 					<li>
 						<a href="#">系統管理</a>

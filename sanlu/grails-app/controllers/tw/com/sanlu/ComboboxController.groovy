@@ -39,11 +39,11 @@ class ComboboxController extends BaseController {
 		render res as JSON
 	}
 
-	//地址	
+	//地址
 	private static Map<String, List<String>> addrMap;
 	def city={
 		if(addrMap==null){
-			addrMap = ExcelUtility.handleAddrExcel("addr.xls")
+			addrMap = ExcelUtility.handleAddrExcel("Excel//addr.xls")
 		}
 		render addrMap as JSON
 	}
@@ -56,7 +56,7 @@ class ComboboxController extends BaseController {
 		}
 		render res as JSON
 	}
-	
+
 	//場地
 	def place ={
 		def l = Place.findAll()
@@ -66,4 +66,24 @@ class ComboboxController extends BaseController {
 		}
 		render res as JSON
 	}
+
+	//一般商品
+	def normalProduct ={
+		def l = Product.findAllByHasPlace(false)
+		def res = [:]
+		l?.each(){
+			res[it.id] = it.productName
+		}
+		render res as JSON
+	}
+	
+	//進行中專案
+	def nonCloseProject={
+		def projects = Project.findAllByClosingDateOrClosingDateIsNull(new Date())
+		def res = [:]
+		projects?.each(){
+			res[it.id] = it.projectName
+		}
+		render res as JSON
+		}
 }
