@@ -1,11 +1,11 @@
 <html>
-<head>
-<title>產品管理</title>
-<meta name="layout" content="inner" />
-</head>
-<body>
-	<script>
-            $(document).ready(function(){
+    <head>
+        <title>產品管理</title>
+        <meta name="layout" content="inner" />
+    </head>
+    <body>
+        <script>
+        	$(document).ready(function(){
                 var hasPlace = $("#hasPlace"), placeId = $("#placeId"), productName = $('#productName'), productId = $('#productId');
                 var grid1 = $("#grid1").jqGrid({
                     url: contextRoot + "/product/queryProduct",
@@ -202,7 +202,7 @@
                 
                 var action = "";
                 $("#add1,#modify1,#add2,#modify2").each(function(){
-                    //newgrid.jqGrid('getGridParam', 'selrow'); get row id
+                    
                     $(this).fancybox({
                         action: $(this).prop("id"),
                         onStart: function(){
@@ -360,7 +360,7 @@
                     }
                 });
             });
-            
+        
         </script>
         <fieldset>
             <legend>
@@ -372,7 +372,7 @@
                 <button id="delete1">
                     刪除商品
                 </button>
-				<a id="purchaseBtn" href="#pdialog2" class="button">進貨</a>
+                <a id="purchaseBtn" href="#pdialog2" class="button">進貨</a>
             </div>
             <div id="grid1" />
         </fieldset>
@@ -394,8 +394,8 @@
                 <g:form name="addForm" id="addForm" onsubmit="return false;" autocomplete="off" novalidate="novalidate">
                     <div class="dialog-body">
                         <!-- <div class="field-row" id='productNoDiv'>
-                            <span class="th1">商品代號：</span>
-                            <span><input type="text" id="productNo" name="productNo" readonly='readonly' /></span>
+                        <span class="th1">商品代號：</span>
+                        <span><input type="text" id="productNo" name="productNo" readonly='readonly' /></span>
                         </div> -->
                         <div class="field-row" id='productNameDiv'>
                             <span class="th1">產品名稱：</span>
@@ -422,7 +422,7 @@
                                 </select>
                             </span>
                         </div>
-						<div class="field-row" id='isAgencyDiv'>
+                        <div class="field-row" id='isAgencyDiv'>
                             <span class="th1">代叫品項：</span>
                             <span>
                                 <select id="isAgency" name="isAgency">
@@ -438,20 +438,18 @@
                         <div class="field-row" id="sallingPriceDiv">
                             <span class="th1">銷售單價：</span>
                             <span><input type="text" id="sallingPrice" name="sallingPrice" placeholder="銷售單價" class="validate[required]"/></span>
+                        </div><!--<div class="field-row" id="costPriceDiv">
+                        <span class="th1">成本單價：</span>
+                        <span><input type="text" id="costPrice" name="costPrice" placeholder="成本單價" class="validate[required]"/></span>
                         </div>
-                        <!--<div class="field-row" id="costPriceDiv">
-                            <span class="th1">成本單價：</span>
-                            <span><input type="text" id="costPrice" name="costPrice" placeholder="成本單價" class="validate[required]"/></span>
-                        </div>                        
                         <div class="field-row" id='totalDiv'>
-                            <span class="th1">庫存數量：</span>
-                            <span><input type="text" id="totalQuantity" name="totalQuantity" placeholder="庫存數量" class="validate[required]"/></span>
+                        <span class="th1">庫存數量：</span>
+                        <span><input type="text" id="totalQuantity" name="totalQuantity" placeholder="庫存數量" class="validate[required]"/></span>
                         </div>-->
-						<div class="field-row" id="unitDiv">
+                        <div class="field-row" id="unitDiv">
                             <span class="th1">計價單位：</span>
                             <span><input type="text" id="unit" name="unit" placeholder="計價單位" class="validate[required]"/></span>
-                        </div>
-						<input type="hidden" id="id" name="id" />
+                        </div><input type="hidden" id="id" name="id" />
                         <div style="text-align:center;">
                             <button id="padd1" type="button">
                                 確定
@@ -464,14 +462,14 @@
                 </g:form>
             </div>
         </div>
-		<div class="hide">
+        <div class="hide">
             <div id="pdialog2" class="dialog2" style="display:block;width:400px;">
                 <g:form name="addForm2" id="addForm2" onsubmit="return false;" autocomplete="off" novalidate="novalidate">
-                    <div class="dialog-body">                        
+                    <div class="dialog-body">
                         <div class="field-row" id='productDiv'>
                             <span class="th1">進貨產品：</span>
                             <span>
-                                <select id="normalProduct" name="normalProduct" class="validate[required]" >
+                                <select id="normalProduct" name="normalProduct" class="validate[required]">
                                     <option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
                                 </select>
                             </span>
@@ -479,7 +477,7 @@
                         <div class="field-row">
                             <span class="th1">進貨專案：</span>
                             <span>
-                                <select id="project" name="project" >
+                                <select id="project" name="project">
                                     <option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
                                 </select>
                             </span>
@@ -487,6 +485,10 @@
                         <div class="field-row" id="priceDiv">
                             <span class="th1">進貨廠商：</span>
                             <span><input type="text" id="vendor" name="vendor" placeholder="進貨廠商" class="validate[required]"/></span>
+                        </div>
+                        <div class="field-row" id="priceDiv">
+                            <span class="th1">進貨日期：</span>
+                            <span><input type="text" id="date" name="date" placeholder="進貨日期" class="validate[required] date"/></span>
                         </div>
                         <div class="field-row" id="priceDiv">
                             <span class="th1">進貨單價：</span>

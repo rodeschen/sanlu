@@ -5,6 +5,7 @@ import tw.com.sanlu.FuneralCompany
 import tw.com.sanlu.Funeraler;
 import tw.com.sanlu.Place
 import tw.com.sanlu.Product
+import tw.com.sanlu.ProductHistory
 import tw.com.sanlu.ProductLinkPlace
 import tw.com.sanlu.Project
 
@@ -47,14 +48,15 @@ class BootStrap {
 					def fCom = new FuneralCompany(
 							funeralCompanyName:"祥安禮儀",
 							phone1:"091234567",
-							address:"新北市三重區XX路",
+							contactAddrCity:"新北市",
+							contactAddrArea:"三重區",
+							contactAddr:"XX路",							
 							lastModifyBy:emp1
 							)
 					fCom.save()
 					def fCom2 = new FuneralCompany(
 							funeralCompanyName:"祥安禮儀2",
 							phone1:"091234567",
-							address:"新北市三重區XX路",
 							lastModifyBy:emp1
 							)
 					fCom2.save()
@@ -283,6 +285,21 @@ class BootStrap {
 					washbasinDetail.save()
 					if(washbasinDetail.hasErrors()){
 						println washbasinDetail.errors
+					}
+					
+					def productHistory =new ProductHistory(
+						product:hall,
+						project:project1,
+						isPurchase:true,
+						quantity:90,
+						date:new Date(),
+						totalQuantity:hall.totalQuantity,
+						vendor:"廠商一",
+						LastModifyBy: emp2
+						)
+					productHistory.save()
+					if(productHistory.hasErrors()){
+						println productHistory.errors
 					}
 				}catch(Exception e){
 					println e.dump()

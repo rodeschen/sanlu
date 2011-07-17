@@ -13,8 +13,10 @@ class FuneralCompany {
 	String phone1
 	//電話2	
 	String phone2	
-	//地址
-	String address
+	 //地址
+	String contactAddrCity
+	String contactAddrArea
+	String contactAddr
 	//最後修改日期
 	Date lastUpdated
 	//最後修改人員
@@ -27,6 +29,8 @@ class FuneralCompany {
 		funeralCompanyName maxSize:60,blank:false, unique:true
 		phone1 maxSize:20
 		phone2 nullable:true,maxSize:20
-		address maxSize:100
+		contactAddrCity maxSize:12,nullable:true
+		contactAddrArea maxSize:12,nullable:true
+		contactAddr maxSize:100,nullable:true
     }
 }

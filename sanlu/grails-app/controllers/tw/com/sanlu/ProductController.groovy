@@ -202,6 +202,7 @@ class ProductController extends GridController{
 		def productHistory =new ProductHistory(
 			product:product,
 			project:Project.findById(params.project),
+			isPurchase:true,
 			quantity:purchaseQuantity,
 			date:new Date(Integer.parseInt(params.date.substring(0,4))-1900,Integer.parseInt(params.date.substring(5,7)),Integer.parseInt(params.date.substring(8,10)),00,00,00),
 			totalQuantity:product.totalQuantity,

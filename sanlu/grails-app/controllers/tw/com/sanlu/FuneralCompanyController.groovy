@@ -53,4 +53,19 @@ class FuneralCompanyController extends GridController{
 		def res = ["IsSuccess" : true]
 		render res as JSON
 	}
+	
+	def insertAction={			
+		def funeralCompany = new FuneralCompany(
+				funeralCompanyName:params.funeralCompanyName,
+				phone1:params.phone1,
+				phone2:params.phone2,
+				contactAddrCity:params.contactAddrCity,
+				contactAddrArea:params.contactAddrArea,
+				contactAddr:params.contactAddr,
+				lastModifyBy:session.employee)
+		funeralCompany.save()
+
+		def res = ["IsSuccess" : true]
+		render res as JSON
+	}
 }

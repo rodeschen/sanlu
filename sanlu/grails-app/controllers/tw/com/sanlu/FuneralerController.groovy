@@ -19,11 +19,9 @@ class FuneralerController extends GridController{
 	@GridQuery
 	def queryByComp = {
 		def company = FuneralCompany.findById(params.long("funeralCompanyId"))
-		["rowData":Funeraler.findByFuneralCommpany(company,[max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc"]),
+		["rowData":Funeraler.findAllByFuneralCommpany(company,[max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc"]),
 					"rowCount":Funeraler.countByFuneralCommpany(company)]
 	}
-
-
 
 	def deleteAction = {
 		def funeraler = Funeraler.findById(id)
@@ -36,23 +34,33 @@ class FuneralerController extends GridController{
 		render res as JSON
 	}
 	def modifyAction={
-		def funeraler = Funeraler.findById(id)
+		def funeraler = Funeraler.findById(params.id)
 		if(!funeraler) {
 			return println("無法修改")
 		}
 
-		new JSONObject(params.get("data")).each(){
-			switch( it.key ){
-				case 'FuneralerName':
-				case 'phone1':
-				case 'phone2':
-					funeraler.putAt it.key,it.value
-					break
-			}
-		}
+		funeraler.setFuneralerName params.funeralerName
+		funeraler.setPhone1 params.phone1
+		funeraler.setPhone2 params.phone2
 		funeraler.setLastModifyBy session.employee
 
 		funeraler.save()
+		def res = ["IsSuccess" : true]
+		render res as JSON
+	}
+	
+	def insertAction={
+		def company = FuneralCompany.findById(params.funeralCompanyId)
+		def funeraler = new Funeraler(
+				funeralCommpany:company,
+				funeralerName:params.funeralerName,
+				phone1:params.phone1,
+				phone2:params.phone2,
+				lastModifyBy:session.employee)
+		funeraler.save()
+		if(funeraler.hasErrors()){
+			println funeraler.errors
+		}
 		def res = ["IsSuccess" : true]
 		render res as JSON
 	}

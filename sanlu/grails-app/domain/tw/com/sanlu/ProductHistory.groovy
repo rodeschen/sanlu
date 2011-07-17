@@ -12,6 +12,8 @@ class ProductHistory {
 	Product product
 	//使用專案
 	Project project
+	//是否為進貨
+	boolean isPurchase
 	//進貨日期
 	Date date
 	//進貨廠商
