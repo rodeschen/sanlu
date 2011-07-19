@@ -2,6 +2,9 @@ package tw.com.sanlu
 
 import grails.converters.JSON
 import java.sql.Timestamp
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+
 import org.codehaus.groovy.grails.web.json.JSONObject
 
 import tw.com.sanlu.annotation.GridQuery;
@@ -198,13 +201,13 @@ class ProductController extends GridController{
 		product.costPrice = totalCost.divide(product.totalQuantity,2,BigDecimal.ROUND_HALF_UP)
 		
 		product.save()
-		
+		DateFormat df = new SimpleDateFormat("yyyy-M-d");
 		def productHistory =new ProductHistory(
 			product:product,
 			project:Project.findById(params.project),
 			isPurchase:true,
 			quantity:purchaseQuantity,
-			date:new Date(Integer.parseInt(params.date.substring(0,4))-1900,Integer.parseInt(params.date.substring(5,7)),Integer.parseInt(params.date.substring(8,10)),00,00,00),
+			date:df.parse(params.date),
 			totalQuantity:product.totalQuantity,
 			vendor:params.vendor,
 			LastModifyBy: session.employee

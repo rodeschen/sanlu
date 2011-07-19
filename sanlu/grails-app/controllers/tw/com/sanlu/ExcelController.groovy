@@ -10,19 +10,25 @@ class ExcelController extends BaseController {
 
 	def agency = {
 		// create our workbook and sheet
-		println(params)
-		def file = new File("Excel//"+new Date().format("yyyy-MM-dd")+".xls")
+		
+		def file = new File("Excel//"+params.exportYear+"-"+params.exportMonth+"品項代叫記錄.xls")
 		def workbook = Workbook.createWorkbook(file,Workbook.getWorkbook(new File("Excel//品項代叫記錄.xls")))
 		def sheet = workbook.getSheet(0)
-
+		def cal = Calendar.instance
+		cal.set params.int("exportYear"), params.int("exportMonth")-1, 00
+		def cal2 = Calendar.instance
+		cal2.set params.int("exportYear"), params.int("exportMonth"), 00
+		//cal2.add Calendar.MONTH, 1
 		//def productHistorys =ProductHistory.findAllByProduct(Product.findAllByIsAgency(true))
 		def products = Product.findAllByIsAgency(true)
 		def criteria = ProductHistory.createCriteria()
-		def productHistorys = criteria { 
+		def productHistorys = criteria {				 
 				and {
-					eq("isPurchase", true)  
-					'in'("product",products)
+					eq("isPurchase", true)
+					between("date", cal.getTime(), cal2.getTime())
+					'in'("product",products)					
 				} 
+				order("date", "asc")
 			}
 		def r = 4
 		//def c = [0, 1, 7, 8]
@@ -55,8 +61,8 @@ class ExcelController extends BaseController {
 
 
 		//def file = new File("addr.xls")
-		//response.setContentType("application/octet-stream")
-		response.setContentType("application/vnd.ms-excel")
+		response.setContentType("application/octet-stream")
+		//response.setContentType("application/vnd.ms-excel")
 		
 		response.setHeader("Content-disposition", "attachment;filename=${file.getName()}")
 

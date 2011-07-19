@@ -206,6 +206,11 @@ $(document).ready( function() {
 		'titlePosition': 'inside',
 		'transitionIn': 'elastic',
 		'transitionOut': 'elastic',
+		onStart: function(){
+			var now = new Date()
+			$("#agencyForm").find("#exportYear").val(now.getFullYear());
+			$("#agencyForm").find("#exportMonth").val((now.getMonth()<9?'0':'')+(now.getMonth()+1));
+		},
 		onClosed: function() {
 			$("#agencyDialog1").find("form").each( function() {
 				this.reset();
@@ -218,7 +223,8 @@ $(document).ready( function() {
 				url: contextRoot + "/excel/agency",
 				target: "_self",
 				data: {
-					exportDate : exportDate.val()
+					exportYear : $("#agencyForm").find("#exportYear").val(),
+					exportMonth : $("#agencyForm").find("#exportMonth").val()
 				}
 			});
 			$.fancybox.close();

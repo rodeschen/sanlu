@@ -3,6 +3,8 @@ package tw.com.sanlu
 import grails.converters.JSON
 
 import java.sql.Timestamp
+import java.text.DateFormat
+import java.text.SimpleDateFormat
 
 import org.codehaus.groovy.grails.web.json.JSONObject
 
@@ -21,7 +23,7 @@ class EmployeeController extends GridController{
 					"rowCount":Employee.count()]
 	}
 
-
+	
 	def modifyAction={
 		def emp = Employee.findById(params.long("id"))
 		if(!emp) {
@@ -34,6 +36,7 @@ class EmployeeController extends GridController{
 			"empLevel",
 			"hireDate"
 		]
+		DateFormat df = new SimpleDateFormat("yyyy-M-d");
 		ids.each(){
 			switch( it ){
 				case 'empName':
@@ -44,7 +47,7 @@ class EmployeeController extends GridController{
 					emp.putAt it,params.int(it)
 					break
 				case 'hireDate':
-					emp.putAt it,new Date(Integer.parseInt(params.get(it).substring(0,4))-1900,Integer.parseInt(params.get(it).substring(5,7)),Integer.parseInt(params.get(it).substring(8,10)),00,00,00)
+					emp.putAt it,df.parse(params.get(it))
 					break
 			}
 		}
@@ -70,13 +73,12 @@ class EmployeeController extends GridController{
 
 	def insertAction={
 		int count = Employee.executeQuery("select max(id) from Employee")[0]
-		String h = params.hireDate
-		Date hireDate = new Date(Integer.parseInt(h.substring(0,4))-1900,Integer.parseInt(h.substring(5,7)),Integer.parseInt(h.substring(8,10)),00,00,00)
+		DateFormat df = new SimpleDateFormat("yyyy-M-d");
 		def emp = new Employee(
 				empNo:String.format("%05d", ++count),
 				empName:params.empName,
 				password:"1234".encodeAsMD5(),
-				hireDate:hireDate,
+				hireDate:df.parse(params.get(params.hireDate)),
 				empLevel:params.int("empLevel"),
 				isLeft:params.boolean("isLeft"),
 				gender:"M")
