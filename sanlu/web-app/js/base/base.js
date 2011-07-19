@@ -166,7 +166,7 @@ var API = {
 				type: s.type,
 				id : s.id
 			})
-		})
+		});
 	},
 	openProject: function(s) {
 		//debugger;
@@ -176,19 +176,19 @@ var API = {
 			data: $.extend(s.data || {}, {
 				id: s.id
 			})
-		})
+		});
 	}
 };
 
 //first
 $(document).ready( function() {
-	var section = $("section"), aside = $("aside");
+	var section = $("section"), aside = $("aside"),exportDate = $("#exportDate");
 	$("#nav  li > a").click( function(event) {
 		if ($(this).prop("id") == "logout") {
 			return;
 		}
 		var $this = $(this), list = "", parent;
-		if ($this.attr("href") && $this.attr("href") != "#" && !$this.parent().is(".current")) {
+		if ($this.attr("href") && !/#/.test($this.attr("href")) && !$this.parent().is(".current")) {
 			$("#nav").find("li").removeClass("current");
 			$this.parents("li").addClass("current");
 			API.loadPage($this.attr("href"));
@@ -200,6 +200,32 @@ $(document).ready( function() {
 			aside.html(list);
 		}
 		event.preventDefault();
+
+	});
+	$("#agency").fancybox({
+		'titlePosition': 'inside',
+		'transitionIn': 'elastic',
+		'transitionOut': 'elastic',
+		onClosed: function() {
+			$("#agencyDialog1").find("form").each( function() {
+				this.reset();
+			});
+		}
+	});
+	$("#agencyExport").click( function() {
+		if($("#agencyForm").validationEngine('validate')) {
+			API.formSubmit({
+				url: contextRoot + "/excel/agency",
+				target: "_self",
+				data: {
+					exportDate : exportDate.val()
+				}
+			});
+			$.fancybox.close();
+		}
+	});
+	$(".dialogClose").live('click', function() {
+		$.fancybox.close();
 	});
 	API.loadInit.call(document);
 });

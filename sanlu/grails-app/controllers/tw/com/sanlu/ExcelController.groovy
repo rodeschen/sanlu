@@ -10,6 +10,7 @@ class ExcelController extends BaseController {
 
 	def agency = {
 		// create our workbook and sheet
+		println(params)
 		def file = new File("Excel//"+new Date().format("yyyy-MM-dd")+".xls")
 		def workbook = Workbook.createWorkbook(file,Workbook.getWorkbook(new File("Excel//品項代叫記錄.xls")))
 		def sheet = workbook.getSheet(0)
