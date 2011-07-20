@@ -39,7 +39,7 @@ class ProjectController extends GridController {
 		def rowCount = bList.count{
 			project{ eq('id',params.id?params.long("id"):"") }
 		}
-		
+
 		bList = BillDetail.createCriteria()
 		def projects = bList.list{
 			project{ eq('id',params.id?params.long("id"):"") }
@@ -51,12 +51,12 @@ class ProjectController extends GridController {
 						product{
 							order("productName",isAsc?"asc":"desc")
 						}
-					break;
+						break;
 					case "place.placeName" :
-					    place{
+						place{
 							order("placeName",isAsc?"asc":"desc")
 						}
-					break;
+						break;
 					default:
 						order(sortBy,isAsc?"asc":"desc")
 				}
@@ -155,6 +155,101 @@ class ProjectController extends GridController {
 			}
 		}
 		project.save()
+		def res = ["IsSuccess" : true]
+		render res as JSON
+	}
+	//	product:flower,//
+	//	startTime:new Date(111,5,8,10,00,00),//
+	//	endTime:new Date(111,5,8,12,00,00),//
+	//	quantity:10,
+	//	price:550,//
+	//	color:1,
+	//	place:place8,
+	//	modifiedPrice:500,
+	//	costPrice:300,
+	//	modifiedCostPrice:300,
+	//	lastModifyBy:emp2,
+	//	project:project1 //
+
+	def addProduct={
+		def type = params.type
+		def detail= new BillDetail();
+		detail.project = Project.findById(params.long("id"))
+		def product = Product.findById(params.long("product" + type))
+		detail.product = product
+		DateFormat df = new SimpleDateFormat("yyyy-M-d HH:mm");
+		def productHistory = new ProductHistory();
+		switch(type){
+			case "1":
+				detail.startTime = df.parse(params.date1 + " " + params.hour1 + ":" + params.min1)
+				detail.endTime = detail.startTime
+				if(product.totalQuantity < params.int("amount1")){
+					// throw error
+				}
+				detail.quantity = params.int("amount1")
+				product.totalQuantity -= detail.quantity
+				detail.price = detail.product.sallingPrice
+				detail.color = 1
+				detail.modifiedPrice = detail.price
+				detail.costPrice = product.costPrice
+				detail.modifiedCostPrice = detail.costPrice
+
+			// history
+				new ProductHistory(
+						product:product,
+						project:detail.project,
+						isPurchase:false,
+						quantity:detail.quantity,
+						date:detail.startTime,
+						totalQuantity:product.totalQuantity,
+						vendor:"",
+						LastModifyBy: session.employee
+						).save()
+				break;
+			case "2":
+				detail.startTime = df.parse(params.date2 + " " + params.hour2 + ":" + params.min2)
+				detail.endTime = detail.startTime
+				detail.quantity = params.int("amount2")
+				detail.price = product.sallingPrice
+				detail.color = 2
+				detail.modifiedPrice = detail.price
+				detail.costPrice = product.costPrice
+				detail.modifiedCostPrice = detail.costPrice
+
+
+				new ProductHistory(
+						product:product,
+						project:detail.project,
+						isPurchase:false,
+						quantity:detail.quantity,
+						date:detail.startTime,
+						totalQuantity:0,
+						vendor:params.vendor2,
+						LastModifyBy: session.employee
+						).save()
+				break;
+			case "3":
+				def place = Place.findById(params.long("place3"))
+				def link = ProductLinkPlace.findByProductAndPlace(detail.product,place)
+				detail.startTime = df.parse(params.startDate3 + " " + params.startHour3 + ":" + params.startMin3)
+				detail.endTime = df.parse(params.endDate3 + " " + params.endHour3 + ":" + params.endMin3)
+				detail.quantity = 1
+				detail.price = link.sallingPrice
+				detail.color = 3
+				detail.place = place
+				detail.modifiedPrice = detail.price
+				detail.costPrice = link.costPrice
+				detail.modifiedCostPrice = detail.costPrice
+				break;
+			case "4":
+				break;
+
+		}
+		detail.lastModifyBy = session.employee
+		detail.save()
+		if(detail.hasErrors()){
+			println detail.errors
+		}
 		def res = ["IsSuccess" : true]
 		render res as JSON
 	}

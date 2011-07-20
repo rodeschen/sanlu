@@ -266,7 +266,11 @@
                             var data = grid2.getRowData(id);
                             API.openCalendar({
                                 id: data.id,
-                                type: "l"
+                                type: "l",
+                                data:{
+                                	calendarName : data.placeName
+                                }
+                             
                             });
                         }
                     });

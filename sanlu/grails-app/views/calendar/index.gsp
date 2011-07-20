@@ -7,6 +7,7 @@
 				var contextRoot = "${request.contextPath}";
 				
 				$(document).ready( function() {
+					document.title = responseJSON.calendarName + " - 行事曆";
 					var view = "month";
 					var op = {
 						view: view,

@@ -208,7 +208,7 @@ $(document).ready( function() {
 		'titlePosition': 'inside',
 		'transitionIn': 'elastic',
 		'transitionOut': 'elastic',
-		onStart: function(){
+		onStart: function() {
 			var now = new Date()
 			agencyForm.find("#exportYear").val(now.getFullYear());
 			agencyForm.find("#exportMonth").val((now.getMonth()<9?'0':'')+(now.getMonth()+1));
@@ -219,7 +219,7 @@ $(document).ready( function() {
 			});
 		}
 	});
-	$("#excelExport1").click( function() {		
+	$("#excelExport1").click( function() {
 		if(agencyForm.validationEngine('validate')) {
 			API.formSubmit({
 				url: contextRoot + "/excel/agency",
@@ -238,7 +238,7 @@ $(document).ready( function() {
 		'titlePosition': 'inside',
 		'transitionIn': 'elastic',
 		'transitionOut': 'elastic',
-		onStart: function(){
+		onStart: function() {
 			var now = new Date()
 			productSaleForm.find("#exportYear").val(now.getFullYear());
 			productSaleForm.find("#exportMonth").val((now.getMonth()<9?'0':'')+(now.getMonth()+1));
@@ -249,7 +249,7 @@ $(document).ready( function() {
 			});
 		}
 	});
-	$("#excelExport2").click( function() {		
+	$("#excelExport2").click( function() {
 		if(productSaleForm.validationEngine('validate')) {
 			API.formSubmit({
 				url: contextRoot + "/excel/productSale",
