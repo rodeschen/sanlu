@@ -202,14 +202,16 @@ $(document).ready( function() {
 		event.preventDefault();
 
 	});
+	//品項代叫報表
+	var agencyForm = $("#agencyForm");
 	$("#agency").fancybox({
 		'titlePosition': 'inside',
 		'transitionIn': 'elastic',
 		'transitionOut': 'elastic',
 		onStart: function(){
 			var now = new Date()
-			$("#agencyForm").find("#exportYear").val(now.getFullYear());
-			$("#agencyForm").find("#exportMonth").val((now.getMonth()<9?'0':'')+(now.getMonth()+1));
+			agencyForm.find("#exportYear").val(now.getFullYear());
+			agencyForm.find("#exportMonth").val((now.getMonth()<9?'0':'')+(now.getMonth()+1));
 		},
 		onClosed: function() {
 			$("#agencyDialog1").find("form").each( function() {
@@ -217,14 +219,44 @@ $(document).ready( function() {
 			});
 		}
 	});
-	$("#agencyExport").click( function() {
-		if($("#agencyForm").validationEngine('validate')) {
+	$("#excelExport1").click( function() {		
+		if(agencyForm.validationEngine('validate')) {
 			API.formSubmit({
 				url: contextRoot + "/excel/agency",
 				target: "_self",
 				data: {
-					exportYear : $("#agencyForm").find("#exportYear").val(),
-					exportMonth : $("#agencyForm").find("#exportMonth").val()
+					exportYear : agencyForm.find("#exportYear").val(),
+					exportMonth : agencyForm.find("#exportMonth").val()
+				}
+			});
+			$.fancybox.close();
+		}
+	});
+	//商品提出明細
+	var productSaleForm = $("#productSaleForm");
+	$("#productSale").fancybox({
+		'titlePosition': 'inside',
+		'transitionIn': 'elastic',
+		'transitionOut': 'elastic',
+		onStart: function(){
+			var now = new Date()
+			productSaleForm.find("#exportYear").val(now.getFullYear());
+			productSaleForm.find("#exportMonth").val((now.getMonth()<9?'0':'')+(now.getMonth()+1));
+		},
+		onClosed: function() {
+			$("#agencyDialog1").find("form").each( function() {
+				this.reset();
+			});
+		}
+	});
+	$("#excelExport2").click( function() {		
+		if(productSaleForm.validationEngine('validate')) {
+			API.formSubmit({
+				url: contextRoot + "/excel/productSale",
+				target: "_self",
+				data: {
+					exportYear : productSaleForm.find("#exportYear").val(),
+					exportMonth : productSaleForm.find("#exportMonth").val()
 				}
 			});
 			$.fancybox.close();

@@ -49,7 +49,7 @@
 									<a id="agency" href="#agencyDialog1">品項代叫報表</a>
 								</li>
 								<li>
-									<a href="${request.contextPath}/excel/goods" target="_blank">商品提出明細</a>
+									<a id="productSale" href="#agencyDialog2">商品提出明細</a>
 								</li>
 							</ul>
 						</li>
@@ -124,7 +124,55 @@
 							</select> </span>
 							</div>
 							<div style="text-align: center;">
-								<button id="agencyExport" type="button">
+								<button id="excelExport1" type="button">
+									確定
+								</button>
+								<button class="dialogClose" type="button">
+									取消
+								</button>
+							</div>
+						</g:form>
+					</fieldset>
+				</div>
+			</div>
+			<div class="hide">
+				<div id="agencyDialog2">
+					<fieldset>
+						<legend>
+							商品提出明細
+						</legend>
+						<g:form name="productSaleForm" id="productSaleForm" onsubmit="return false;" autocomplete="off" novalidate="novalidate">
+							<div class="field-row">
+								<span class="th1">報表月份：</span> <select id="exportYear"
+								name="exportYear">
+								<option value="2010">2010</option>
+								<option value="2011">2011</option>
+								<option value="2012">2012</option>
+								<option value="2013">2013</option>
+								<option value="2014">2014</option>
+								<option value="2015">2015</option>
+								<option value="2016">2016</option>
+								<option value="2017">2017</option>
+								<option value="2018">2018</option>
+								<option value="2019">2019</option>
+								<option value="2020">2020</option>
+							</select> <select id="exportMonth" name="exportMonth">
+								<option value="01">01</option>
+								<option value="02">02</option>
+								<option value="03">03</option>
+								<option value="04">04</option>
+								<option value="05">05</option>
+								<option value="06">06</option>
+								<option value="07">07</option>
+								<option value="08">08</option>
+								<option value="09">09</option>
+								<option value="10">10</option>
+								<option value="11">11</option>
+								<option value="12">12</option>
+							</select> </span>
+							</div>
+							<div style="text-align: center;">
+								<button id="excelExport2" type="button">
 									確定
 								</button>
 								<button class="dialogClose" type="button">

@@ -48,10 +48,8 @@ class ProductController extends GridController{
 				product = new Product(
 						productNo:String.format("%06d", ++count),
 						productName:json.getString("productName"),
-						//totalQuantity:new BigDecimal(json.getInt("totalQuantity")),
 						price:new BigDecimal(json.getString("price")),
 						sallingPrice:new BigDecimal(json.getString("sallingPrice")),
-						//costPrice:new BigDecimal(json.getString("costPrice")),
 						unit:json.getString("unit"),
 						hasPlace:"T".equals( json.getString("hasPlace")),
 						lastModifyBy:session.employee)
@@ -145,8 +143,6 @@ class ProductController extends GridController{
 						break
 					case 'price':
 					case 'sallingPrice':
-					//case 'costPrice':
-					//case 'totalQuantity':
 						productLinkPlace.putAt keyName,new BigDecimal(it.value)
 						break
 					case 'hasPlace':
@@ -210,6 +206,7 @@ class ProductController extends GridController{
 			date:df.parse(params.date),
 			totalQuantity:product.totalQuantity,
 			vendor:params.vendor,
+			memo:params.memo,
 			LastModifyBy: session.employee
 			)
 		productHistory.save()

@@ -497,7 +497,12 @@
                         <div class="field-row" id='totalDiv'>
                             <span class="th1">進貨數量：</span>
                             <span><input type="text" id="purchaseQuantity" name="purchaseQuantity" placeholder="進貨數量" class="validate[required]"/></span>
-                        </div><input type="hidden" id="id" name="id" />
+                        </div>
+						<div class="field-row" id='memoDiv'>
+                            <span class="th1">備註：</span>
+                            <span><input type="text" id="memo" name="memo" placeholder="memo" /></span>
+                        </div>
+						<input type="hidden" id="id" name="id" />
                         <div style="text-align:center;">
                             <button id="padd2" type="button">
                                 確定

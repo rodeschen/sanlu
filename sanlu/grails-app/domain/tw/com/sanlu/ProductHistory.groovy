@@ -22,6 +22,8 @@ class ProductHistory {
 	BigDecimal quantity
 	//庫存數量
 	Integer totalQuantity	
+	//備註
+	String memo
 	//最後修改時間
 	Date lastUpdated
 	//最後修改人
@@ -29,5 +31,6 @@ class ProductHistory {
     static constraints = {
 		project nullable:true
 		vendor nullable:true
+		memo nullable:true
     }
 }

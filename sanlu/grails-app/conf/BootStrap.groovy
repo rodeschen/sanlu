@@ -298,9 +298,18 @@ class BootStrap {
 						LastModifyBy: emp2
 						)
 					productHistory.save()
-					if(productHistory.hasErrors()){
-						println productHistory.errors
-					}
+					def productHistory2 =new ProductHistory(
+						product:washbasin,
+						//project:project1,
+						isPurchase:true,
+						quantity:100,
+						date:new Date(),
+						totalQuantity:washbasin.totalQuantity,
+						memo:"This is a memo!!",
+						vendor:"廠商二",
+						LastModifyBy: emp2
+						)
+					productHistory2.save()
 				}catch(Exception e){
 					println e.dump()
 				}
