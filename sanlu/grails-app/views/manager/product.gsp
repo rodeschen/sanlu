@@ -26,6 +26,7 @@
                         header: "產品名稱",
                         name: 'productName',
                         index: 'productName',
+                        align:'center',
                         width: 20
                     }, {
                         header: "場地類",
@@ -34,7 +35,8 @@
                         width: 20,
                         formatter: function(el, cellval, opts){
                             return el ? "是" : "否";
-                        }
+                        },
+                        align:'center'
 					 }, {
                         header: "代叫品項",
                         name: 'isAgency',
@@ -42,43 +44,54 @@
                         width: 20,
                         formatter: function(el, cellval, opts){
                             return el ? "是" : "否";
-                        }                    
+                        },
+                        align:'center'                    
                     }, {
                         header: "內帳銷售單價",
                         name: 'price',
                         index: 'price',
-                        width: 20
+                        width: 20,
+                        align:'right',
+						formatter: "currency"
                     }, {
                         header: "銷售單價",
                         name: 'sallingPrice',
                         index: 'sallingPrice',
-                        width: 20
+                        width: 20,
+                        align:'right',
+						formatter: "currency"
                     }, {
                         header: "成本單價",
                         name: 'costPrice',
                         index: 'costPrice',
-                        width: 20
+                        width: 20,
+                        align:'right',
+						formatter: "currency"
                     }, {
                         header: "庫存數量",
                         name: 'totalQuantity',
                         index: 'totalQuantity',
-                        width: 20
+                        width: 20,
+                        align:'right'
                     }, {
                         header: "計價單位",
                         name: 'unit',
                         index: 'unit',
-                        width: 20
+                        width: 20,
+                        align:'center'
                     }, {
                         header: "最後修改時間",
                         name: 'lastUpdated',
                         index: 'lastUpdated',
-                        width: 35,
-                        sorttype: "date"
+                        width: 50,
+                        sorttype: "date",
+                        align:'center'
                     }, {
                         header: "最後修改者",
                         name: 'lastModifyBy.empName',
                         index: 'lastModifyBy.empName',
-                        width: 30
+                        width: 30,
+                        align:'center'
                     }],
                     onSelectRow: function(id){
                         grid2.clearGridData();
@@ -123,38 +136,48 @@
                         header: "產品名稱",
                         name: 'product.productName',
                         index: 'product.productName',
-                        width: 20
+                        width: 20,
+                        align:'center'
                     }, {
                         header: "場地名稱",
                         name: 'place.placeName',
                         index: 'place.placeName',
-                        width: 20
+                        width: 20,
+                        align:'center'
                     }, {
                         header: "內帳銷售單價",
                         name: 'price',
                         index: 'price',
-                        width: 20
+                        width: 20,
+                        align:'right',
+						formatter: "currency"
                     }, {
                         header: "銷售單價",
                         name: 'sallingPrice',
                         index: 'sallingPrice',
-                        width: 20
+                        width: 20,
+                        align:'right',
+						formatter: "currency"
                     }, {
                         header: "成本單價",
                         name: 'costPrice',
                         index: 'costPrice',
-                        width: 20
+                        width: 20,
+                        align:'right',
+						formatter: "currency"
                     }, {
                         header: "最後修改時間",
                         name: 'lastUpdated',
                         index: 'lastUpdated',
                         width: 35,
-                        sorttype: "date"
+                        sorttype: "date",
+                        align:'center'
                     }, {
                         header: "最後修改者",
                         name: 'product.lastModifyBy.empName',
                         index: 'product.lastModifyBy.empName',
-                        width: 30
+                        width: 30,
+                        align:'center'
                     }]
                 });
                 
