@@ -23,7 +23,6 @@ class CalendarController extends BaseController {
 		def project1 = Project.findByProjectName("projectName")
 		def emp2 = session.employee
 		def hall = Product.findByProductName("大忠廳")
-		System.out.println params.startTime
 		def cal= new BillDetail(
 				product:hall,
 				startTime:df.parse(params.startTime),
