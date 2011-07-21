@@ -51,6 +51,9 @@
 								<li>
 									<a id="productSale" href="#agencyDialog2">商品提出明細</a>
 								</li>
+								<li>
+									<a id="productDaily" href="#agencyDialog3">商品日執行表</a>
+								</li>
 							</ul>
 						</li>
 						<g:if test="${session.empLevel.equals(1)}">
@@ -183,6 +186,165 @@
 					</fieldset>
 				</div>
 			</div>
+			<div class="hide">
+				<div id="agencyDialog3">
+					<fieldset>
+						<legend>
+							商品日執行表
+						</legend>
+						<g:form name="productDailyForm" id="productDailyForm" onsubmit="return false;" autocomplete="off" novalidate="novalidate">
+							<div class="field-row">
+								<span class="th1">商品：</span>
+                            <span>
+                                <select id="productId" name="productId" >
+                                    <option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+                                </select>
+                            </span>
+								<span class="th1">報表月份：</span> <select id="exportYear"
+								name="exportYear">
+								<option value="2010">2010</option>
+								<option value="2011">2011</option>
+								<option value="2012">2012</option>
+								<option value="2013">2013</option>
+								<option value="2014">2014</option>
+								<option value="2015">2015</option>
+								<option value="2016">2016</option>
+								<option value="2017">2017</option>
+								<option value="2018">2018</option>
+								<option value="2019">2019</option>
+								<option value="2020">2020</option>
+							</select> <select id="exportMonth" name="exportMonth">
+								<option value="01">01</option>
+								<option value="02">02</option>
+								<option value="03">03</option>
+								<option value="04">04</option>
+								<option value="05">05</option>
+								<option value="06">06</option>
+								<option value="07">07</option>
+								<option value="08">08</option>
+								<option value="09">09</option>
+								<option value="10">10</option>
+								<option value="11">11</option>
+								<option value="12">12</option>
+							</select> </span>
+							</div>
+							<div style="text-align: center;">
+								<button id="excelExport3" type="button">
+									確定
+								</button>
+								<button class="dialogClose" type="button">
+									取消
+								</button>
+							</div>
+						</g:form>
+					</fieldset>
+				</div>
+			</div>
 		</div>
+		<script>
+		//品項代叫報表
+		var agencyForm = $("#agencyForm");
+		$("#agency").fancybox({
+			'titlePosition': 'inside',
+			'transitionIn': 'elastic',
+			'transitionOut': 'elastic',
+			onStart: function() {
+				var now = new Date()
+				agencyForm.find("#exportYear").val(now.getFullYear());
+				agencyForm.find("#exportMonth").val((now.getMonth()<9?'0':'')+(now.getMonth()+1));
+			},
+			onClosed: function() {
+				$("#agencyDialog1").find("form").each( function() {
+					this.reset();
+				});
+			}
+		});
+		$("#excelExport1").click( function() {
+			if(agencyForm.validationEngine('validate')) {
+				API.formSubmit({
+					url: contextRoot + "/excel/agency",
+					target: "_self",
+					data: {
+						exportYear : agencyForm.find("#exportYear").val(),
+						exportMonth : agencyForm.find("#exportMonth").val()
+					}
+				});
+				$.fancybox.close();
+			}
+		});
+		//商品提出明細
+		var productSaleForm = $("#productSaleForm");
+		$("#productSale").fancybox({
+			'titlePosition': 'inside',
+			'transitionIn': 'elastic',
+			'transitionOut': 'elastic',
+			onStart: function() {
+				var now = new Date()
+				productSaleForm.find("#exportYear").val(now.getFullYear());
+				productSaleForm.find("#exportMonth").val((now.getMonth()<9?'0':'')+(now.getMonth()+1));
+			},
+			onClosed: function() {
+				$("#agencyDialog2").find("form").each( function() {
+					this.reset();
+				});
+			}
+		});
+		$("#excelExport2").click( function() {
+			if(productSaleForm.validationEngine('validate')) {
+				API.formSubmit({
+					url: contextRoot + "/excel/productSale",
+					target: "_self",
+					data: {
+						exportYear : productSaleForm.find("#exportYear").val(),
+						exportMonth : productSaleForm.find("#exportMonth").val()
+					}
+				});
+				$.fancybox.close();
+			}
+		});
+		//商品日執行表
+		var productDailyForm = $("#productDailyForm");
+		$("#productDaily").fancybox({
+			'titlePosition': 'inside',
+			'transitionIn': 'elastic',
+			'transitionOut': 'elastic',
+			onStart: function() {
+				var now = new Date()
+				productDailyForm.find("#exportYear").val(now.getFullYear());
+				productDailyForm.find("#exportMonth").val((now.getMonth()<9?'0':'')+(now.getMonth()+1));
+			},
+			onClosed: function() {
+				$("#agencyDialog3").find("form").each( function() {
+					this.reset();
+				});
+			}
+		});
+		$("#excelExport3").click( function() {
+			if(productDailyForm.validationEngine('validate')) {
+				API.formSubmit({
+					url: contextRoot + "/excel/productDaily",
+					target: "_self",
+					data: {
+						productId:productDailyForm.find("#productId").val(),
+						exportYear : productDailyForm.find("#exportYear").val(),
+						exportMonth : productDailyForm.find("#exportMonth").val()
+					}
+				});
+				$.fancybox.close();
+			}
+		});
+		$(".dialogClose").live('click', function() {
+			$.fancybox.close();
+		});
+		//下拉選單
+		//一般商品
+		$.ajax({
+            type: "POST",
+            url: contextRoot + "/combobox/normalProduct",
+            success: function(map){
+                $('#productId').setDropdown(map);
+            }
+        });
+		</script>
 	</body>
 </html>
