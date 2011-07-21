@@ -932,7 +932,7 @@
             else
                 methods._buildPrompt(field, promptText, type, ajaxed, options);
                 
-           setTimeout(function(){$(field).validationEngine('hide')},3000)
+           setTimeout(function(){$(field).validationEngine('hide')},2000)
             
         },
         /**
