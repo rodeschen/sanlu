@@ -187,7 +187,7 @@
             <div>
 				<a id="purchaseBtn" href="#pdialog2" class="button">進貨</a>
             </div>
-            <div id="grid1" />
+            <div style="margin-top:5px;" id="grid1" />
         </fieldset>
         <fieldset>
             <legend>

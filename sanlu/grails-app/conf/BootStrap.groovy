@@ -290,7 +290,7 @@ class BootStrap {
 					def productHistory =new ProductHistory(
 						product:hall,
 						project:project1,
-						isPurchase:true,
+						isPurchase:false,
 						quantity:90,
 						date:new Date(),
 						totalQuantity:hall.totalQuantity,
@@ -301,7 +301,7 @@ class BootStrap {
 					def productHistory2 =new ProductHistory(
 						product:washbasin,
 						//project:project1,
-						isPurchase:true,
+						isPurchase:false,
 						quantity:100,
 						date:new Date(),
 						totalQuantity:washbasin.totalQuantity,
