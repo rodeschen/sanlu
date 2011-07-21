@@ -3,6 +3,7 @@ import java.io.File
 
 import jxl.*
 import jxl.write.*
+import java.util.Calendar;
 
 class ExcelController extends BaseController {
 
@@ -25,7 +26,7 @@ class ExcelController extends BaseController {
 		def criteria = ProductHistory.createCriteria()
 		def productHistorys = criteria {				 
 				and {
-					eq("isPurchase", true)
+					eq("isPurchase", false)
 					between("date", cal.getTime(), cal2.getTime())
 					'in'("product",products)					
 				} 
@@ -86,7 +87,7 @@ class ExcelController extends BaseController {
 		def criteria = ProductHistory.createCriteria()
 		def productHistorys = criteria {
 				and {
-					eq("isPurchase", true)
+					eq("isPurchase", false)
 					between("date", cal.getTime(), cal2.getTime())
 					'in'("product",products)
 				}
