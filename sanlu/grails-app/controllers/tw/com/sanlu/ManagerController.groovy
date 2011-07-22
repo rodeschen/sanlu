@@ -11,4 +11,6 @@ class ManagerController extends BaseController {
 	def employee={}
 	
 	def purchase={}
+	
+	def place={}
 }

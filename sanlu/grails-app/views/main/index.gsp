@@ -56,9 +56,7 @@
 		<fieldset>
 			<legend> 場地清單 </legend>
 			<div>
-				<a id="add2" href="#pdialog2" class="button">新增</a> <a id="modify2"
-					href="#pdialog2" class="button">修改</a>
-				<button id="delete2">刪除</button>
+				<button id="view">檢視</button>
 			</div>
 			<div id="palceGrid" />
 		</fieldset>
@@ -275,6 +273,23 @@
                         }
                     });
                     
+                    $("#view").click(function(){
+                        var selrow = grid2.jqGrid('getGridParam', 'selrow');
+                        if (!selrow) {
+                            alert("請先選擇檢視列");
+                            return;
+                        }
+                        var data = grid2.getRowData(selrow);
+                        API.openCalendar({
+                                id: data.id,
+                                type: "l",
+                                data:{
+                                	calendarName : data.placeName
+                                }
+                             
+                            });
+                    });
+                    
                     $("#delete").click(function(){
                         var selrow = grid1.jqGrid('getGridParam', 'selrow');
                         if (!selrow) {
@@ -339,73 +354,11 @@
                         }
                     });
                     
-                    $("#pclose,#pclose2").click(function(){
+                    $("#pclose").click(function(){
                         $.fancybox.close();
                     });
                     
-                    $("#delete2").click(function(){
-                        var selrow = grid2.jqGrid('getGridParam', 'selrow');
-                        if (!selrow) {
-                            alert("請先選擇刪除列");
-                            return;
-                        }
-                        if (!confirm("確定要刪除?")) {
-                            return;
-                        }
-                        var data = grid2.getRowData(selrow);
-                        $.ajax({
-                            type: "POST",
-                            url: contextRoot + "/place/delete",
-                            data: data,
-                            success: function(msg){
-                                grid2.trigger("reloadGrid");
-                                alert("刪除成功");
-                            }
-                        })
-                    });                    
-                    var action;
-                    $("#add2,#modify2").each(function(){
-                        $(this).fancybox({
-                            action: $(this).prop("id"),
-                            onStart: function(){
-                                action = this.action;
-                                if (action == "modify2") {
-                                    var selrow = grid2.jqGrid('getGridParam', 'selrow');
-                                    if (!selrow) {
-                                        alert("請先選擇修改列");
-                                        return false;
-                                    }
-                                    var id = grid2.getRowData(selrow);
-                                    $("#id").val(id.id);
-                                    $("#placeName").val(id.placeName);
-                                }
-                            },
-                            'titlePosition': 'inside',
-                            'transitionIn': 'elastic',
-                            'transitionOut': 'elastic',
-                            onClosed: function(){
-                                addForm2.reset();
-                            }
-                        });
-                    });
                     
-                    $("#padd2").click(function(){
-                    
-                        if ($("#addForm2").validationEngine('validate')) {
-                            var id = "";
-                            $.ajax({
-                                async: false,
-								url: contextRoot + "/place/" + (action == "add2" ? "insert" : "modify"),
-                                data: $("#addForm2").serializeData(),
-                                success: function(msg){
-                                $.fancybox.close();
-                                grid2.trigger("reloadGrid");
-                                alert("場地" + (action == "add1" ? "新增" : "修改") + "成功");
-                            }
-                            });
-							
-                        }
-                    });
                     //下拉選單
                     //禮儀公司
                     $.ajax({

@@ -61,6 +61,9 @@
 								<a href="#">系統管理</a>
 								<ul>
 									<li>
+										<a href="${request.contextPath}/manager/place">場地管理</a>
+									</li>
+									<li>
 										<a href="${request.contextPath}/manager/product">商品管理</a>
 									</li>
 									<li>

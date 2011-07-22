@@ -271,7 +271,9 @@
                             }
                             var product = grid1.getRowData(grid1.jqGrid('getGridParam', 'selrow'));
                             productId.val(product.id);
-                            hasPlace.trigger("change");
+                            if(isNomal){
+                            	hasPlace.trigger("change");
+                            }
                         },
                         'titlePosition': 'inside',
                         'transitionIn': 'elastic',

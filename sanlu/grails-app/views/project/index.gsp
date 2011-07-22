@@ -457,7 +457,7 @@
 							<button id="padd" type="button">
 								確定
 							</button>
-							<button  class="dialogClose"  type="button">
+							<button id="pclose" class="dialogClose"  type="button">
 								取消
 							</button>
 						</div>
@@ -723,6 +723,9 @@
 						});
 					}
 				});
+				$("#pclose").click(function(){
+                    $.fancybox.close();
+                });
 			});
 		</script>
 	</body>
