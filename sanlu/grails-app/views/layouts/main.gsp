@@ -81,7 +81,8 @@
 						<li style="float:right;">
 							<a id="logout" href="${request.contextPath}/login/logout">登出</a>
 						</li>
-						<li style="float:right;">
+						<li style="float:right;font-weight: bold;color: #666;display: block;padding: 4px 10px;">
+						
 							姓名:${session.empName}
 						</li>
 					</ul>
@@ -344,7 +345,7 @@
 		//一般商品
 		$.ajax({
             type: "POST",
-            url: contextRoot + "/combobox/normalProduct",
+            url: contextRoot + "/combobox/product",
             success: function(map){
                 $('#productId').setDropdown(map);
             }
