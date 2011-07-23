@@ -189,10 +189,10 @@ class BootStrap {
 					def flower = new Product(
 							productNo:"000001",
 							productName:"瓶花",
-							totalQuantity:50,
+							totalQuantity:0,
 							price:100,
 							sallingPrice:200,
-							costPrice:50,
+							costPrice:0,
 							isAgency:true,
 							//timetype:1,
 							lastModifyBy:emp1,
@@ -221,10 +221,10 @@ class BootStrap {
 					def hall = new Product(
 							productNo:"000003",
 							productName:"六菜碗",
-							totalQuantity:1,
+							totalQuantity:0,
 							price:400,
 							sallingPrice:800,
-							costPrice:500,
+							costPrice:0,
 							isAgency:true,
 							//timetype:1,
 							lastModifyBy:emp1,
@@ -291,9 +291,9 @@ class BootStrap {
 						product:hall,
 						project:project1,
 						isPurchase:false,
-						quantity:90,
+						quantity:0,
 						date:new Date(),
-						totalQuantity:hall.totalQuantity,
+						totalQuantity:0,
 						vendor:"廠商一",
 						LastModifyBy: emp2
 						)

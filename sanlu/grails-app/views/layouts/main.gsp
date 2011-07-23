@@ -93,6 +93,7 @@
 			<section>
 				<g:layoutBody />
 			</section>
+			<g:if test="${session.empLevel}">
 			<div class="hide">
 				<div id="agencyDialog1">
 					<fieldset>
@@ -349,5 +350,6 @@
             }
         });
 		</script>
+		</g:if>
 	</body>
 </html>
