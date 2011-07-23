@@ -17,7 +17,7 @@ import tw.com.sanlu.annotation.GridQuery
  */
 abstract class GridController extends BaseController {
 	public int page = 0, pageRows = 0, startRow = 0, rowCount = 0, pagerows = 0
-	def id ,sortBy,columns=[],rowData,format
+	def id ,sortBy,columns=[],rowData,format,userdata
 	public boolean pages,isAsc
 
 	def beforeInterceptor = {
@@ -55,6 +55,7 @@ abstract class GridController extends BaseController {
 			rowData = res["rowData"]
 			rowCount = res["rowCount"]
 			format = res["format"]
+			userdata = res["userdata"]
 			def rows=[]
 			for (data in rowData) {
 				def o=[]
@@ -87,6 +88,7 @@ abstract class GridController extends BaseController {
 			result.put(GridEnum.TOTAL.getCode(),rowCount.intdiv(pageRows)
 					+ (rowCount % pageRows > 0 ? 1 : 0))
 			result.put(GridEnum.RECORDS.getCode(),rowCount)
+			if(userdata)result.put("userdata",userdata)
 			render result as JSON
 		}catch(Exception e){
 			log.error e.dump()

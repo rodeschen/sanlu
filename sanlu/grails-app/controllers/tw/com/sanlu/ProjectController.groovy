@@ -62,10 +62,16 @@ class ProjectController extends GridController {
 				}
 			}
 		}
-
+		def itemCount = 0,amount = 0,itemCount2 = 0
+		projects?.each(){
+			itemCount++
+			itemCount2 += it.quantity
+			amount += (it.modifiedPrice * it.quantity)
+		}
+		
 		//format
 		//return ["rowData":projects,"rowCount":rowCount,"format":["projectName":{str -> return "$str xxxxccc"}]]
-		["rowData":projects,"rowCount":rowCount,format:["amount":{str , data -> return data.modifiedPrice * data.quantity}]]
+		["rowData":projects,"rowCount":rowCount,format:["amount":{str , data -> return data.modifiedPrice * data.quantity}],"userdata":[amount:amount,price:itemCount,quantity:itemCount2]]
 	}
 
 	def queryid = {

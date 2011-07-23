@@ -78,8 +78,13 @@ $.extend($.fn, {
 	setDropdown: function(data, append) {
 		!append && this.html('') && this.append($('<option></option>'));
 		var $this = this;
-		$.each(data, function(value, text) {
-			$this.append($('<option></option>').val(value).text(text));
+		$.each(data, function(value, data) {
+			if(typeof data === 'string'){
+				$this.append($('<option></option>').val(value).text(data));	
+			}else{
+				$this.append($('<option>',data));
+			}
+			
 		});
 		return this;
 	},

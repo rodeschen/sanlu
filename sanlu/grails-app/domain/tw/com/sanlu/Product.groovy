@@ -22,8 +22,15 @@ class Product {
 	BigDecimal costPrice
 	//時間類型
 	//String timeType
-	//計價單位
+	//計價顯示單位
 	String unit
+	
+	//計價單位類別  0:次  1:區間(時) 2:區間(天)
+	Integer costUnit = 0
+	
+	//每次計價單位
+	Integer costRange
+	
 	//是否為場地類商品
 	boolean hasPlace
 	//是否為代叫項目

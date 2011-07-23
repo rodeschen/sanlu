@@ -132,6 +132,8 @@ class BootStrap {
 //							costPrice:50,
 							//timeType:1,
 							unit:"場",
+							costUnit:1,
+							costRange:3,
 							lastModifyBy:emp1,
 							hasPlace:true)
 					leave.save()
@@ -163,6 +165,8 @@ class BootStrap {
 //							costPrice:50,
 							//timetype:1,
 							unit:"場",
+							costUnit:1,
+							costRange:2,
 							lastModifyBy:emp1,
 							hasPlace:true)
 					product2.save()
@@ -197,9 +201,27 @@ class BootStrap {
 							//timetype:1,
 							lastModifyBy:emp1,
 							unit:"對",
+							costUnit:0,
+							costRange:1,
 							hasPlace:false
 							)
+					def flower2 = new Product(
+						productNo:"000001",
+						productName:"瓶花",
+						totalQuantity:0,
+						price:100,
+						sallingPrice:200,
+						costPrice:0,
+						isAgency:true,
+						//timetype:1,
+						lastModifyBy:emp1,
+						unit:"對",
+						costUnit:0,
+						costRange:1,
+						hasPlace:false
+						)
 					flower.save()
+					flower2.save()
 					def washbasin = new Product(
 							productNo:"000002",
 							productName:"奉臉盆水",
@@ -211,6 +233,8 @@ class BootStrap {
 							//timetype:1,
 							lastModifyBy:emp1,
 							unit:"組",
+							costUnit:2,
+							costRange:1,
 							hasPlace:false
 							)
 					washbasin.save()
@@ -228,6 +252,8 @@ class BootStrap {
 							isAgency:true,
 							//timetype:1,
 							lastModifyBy:emp1,
+							costUnit:0,
+							costRange:1,
 							unit:"節",
 							hasPlace:false
 							)
@@ -265,6 +291,20 @@ class BootStrap {
 							project:project1
 							)
 					flowerDetail.save()
+//					def flowerDetail2 = new BillDetail(
+//						product:flower2,
+//						startTime:new Date(111,5,9,10,00,00),
+//						endTime:new Date(111,5,9,12,00,00),
+//						quantity:10,
+//						price:550,
+//						color:1,
+//						modifiedPrice:500,
+//						costPrice:300,
+//						modifiedCostPrice:300,
+//						lastModifyBy:emp2,
+//						project:project1
+//						)
+//				flowerDetail2.save()
 					if(flowerDetail.hasErrors()){
 						println flowerDetail.errors
 					}
