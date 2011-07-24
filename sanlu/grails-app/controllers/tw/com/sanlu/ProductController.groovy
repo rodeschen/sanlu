@@ -52,6 +52,7 @@ class ProductController extends GridController{
 						sallingPrice:new BigDecimal(json.getString("sallingPrice")),
 						unit:json.getString("unit"),
 						hasPlace:"T".equals( json.getString("hasPlace")),
+						costRange:json.getInt("costRange"),
 						lastModifyBy:session.employee)
 			}
 		}else{
@@ -123,7 +124,7 @@ class ProductController extends GridController{
 						break
 					case 'price':
 					case 'sallingPrice':
-					case 'costPrice':
+					case 'costPrice':					
 						productLinkPlace.putAt keyName,new BigDecimal(it.value)
 						break
 					default:
@@ -142,7 +143,9 @@ class ProductController extends GridController{
 					case 'productId':
 						break
 					case 'price':
-					case 'sallingPrice':
+					case 'sallingPrice':		
+					case 'costRange':
+					case 'costUnit':
 						productLinkPlace.putAt keyName,new BigDecimal(it.value)
 						break
 					case 'hasPlace':
@@ -161,7 +164,7 @@ class ProductController extends GridController{
 		render res as JSON
 	}
 	//product.lastModifyBy.empName
-	def setObj(keyNames,obj,val){
+	/*def setObj(keyNames,obj,val){
 		if(keyNames.indexOf('.') > -1){
 			def keyName = keyNames.substring(0,keyNames.indexOf('.'))
 			def lastKeyNames = keyNames.substring(keyNames.indexOf('.')+1)
@@ -177,13 +180,15 @@ class ProductController extends GridController{
 				case 'sallingPrice':
 				case 'costPrice':
 				case 'totalQuantity':
+				case 'cosRange':
+				case 'costUnit':
 					obj.putAt keyNames,new BigDecimal(val)
 					break
 				default:
 					obj.putAt keyNames,val
 			}
 		}
-	}
+	}*/
 
 	def purchase={
 

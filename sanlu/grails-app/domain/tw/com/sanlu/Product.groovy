@@ -55,5 +55,6 @@ class Product {
 		costPrice nullable:true
 		hasPlace nullable:true
 		isAgency nullable:true
+		costRange nullable:true
 	}
 }

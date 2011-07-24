@@ -62,7 +62,7 @@
                 },
                 "integer": {
                     "regex": /^[\-\+]?\d+$/,
-                    "alertText": "* Not a valid integer"
+                    "alertText": "* 請輸入數字"
                 },
                 "number": {
                     // Number, including positive, negative, and floating decimal. credit: orefalo

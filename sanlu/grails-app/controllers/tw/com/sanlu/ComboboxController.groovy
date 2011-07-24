@@ -68,11 +68,11 @@ class ComboboxController extends BaseController {
 	}
 
 	//一般商品
-	def normalProduct = {
+	def normalProduct ={
 		def l = Product.findAllByHasPlaceAndIsAgency(false,false)
 		def res = [:]
 		l?.each(){
-			res[it.id] = ["value":it.id,"unit":it.costUnit,rangee:it.costRange,"text":it.productName]
+			res[it.id] = it.productName
 		}
 		render res as JSON
 	}
@@ -85,7 +85,17 @@ class ComboboxController extends BaseController {
 		}
 		render res as JSON
 	}
-
+	
+	//非場地型商品
+	def product ={
+		def l = Product.findAllByHasPlace(false)
+		def res = [:]
+		l?.each(){
+			res[it.id] = it.productName
+		}
+		render res as JSON
+	}
+	
 	def placeByProduct={
 		def l = ProductLinkPlace.findAllByProduct(Product.findById(params.get("id")));
 		def res = [:]
