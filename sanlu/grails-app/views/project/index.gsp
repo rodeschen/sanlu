@@ -141,6 +141,8 @@
             <button id="delete1">
                 刪除
             </button>
+            <!--  <button id="checkOut">結帳</button> -->
+            <button id="downloadBill">下載帳單</button>
             <button id="calendar" style="float: right;">
                 專案行事曆
             </button>
@@ -688,6 +690,16 @@
                 });
                 $("#pclose").click(function(){
                     $.fancybox.close();
+                });
+                
+                $("#downloadBill").click(function(){                    
+                   API.formSubmit({
+					url: contextRoot + "/excel/bill",
+					target: "_self",
+					data: {
+						projectId:responseJSON.id
+					}
+				});
                 });
             });
         </script>

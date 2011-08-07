@@ -1,6 +1,6 @@
 dataSource {
 
-	//logSql = true	
+	logSql = true	
 	pooled = true
 	dbCreate = "update"
 	url = "jdbc:mysql://localhost/yourDB"

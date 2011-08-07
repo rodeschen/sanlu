@@ -3,6 +3,7 @@ import tw.com.sanlu.BillDetail
 import tw.com.sanlu.Employee
 import tw.com.sanlu.FuneralCompany
 import tw.com.sanlu.Funeraler;
+import tw.com.sanlu.Parameters
 import tw.com.sanlu.Place
 import tw.com.sanlu.Product
 import tw.com.sanlu.ProductHistory
@@ -50,7 +51,7 @@ class BootStrap {
 							phone1:"091234567",
 							contactAddrCity:"新北市",
 							contactAddrArea:"三重區",
-							contactAddr:"XX路",							
+							contactAddr:"XX路",
 							lastModifyBy:emp1
 							)
 					fCom.save()
@@ -126,10 +127,10 @@ class BootStrap {
 					//init Product
 					def leave = new Product(productNo:"000004",
 							productName:"告別式",
-//							totalQuantity:50,
-//							price:100,
-//							sallingPrice:200,
-//							costPrice:50,
+							//							totalQuantity:50,
+							//							price:100,
+							//							sallingPrice:200,
+							//							costPrice:50,
 							//timeType:1,
 							unit:"場",
 							costUnit:1,
@@ -159,10 +160,10 @@ class BootStrap {
 					productLinkPlace1.save()
 					def product2 = new Product(productNo:"000005",
 							productName:"助念",
-//							totalQuantity:50,
-//							price:100,
-//							sallingPrice:200,
-//							costPrice:50,
+							//							totalQuantity:50,
+							//							price:100,
+							//							sallingPrice:200,
+							//							costPrice:50,
 							//timetype:1,
 							unit:"場",
 							costUnit:1,
@@ -205,23 +206,8 @@ class BootStrap {
 							costRange:1,
 							hasPlace:false
 							)
-					def flower2 = new Product(
-						productNo:"000001",
-						productName:"瓶花",
-						totalQuantity:0,
-						price:100,
-						sallingPrice:200,
-						costPrice:0,
-						isAgency:true,
-						//timetype:1,
-						lastModifyBy:emp1,
-						unit:"對",
-						costUnit:0,
-						costRange:1,
-						hasPlace:false
-						)
+
 					flower.save()
-					flower2.save()
 					def washbasin = new Product(
 							productNo:"000002",
 							productName:"奉臉盆水",
@@ -238,9 +224,6 @@ class BootStrap {
 							hasPlace:false
 							)
 					washbasin.save()
-					if(washbasin.hasErrors()){
-						println washbasin.errors
-					}
 
 					def hall = new Product(
 							productNo:"000003",
@@ -250,7 +233,6 @@ class BootStrap {
 							sallingPrice:800,
 							costPrice:0,
 							isAgency:true,
-							//timetype:1,
 							lastModifyBy:emp1,
 							costUnit:0,
 							costRange:1,
@@ -258,14 +240,45 @@ class BootStrap {
 							hasPlace:false
 							)
 					hall.save()
+					def rice = new Product(
+							productNo:"000004",
+							productName:"靈位供飯",
+							totalQuantity:0,
+							price:240,
+							sallingPrice:300,
+							costPrice:100,
+							isAgency:true,
+							lastModifyBy:emp1,
+							unit:"天",
+							costUnit:2,
+							costRange:1,
+							hasPlace:false
+							)
+					rice.save()
+
+					def readBook = new Product(
+							productNo:"000005",
+							productName:"誦經",
+							totalQuantity:0,
+							price:400,
+							sallingPrice:600,
+							costPrice:300,
+							isAgency:false,
+							lastModifyBy:emp1,
+							unit:"時",
+							costUnit:0,
+							costRange:2,
+							hasPlace:false
+							)
+					readBook.save()
 
 					//init Project
 					def project1 = new Project(
 							projectName:"張一二",
 							funeralCompany : fCom,
 							funeraler:funer,
-							inDate:new Date(99,12,1,10,00,00),
-							outDate:new Date(100,12,1,10,00,00),
+							inDate:new Date(111,5,1,10,00,00),
+							outDate:new Date(111,9,1,10,00,00),
 							emp:emp1,
 							sallingTotal:100000,
 							total:90000,
@@ -291,21 +304,21 @@ class BootStrap {
 							project:project1
 							)
 					flowerDetail.save()
-//					def flowerDetail2 = new BillDetail(
-//						product:flower2,
-//						startTime:new Date(111,5,9,10,00,00),
-//						endTime:new Date(111,5,9,12,00,00),
-//						quantity:10,
-//						price:550,
-//						color:1,
-//						modifiedPrice:500,
-//						costPrice:300,
-//						modifiedCostPrice:300,
-//						lastModifyBy:emp2,
-//						project:project1
-//						)
-//				flowerDetail2.save()
-					if(flowerDetail.hasErrors()){
+					def riceDetail = new BillDetail(
+							product:rice,
+							startTime:new Date(111,5,9,10,00,00),
+							endTime:new Date(111,5,20,12,00,00),
+							quantity:10,
+							price:300,
+							color:1,
+							modifiedPrice:300,
+							costPrice:100,
+							modifiedCostPrice:100,
+							lastModifyBy:emp2,
+							project:project1
+							)
+					riceDetail.save()
+					if(riceDetail.hasErrors()){
 						println flowerDetail.errors
 					}
 					def washbasinDetail= new BillDetail(
@@ -326,30 +339,83 @@ class BootStrap {
 					if(washbasinDetail.hasErrors()){
 						println washbasinDetail.errors
 					}
-					
+					def readBookDetail = new BillDetail(
+							product:readBook,
+							startTime:new Date(111,5,9,10,00,00),
+							endTime:new Date(111,5,9,12,00,00),
+							quantity:1,
+							price:600,
+							color:1,
+							modifiedPrice:600,
+							costPrice:400,
+							modifiedCostPrice:400,
+							lastModifyBy:emp2,
+							project:project1
+							)
+					readBookDetail.save()
+					if(readBookDetail.hasErrors()){
+						println flowerDetail.errors
+					}
+					def readBookDetail2 = new BillDetail(
+							product:readBook,
+							startTime:new Date(111,5,11,10,00,00),
+							endTime:new Date(111,5,11,12,00,00),
+							quantity:1,
+							price:600,
+							color:1,
+							modifiedPrice:600,
+							costPrice:400,
+							modifiedCostPrice:400,
+							lastModifyBy:emp2,
+							project:project1
+							)
+					readBookDetail2.save()
+					def readBookDetail3 = new BillDetail(
+							product:readBook,
+							startTime:new Date(111,5,13,10,00,00),
+							endTime:new Date(111,5,13,12,00,00),
+							quantity:1,
+							price:600,
+							color:1,
+							modifiedPrice:600,
+							costPrice:400,
+							modifiedCostPrice:400,
+							lastModifyBy:emp2,
+							project:project1
+							)
+					readBookDetail3.save()
 					def productHistory =new ProductHistory(
-						product:hall,
-						project:project1,
-						isPurchase:false,
-						quantity:0,
-						date:new Date(),
-						totalQuantity:0,
-						vendor:"廠商一",
-						LastModifyBy: emp2
-						)
+							product:hall,
+							project:project1,
+							isPurchase:false,
+							quantity:0,
+							date:new Date(),
+							totalQuantity:0,
+							vendor:"廠商一",
+							lastModifyBy: emp2
+							)
 					productHistory.save()
 					def productHistory2 =new ProductHistory(
-						product:washbasin,
-						//project:project1,
-						isPurchase:false,
-						quantity:100,
-						date:new Date(),
-						totalQuantity:washbasin.totalQuantity,
-						memo:"This is a memo!!",
-						vendor:"廠商二",
-						LastModifyBy: emp2
-						)
+							product:washbasin,
+							//project:project1,
+							isPurchase:false,
+							quantity:100,
+							date:new Date(),
+							totalQuantity:washbasin.totalQuantity,
+							memo:"This is a memo!!",
+							vendor:"廠商二",
+							lastModifyBy: emp2
+							)
 					productHistory2.save()
+					
+					def excelPassword = new Parameters(
+						type:"excelPassword",
+						value:"ssanlu",
+						description:"Excel Password",
+						memo:"Excel Password",
+						lastModifyBy: emp1
+						)
+					excelPassword.save()
 				}catch(Exception e){
 					println e.dump()
 				}

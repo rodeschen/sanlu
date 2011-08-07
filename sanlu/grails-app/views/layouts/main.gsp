@@ -75,6 +75,9 @@
 									<li>
 										<a href="${request.contextPath}/manager/employee">員工管理</a>
 									</li>
+									<li>
+										<a id="resetExcelPW" href="#agencyDialog4">重設Excel保護密碼</a>
+									</li>
 								</ul>
 							</li>
 						</g:if>
@@ -245,6 +248,32 @@
 					</fieldset>
 				</div>
 			</div>
+			<div class="hide">
+				<div id="agencyDialog4">
+					<fieldset>
+						<legend>
+							重設Excel保護密碼
+						</legend>
+						<g:form name="resetExcelPWForm" id="resetExcelPWForm" onsubmit="return false;" autocomplete="off" novalidate="novalidate">
+							<div class="field-row">
+								<span class="th1">保護密碼：</span>
+                            <span>
+                                <input type="text" id="excelPW" name="excelPW" placeholder="保護密碼"
+								class="validate[required]" />
+                            </span>
+							</div>
+							<div style="text-align: center;">
+								<button id="excelExport4" type="button">
+									確定
+								</button>
+								<button class="dialogClose" type="button">
+									取消
+								</button>
+							</div>
+						</g:form>
+					</fieldset>
+				</div>
+			</div>
 		</div>
 		<script>
 		//品項代叫報表
@@ -336,6 +365,33 @@
 					}
 				});
 				$.fancybox.close();
+			}
+		});
+
+		//重設Excel保護密碼		
+		var resetExcelPWForm = $("#resetExcelPWForm");
+		$("#resetExcelPW").fancybox({
+			'titlePosition': 'inside',
+			'transitionIn': 'elastic',
+			'transitionOut': 'elastic',
+			onClosed: function() {
+				$("#agencyDialog4").find("form").each( function() {
+					this.reset();
+				});
+			}
+		});
+		$("#excelExport4").click( function() {
+			if(resetExcelPWForm.validationEngine('validate')) {
+				$.ajax({
+                    type: "POST",
+                    url: contextRoot + "/excel/resetExcelPW",
+                    data: {excelPW:resetExcelPWForm.find("#excelPW").val()},
+                    success: function(msg){
+                    	
+                        alert("重設密碼成功");
+                    }
+                })				
+                $.fancybox.close();				
 			}
 		});
 		$(".dialogClose").live('click', function() {
