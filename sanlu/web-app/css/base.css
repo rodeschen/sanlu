@@ -259,6 +259,15 @@ button {
 	text-align:right;
 }
 
+.field-row span.th2{
+	color:#AB8915 ;
+	font-weight:bold;
+	width:130px;
+	display:inline-block;
+	padding:5px;
+	text-align:right;
+}
+
 .field-row span.td1{
 }
 

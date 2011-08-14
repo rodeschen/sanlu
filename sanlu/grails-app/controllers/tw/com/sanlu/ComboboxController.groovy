@@ -52,7 +52,7 @@ class ComboboxController extends BaseController {
 		def l = Product.findAllByHasPlace(true)
 		def res = [:]
 		l?.each(){
-			res[it.id] = it.productName
+			res[it.id] = ["value":it.id,"unit":it.costUnit,range:it.costRange,"text":it.productName]
 		}
 		render res as JSON
 	}
@@ -72,7 +72,7 @@ class ComboboxController extends BaseController {
 		def l = Product.findAllByHasPlaceAndIsAgency(false,false)
 		def res = [:]
 		l?.each(){
-			res[it.id] = it.productName
+			res[it.id] = ["value":it.id,"unit":it.costUnit,range:it.costRange,"text":it.productName]
 		}
 		render res as JSON
 	}
@@ -81,11 +81,11 @@ class ComboboxController extends BaseController {
 		def l = Product.findAllByHasPlaceAndIsAgency(false,true)
 		def res = [:]
 		l?.each(){
-			res[it.id] = it.productName
+			res[it.id] = ["value":it.id,"unit":it.costUnit,range:it.costRange,"text":it.productName]
 		}
 		render res as JSON
 	}
-	
+
 	//非場地型商品
 	def product ={
 		def l = Product.findAllByHasPlace(false)
@@ -95,12 +95,14 @@ class ComboboxController extends BaseController {
 		}
 		render res as JSON
 	}
-	
+
 	def placeByProduct={
-		def l = ProductLinkPlace.findAllByProduct(Product.findById(params.get("id")));
 		def res = [:]
-		l?.each(){
-			res[it.place.id] = it.place.placeName
+		if(params.getAt("id")){
+			def l = ProductLinkPlace.findAllByProduct(Product.findById(params.get("id")));
+			l?.each(){
+				res[it.place.id] = it.place.placeName
+			}
 		}
 		render res as JSON
 	}

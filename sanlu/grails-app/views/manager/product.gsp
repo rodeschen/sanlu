@@ -5,403 +5,411 @@
     </head>
     <body>
         <script>
-                        $(document).ready(function(){
-                            var hasPlace = $("#hasPlace"), placeId = $("#placeId"), productName = $('#productName'), productId = $('#productId');
-                            var grid1 = $("#grid1").jqGrid({
-                                url: contextRoot + "/product/queryProduct",
-                                pager: true,
-                                sortname: 'productNo',
-                                caption: "商品清單",
-                                colModel: [{
-                                    name: 'id',
-                                    index: 'id',
-                                    hidden: true,
-                                    key: true
-                                }, {
-                                    header: "商品代號",
-                                    name: 'productNo',
-                                    index: 'productNo',
-                                    width: 20
-                                }, {
-                                    header: "產品名稱",
-                                    name: 'productName',
-                                    index: 'productName',
-                                    align: 'center',
-                                    width: 20
-                                }, {
-                                    header: "場地類",
-                                    name: 'hasPlace',
-                                    index: 'hasPlace',
-                                    width: 15,
-                                    formatter: function(el, cellval, opts){
-                                        return el ? "是" : "否";
-                                    },
-                                    align: 'center'
-                                }, {
-                                    header: "代叫品項",
-                                    name: 'isAgency',
-                                    index: 'isAgency',
-                                    width: 17,
-                                    align: 'center',
-                                    formatter: function(el, cellval, opts){
-                                        return el ? "是" : "否";
-                                    }                        
-                                }, {
-                                    header: "內帳單價",
-                                    name: 'price',
-                                    index: 'price',
-                                    width: 20,
-                                    align: 'right',
-                                    formatter: "currency"
-                                }, {
-                                    header: "銷售單價",
-                                    name: 'sallingPrice',
-                                    index: 'sallingPrice',
-                                    width: 20,
-                                    align: 'right',
-                                    formatter: "currency"
-                                }, {
-                                    header: "成本單價",
-                                    name: 'costPrice',
-                                    index: 'costPrice',
-                                    width: 20,
-                                    align: 'right',
-                                    formatter: "currency"
-                                }, {
-                                    header: "庫存數量",
-                                    name: 'totalQuantity',
-                                    index: 'totalQuantity',
-                                    width: 20,
-                                    align: 'right'
-                                }, {
-                                    header: "顯示單位",
-                                    name: 'unit',
-                                    index: 'unit',
-                                    width: 20,
-                                    align: 'center'
-                                }, {
-                                    header: "計價單位",
-                                    name: 'costUnit',
-                                    index: 'costUnit',
-                                    width: 17,
-                                    align: 'center',
-                                    formatter: function(el, cellval, opts){
-                                        return el==0 ? "次" : (el==1 ? "時": "天");
-                                    }
-                                }, {
-                                    header: "顯示單位",
-                                    name: 'costRange',
-                                    index: 'costRange',
-                                    width: 17,
-                                    align: 'center'
-                                }, {
-                                    header: "最後修改時間",
-                                    name: 'lastUpdated',
-                                    index: 'lastUpdated',
-                                    width: 40,
-                                    sorttype: "date",
-                                    align: 'center'
-                                }, {
-                                    header: "最後修改者",
-                                    name: 'lastModifyBy.empName',
-                                    index: 'lastModifyBy.empName',
-                                    width: 25,
-                                    align: 'center'
-                                }],
-                                onSelectRow: function(id){
-                                    grid2.clearGridData();
-                                    var product = grid1.getRowData(id);
-                                    $("#placeMDiv")[product.hasPlace == '是' ? 'show' : 'hide']();
-                                    if (product.hasPlace == '是') {
-                                        grid2.jqGrid('setGridParam', {
-                                            postData: {
-                                                'product.id': product.id
-                                            },
-                                            datatype: "json"
-                                        }).trigger("reloadGrid");
-                                    }
-                                }
-                            });
-                            
-                            var grid2 = $("#grid2").jqGrid({
-                                url: contextRoot + "/product/queryPlaceProduct",
-                                datatype: "local",
-                                pager: true,
-                                //grouping: true,
-                                //groupingView: {
-                                //groupField: ['product.productName'],
-                                //    groupColumnShow: [false]
-                                //},
-                                sortname: 'place',
-                                caption: "場地清單",
-                                colModel: [{
-                                    name: 'id',
-                                    index: 'id',
-                                    hidden: true,
-                                    key: true
-                                }, {
-                                    name: 'product.id',
-                                    index: 'product.id',
-                                    hidden: true
-                                }, {
-                                    name: 'place.id',
-                                    index: 'place.id',
-                                    hidden: true
-                                }, {
-                                    header: "產品名稱",
-                                    name: 'product.productName',
-                                    index: 'product.productName',
-                                    width: 20,
-                                    align: 'center'
-                                }, {
-                                    header: "場地名稱",
-                                    name: 'place.placeName',
-                                    index: 'place.placeName',
-                                    width: 20,
-                                    align: 'center'
-                                }, {
-                                    header: "內帳銷售單價",
-                                    name: 'price',
-                                    index: 'price',
-                                    width: 20,
-                                    align: 'right',
-                                    formatter: "currency"
-                                }, {
-                                    header: "銷售單價",
-                                    name: 'sallingPrice',
-                                    index: 'sallingPrice',
-                                    width: 20,
-                                    align: 'right',
-                                    formatter: "currency"
-                                }, {
-                                    header: "成本單價",
-                                    name: 'costPrice',
-                                    index: 'costPrice',
-                                    width: 20,
-                                    align: 'right',
-                                    formatter: "currency"
-                                }, {
-                                    header: "最後修改時間",
-                                    name: 'lastUpdated',
-                                    index: 'lastUpdated',
-                                    width: 35,
-                                    sorttype: "date",
-                                    align: 'center'
-                                }, {
-                                    header: "最後修改者",
-                                    name: 'product.lastModifyBy.empName',
-                                    index: 'product.lastModifyBy.empName',
-                                    width: 30,
-                                    align: 'center'
-                                }]
-                            });
-                            
-                            
-                            
-                            $("#delete1,#delete2").click(function(){
-                                var action = $(this).prop("id");
-                                var grid = action.indexOf('2') > -1 ? grid2 : grid1
-                                var selrow = grid.jqGrid('getGridParam', 'selrow');
-                                if (!selrow) {
-                                    alert("請先選擇刪除列");
-                                    return false;
-                                }
-                                var isNomal = action.indexOf('1') > -1;
-                                if (isNomal && grid2.jqGrid('getGridParam', 'records') > 0) {
-                                    alert("請先刪除商品使用場地");
-                                    return false;
-                                }
-                                if (!confirm("確定要刪除?")) {
-                                    return;
-                                }
-                                var id = grid.getRowData(selrow);
-                                $.extend(id, {
-                                    isNomal: isNomal
-                                });
+            $(document).ready(function(){
+                var hasPlace = $("#hasPlace"), placeId = $("#placeId"), productName = $('#productName'), productId = $('#productId');
+                var grid1 = $("#grid1").jqGrid({
+                    url: contextRoot + "/product/queryProduct",
+                    pager: true,
+                    sortname: 'productNo',
+                    caption: "商品清單",
+                    colModel: [{
+                        name: 'id',
+                        index: 'id',
+                        hidden: true,
+                        key: true
+                    }, {
+                        header: "商品代號",
+                        name: 'productNo',
+                        index: 'productNo',
+                        width: 20,
+                        align: 'center',
+                    }, {
+                        header: "產品名稱",
+                        name: 'productName',
+                        index: 'productName',
+                        align: 'center',
+                        width: 20
+                    }, {
+                        header: "類別",
+                        name: 'hasPlace',
+                        index: 'hasPlace',
+                        width: 15,
+                        formatter: function(el, cellval, opts){
+                            return el ? "場地" : "一般";
+                        },
+                        align: 'center'
+                    }, {
+                        header: "代叫品項",
+                        name: 'isAgency',
+                        index: 'isAgency',
+                        width: 17,
+                        align: 'center',
+                        formatter: function(el, cellval, opts){
+                            return el ? "是" : "否";
+                        }
+                    }, {
+                        header: "內帳單價",
+                        name: 'price',
+                        index: 'price',
+                        width: 20,
+                        align: 'right',
+                        formatter: "currency"
+                    }, {
+                        header: "銷售單價",
+                        name: 'sallingPrice',
+                        index: 'sallingPrice',
+                        width: 20,
+                        align: 'right',
+                        formatter: "currency"
+                    }, {
+                        header: "成本單價",
+                        name: 'costPrice',
+                        index: 'costPrice',
+                        width: 20,
+                        align: 'right',
+                        formatter: "currency"
+                    }, {
+                        header: "庫存數量",
+                        name: 'totalQuantity',
+                        index: 'totalQuantity',
+                        width: 20,
+                        align: 'right'
+                    }, {
+                        header: "顯示單位",
+                        name: 'unit',
+                        index: 'unit',
+                        width: 20,
+                        align: 'center'
+                    }, {
+                        header: "計價單位",
+                        name: 'costUnit_view',
+                        index: 'costUnit',
+                        width: 17,
+                        align: 'center',
+                        formatter: function(el, cellval, opts){
+                            return ["次","次(時)","小時","天","月"][el];//el == 0 ? "次" : (el == 1 ? "時" : "天");
+                        }
+                    }, {
+                        header: "計價單位",
+                        name: 'costUnit',
+                        index: 'costUnit',
+                        width: 17,
+                        align: 'center',
+						hidden:true
+                    }, {
+                        header: "計價區間",
+                        name: 'costRange',
+                        index: 'costRange',
+                        width: 17,
+                        align: 'center'
+                    }, {
+                        header: "最後修改時間",
+                        name: 'lastUpdated',
+                        index: 'lastUpdated',
+                        width: 40,
+                        sorttype: "date",
+                        align: 'center'
+                    }, {
+                        header: "最後修改者",
+                        name: 'lastModifyBy.empName',
+                        index: 'lastModifyBy.empName',
+                        width: 25,
+                        align: 'center'
+                    }],
+                    onSelectRow: function(id){
+                        grid2.clearGridData();
+                        var product = grid1.getRowData(id);
+                        $("#placeMDiv")[product.hasPlace == '場地' ? 'show' : 'hide']();
+                        if (product.hasPlace == '場地') {
+                            grid2.jqGrid('setGridParam', {
+                                postData: {
+                                    'product.id': product.id
+                                },
+                                datatype: "json"
+                            }).trigger("reloadGrid");
+                        }
+                    }
+                });
+                
+                var grid2 = $("#grid2").jqGrid({
+                    url: contextRoot + "/product/queryPlaceProduct",
+                    datatype: "local",
+                    pager: true,
+                    //grouping: true,
+                    //groupingView: {
+                    //groupField: ['product.productName'],
+                    //    groupColumnShow: [false]
+                    //},
+                    sortname: 'place',
+                    caption: "場地清單",
+                    colModel: [{
+                        name: 'id',
+                        index: 'id',
+                        hidden: true,
+                        key: true
+                    }, {
+                        name: 'product.id',
+                        index: 'product.id',
+                        hidden: true
+                    }, {
+                        name: 'place.id',
+                        index: 'place.id',
+                        hidden: true
+                    }, {
+                        header: "產品名稱",
+                        name: 'product.productName',
+                        index: 'product.productName',
+                        width: 20,
+                        align: 'center'
+                    }, {
+                        header: "場地名稱",
+                        name: 'place.placeName',
+                        index: 'place.placeName',
+                        width: 20,
+                        align: 'center'
+                    }, {
+                        header: "內帳銷售單價",
+                        name: 'price',
+                        index: 'price',
+                        width: 20,
+                        align: 'right',
+                        formatter: "currency"
+                    }, {
+                        header: "銷售單價",
+                        name: 'sallingPrice',
+                        index: 'sallingPrice',
+                        width: 20,
+                        align: 'right',
+                        formatter: "currency"
+                    }, {
+                        header: "成本單價",
+                        name: 'costPrice',
+                        index: 'costPrice',
+                        width: 20,
+                        align: 'right',
+                        formatter: "currency"
+                    }, {
+                        header: "最後修改時間",
+                        name: 'lastUpdated',
+                        index: 'lastUpdated',
+                        width: 35,
+                        sorttype: "date",
+                        align: 'center'
+                    }, {
+                        header: "最後修改者",
+                        name: 'product.lastModifyBy.empName',
+                        index: 'product.lastModifyBy.empName',
+                        width: 30,
+                        align: 'center'
+                    }]
+                });
+                
+                
+                
+                $("#delete1,#delete2").click(function(){
+                    var action = $(this).prop("id");
+                    var grid = action.indexOf('2') > -1 ? grid2 : grid1
+                    var selrow = grid.jqGrid('getGridParam', 'selrow');
+                    if (!selrow) {
+                        alert("請先選擇刪除列");
+                        return false;
+                    }
+                    var isNomal = action.indexOf('1') > -1;
+                    if (isNomal && grid2.jqGrid('getGridParam', 'records') > 0) {
+                        alert("請先刪除商品使用場地");
+                        return false;
+                    }
+                    if (!confirm("確定要刪除?")) {
+                        return;
+                    }
+                    var id = grid.getRowData(selrow);
+                    $.extend(id, {
+                        isNomal: isNomal
+                    });
+                    $.ajax({
+                        type: "POST",
+                        url: contextRoot + "/product/delete",
+                        data: id,
+                        success: function(msg){
+                            grid.trigger("reloadGrid");
+                            if (isNomal) {
                                 $.ajax({
                                     type: "POST",
-                                    url: contextRoot + "/product/delete",
-                                    data: id,
-                                    success: function(msg){
-                                        grid.trigger("reloadGrid");
-                                        if (isNomal) {
-                                            $.ajax({
-                                                type: "POST",
-                                                url: contextRoot + "/combobox/placeOfProduct",
-                                                success: function(map){
-                                                    productId.setDropdown(map);
-                                                }
-                                            });
-                                        }
-                                        alert("刪除成功");
-                                    }
-                                })
-                            });
-                            
-                            var action = "";
-                            $("#add1,#modify1,#add2,#modify2").each(function(){
-                            
-                                $(this).fancybox({
-                                    action: $(this).prop("id"),
-                                    onStart: function(){
-                                        var selrow;
-                                        action = this.action;
-                                        var isNomal = action.indexOf('1') > -1;
-                                        var grid = (isNomal ? grid1 : grid2);
-                                        
-                                        $("#placeDiv,#productId")[isNomal ? 'hide' : 'show']();
-                                        $("#placeId,#productId")[isNomal ? 'removeClass' : 'addClass']('validate[required]');
-                                        $("#productName,#hasPlaceDiv,#unitDiv,#isAgencyDiv")[!isNomal ? 'hide' : 'show']();
-                                        $("#productName,#hasPlace,#unit,#isAgency")[!isNomal ? 'removeClass' : 'addClass']('validate[required]');
-                                        
-                                        if (action.indexOf("modify") > -1) {
-                                            selrow = grid.jqGrid('getGridParam', 'selrow');
-                                            if (!selrow) {
-                                                alert("請先選擇修改列");
-                                                return false;
-                                            }
-                                            var id = grid.getRowData(selrow);
-                                            var hasplace = id.hasPlace == '是';
-                                            $("#id").val(id.id);
-                                            $("#productNo").val(isNomal ? id.productNo : '');
-                                            $("#totalQuantity").val(isNomal ? id.totalQuantity : '');
-                                            $("#price").val(id.price);
-                                            $("#sallingPrice").val(id.sallingPrice);
-                                            $("#costPrice").val(id.costPrice);
-                                            $("#unit").val(isNomal ? id.unit : id['product.unit']);
-                                            if (isNomal) {
-                                                hasPlace.val(hasplace ? "T" : "F");
-                                                productName.val(id.productName);
-            									$("#costUnit").val("次"==id.costUnit?'0':("時"==id.costUnit?'1':'2'));            									
-            									$("#costRange").val(id.costRange);
-                                            }
-                                            else {
-                                                placeId.val(id['place.id']);
-                                                //$("#OplaceId").val(id['place.id']);
-                                                //$("#OproductId").val(id['product.id']);
-                                                productId.val(id['product.id']);
-                                            }
-                                            
-                                        }
-                                        else {
-                                        
-                                        }
-                                        var product = grid1.getRowData(grid1.jqGrid('getGridParam', 'selrow'));
-                                        productId.val(product.id);
-                                        if (isNomal) {
-                                            hasPlace.trigger("change");
-                                        }
-                                    },
-                                    'titlePosition': 'inside',
-                                    'transitionIn': 'elastic',
-                                    'transitionOut': 'elastic',
-                                    onClosed: function(){
-                                        addForm.reset();
+                                    url: contextRoot + "/combobox/placeOfProduct",
+                                    success: function(map){
+                                        productId.setDropdown(map);
                                     }
                                 });
-                            });
-                            $("#padd1").click(function(){
-                                if ($('#addForm').validationEngine('validate')) {
-                                    var isNomal = action.indexOf('1') > -1;
-                                    var grid = isNomal ? grid1 : grid2;
-                                    $.ajax({
-                                        url: contextRoot + "/product/" + (action == "add1" || action == "add2" ? "insert" : "modify"),
-                                        data: {
-                                            columnParam: JSON.stringify(grid.jqGrid('getGridParam', 'colModel')),
-                                            data: JSON.stringify($.extend($("#addForm").serializeData(), {
-                                                productId: productId.val()
-                                            })),
-                                            isNomal: isNomal
-                                        },
-                                        success: function(msg){
-                                            $.fancybox.close();
-                                            grid.trigger("reloadGrid");
-                                            if (isNomal) {
-                                                $.ajax({
-                                                    type: "POST",
-                                                    url: contextRoot + "/combobox/placeOfProduct",
-                                                    success: function(map){
-                                                        productId.setDropdown(map);
-                                                    }
-                                                });
-                                                $.ajax({
-                                                    type: "POST",
-                                                    url: contextRoot + "/combobox/normalProduct",
-                                                    success: function(map){
-                                                        $('#normalProduct').setDropdown(map);
-                                                    }
-                                                });
-                                            }
-                                            alert("產品/場地" + (action == "add1" || action == "add2" ? "新增" : "修改") + "成功");
-                                        }
-                                    })
+                            }
+                            alert("刪除成功");
+                        }
+                    })
+                });
+                
+                var action = "";
+                $("#add1,#modify1,#add2,#modify2").each(function(){
+                
+                    $(this).fancybox({
+                        action: $(this).prop("id"),
+                        onStart: function(){
+                            var selrow;
+                            action = this.action;
+                            var isNomal = action.indexOf('1') > -1;
+                            var grid = (isNomal ? grid1 : grid2);
+                            
+                            $("#placeDiv,#productId")[isNomal ? 'hide' : 'show']();
+                            $("#placeId,#productId")[isNomal ? 'removeClass' : 'addClass']('validate[required]');
+                            $("#productName,#hasPlaceDiv,#unitDiv,#isAgencyDiv")[!isNomal ? 'hide' : 'show']();
+                            $("#productName,#hasPlace,#unit,#isAgency")[!isNomal ? 'removeClass' : 'addClass']('validate[required]');
+                            
+                            if (action.indexOf("modify") > -1) {
+                                selrow = grid.jqGrid('getGridParam', 'selrow');
+                                if (!selrow) {
+                                    alert("請先選擇修改列");
+                                    return false;
                                 }
-                            });
-                            $("#pclose2,#pclose1").click(function(){
+                                var id = grid.getRowData(selrow);
+                                var hasplace = id.hasPlace == '場地';
+                                $("#id").val(id.id);
+                                $("#productNo").val(isNomal ? id.productNo : '');
+                                $("#totalQuantity").val(isNomal ? id.totalQuantity : '');
+                                $("#price").val(id.price);
+                                $("#sallingPrice").val(id.sallingPrice);
+                                $("#costPrice").val(id.costPrice);
+                                $("#unit").val(isNomal ? id.unit : id['product.unit']);
+                                if (isNomal) {
+                                    hasPlace.val(hasplace ? "T" : "F");
+                                    productName.val(id.productName);
+                                    //$("#costUnit").val("次" == id.costUnit ? '0' : ("時" == id.costUnit ? '1' : '2'));
+									$("#costUnit").val(id.costUnit);
+                                    $("#costRange").val(id.costRange);
+                                }
+                                else {
+                                    placeId.val(id['place.id']);
+                                    //$("#OplaceId").val(id['place.id']);
+                                    //$("#OproductId").val(id['product.id']);
+                                    productId.val(id['product.id']);
+                                }
+                                
+                            }
+                            else {
+                            
+                            }
+                            var product = grid1.getRowData(grid1.jqGrid('getGridParam', 'selrow'));
+                            productId.val(product.id);
+                            if (isNomal) {
+                                hasPlace.trigger("change");
+                            }
+                        },
+                        'titlePosition': 'inside',
+                        'transitionIn': 'elastic',
+                        'transitionOut': 'elastic',
+                        onClosed: function(){
+                            addForm.reset();
+                        }
+                    });
+                });
+                $("#padd1").click(function(){
+                    if ($('#addForm').validationEngine('validate')) {
+                        var isNomal = action.indexOf('1') > -1;
+                        var grid = isNomal ? grid1 : grid2;
+                        $.ajax({
+                            url: contextRoot + "/product/" + (action == "add1" || action == "add2" ? "insert" : "modify"),
+                            data: {
+                                columnParam: JSON.stringify(grid.jqGrid('getGridParam', 'colModel')),
+                                data: JSON.stringify($.extend($("#addForm").serializeData(), {
+                                    productId: productId.val()
+                                })),
+                                isNomal: isNomal
+                            },
+                            success: function(msg){
                                 $.fancybox.close();
-                            });
-                            $("#purchaseBtn").fancybox({
-                                'titlePosition': 'inside',
-                                'transitionIn': 'elastic',
-                                'transitionOut': 'elastic',
-                                onClosed: function(){
-                                    addForm2.reset();
-                                }
-                            });
-                            $("#padd2").click(function(){
-                                if ($('#addForm2').validationEngine('validate')) {
+                                grid.trigger("reloadGrid");
+                                if (isNomal) {
                                     $.ajax({
-                                        url: contextRoot + "/product/purchase",
-                                        data: $.extend($("#addForm2").serializeData(), {
-                                            id: $('#normalProduct').val()
-                                        }),
-                                        success: function(msg){
-                                            $.fancybox.close();
-                                            grid1.trigger("reloadGrid");
-                                            alert("進貨成功");
+                                        type: "POST",
+                                        url: contextRoot + "/combobox/placeOfProduct",
+                                        success: function(map){
+                                            productId.setDropdown(map);
                                         }
-                                    })
+                                    });
+                                    $.ajax({
+                                        type: "POST",
+                                        url: contextRoot + "/combobox/normalProduct",
+                                        success: function(map){
+                                            $('#normalProduct').setDropdown(map);
+                                        }
+                                    });
                                 }
-                            });
-                            hasPlace.change(function(){
-                                var v = $(this).val();
-                                $("#priceDiv,#sallingPriceDiv,#totalDiv,#costPriceDiv,#isAgencyDiv")[v == "F" ? 'show' : 'hide']();
-                                $("#price,#sallingPrice,#totalQuantity,#costPrice,#isAgency")[v == "F" ? 'removeClass' : 'addClass']('validate[required]');
-                            });
-                            //下拉選單
-                            //場地
-                            $.ajax({
-                                type: "POST",
-                                url: contextRoot + "/combobox/place",
-                                success: function(map){
-                                    placeId.setDropdown(map);
-                                }
-                            });
-                            //場地型商品
-                            $.ajax({
-                                type: "POST",
-                                url: contextRoot + "/combobox/placeOfProduct",
-                                success: function(map){
-                                    productId.setDropdown(map);
-                                }
-                            });
-                            //一般商品
-                            $.ajax({
-                                type: "POST",
-                                url: contextRoot + "/combobox/normalProduct",
-                                success: function(map){
-                                    $('#normalProduct').setDropdown(map);
-                                }
-                            });
-                            $.ajax({
-                                type: "POST",
-                                url: contextRoot + "/combobox/nonCloseProject",
-                                success: function(map){
-                                    $('#project').setDropdown(map);
-                                }
-                            });
-                        });
-                    
+                                alert("產品/場地" + (action == "add1" || action == "add2" ? "新增" : "修改") + "成功");
+                            }
+                        })
+                    }
+                });
+                $("#pclose2,#pclose1").click(function(){
+                    $.fancybox.close();
+                });
+                $("#purchaseBtn").fancybox({
+                    'titlePosition': 'inside',
+                    'transitionIn': 'elastic',
+                    'transitionOut': 'elastic',
+                    onClosed: function(){
+                        addForm2.reset();
+                    }
+                });
+                $("#padd2").click(function(){
+                    if ($('#addForm2').validationEngine('validate')) {
+                        $.ajax({
+                            url: contextRoot + "/product/purchase",
+                            data: $.extend($("#addForm2").serializeData(), {
+                                id: $('#normalProduct').val()
+                            }),
+                            success: function(msg){
+                                $.fancybox.close();
+                                grid1.trigger("reloadGrid");
+                                alert("進貨成功");
+                            }
+                        })
+                    }
+                });
+                hasPlace.change(function(){
+                    var v = $(this).val();
+                    $("#priceDiv,#sallingPriceDiv,#totalDiv,#costPriceDiv,#isAgencyDiv")[v == "F" ? 'show' : 'hide']();
+                    $("#price,#sallingPrice,#totalQuantity,#costPrice,#isAgency")[v == "F" ? 'removeClass' : 'addClass']('validate[required]');
+                });
+                //下拉選單
+                //場地
+                $.ajax({
+                    type: "POST",
+                    url: contextRoot + "/combobox/place",
+                    success: function(map){
+                        placeId.setDropdown(map);
+                    }
+                });
+                //場地型商品
+                $.ajax({
+                    type: "POST",
+                    url: contextRoot + "/combobox/placeOfProduct",
+                    success: function(map){
+                        productId.setDropdown(map);
+                    }
+                });
+                //一般商品
+                $.ajax({
+                    type: "POST",
+                    url: contextRoot + "/combobox/normalProduct",
+                    success: function(map){
+                        $('#normalProduct').setDropdown(map);
+                    }
+                });
+                $.ajax({
+                    type: "POST",
+                    url: contextRoot + "/combobox/nonCloseProject",
+                    success: function(map){
+                        $('#project').setDropdown(map);
+                    }
+                });
+            });
         </script>
         <fieldset>
             <legend>
@@ -496,19 +504,36 @@
                             <span>
                                 <select id="costUnit" name="costUnit">
                                     <option value="0" selected="selected">次</option>
-                                    <option value="1">時</option>
-                                    <option value="2">天</option>
+                                    <option value="1">次(時間)</option>
+                                    <option value="2">小時</option>
+                                    <option value="3">天</option>
+                                    <option value="4">月</option>
                                 </select>
                             </span>
                         </div>
                         <div class="field-row">
                             <span class="th1">計價單位：</span>
-                            <span><input type="text" id="costRange" name="costRange" placeholder="計價區間" class="validate[required,custom[integer]] text-input"/><span style="padding-left:25px;color:#900;font-weight:bold;font-size:11px;">
+                            <span><input type="text" id="costRange" name="costRange" placeholder="計價區間" class="validate[required,custom[integer]] text-input"/>
+                                <br/>
+                                <span style="padding-left:25px;disply:block;color:#900;font-weight:bold;font-size:11px;">註：
                                     <br/>
-                                    註：
-                                    次-以次為單位,
-                                    時-每次幾小時,
-                                    天-每次1天(新增時可選多天)
+                                    <ul>
+                                        <li>
+                                            次&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-以次為單位
+                                        </li>
+                                        <li>
+                                            次(時)&nbsp;-以次為單位(可設定使用時間)
+                                        </li>
+                                        <li>
+                                            時&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-每次幾小時(新增時可連續)
+                                        </li>
+                                        <li>
+                                            天&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-每次幾天(新增時可連續多天)
+                                        </li>
+                                        <li>
+                                            月&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-每次幾個月(新增時可連續多月)
+                                        </li>
+                                    </ul>
                                 </span>
                             </span>
                         </div>

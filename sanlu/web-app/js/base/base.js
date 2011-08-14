@@ -89,7 +89,7 @@ $.extend($.fn, {
 		return this;
 	},
 	serializeData: function() {
-		var res = {}, fields = this.find(":input").serializeArray();
+		var res = {}, fields = this.find(":input,:disabled").serializeArray();
 		$("#results").empty();
 		$.each(fields, function(i, field) {
 			if (res[field.name]) {

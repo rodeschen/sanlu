@@ -40,7 +40,7 @@ class ProductController extends GridController{
 				product = new Product(
 						productNo:String.format("%06d", ++count),
 						productName:json.getString("productName"),
-						totalQuantity:new BigDecimal(json.getInt("totalQuantity")),
+						totalQuantity:new BigDecimal(0),
 						unit:json.getString("unit"),
 						hasPlace:"T".equals( json.getString("hasPlace")),
 						lastModifyBy:session.employee)
@@ -61,7 +61,8 @@ class ProductController extends GridController{
 					place : Place.findById(json.getString("placeId")),
 					price:new BigDecimal(json.getString("price")),
 					sallingPrice:new BigDecimal(json.getString("sallingPrice")),
-					costPrice:new BigDecimal(json.getString("costPrice")),
+					//costPrice:new BigDecimal(json.getString("costPrice")),
+					costPrice:0,
 					lastModifyBy:session.employee)
 		}
 		product.save()

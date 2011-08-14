@@ -72,7 +72,7 @@ abstract class GridController extends BaseController {
 						}
 					}
 					if(tmp instanceof Timestamp){
-						tmp = Utility.shortFormat.format(tmp)
+						tmp = Utility.ADFormat.format(tmp)
 					}
 					//format ????
 					tmp = format?(format.containsKey(it)?format[it](tmp,data):tmp):tmp

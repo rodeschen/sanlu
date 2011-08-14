@@ -68,10 +68,17 @@ class ProjectController extends GridController {
 			itemCount2 += it.quantity
 			amount += (it.modifiedPrice * it.quantity)
 		}
-		
+
 		//format
 		//return ["rowData":projects,"rowCount":rowCount,"format":["projectName":{str -> return "$str xxxxccc"}]]
-		["rowData":projects,"rowCount":rowCount,format:["amount":{str , data -> return data.modifiedPrice * data.quantity}],"userdata":[amount:amount,price:itemCount,quantity:itemCount2]]
+		["rowData":projects,"rowCount":rowCount,format:["amount":{str , data -> return data.modifiedPrice * data.quantity},
+				"useTime":{str,data->
+					println data.product.costUnit
+					if(data.product.costUnit == "0"){
+						return Utility.ADFormat.format(data.startTime)
+					}else{
+						return Utility.ADFormat.format(data.startTime) + " ~ "+ Utility.ADFormat.format(data.endTime)
+					}}],"userdata":[amount:amount,price:itemCount,quantity:itemCount2]]
 	}
 
 	def queryid = {
@@ -184,11 +191,27 @@ class ProjectController extends GridController {
 		def product = Product.findById(params.long("product" + type))
 		detail.product = product
 		DateFormat df = new SimpleDateFormat("yyyy-M-d HH:mm");
+		switch(product.costUnit){
+			case "0":
+				detail.startTime = df.parse(params.startDate + " " + params.startHour + ":" + params.startMin)
+				detail.endTime = detail.startTime
+				break;
+			case "1":
+			case "2":
+			case "3":
+			case "4":
+				detail.startTime = df.parse(params.startDate + " " + params.startHour + ":" + params.startMin)
+				detail.endTime = df.parse(params.endDate + " " + params.endHour + ":" + params.endMin)
+				break;
+
+		}
+
+
 		def productHistory = new ProductHistory();
 		switch(type){
 			case "1":
-				detail.startTime = df.parse(params.date1 + " " + params.hour1 + ":" + params.min1)
-				detail.endTime = detail.startTime
+			//detail.startTime = df.parse(params.date1 + " " + params.hour1 + ":" + params.min1)
+			//detail.endTime = detail.startTime
 				if(product.totalQuantity < params.int("amount1")){
 					// throw error
 				}
@@ -213,8 +236,8 @@ class ProjectController extends GridController {
 						).save()
 				break;
 			case "2":
-				detail.startTime = df.parse(params.date2 + " " + params.hour2 + ":" + params.min2)
-				detail.endTime = detail.startTime
+			//detail.startTime = df.parse(params.date2 + " " + params.hour2 + ":" + params.min2)
+			//detail.endTime = detail.startTime
 				detail.quantity = params.int("amount2")
 				detail.price = product.sallingPrice
 				detail.color = 2
@@ -237,8 +260,8 @@ class ProjectController extends GridController {
 			case "3":
 				def place = Place.findById(params.long("place3"))
 				def link = ProductLinkPlace.findByProductAndPlace(detail.product,place)
-				detail.startTime = df.parse(params.startDate3 + " " + params.startHour3 + ":" + params.startMin3)
-				detail.endTime = df.parse(params.endDate3 + " " + params.endHour3 + ":" + params.endMin3)
+			//detail.startTime = df.parse(params.startDate3 + " " + params.startHour3 + ":" + params.startMin3)
+			//detail.endTime = df.parse(params.endDate3 + " " + params.endHour3 + ":" + params.endMin3)
 				detail.quantity = 1
 				detail.price = link.sallingPrice
 				detail.color = 3

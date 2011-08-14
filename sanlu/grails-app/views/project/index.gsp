@@ -142,7 +142,9 @@
                 刪除
             </button>
             <!--  <button id="checkOut">結帳</button> -->
-            <button id="downloadBill">下載帳單</button>
+            <button id="downloadBill">
+                下載帳單
+            </button>
             <button id="calendar" style="float: right;">
                 專案行事曆
             </button>
@@ -151,7 +153,7 @@
         </div>
         <!-- dialog -->
         <div class="hide">
-            <div id="pdialog" class="dialog" style="display: block; width: 400px;">
+            <div id="pdialog" class="dialog" style="display: block; width: 470px;">
                 <g:form name="addProductForm" id="addProductForm" onsubmit="return false;" autocomplete="off" novalidate="novalidate">
                     <div class="dialog-body">
                         <fieldset style="margin:10 10px">
@@ -159,7 +161,7 @@
                                 新增使用商品
                             </legend>
                             <div class="field-row">
-                                <span class="th1" style="color:black">啇品類別：</span>
+                                <span class="th2" style="color:black">啇品類別：</span>
                                 <span><input type="radio" id="type" name="type" value="1" checked="checked" />一般 <input type="radio" id="type" name="type" value="2"/>代叫 <input type="radio" id="type" name="type" value="3"/>場地 <!--
                                     <input type="radio" id="type" name="type" value="3"/>
                                     專案--></span>
@@ -167,149 +169,117 @@
                             <div id="productArea" style="">
                                 <div id="type1" class="productArea" style="">
                                     <div class="field-row">
-                                        <span class="th1">產品名稱：</span>
+                                        <span class="th2">產品名稱：</span>
                                         <span>
-                                            <select id="product1" name="product1" class="validate[required]">
+                                            <select id="product1" name="product1" class="validate[required] product">
                                                 <option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
                                             </select>
                                         </span>
                                     </div>
                                     <div class="field-row">
-                                        <span class="th1">數量：</span>
+                                        <span class="th2">數量：</span>
                                         <span><input id="amount1" name="amount1" class="validate[required]" /></span>
-                                    </div>
-                                    <div class="field-row">
-                                        <span class="th1">時間：</span>
-                                        <span><input type="text" class="validate[required] date" id="date1" name="date1" size="10" /></span><span>
-                                            <select id="hour1" name="hour1">
-                                                <option value="00">00</option>
-                                                <option value="01">01</option>
-                                                <option value="02">02</option>
-                                                <option value="03">03</option>
-                                                <option value="04">04</option>
-                                                <option value="05">05</option>
-                                                <option value="06">06</option>
-                                                <option value="07">07</option>
-                                                <option value="08">08</option>
-                                                <option value="09">09</option>
-                                                <option value="10">10</option>
-                                                <option value="11">11</option>
-                                                <option value="12">12</option>
-                                                <option value="13">13</option>
-                                                <option value="14">14</option>
-                                                <option value="15">15</option>
-                                                <option value="16">16</option>
-                                                <option value="17">17</option>
-                                                <option value="18">18</option>
-                                                <option value="19">19</option>
-                                                <option value="20">20</option>
-                                                <option value="21">21</option>
-                                                <option value="22">22</option>
-                                                <option value="23">23</option>
-                                            </select>
-                                            ：
-                                            <select id="min1" name="min1">
-                                                <option value="00">00</option>
-                                                <option value="05">05</option>
-                                                <option value="10">10</option>
-                                                <option value="15">15</option>
-                                                <option value="20">20</option>
-                                                <option value="25">25</option>
-                                                <option value="30">30</option>
-                                                <option value="35">35</option>
-                                                <option value="40">40</option>
-                                                <option value="45">45</option>
-                                                <option value="50">50</option>
-                                                <option value="55">55</option>
-                                            </select>
-                                        </span>
                                     </div>
                                 </div>
                                 <div id="type2" class="productArea" style="display:none;">
                                     <div class="field-row">
-                                        <span class="th1">產品名稱：</span>
+                                        <span class="th2">產品名稱：</span>
                                         <span>
-                                            <select id="product2" name="product2" class="validate[required]">
+                                            <select id="product2" name="product2" class="validate[required] product">
                                                 <option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
                                             </select>
                                         </span>
                                     </div>
                                     <div class="field-row">
-                                        <span class="th1">數量：</span>
+                                        <span class="th2">數量：</span>
                                         <span><input id="amount2" name="amount2" class="validate[required]" /></span>
                                     </div>
                                     <div class="field-row">
-                                        <span class="th1">廠商名稱：</span>
+                                        <span class="th2">廠商名稱：</span>
                                         <span><input id="vendor2" name="vendor2" class="validate[required]" /></span>
-                                    </div>
-                                    <div class="field-row">
-                                        <span class="th1">時間：</span>
-                                        <span><input type="text" class="validate[required] date" id="date2" name="date2" size="10" /></span><span>
-                                            <select id="hour2" name="hour2">
-                                                <option value="00">00</option>
-                                                <option value="01">01</option>
-                                                <option value="02">02</option>
-                                                <option value="03">03</option>
-                                                <option value="04">04</option>
-                                                <option value="05">05</option>
-                                                <option value="06">06</option>
-                                                <option value="07">07</option>
-                                                <option value="08">08</option>
-                                                <option value="09">09</option>
-                                                <option value="10">10</option>
-                                                <option value="11">11</option>
-                                                <option value="12">12</option>
-                                                <option value="13">13</option>
-                                                <option value="14">14</option>
-                                                <option value="15">15</option>
-                                                <option value="16">16</option>
-                                                <option value="17">17</option>
-                                                <option value="18">18</option>
-                                                <option value="19">19</option>
-                                                <option value="20">20</option>
-                                                <option value="21">21</option>
-                                                <option value="22">22</option>
-                                                <option value="23">23</option>
-                                            </select>
-                                            ：
-                                            <select id="min2" name="min2">
-                                                <option value="00">00</option>
-                                                <option value="05">05</option>
-                                                <option value="10">10</option>
-                                                <option value="15">15</option>
-                                                <option value="20">20</option>
-                                                <option value="25">25</option>
-                                                <option value="30">30</option>
-                                                <option value="35">35</option>
-                                                <option value="40">40</option>
-                                                <option value="45">45</option>
-                                                <option value="50">50</option>
-                                                <option value="55">55</option>
-                                            </select>
-                                        </span>
                                     </div>
                                 </div>
                                 <div id="type3" class="productArea" style="display:none";>
                                     <div class="field-row">
-                                        <span class="th1">產品名稱：</span>
+                                        <span class="th2">產品名稱：</span>
                                         <span>
-                                            <select id="product3" name="product3" class="validate[required]">
+                                            <select id="product3" name="product3" class="validate[required] product">
                                                 <option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
                                             </select>
                                         </span>
                                     </div>
                                     <div class="field-row">
-                                        <span class="th1">場地：</span>
+                                        <span class="th2">場地：</span>
                                         <span>
                                             <select id="place3" name="place3" class="validate[required]">
                                                 <option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
                                             </select>
                                         </span>
                                     </div>
-                                    <div class="field-row">
-                                        <span class="th1">開始時間：</span>
-                                        <span><input type="text" class="validate[required] date" id="startDate3" name="startDate3" size="10" /></span><span>
-                                            <select id="startHour3" name="startHour3">
+                                </div>
+                                <div class="field-row costUnit hide">
+                                    <span class="th2">時間類型：</span>
+                                    <span>
+                                        <select id="costUnit" name="costUnit" disabled="disabled">
+                                            <option value="0">次</option>
+                                            <option value="1">次(時間)</option>
+                                            <option value="2">小時</option>
+                                            <option value="3">天</option>
+                                            <option value="4">月</option>
+                                        </select>
+                                    </span>
+                                    <span class="costRange" style="color:#AB8915;">&nbsp;&nbsp;單位：<span id="costRange"></span></span>
+                                </div>
+                                <div class="field-row startTime hide">
+                                    <span class="th2">開始/使用時間：</span>
+                                    <span><input type="text" class="validate[required] date" id="startDate" name="startDate" size="12" /></span><span>
+                                        <span class="timeSelect"><select id="startHour" name="startHour" class="timeSelect">
+                                            <option value="00">00</option>
+                                            <option value="01">01</option>
+                                            <option value="02">02</option>
+                                            <option value="03">03</option>
+                                            <option value="04">04</option>
+                                            <option value="05">05</option>
+                                            <option value="06">06</option>
+                                            <option value="07">07</option>
+                                            <option value="08">08</option>
+                                            <option value="09">09</option>
+                                            <option value="10">10</option>
+                                            <option value="11">11</option>
+                                            <option value="12">12</option>
+                                            <option value="13">13</option>
+                                            <option value="14">14</option>
+                                            <option value="15">15</option>
+                                            <option value="16">16</option>
+                                            <option value="17">17</option>
+                                            <option value="18">18</option>
+                                            <option value="19">19</option>
+                                            <option value="20">20</option>
+                                            <option value="21">21</option>
+                                            <option value="22">22</option>
+                                            <option value="23">23</option>
+                                        </select>
+                                        ：
+                                        <select id="startMin" name="startMin" class="timeSelect">
+                                            <option value="00">00</option>
+                                            <option value="05">05</option>
+                                            <option value="10">10</option>
+                                            <option value="15">15</option>
+                                            <option value="20">20</option>
+                                            <option value="25">25</option>
+                                            <option value="30">30</option>
+                                            <option value="35">35</option>
+                                            <option value="40">40</option>
+                                            <option value="45">45</option>
+                                            <option value="50">50</option>
+                                            <option value="55">55</option>
+                                        </select></span>
+                                    </span>
+                                </div>
+                                <div class="field-row endTime hide">
+                                    <span class="th2">結束時間：</span>
+                                    <span><input type="text" class="validate[required] date" id="endDate" name="endDate" size="12" /></span><span><span class="timeSelect">
+                                            <select id="endHour" name="endHour">
                                                 <option value="00">00</option>
                                                 <option value="01">01</option>
                                                 <option value="02">02</option>
@@ -336,7 +306,7 @@
                                                 <option value="23">23</option>
                                             </select>
                                             ：
-                                            <select id="startMin3" name="startMin3">
+                                            <select id="endMin" name="endMin" disabled="disable">
                                                 <option value="00">00</option>
                                                 <option value="05">05</option>
                                                 <option value="10">10</option>
@@ -350,54 +320,7 @@
                                                 <option value="50">50</option>
                                                 <option value="55">55</option>
                                             </select>
-                                        </span>
-                                    </div>
-                                    <div class="field-row">
-                                        <span class="th1">結束時間：</span>
-                                        <span><input type="text" class="validate[required] date" id="endDate3" name="endDate3" size="10" /></span><span>
-                                            <select id="endHour3" name="endHour3">
-                                                <option value="00">00</option>
-                                                <option value="01">01</option>
-                                                <option value="02">02</option>
-                                                <option value="03">03</option>
-                                                <option value="04">04</option>
-                                                <option value="05">05</option>
-                                                <option value="06">06</option>
-                                                <option value="07">07</option>
-                                                <option value="08">08</option>
-                                                <option value="09">09</option>
-                                                <option value="10">10</option>
-                                                <option value="11">11</option>
-                                                <option value="12">12</option>
-                                                <option value="13">13</option>
-                                                <option value="14">14</option>
-                                                <option value="15">15</option>
-                                                <option value="16">16</option>
-                                                <option value="17">17</option>
-                                                <option value="18">18</option>
-                                                <option value="19">19</option>
-                                                <option value="20">20</option>
-                                                <option value="21">21</option>
-                                                <option value="22">22</option>
-                                                <option value="23">23</option>
-                                            </select>
-                                            ：
-                                            <select id="endMin3" name="endMin3">
-                                                <option value="00">00</option>
-                                                <option value="05">05</option>
-                                                <option value="10">10</option>
-                                                <option value="15">15</option>
-                                                <option value="20">20</option>
-                                                <option value="25">25</option>
-                                                <option value="30">30</option>
-                                                <option value="35">35</option>
-                                                <option value="40">40</option>
-                                                <option value="45">45</option>
-                                                <option value="50">50</option>
-                                                <option value="55">55</option>
-                                            </select>
-                                        </span>
-                                    </div>
+                                        </span></span>
                                 </div>
                             </div>
                         </fieldset>
@@ -417,6 +340,8 @@
             $(document).ready(function(){
             
                 var productArea = $("#productArea");
+                var startTime = $(".startTime"), endTime = $(".endTime"), costUnit = $(".costUnit"), costRange = $(".costRange"), timeSelect = $(".timeSelect");
+                var endMin = $("#endMin");
                 //禮儀師
                 $('#funeralCompany').change(function(event, value){
                     if ($(this).val()) {
@@ -445,7 +370,7 @@
                         $("#pdialog").find("form").each(function(){
                             this.reset();
                         }).end().find("#type[value=1]").trigger("click");
-                        productArea.find(".productArea").hide().end().find("#type1").show();
+                        productArea.find(".productArea").hide().end().find("#type1").show().end().find(".startTime,.endTime,.costUnit").hide();
                     }
                 });
                 
@@ -518,6 +443,7 @@
                     },
                     pgbuttons: false,
                     pginput: false,
+                    forceFit: false,
                     footerrow: true,
                     userDataOnFooter: true,
                     colModel: [{
@@ -542,7 +468,7 @@
                         summaryTpl: '筆數：{0}'
                     
                     }, {
-                        header: "賣價(調整後單價)",
+                        header: "調整後單價",
                         name: 'modifiedPrice',
                         index: 'modifiedPrice',
                         width: 80,
@@ -557,6 +483,12 @@
                         align: "right",
                         //formatter: "currency",
                         summaryType: 'sum'
+                    }, {
+                        header: "單位",
+                        name: 'unit',
+                        index: 'product.unit',
+                        width: 30,
+                        align: 'center'
                     }, {
                         header: "小計",
                         name: 'amount',
@@ -573,17 +505,23 @@
                         width: 80,
                         align: "center"
                     }, {
+                        header: "使用時間",
+                        name: 'useTime‧',
+                        index: 'useTime',
+                        width: 300,
+                        align: "center"
+                    }, {
                         header: "建立人",
                         name: 'lastModifyBy.empName',
                         index: 'lastModifyBy.empName',
-                        width: 80,
+                        width: 100,
                         align: "center"
                     
                     }, {
                         header: "建立日期",
                         name: 'lastUpdated',
                         index: 'lastUpdated',
-                        width: 130,
+                        width: 150,
                         align: "center"
                     }]
                     /*,
@@ -656,18 +594,55 @@
                 $(":input[name=type]").click(function(){
                     var val = $(this).val();
                     productArea.find(".productArea:visible").hide('slide', 200, function(){
-                        productArea.find("#type" + val).show("slide", 200);
+                        productArea.find("#type" + val).show("slide", 200).end().find(".startTime,.endTime").hide().end().find(".product").val("").trigger("change");
+                        costUnit.hide();
                     });
                 });
+                
+                function productChange(){
+                    var $this = $(this), opt = $this.find("option[value=" + $this.val() + "]"), unit = opt.attr("unit"), range = opt.attr("range");
+                    switch (unit) {
+                        case "0":
+                            startTime.show();
+                            endTime.hide();
+                            costRange.hide();
+                            timeSelect.show();
+                            break;
+                        case "1":
+                            startTime.show();
+                            endTime.show();
+                            costRange.hide();
+                            timeSelect.show();
+                            break;
+                        case "2":
+                            startTime.show();
+                            endTime.show();
+                            costRange.show();
+                            timeSelect.show();
+                            break;
+                        case "3":
+                            startTime.show();
+                            endTime.show();
+                            timeSelect.hide();
+                            break;
+                        case "4":
+                            startTime.show();
+                            endTime.show();
+                            timeSelect.hide();
+                            break;
+                    }
+                    costUnit.show().find("#costUnit").val(unit).end().find("#costRange").html(range);
+                }
+                
                 //init project
                 $.post(contextRoot + "/combobox/normalProduct", function(map){
-                    $('#product1').setDropdown(map);
+                    $('#product1').setDropdown(map).change(productChange);
                 });
                 $.post(contextRoot + "/combobox/normalProduct2", function(map){
-                    $('#product2').setDropdown(map);
+                    $('#product2').setDropdown(map).change(productChange);
                 });
                 $.post(contextRoot + "/combobox/placeOfProduct", function(map){
-                    $('#product3').setDropdown(map);
+                    $('#product3').setDropdown(map).change(productChange);
                 });
                 $('#product3').change(function(){
                     $.post(contextRoot + "/combobox/placeByProduct", {
@@ -692,15 +667,19 @@
                     $.fancybox.close();
                 });
                 
-                $("#downloadBill").click(function(){                    
-                   API.formSubmit({
-					url: contextRoot + "/excel/bill",
-					target: "_self",
-					data: {
-						projectId:responseJSON.id
-					}
-				});
+                $("#downloadBill").click(function(){
+                    API.formSubmit({
+                        url: contextRoot + "/excel/bill",
+                        target: "_self",
+                        data: {
+                            projectId: responseJSON.id
+                        }
+                    });
                 });
+                
+                $("#startMin").change(function(){
+                    endMin.val($(this).val());
+                })
             });
         </script>
     </body>
