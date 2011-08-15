@@ -37,12 +37,14 @@ class ProductController extends GridController{
 
 		if(isNomal){
 			if(hasPlace){
+				println "aaaaaa "+json.getString("costRange")
 				product = new Product(
 						productNo:String.format("%06d", ++count),
 						productName:json.getString("productName"),
 						totalQuantity:new BigDecimal(0),
 						unit:json.getString("unit"),
 						hasPlace:"T".equals( json.getString("hasPlace")),
+						costRange:json.containsKey("costRange")?json.getInt("costRange"):0,
 						lastModifyBy:session.employee)
 			}else{
 				product = new Product(
@@ -61,8 +63,8 @@ class ProductController extends GridController{
 					place : Place.findById(json.getString("placeId")),
 					price:new BigDecimal(json.getString("price")),
 					sallingPrice:new BigDecimal(json.getString("sallingPrice")),
-					//costPrice:new BigDecimal(json.getString("costPrice")),
-					costPrice:0,
+					costPrice:new BigDecimal(json.getString("costPrice")),
+					//costPrice:0,
 					lastModifyBy:session.employee)
 		}
 		product.save()
@@ -147,6 +149,7 @@ class ProductController extends GridController{
 					case 'sallingPrice':		
 					case 'costRange':
 					case 'costUnit':
+					case 'costPrice':
 						productLinkPlace.putAt keyName,new BigDecimal(it.value)
 						break
 					case 'hasPlace':
