@@ -261,9 +261,7 @@
                             var grid = (isNomal ? grid1 : grid2);
                             
                             $("#placeDiv,#productId")[isNomal ? 'hide' : 'show']();
-                            $("#placeId,#productId")[isNomal ? 'removeClass' : 'addClass']('validate[required]');
                             $("#productName,#hasPlaceDiv,#unitDiv,#isAgencyDiv,#costUnitDiv,#costRangeDiv")[!isNomal ? 'hide' : 'show']();
-                            $("#productName,#hasPlace,#unit,#isAgency,#costUnit,#costRange")[!isNomal ? 'removeClass' : 'addClass']('validate[required]');
                             
                             if (action.indexOf("modify") > -1) {
                                 selrow = grid.jqGrid('getGridParam', 'selrow');
@@ -293,8 +291,8 @@
                                 
                             }
                             else {
-                            if (isNomal) {
-                            	costUnit.trigger("change");
+                            	if (isNomal) {
+                            		costUnit.trigger("change");
                             	}
                             }
                             var product = grid1.getRowData(grid1.jqGrid('getGridParam', 'selrow'));
@@ -308,6 +306,7 @@
                         'transitionOut': 'elastic',
                         onClosed: function(){
                             addForm.reset();
+                            hasPlace.val("F").trigger("change");
                         }
                     });
                 });
@@ -377,7 +376,7 @@
                 hasPlace.change(function(){
                     var v = $(this).val();
                     $("#priceDiv,#sallingPriceDiv,#totalDiv,#costPriceDiv,#isAgencyDiv")[v == "F" ? 'show' : 'hide']();
-                    $("#price,#sallingPrice,#totalQuantity,#costPrice,#isAgency")[v == "F" ? 'removeClass' : 'addClass']('validate[required]');
+                   
                     $("#isAgency").val("F");
                 });
                 costUnit.change(function(){
