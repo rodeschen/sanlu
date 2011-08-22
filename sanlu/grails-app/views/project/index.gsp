@@ -41,7 +41,7 @@
                     </div>
                     <div class="field-row">
                         <span class="th1">入館日期：</span>
-                        <span><input type="text" class="validate[required] date" id="inDate" name="inDate" size="10" /></span>
+                        <span><input type="text" class="validate[required] date" id="inDate" name="inDate" size="12" /></span>
                     </div>
                     <div class="field-row">
                         <span class="th1">時間：</span>
@@ -228,53 +228,57 @@
                                             <option value="4">月</option>
                                         </select>
                                     </span>
-                                    <span class="costRange" style="color:#AB8915;">&nbsp;&nbsp;單位：<span id="costRange"></span></span>
+                                    <span class="costRange" style="color:#AB8915;">&nbsp;&nbsp;單位：<input type="text" size="4" readonly="readonly" id="costRange" name="costRange" style="border:0px;background-color:#F1F1F1;"/></span>
                                 </div>
                                 <div class="field-row startTime hide">
                                     <span class="th2">開始/使用時間：</span>
-                                    <span><input type="text" class="validate[required] date" id="startDate" name="startDate" size="12" /></span><span>
-                                        <span class="timeSelect"><select id="startHour" name="startHour" class="timeSelect">
-                                            <option value="00">00</option>
-                                            <option value="01">01</option>
-                                            <option value="02">02</option>
-                                            <option value="03">03</option>
-                                            <option value="04">04</option>
-                                            <option value="05">05</option>
-                                            <option value="06">06</option>
-                                            <option value="07">07</option>
-                                            <option value="08">08</option>
-                                            <option value="09">09</option>
-                                            <option value="10">10</option>
-                                            <option value="11">11</option>
-                                            <option value="12">12</option>
-                                            <option value="13">13</option>
-                                            <option value="14">14</option>
-                                            <option value="15">15</option>
-                                            <option value="16">16</option>
-                                            <option value="17">17</option>
-                                            <option value="18">18</option>
-                                            <option value="19">19</option>
-                                            <option value="20">20</option>
-                                            <option value="21">21</option>
-                                            <option value="22">22</option>
-                                            <option value="23">23</option>
-                                        </select>
-                                        ：
-                                        <select id="startMin" name="startMin" class="timeSelect">
-                                            <option value="00">00</option>
-                                            <option value="05">05</option>
-                                            <option value="10">10</option>
-                                            <option value="15">15</option>
-                                            <option value="20">20</option>
-                                            <option value="25">25</option>
-                                            <option value="30">30</option>
-                                            <option value="35">35</option>
-                                            <option value="40">40</option>
-                                            <option value="45">45</option>
-                                            <option value="50">50</option>
-                                            <option value="55">55</option>
-                                        </select></span>
-                                    </span>
+                                    <span><input type="text" class="validate[required] date" id="startDate" name="startDate" size="12" /></span><span><span class="timeSelect">
+                                            <select id="startHour" name="startHour" class="timeSelect">
+                                                <option value="00">00</option>
+                                                <option value="01">01</option>
+                                                <option value="02">02</option>
+                                                <option value="03">03</option>
+                                                <option value="04">04</option>
+                                                <option value="05">05</option>
+                                                <option value="06">06</option>
+                                                <option value="07">07</option>
+                                                <option value="08">08</option>
+                                                <option value="09">09</option>
+                                                <option value="10">10</option>
+                                                <option value="11">11</option>
+                                                <option value="12">12</option>
+                                                <option value="13">13</option>
+                                                <option value="14">14</option>
+                                                <option value="15">15</option>
+                                                <option value="16">16</option>
+                                                <option value="17">17</option>
+                                                <option value="18">18</option>
+                                                <option value="19">19</option>
+                                                <option value="20">20</option>
+                                                <option value="21">21</option>
+                                                <option value="22">22</option>
+                                                <option value="23">23</option>
+                                            </select>
+                                            ：
+                                            <select id="startMin" name="startMin" class="timeSelect">
+                                                <option value="00">00</option>
+                                                <option value="05">05</option>
+                                                <option value="10">10</option>
+                                                <option value="15">15</option>
+                                                <option value="20">20</option>
+                                                <option value="25">25</option>
+                                                <option value="30">30</option>
+                                                <option value="35">35</option>
+                                                <option value="40">40</option>
+                                                <option value="45">45</option>
+                                                <option value="50">50</option>
+                                                <option value="55">55</option>
+                                            </select>
+                                        </span></span>
+                                </div>
+                                <div class="field-row mouth hide">
+                                    <span class="th2">共</span>
+                                    <span><input type="text" class="validate[required,custom[integer]]" id="mouth" name="mouth" size="3" /></span><span style="color:#AB8915;">&nbsp;個月</span>
                                 </div>
                                 <div class="field-row endTime hide">
                                     <span class="th2">結束時間：</span>
@@ -341,7 +345,7 @@
             
                 var productArea = $("#productArea");
                 var startTime = $(".startTime"), endTime = $(".endTime"), costUnit = $(".costUnit"), costRange = $(".costRange"), timeSelect = $(".timeSelect");
-                var endMin = $("#endMin");
+                var endMin = $("#endMin"),mouth = $(".mouth");
                 //禮儀師
                 $('#funeralCompany').change(function(event, value){
                     if ($(this).val()) {
@@ -370,7 +374,7 @@
                         $("#pdialog").find("form").each(function(){
                             this.reset();
                         }).end().find("#type[value=1]").trigger("click");
-                        productArea.find(".productArea").hide().end().find("#type1").show().end().find(".startTime,.endTime,.costUnit").hide();
+                        productArea.find(".productArea").hide().end().find("#type1").show().end().find(".startTime,.endTime,.mouth,.costUnit").hide();
                     }
                 });
                 
@@ -594,7 +598,7 @@
                 $(":input[name=type]").click(function(){
                     var val = $(this).val();
                     productArea.find(".productArea:visible").hide('slide', 200, function(){
-                        productArea.find("#type" + val).show("slide", 200).end().find(".startTime,.endTime").hide().end().find(".product").val("").trigger("change");
+                        productArea.find("#type" + val).show("slide", 200).end().find(".startTime,.endTime,.mouth").hide().end().find(".product").val("").trigger("change");
                         costUnit.hide();
                     });
                 });
@@ -607,31 +611,36 @@
                             endTime.hide();
                             costRange.hide();
                             timeSelect.show();
+							mouth.hide();
                             break;
                         case "1":
                             startTime.show();
                             endTime.show();
                             costRange.hide();
                             timeSelect.show();
+							mouth.hide();
                             break;
                         case "2":
                             startTime.show();
                             endTime.show();
                             costRange.show();
                             timeSelect.show();
+							mouth.hide();
                             break;
                         case "3":
                             startTime.show();
                             endTime.show();
                             timeSelect.hide();
+							mouth.hide();
                             break;
                         case "4":
                             startTime.show();
-                            endTime.show();
+                            endTime.hide();
                             timeSelect.hide();
+							mouth.show();
                             break;
                     }
-                    costUnit.show().find("#costUnit").val(unit).end().find("#costRange").html(range);
+                    costUnit.show().find("#costUnit").val(unit).end().find("#costRange").val(range);
                 }
                 
                 //init project

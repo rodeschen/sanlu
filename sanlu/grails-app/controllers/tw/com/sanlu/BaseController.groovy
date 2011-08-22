@@ -19,6 +19,7 @@ abstract class BaseController {
 		"employee"
 	]
 	def beforeInterceptor ={
+
 		if(manageUrl.contains(params.controller)?1==session.empLevel:session.empLevel ){
 			def res = [:]
 			params.keySet().each (){
@@ -31,6 +32,14 @@ abstract class BaseController {
 			}else{
 				redirect(uri:"/")
 			}
+		}
+	}
+
+	protected throwError(message){
+		//response.status HttpServletResponse.SC_INTERNAL_SERVER_ERROR
+		if(request.xhr){
+			def res = "errorMessage:\n" + message
+			return render(status: 400, contentType:"text/json", text: res)
 		}
 	}
 }

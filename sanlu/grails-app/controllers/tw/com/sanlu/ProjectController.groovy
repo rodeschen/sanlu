@@ -37,12 +37,16 @@ class ProjectController extends GridController {
 
 		def bList = BillDetail.createCriteria()
 		def rowCount = bList.count{
-			project{ eq('id',params.id?params.long("id"):"") }
+			project{
+				eq('id',params.id?params.long("id"):"")
+			}
 		}
 
 		bList = BillDetail.createCriteria()
 		def projects = bList.list{
-			project{ eq('id',params.id?params.long("id"):"") }
+			project{
+				eq('id',params.id?params.long("id"):"")
+			}
 			firstResult (startRow)
 			maxResults(pageRows)
 			if(sortBy){
@@ -73,12 +77,18 @@ class ProjectController extends GridController {
 		//return ["rowData":projects,"rowCount":rowCount,"format":["projectName":{str -> return "$str xxxxccc"}]]
 		["rowData":projects,"rowCount":rowCount,format:["amount":{str , data -> return data.modifiedPrice * data.quantity},
 				"useTime":{str,data->
-					println data.product.costUnit
-					if(data.product.costUnit == "0"){
-						return Utility.ADFormat.format(data.startTime)
-					}else{
-						return Utility.ADFormat.format(data.startTime) + " ~ "+ Utility.ADFormat.format(data.endTime)
-					}}],"userdata":[amount:amount,price:itemCount,quantity:itemCount2]]
+					switch(data.product.costUnit){
+						case 0:
+							return Utility.ADFormat.format(data.startTime)
+							break;
+						case 3:
+						case 4:
+							return Utility.dateToString(data.startTime,"yyyy-MM-dd") + " ~ "+ Utility.dateToString(data.endTime,"yyyy-MM-dd");
+							break;
+						default:
+							return Utility.ADFormat.format(data.startTime) + " ~ "+ Utility.ADFormat.format(data.endTime)
+					}
+				}],"userdata":[amount:amount,price:itemCount,quantity:itemCount2]]
 	}
 
 	def queryid = {
@@ -191,17 +201,45 @@ class ProjectController extends GridController {
 		def product = Product.findById(params.long("product" + type))
 		detail.product = product
 		DateFormat df = new SimpleDateFormat("yyyy-M-d HH:mm");
+		def cal1 = Calendar.getInstance();
+		def cal2 = Calendar.getInstance();
 		switch(product.costUnit){
 			case "0":
 				detail.startTime = df.parse(params.startDate + " " + params.startHour + ":" + params.startMin)
 				detail.endTime = detail.startTime
 				break;
-			case "1":
-			case "2":
-			case "3":
-			case "4":
+			case "1": //次(時間)
+				detail.startTime = df.parse(params.startDate + " 00:00")
+				detail.endTime = df.parse(params.endDate + " 00:00")
+				break;
+			case "2": //時
+				def hour = 1000 * 60 * 60 * product.costRange
 				detail.startTime = df.parse(params.startDate + " " + params.startHour + ":" + params.startMin)
-				detail.endTime = df.parse(params.endDate + " " + params.endHour + ":" + params.endMin)
+				detail.endTime = df.parse(params.endDate + " " + params.endHour + ":" + params.startMin)
+				cal1.setTime detail.startTime
+				cal2.setTime detail.endTime
+				if(cal2.compareTo(cal1) <= 0 || ((cal2.getTimeInMillis() - cal1.getTimeInMillis())%hour) != 0 ){
+					return throwError("結束時間需大於開始時間 且 每次使用時間以 " + product.costRange + " 小時為單位");
+				}
+				break;
+			case "3": //天
+				def day = 1000 * 60 * 60 * 24 * product.costRange
+				detail.startTime = df.parse(params.startDate + " 00:00")
+				detail.endTime = df.parse(params.endDate + " 00:00")
+				cal1.setTime detail.startTime
+				cal2.setTime detail.endTime
+				if(cal2.compareTo(cal1) <= 0 || ((cal2.getTimeInMillis() - cal1.getTimeInMillis())%hour) != 0 ){
+					return throwError("結束日期需大於開始日期 且 每次使用時間以 " + product.costRange + " 天為單位");
+				}
+				break;
+			case "4": //月
+				detail.startTime = df.parse(params.startDate + " 00:00")
+				cal1.setTime detail.startTime
+				if((params.int("mouth") % product.costRange) != 0){
+					return throwError("每次使用時間以 " + product.costRange + " 個月為單位");
+				}
+				cal1.add(Calendar.MONTH, params.int("mouth"))
+				detail.endTime  = cal1.getTime();
 				break;
 
 		}
@@ -210,10 +248,8 @@ class ProjectController extends GridController {
 		def productHistory = new ProductHistory();
 		switch(type){
 			case "1":
-			//detail.startTime = df.parse(params.date1 + " " + params.hour1 + ":" + params.min1)
-			//detail.endTime = detail.startTime
 				if(product.totalQuantity < params.int("amount1")){
-					// throw error
+					return throwError("目前剩餘庫存量:" + product.totalQuantity);
 				}
 				detail.quantity = params.int("amount1")
 				product.totalQuantity -= detail.quantity
