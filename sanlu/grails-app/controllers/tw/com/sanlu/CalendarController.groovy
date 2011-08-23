@@ -105,7 +105,7 @@ class CalendarController extends BaseController {
 			event.add billDetail.color            // color 0..21
 			event.add 0                           // editable 0 1
 			event.add billDetail.place?.placeName        //location
-			event.add ""                          //people(String)
+			event.add billDetail.project.projectName                         //people(String)
 			events.add event
 		}
 		def res = ["events":events,

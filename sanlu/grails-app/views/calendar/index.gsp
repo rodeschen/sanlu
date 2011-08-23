@@ -17,7 +17,11 @@
 						contextRoot: contextRoot,
 						url : contextRoot + "/calendar/query",
 						showday: new Date(),
-						//ViewCmdhandler: View,
+						//view action
+						ViewCmdhandler: function(){
+							//alert("XXX")
+							//console.debug(arguments)
+						},
 						//onWeekOrMonthToDay: wtd,
 						readonly : true,
 						autoload:true,

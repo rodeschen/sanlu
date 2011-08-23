@@ -39,7 +39,7 @@ var i18n = $.extend({}, i18n || {}, {
         "time": "時 間",
         "event": "事 件",
         "location": "地 點",
-        "participant": "參與人",
+        "participant": "專案名稱",//"參與人",
         "get_data_exception": "獲取數據發生異常",
         "new_event": "新日程",
         "confirm_delete_event": "確定刪除該日程嗎？",

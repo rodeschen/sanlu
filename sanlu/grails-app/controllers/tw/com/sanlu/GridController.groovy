@@ -21,12 +21,14 @@ abstract class GridController extends BaseController {
 	public boolean pages,isAsc
 
 	def beforeInterceptor = {
-		super.beforeInterceptor.call()
-		def action = delegate.class.declaredFields.find{it.name == actionName}
-		if(action && action.isAnnotationPresent(GridQuery)){
-			params.delegateAction = actionName
-			query()
-			return false
+		def b = super.beforeInterceptor.call()
+		if(b){
+			def action = delegate.class.declaredFields.find{it.name == actionName}
+			if(action && action.isAnnotationPresent(GridQuery)){
+				params.delegateAction = actionName
+				query()
+				return false
+			}
 		}
 	}
 

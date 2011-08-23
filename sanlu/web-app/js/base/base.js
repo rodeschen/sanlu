@@ -1,3 +1,16 @@
+function checkError(xhr){
+    if (xhr.responseText && xhr.responseText.indexOf("errorMessage:") == 0) {
+        alert(xhr.responseText || "程式錯誤，請通知資訊人員!");
+    }
+    else 
+        if (xhr.responseText && xhr.responseText.indexOf("sessionError") == 0) {
+            alert("請重新登入");
+            window.location.reload();
+        }
+        else {
+            alert("程式錯誤，請通知資訊人員!");
+        }
+}
 /**
  * override grid
  */
@@ -11,7 +24,8 @@
         rownumbers: true,
         mtype: 'POST',
         autowidth: true,
-        forceFit: true
+        forceFit: true,
+        loadError: checkError
     });
     var _jqGrid = $.fn.jqGrid;
     $.fn.jqGrid = function(){
@@ -67,19 +81,14 @@
     };
     $.extend($.fn.jqGrid, _jqGrid);
 })(jQuery);
+
+
+
 $.ajaxSetup({
     jsonp: null,
     jsonpCallback: null,
     type: "POST",
-    error: function(xhr){
-        if (xhr.responseText && xhr.responseText.indexOf("errorMessage:") == 0) {
-            alert(xhr.responseText || "程式錯誤，請通知資訊人員!");
-        }else{
-			alert("程式錯誤，請通知資訊人員!");
-		}
-        
-        
-    }
+    error: checkError
 });
 
 $.extend($.fn, {

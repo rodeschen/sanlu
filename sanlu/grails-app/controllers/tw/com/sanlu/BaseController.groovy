@@ -19,7 +19,7 @@ abstract class BaseController {
 		"employee"
 	]
 	def beforeInterceptor ={
-
+		def b = true;
 		if(manageUrl.contains(params.controller)?1==session.empLevel:session.empLevel ){
 			def res = [:]
 			params.keySet().each (){
@@ -27,12 +27,18 @@ abstract class BaseController {
 			}
 			params.responseJSON = res as JSON
 		}else if(!"main".equals(params.controller) && !"login".equals(params.controller)){
-			if(params.action){
-				redirect(controller:"main",action:"index")
+			if(!request.xhr){
+				if(params.action){
+					redirect(controller:"main",action:"index")
+				}else{
+					redirect(uri:"/")
+				}
 			}else{
-				redirect(uri:"/")
+				render(status: 400, contentType:"text/json", text: "sessionError")
+				b = false;
 			}
 		}
+		return b
 	}
 
 	protected throwError(message){

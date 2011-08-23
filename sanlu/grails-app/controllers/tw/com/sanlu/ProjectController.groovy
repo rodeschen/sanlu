@@ -209,8 +209,13 @@ class ProjectController extends GridController {
 				detail.endTime = detail.startTime
 				break;
 			case "1": //次(時間)
-				detail.startTime = df.parse(params.startDate + " 00:00")
-				detail.endTime = df.parse(params.endDate + " 00:00")
+				detail.startTime = df.parse(params.startDate + " " + params.startHour + ":" + params.startMin)
+				detail.endTime = df.parse(params.endDate + " " + params.endHour + ":" + params.startMin)
+				cal1.setTime detail.startTime
+				cal2.setTime detail.endTime
+				if(cal2.compareTo(cal1) <= 0){
+					return throwError("結束時間需大於開始時間");
+				}
 				break;
 			case "2": //時
 				def hour = 1000 * 60 * 60 * product.costRange
@@ -296,6 +301,18 @@ class ProjectController extends GridController {
 			case "3":
 				def place = Place.findById(params.long("place3"))
 				def link = ProductLinkPlace.findByProductAndPlace(detail.product,place)
+				def hasUse = BillDetail.createCriteria().list{
+					and{
+						eq('place',place)
+						gt('endTime',detail.startTime)
+						lt('startTime',detail.endTime)
+
+					}
+
+				}
+				if(hasUse.size()>0){
+					return throwError("此時間場地使用中!!")
+				}
 			//detail.startTime = df.parse(params.startDate3 + " " + params.startHour3 + ":" + params.startMin3)
 			//detail.endTime = df.parse(params.endDate3 + " " + params.endHour3 + ":" + params.endMin3)
 				detail.quantity = 1
