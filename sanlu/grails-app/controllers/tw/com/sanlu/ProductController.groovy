@@ -37,7 +37,7 @@ class ProductController extends GridController{
 
 		if(isNomal){
 			if(hasPlace){
-				println "aaaaaa "+json.getString("costRange")
+				//println "aaaaaa "+json.getString("costRange")
 				product = new Product(
 						productNo:String.format("%06d", ++count),
 						productName:json.getString("productName"),
@@ -153,6 +153,7 @@ class ProductController extends GridController{
 						productLinkPlace.putAt keyName,new BigDecimal(it.value)
 						break
 					case 'hasPlace':
+					case 'isAgency':
 						productLinkPlace.putAt keyName,new Boolean("T".equals(it.value))
 						break
 					default:

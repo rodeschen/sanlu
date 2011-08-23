@@ -6,7 +6,7 @@
 <body>
 	<script>        
             $(document).ready(function(){
-                var hasPlace = $("#hasPlace"), placeId = $("#placeId"), productName = $('#productName'), productId = $('#productId'),costUnit = $("#costUnit");
+                var hasPlace = $("#hasPlace"), placeId = $("#placeId"), productName = $('#productName'), productId = $('#productId'),costUnit = $("#costUnit"),isAgency = $("#isAgency");
                 var grid1 = $("#grid1").jqGrid({
                     url: contextRoot + "/product/queryProduct",
                     pager: true,
@@ -276,9 +276,10 @@
                                 $("#totalQuantity").val(isNomal ? id.totalQuantity : '');
                                 $("#price").val(id.price);
                                 $("#sallingPrice").val(id.sallingPrice);
-                                $("#costPrice").val(id.costPrice);
+                                $("#costPrice").val(id.costPrice);                                
                                 $("#unit").val(isNomal ? id.unit : id['product.unit']);
                                 if (isNomal) {
+                                	isAgency.val("是"==id.isAgency?"T" : "F");
                                     hasPlace.val(hasplace ? "T" : "F");
                                     productName.val(id.productName);                                    
 									costUnit.val(id.costUnit);
@@ -377,7 +378,7 @@
                     var v = $(this).val();
                     $("#priceDiv,#sallingPriceDiv,#totalDiv,#costPriceDiv,#isAgencyDiv")[v == "F" ? 'show' : 'hide']();
                    
-                    $("#isAgency").val("F");
+                    isAgency.val(v == "T"?"F":isAgency.val());
                 });
                 costUnit.change(function(){
                 	var v = $(this).val();
