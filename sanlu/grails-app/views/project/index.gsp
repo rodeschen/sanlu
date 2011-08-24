@@ -134,10 +134,9 @@
         </g:form>
         <div>
             <a id="add" href="#pdialog" class="button">新增</a>
-            <!--
             <button id="modify1">
-            修改
-            </button>-->
+                修改
+            </button>
             <button id="delete1">
                 刪除
             </button>
@@ -155,6 +154,7 @@
         <div class="hide">
             <div id="pdialog" class="dialog" style="display: block; width: 470px;">
                 <g:form name="addProductForm" id="addProductForm" onsubmit="return false;" autocomplete="off" novalidate="novalidate">
+                    <input type="text" class="hide" id="isupdate" name="isupdate" value="N" /><input type="text" class="hide" id="detailid" name="detailid" />
                     <div class="dialog-body">
                         <fieldset style="margin:10 10px">
                             <legend>
@@ -176,9 +176,15 @@
                                             </select>
                                         </span>
                                     </div>
+                                    <g:if test="${1==session.empLevel}">
+                                        <div class="field-row">
+                                            <span class="th2">調整後單價：</span>
+                                            <span><input type="text" id="modifiedPrice1" name="modifiedPrice1" class="validate[custom[integer]]" /><span style="color:#AB8915;">&nbsp;空白為原價</span></span>
+                                        </div>
+                                    </g:if>
                                     <div class="field-row">
                                         <span class="th2">數量：</span>
-                                        <span><input id="amount1" name="amount1" class="validate[required]" /></span>
+                                        <span><input id="amount1" name="amount1" class="validate[required,custom[integer]]" /></span>
                                     </div>
                                 </div>
                                 <div id="type2" class="productArea" style="display:none;">
@@ -190,9 +196,15 @@
                                             </select>
                                         </span>
                                     </div>
+                                    <g:if test="${1==session.empLevel}">
+                                        <div class="field-row">
+                                            <span class="th2">調整後單價：</span>
+                                            <span><input type="text" id="modifiedPrice2" name="modifiedPrice2" class="validate[custom[integer]]" /><span style="color:#AB8915;">&nbsp;空白為原價</span></span>
+                                        </div>
+                                    </g:if>
                                     <div class="field-row">
                                         <span class="th2">數量：</span>
-                                        <span><input id="amount2" name="amount2" class="validate[required]" /></span>
+                                        <span><input id="amount2" name="amount2" class="validate[required,custom[integer]]" /></span>
                                     </div>
                                     <div class="field-row">
                                         <span class="th2">廠商名稱：</span>
@@ -208,6 +220,12 @@
                                             </select>
                                         </span>
                                     </div>
+                                    <g:if test="${1==session.empLevel}">
+                                        <div class="field-row">
+                                            <span class="th2">調整後單價：</span>
+                                            <span><input type="text" id="modifiedPrice3" name="modifiedPrice3" class="validate[custom[integer]]" /><span style="color:#AB8915;">&nbsp;空白為原價</span></span>
+                                        </div>
+                                    </g:if>
                                     <div class="field-row">
                                         <span class="th2">場地：</span>
                                         <span>
@@ -345,7 +363,7 @@
             
                 var productArea = $("#productArea");
                 var startTime = $(".startTime"), endTime = $(".endTime"), costUnit = $(".costUnit"), costRange = $(".costRange"), timeSelect = $(".timeSelect");
-                var endMin = $("#endMin"),mouth = $(".mouth");
+                var endMin = $("#endMin"), mouth = $(".mouth");
                 //禮儀師
                 $('#funeralCompany').change(function(event, value){
                     if ($(this).val()) {
@@ -510,10 +528,54 @@
                         align: "center"
                     }, {
                         header: "使用時間",
-                        name: 'useTime‧',
+                        name: 'useTime',
                         index: 'useTime',
                         width: 300,
                         align: "center"
+                    }, {
+                        name: 'productType',
+                        index: 'productType',
+                        align: "center",
+                        hidden: true
+
+                    }, {
+                        name: 'startTime',
+                        index: 'startTime',
+                        align: "center",
+                        hidden: true
+
+                    }, {
+                        name: 'endTime',
+                        index: 'endTime',
+                        align: "center",
+                        hidden: true
+
+                    }, {
+                        name: 'productId',
+                        index: 'product.id',
+                        align: "center",
+                        hidden: true
+
+                    }, {
+                        name: 'vendor',
+                        index: 'vendor',
+                        align: "center",
+                        hidden: true
+
+                    }, {
+                        name: 'placeId',
+                        index: 'place.id',
+                        width: 80,
+                        align: "center",
+                        hidden: true
+
+                    }, {
+                        name: 'modifiedPrice',
+                        index: 'modifiedPrice',
+                        width: 80,
+                        align: "center",
+                        hidden: true
+
                     }, {
                         header: "建立人",
                         name: 'lastModifyBy.empName',
@@ -562,19 +624,34 @@
                     var selrow = grid1.jqGrid('getGridParam', 'selrow');
                     if (!selrow) {
                         alert("請先選擇修改列");
+                        return;
                     }
-                    var id = grid1.getRowData(selrow);
-                    $.ajax({
-                        url: contextRoot + "/project/modify",
-                        data: {
-                            columnParam: JSON.stringify(grid1.jqGrid('getGridParam', 'colModel')),
-                            data: JSON.stringify(id)
-                        },
-                        success: function(msg){
-                            grid1.trigger("reloadGrid");
-                            alert("修改成功 ");
+                    var data = grid1.getRowData(selrow);
+                    $("#add").click();
+                    var form = $("#addProductForm");
+                    form.find(":radio[value=" + data.productType + "]").click();
+                    var product = form.find("#product" + data.productType);
+                    setTimeout(function(){
+                        window.inputModify = function(){
+                            $('#place3').val(data.placeId);
                         }
-                    })
+                        product.val(data.productId).change();
+                        
+                        form.find("#amount" + data.productType).val(data.quantity);
+                        form.find("#vendor" + data.productType).val(data.vendor);
+						form.find("#modifiedPrice" + data.productType).val(data.modifiedPrice);
+                        var sd = data.startTime.split(" "), ed = data.endTime.split(" ");
+                        var st = sd[1].split(":"), et = ed[1].split(":");
+                        form.find("#startDate").val(sd[0]);
+                        form.find("#endDate").val(ed[0]);
+                        form.find("#startHour").val(st[0]);
+                        form.find("#startMin").val(st[1]);
+                        form.find("#endHour").val(et[0]);
+                        form.find("#endMin").val(et[1]);
+                        form.find("#isupdate").val("Y");
+                        form.find("#detailid").val(data.id);
+                    }, 500);
+                    
                 });
                 $("#calendar").click(function(){
                     API.openCalendar({
@@ -592,6 +669,7 @@
                             data: $("#addForm").serializeData()
                         }).done(function(){
                             opener.$("#projectGrid").trigger("reloadGrid");
+                            alert("修改完成!")
                         });
                     }
                 });
@@ -611,33 +689,33 @@
                             endTime.hide();
                             costRange.hide();
                             timeSelect.show();
-							mouth.hide();
+                            mouth.hide();
                             break;
                         case "1":
                             startTime.show();
                             endTime.show();
                             costRange.hide();
                             timeSelect.show();
-							mouth.hide();
+                            mouth.hide();
                             break;
                         case "2":
                             startTime.show();
                             endTime.show();
                             costRange.show();
                             timeSelect.show();
-							mouth.hide();
+                            mouth.hide();
                             break;
                         case "3":
                             startTime.show();
                             endTime.show();
                             timeSelect.hide();
-							mouth.hide();
+                            mouth.hide();
                             break;
                         case "4":
                             startTime.show();
                             endTime.hide();
                             timeSelect.hide();
-							mouth.show();
+                            mouth.show();
                             break;
                     }
                     costUnit.show().find("#costUnit").val(unit).end().find("#costRange").val(range);
@@ -658,13 +736,16 @@
                         id: $(this).val()
                     }, function(map){
                         $('#place3').setDropdown(map);
+                    }).done(function(json){
+                        window.inputModify && inputModify(json);
+                        window.inputModify = null;
                     });
                 });
                 $("#padd").click(function(){
                     var form = $("#addProductForm");
                     if (form.validationEngine('validate')) {
                         $.ajax({
-                            url: contextRoot + "/project/addProduct",
+                            url: contextRoot + (form.find("#isupdate").val() == "Y" ? "/project/updateProduct" : "/project/addProduct"),
                             data: $.extend(responseJSON, form.serializeData())
                         }).done(function(json){
                             $.fancybox.close();

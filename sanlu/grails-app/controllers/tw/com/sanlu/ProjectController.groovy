@@ -88,6 +88,14 @@ class ProjectController extends GridController {
 						default:
 							return Utility.ADFormat.format(data.startTime) + " ~ "+ Utility.ADFormat.format(data.endTime)
 					}
+				},"productType":{str,data->
+					if(data.product.hasPlace){
+						return "3"
+					}else if(data.product.isAgency){
+						return "2"
+					}else{
+						return "1"
+					}
 				}],"userdata":[amount:amount,price:itemCount,quantity:itemCount2]]
 	}
 
@@ -151,6 +159,41 @@ class ProjectController extends GridController {
 		render [:] as JSON
 	}
 
+	def delete = {
+		def detail = BillDetail.findById(params.long("id"))
+		def product = detail.product
+		if(!product.hasPlace){
+			if(product.isAgency){
+				new ProductHistory(
+						product:product,
+						project:detail.project,
+						isPurchase:false,
+						quantity:(detail.quantity * -1),
+						date:new Date(),
+						totalQuantity:0,
+						vendor:detail.vendor,
+						LastModifyBy: session.employee
+						).save()
+			}else{
+				product.totalQuantity += detail.quantity
+				new ProductHistory(
+						product:product,
+						project:detail.project,
+						isPurchase:false,
+						quantity:(detail.quantity * -1),
+						date:new Date(),
+						totalQuantity:(product.totalQuantity),
+						vendor:"",
+						LastModifyBy: session.employee
+						).save()
+				product.save()
+			}
+		}
+		detail.delete()
+		def res = ["IsSuccess" : true]
+		render res as JSON
+	}
+
 	def deleteAction = {
 		def project = Project.findById(id)
 		return project?project.delete():println("無法刪除")
@@ -193,6 +236,187 @@ class ProjectController extends GridController {
 	//	modifiedCostPrice:300,
 	//	lastModifyBy:emp2,
 	//	project:project1 //
+
+	def updateProduct ={
+		def type = params.type
+		def detail= BillDetail.findById(params.long("detailid"));
+		def oldProduct = detail.product
+		def oldQuantity = detail.quantity
+		def oldVendor =detail.vendor
+
+		if(!oldProduct.hasPlace){
+			if(oldProduct.isAgency){
+				new ProductHistory(
+						product:oldProduct,
+						project:detail.project,
+						isPurchase:false,
+						quantity:(oldQuantity * -1),
+						date:new Date(),
+						totalQuantity:0,
+						vendor:detail.vendor,
+						LastModifyBy: session.employee
+						).save()
+			}else{
+				oldProduct.totalQuantity += oldQuantity
+				new ProductHistory(
+						product:oldProduct,
+						project:detail.project,
+						isPurchase:false,
+						quantity:(oldQuantity * -1),
+						date:new Date(),
+						totalQuantity:(oldProduct.totalQuantity),
+						vendor:"",
+						LastModifyBy: session.employee
+						).save()
+				oldProduct.save()
+			}
+		}
+		 
+		//copy from addProudct
+		
+		
+		def product = Product.findById(params.long("product" + type))
+		detail.product = product
+		DateFormat df = new SimpleDateFormat("yyyy-M-d HH:mm");
+		def cal1 = Calendar.getInstance();
+		def cal2 = Calendar.getInstance();
+		switch(product.costUnit){
+			case "0":
+				detail.startTime = df.parse(params.startDate + " " + params.startHour + ":" + params.startMin)
+				detail.endTime = detail.startTime
+				break;
+			case "1": //次(時間)
+				detail.startTime = df.parse(params.startDate + " " + params.startHour + ":" + params.startMin)
+				detail.endTime = df.parse(params.endDate + " " + params.endHour + ":" + params.startMin)
+				cal1.setTime detail.startTime
+				cal2.setTime detail.endTime
+				if(cal2.compareTo(cal1) <= 0){
+					return throwError("結束時間需大於開始時間");
+				}
+				break;
+			case "2": //時
+				def hour = 1000 * 60 * 60 * product.costRange
+				detail.startTime = df.parse(params.startDate + " " + params.startHour + ":" + params.startMin)
+				detail.endTime = df.parse(params.endDate + " " + params.endHour + ":" + params.startMin)
+				cal1.setTime detail.startTime
+				cal2.setTime detail.endTime
+				if(cal2.compareTo(cal1) <= 0 || ((cal2.getTimeInMillis() - cal1.getTimeInMillis())%hour) != 0 ){
+					return throwError("結束時間需大於開始時間 且 每次使用時間以 " + product.costRange + " 小時為單位");
+				}
+				break;
+			case "3": //天
+				def day = 1000 * 60 * 60 * 24 * product.costRange
+				detail.startTime = df.parse(params.startDate + " 00:00")
+				detail.endTime = df.parse(params.endDate + " 00:00")
+				cal1.setTime detail.startTime
+				cal2.setTime detail.endTime
+				if(cal2.compareTo(cal1) <= 0 || ((cal2.getTimeInMillis() - cal1.getTimeInMillis())%hour) != 0 ){
+					return throwError("結束日期需大於開始日期 且 每次使用時間以 " + product.costRange + " 天為單位");
+				}
+				break;
+			case "4": //月
+				detail.startTime = df.parse(params.startDate + " 00:00")
+				cal1.setTime detail.startTime
+				if((params.int("mouth") % product.costRange) != 0){
+					return throwError("每次使用時間以 " + product.costRange + " 個月為單位");
+				}
+				cal1.add(Calendar.MONTH, params.int("mouth"))
+				detail.endTime  = cal1.getTime();
+				break;
+
+		}
+
+
+		def productHistory = new ProductHistory();
+		switch(type){
+			case "1":
+				if(product.totalQuantity < params.int("amount1")){
+					return throwError("目前剩餘庫存量:" + product.totalQuantity);
+				}
+				detail.quantity = params.int("amount1")
+				product.totalQuantity -= detail.quantity
+				detail.price = detail.product.sallingPrice
+				detail.color = 1
+				detail.place = null
+				detail.modifiedPrice = params.modifiedPrice1?new BigDecimal(params.modifiedPrice1):detail.price
+				detail.costPrice = product.costPrice
+				detail.modifiedCostPrice = detail.costPrice
+				detail.vendor=""
+
+			// history
+				new ProductHistory(
+						product:product,
+						project:detail.project,
+						isPurchase:false,
+						quantity:detail.quantity,
+						date:detail.startTime,
+						totalQuantity:product.totalQuantity,
+						vendor:"",
+						LastModifyBy: session.employee
+						).save()
+				break;
+			case "2":
+			//detail.startTime = df.parse(params.date2 + " " + params.hour2 + ":" + params.min2)
+			//detail.endTime = detail.startTime
+				detail.quantity = params.int("amount2")
+				detail.price = product.sallingPrice
+				detail.color = 2
+				detail.place = null
+				detail.modifiedPrice = params.modifiedPrice2?new BigDecimal(params.modifiedPrice2):detail.price
+				detail.costPrice = product.costPrice
+				detail.modifiedCostPrice = detail.costPrice
+				detail.vendor=params.vendor2
+
+
+				new ProductHistory(
+						product:product,
+						project:detail.project,
+						isPurchase:false,
+						quantity:detail.quantity,
+						date:detail.startTime,
+						totalQuantity:0,
+						vendor:params.vendor2,
+						LastModifyBy: session.employee
+						).save()
+				break;
+			case "3":
+				def place = Place.findById(params.long("place3"))
+				def link = ProductLinkPlace.findByProductAndPlace(detail.product,place)
+				def hasUse = BillDetail.createCriteria().list{
+					and{
+						eq('place',place)
+						ne("id",detail.id)
+						gt('endTime',detail.startTime)
+						lt('startTime',detail.endTime)
+
+					}
+
+				}
+				if(hasUse.size()>0){
+					return throwError("此時間場地使用中!!")
+				}
+				println params.modifiedPrice3
+				detail.quantity = 1
+				detail.price = link.sallingPrice
+				detail.color = 3
+				detail.place = place
+				detail.modifiedPrice = params.modifiedPrice3 != ""?new BigDecimal(params.modifiedPrice3):detail.price
+				detail.costPrice = link.costPrice
+				detail.modifiedCostPrice = detail.costPrice
+				break;
+			case "4":
+				break;
+
+		}
+		detail.lastModifyBy = session.employee
+		detail.save()
+		if(detail.hasErrors()){
+			println detail.errors
+		}
+		def res = ["IsSuccess" : true]
+		render res as JSON
+
+	}
 
 	def addProduct={
 		def type = params.type
@@ -260,9 +484,10 @@ class ProjectController extends GridController {
 				product.totalQuantity -= detail.quantity
 				detail.price = detail.product.sallingPrice
 				detail.color = 1
-				detail.modifiedPrice = detail.price
+				detail.modifiedPrice = params.modifiedPrice1?new BigDecimal(params.modifiedPrice1):detail.price
 				detail.costPrice = product.costPrice
 				detail.modifiedCostPrice = detail.costPrice
+				detail.vendor=""
 
 			// history
 				new ProductHistory(
@@ -282,9 +507,10 @@ class ProjectController extends GridController {
 				detail.quantity = params.int("amount2")
 				detail.price = product.sallingPrice
 				detail.color = 2
-				detail.modifiedPrice = detail.price
+				detail.modifiedPrice = params.modifiedPrice2?new BigDecimal(params.modifiedPrice2):detail.price
 				detail.costPrice = product.costPrice
 				detail.modifiedCostPrice = detail.costPrice
+				detail.vendor=params.vendor2
 
 
 				new ProductHistory(
@@ -313,13 +539,11 @@ class ProjectController extends GridController {
 				if(hasUse.size()>0){
 					return throwError("此時間場地使用中!!")
 				}
-			//detail.startTime = df.parse(params.startDate3 + " " + params.startHour3 + ":" + params.startMin3)
-			//detail.endTime = df.parse(params.endDate3 + " " + params.endHour3 + ":" + params.endMin3)
 				detail.quantity = 1
 				detail.price = link.sallingPrice
 				detail.color = 3
 				detail.place = place
-				detail.modifiedPrice = detail.price
+				detail.modifiedPrice = params.modifiedPrice3?new BigDecimal(params.modifiedPrice3):detail.price
 				detail.costPrice = link.costPrice
 				detail.modifiedCostPrice = detail.costPrice
 				break;

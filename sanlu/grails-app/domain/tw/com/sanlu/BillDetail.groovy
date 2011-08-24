@@ -26,6 +26,8 @@ class BillDetail {
 	BigDecimal modifiedCostPrice
 	//場地
 	Place place
+	//進貨廠商
+	String vendor
 	//最後修改時間
 	Date lastUpdated
 	//最後修改人
@@ -38,5 +40,6 @@ class BillDetail {
 	static constraints = {
 		color nullable:true
 		place nullable:true
+		vendor nullable:true
 	}
 }
