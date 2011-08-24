@@ -815,33 +815,30 @@
         }
 		//show detail by rodes
 		function getEventDetail(event) {	
-		return "";		
             var timeshow, locationshow, attendsshow, eventshow;
             var showtime = event[4] != 1;
             eventshow = event[1];
             var startformat = getymformat(event[2], null, showtime, true);
             var endformat = getymformat(event[3], event[2], showtime, true);
-            timeshow = dateFormat.call(event[2], startformat) + " - " + dateFormat.call(event[3], endformat);
+            timeshow = dateFormat.call(event[2], endformat) + " - " + dateFormat.call(event[3], endformat);
             locationshow = (event[9] != undefined && event[9] != "") ? event[9] : i18n.xgcalendar.i_undefined;
             attendsshow = (event[10] != undefined && event[10] != "") ? event[10] : "";
             var ret = [];
 			//Rodes modify
 			if (attendsshow != "") {
-                ret.push( i18n.xgcalendar.participant + ":", attendsshow,"\r\n");
+                ret.push( i18n.xgcalendar.participant + ":" + attendsshow );
             }
             if (event[4] == 1) {
-                ret.push("[" + i18n.xgcalendar.allday_event + "]",$.browser.mozilla?"":"\r\n" );
+                ret.push("[" + i18n.xgcalendar.allday_event + "]",$.browser.mozilla?"":"" );
             }
             else {
                 if (event[5] == 1) {
-                    ret.push("[" + i18n.xgcalendar.repeat_event + "]",$.browser.mozilla?"":"\r\n");
+                    ret.push("[" + i18n.xgcalendar.repeat_event + "]",$.browser.mozilla?"":"");
                 }
             }
-            ret.push(i18n.xgcalendar.time + ":", timeshow, $.browser.mozilla?"":"\r\n", i18n.xgcalendar.event + ":", eventshow,$.browser.mozilla?"":"\r\n", i18n.xgcalendar.location + ":", locationshow);
-//            if (attendsshow != "") {
-//               // ret.push($.browser.mozilla?"":"\r\n", i18n.xgcalendar.participant + ":", attendsshow);
-//            }
-            return ret.join("");
+            ret.push(i18n.xgcalendar.time + ":" + timeshow, i18n.xgcalendar.event + ":" +  eventshow, i18n.xgcalendar.location + ":" + locationshow);
+
+            return ret.join("<br/>");
         }
         function getTitle(event) {			
             var timeshow, locationshow, attendsshow, eventshow;
@@ -850,6 +847,7 @@
             var startformat = getymformat(event[2], null, showtime, true);
             var endformat = getymformat(event[3], event[2], showtime, true);
             timeshow = dateFormat.call(event[2], startformat) + " - " + dateFormat.call(event[3], endformat);
+			console.debug(timeshow);
             locationshow = (event[9] != undefined && event[9] != "") ? event[9] : i18n.xgcalendar.i_undefined;
             attendsshow = (event[10] != undefined && event[10] != "") ? event[10] : "";
             var ret = [];
@@ -875,7 +873,7 @@
             var p = { bdcolor: theme[0], bgcolor2: theme[0], bgcolor1: theme[2], width: "70%", icon: "", title: "", data: "" };
             p.starttime = pZero(e.st.hour) + ":" + pZero(e.st.minute);
             p.endtime = pZero(e.et.hour) + ":" + pZero(e.et.minute);
-            p.content = [getEventDetail(e.event),e.event[1]].join("<br/>");
+            p.content = getEventDetail(e.event);
             p.title = getTitle(e.event);
             p.data = e.event.join("$");
             var icons = [];
