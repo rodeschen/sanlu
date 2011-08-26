@@ -28,7 +28,7 @@ hibernate {
 environments {
 	development {
 		dataSource {
-			dbCreate = "create-drop" // one of 'create', 'create-drop','update'
+			dbCreate = "create" // one of 'create', 'create-drop','update'
 			//jndiName = "java:comp/env/jdbc/sanlu"
 			url = "jdbc:mysql://localhost/sanlu?useUnicode=true&characterEncoding=UTF-8"
 		}
@@ -41,7 +41,7 @@ environments {
 	}
 	production {
 		dataSource {
-			dbCreate = "create-drop"
+			dbCreate = "update"
 			url = "jdbc:mysql://localhost/sanlu?useUnicode=true&characterEncoding=UTF-8"
 		}
 	}
