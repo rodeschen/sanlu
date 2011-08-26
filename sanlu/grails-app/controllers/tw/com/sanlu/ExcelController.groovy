@@ -74,7 +74,7 @@ class ExcelController extends BaseController {
 		response.setContentType("application/octet-stream")
 		//response.setContentType("application/vnd.ms-excel")
 
-		response.setHeader("Content-disposition", "attachment;filename=${"+ URLEncoder.encode(file.getName())+ "}")
+		response.setHeader("Content-disposition", "attachment;filename="+ URLEncoder.encode(file.getName(), "UTF8"))
 
 		response.outputStream << file.newInputStream()
 	}
@@ -148,8 +148,9 @@ class ExcelController extends BaseController {
 	def productDaily = {
 		// create our workbook and sheet
 		def product = Product.findById(params.productId)
+		
 		def cal = Calendar.instance
-		def file = new File(ExcelUtility.fileRoot + "Excel/日執行表-"+cal.get+"-"+now.getMonth()+".xls")
+		def file = new File(ExcelUtility.fileRoot + "Excel/日執行表_"+params.exportYear+"-"+params.exportMonth+".xls")
 		def workbook = Workbook.createWorkbook(file,Workbook.getWorkbook(new File(ExcelUtility.fileRoot + "Excel/日執行表.xls")))
 		try{
 			def sheet = workbook.getSheet(0)
@@ -200,7 +201,7 @@ class ExcelController extends BaseController {
 
 		//def file = new File("addr.xls")
 		response.setContentType("application/octet-stream")
-
+		
 		response.setHeader("Content-disposition", "attachment;filename="+ URLEncoder.encode(file.getName(), "UTF8"))
 
 		response.outputStream << file.newInputStream()
