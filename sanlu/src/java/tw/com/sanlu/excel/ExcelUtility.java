@@ -18,6 +18,8 @@ import jxl.read.biff.BiffException;
  *
  */
 public class ExcelUtility {
+	
+	public static String fileRoot = "d:/Sanlu/";
 	/**
 	 * 讀取郵局7.1 »臺灣地區郵遞區號前3碼一覽表(Excel版 )
 	 * http://www.post.gov.tw/post/index.jsp

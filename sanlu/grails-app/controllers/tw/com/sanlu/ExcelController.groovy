@@ -1,13 +1,15 @@
 package tw.com.sanlu
 import grails.converters.JSON
+
 import java.io.File
+import java.util.Calendar
 
 import jxl.*
 import jxl.write.*
-import java.util.Calendar;
+import tw.com.sanlu.excel.ExcelUtility
 
 class ExcelController extends BaseController {
-
+	private fileRoot = "c:/sanlu/";
 	def index = {
 	}
 
@@ -15,8 +17,8 @@ class ExcelController extends BaseController {
 	def agency = {
 		// create our workbook and sheet
 
-		def file = new File("Excel//"+params.exportYear+"-"+params.exportMonth+"report1.xls")
-		def workbook = Workbook.createWorkbook(file,Workbook.getWorkbook(new File("Excel//品項代叫記錄.xls")))
+		def file = new File(ExcelUtility.fileRoot + "Excel/品項代叫記錄-"+params.exportYear+"-"+params.exportMonth+".xls")
+		def workbook = Workbook.createWorkbook(file,Workbook.getWorkbook(new File(ExcelUtility.fileRoot + "Excel/品項代叫記錄.xls")))
 		try{
 			def sheet = workbook.getSheet(0)
 			def cal = Calendar.instance
@@ -72,7 +74,7 @@ class ExcelController extends BaseController {
 		response.setContentType("application/octet-stream")
 		//response.setContentType("application/vnd.ms-excel")
 
-		response.setHeader("Content-disposition", "attachment;filename=${file.getName()}")
+		response.setHeader("Content-disposition", "attachment;filename=${"+ URLEncoder.encode(file.getName())+ "}")
 
 		response.outputStream << file.newInputStream()
 	}
@@ -81,8 +83,8 @@ class ExcelController extends BaseController {
 	def productSale = {
 		// create our workbook and sheet
 
-		def file = new File("Excel//"+params.exportYear+"-"+params.exportMonth+"report2.xls")
-		def workbook = Workbook.createWorkbook(file,Workbook.getWorkbook(new File("Excel//商品提出明細.xls")))
+		def file = new File(ExcelUtility.fileRoot + "Excel/商品提出明細-"+params.exportYear+"-"+params.exportMonth+".xls")
+		def workbook = Workbook.createWorkbook(file,Workbook.getWorkbook(new File(ExcelUtility.fileRoot + "Excel/商品提出明細.xls")))
 		try{
 			def sheet = workbook.getSheet(0)
 			def cal = Calendar.instance
@@ -137,7 +139,7 @@ class ExcelController extends BaseController {
 		response.setContentType("application/octet-stream")
 		//response.setContentType("application/vnd.ms-excel")
 
-		response.setHeader("Content-disposition", "attachment;filename=${file.getName()}")
+			response.setHeader("Content-disposition", "attachment;filename="+ URLEncoder.encode(file.getName(), "UTF8"))
 
 		response.outputStream << file.newInputStream()
 	}
@@ -147,8 +149,8 @@ class ExcelController extends BaseController {
 		// create our workbook and sheet
 		def product = Product.findById(params.productId)
 		def cal = Calendar.instance
-		def file = new File("Excel//"+cal.get+"-"+now.getMonth()+"productDailyReport.xls")
-		def workbook = Workbook.createWorkbook(file,Workbook.getWorkbook(new File("Excel//日執行表.xls")))
+		def file = new File(ExcelUtility.fileRoot + "Excel/日執行表-"+cal.get+"-"+now.getMonth()+".xls")
+		def workbook = Workbook.createWorkbook(file,Workbook.getWorkbook(new File(ExcelUtility.fileRoot + "Excel/日執行表.xls")))
 		try{
 			def sheet = workbook.getSheet(0)
 			cal.set params.int("exportYear"), params.int("exportMonth")-1, 00
@@ -199,7 +201,7 @@ class ExcelController extends BaseController {
 		//def file = new File("addr.xls")
 		response.setContentType("application/octet-stream")
 
-		response.setHeader("Content-disposition", "attachment;filename=${file.getName()}")
+		response.setHeader("Content-disposition", "attachment;filename="+ URLEncoder.encode(file.getName(), "UTF8"))
 
 		response.outputStream << file.newInputStream()
 	}
@@ -217,9 +219,9 @@ class ExcelController extends BaseController {
 		}
 		if(project){
 			def cal = Calendar.instance
-			def file = new File("Excel//Bill//"+cal.getTime().format("yyyy-MM-dd")+"Bill.xls")
+			def file = new File(ExcelUtility.fileRoot + "Excel/帳單-案名-" + project.projectName + "-" +cal.getTime().format("yyyy-MM-dd")+".xls")
 			// create our workbook and sheet
-			def workbook = Workbook.createWorkbook(file,Workbook.getWorkbook(new File("Excel//bill.xls")))
+			def workbook = Workbook.createWorkbook(file,Workbook.getWorkbook(new File(ExcelUtility.fileRoot + "Excel/bill.xls")))
 
 			try{
 				def sheet = workbook.getSheet(0)
@@ -378,8 +380,8 @@ class ExcelController extends BaseController {
 			//def file = new File("addr.xls")
 			response.setContentType("application/octet-stream")
 
-			response.setHeader("Content-disposition", "attachment;filename=${file.getName()}")
-
+			//response.setHeader("Content-disposition", "attachment;filename=${file.getName()}")
+			response.setHeader("Content-disposition", "attachment;filename="+ URLEncoder.encode(file.getName(), "UTF8"))
 			response.outputStream << file.newInputStream()
 		}
 	}

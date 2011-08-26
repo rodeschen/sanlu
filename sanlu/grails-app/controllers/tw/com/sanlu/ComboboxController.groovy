@@ -7,6 +7,8 @@ import grails.converters.JSON
 
 class ComboboxController extends BaseController {
 
+
+	
 	//禮儀公司
 	def funeralCompany = {
 		def l = FuneralCompany.findAll()
@@ -43,7 +45,7 @@ class ComboboxController extends BaseController {
 	private static Map<String, List<String>> addrMap;
 	def city={
 		if(addrMap==null){
-			addrMap = ExcelUtility.handleAddrExcel("Excel//addr.xls")
+			addrMap = ExcelUtility.handleAddrExcel(ExcelUtility.fileRoot + "Excel/addr.xls")
 		}
 		render addrMap as JSON
 	}
