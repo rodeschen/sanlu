@@ -141,6 +141,9 @@
                 刪除
             </button>
             <!--  <button id="checkOut">結帳</button> -->
+            <button id="downloadInternalBill">
+                下載內帳單
+            </button>
             <button id="downloadBill">
                 下載帳單
             </button>
@@ -766,6 +769,15 @@
                         }
                     });
                 });
+                $("#downloadInternalBill").click(function(){
+                    API.formSubmit({
+                        url: contextRoot + "/excel/internalBill",
+                        target: "_self",
+                        data: {
+                            projectId: responseJSON.id
+                        }
+                    });
+                });                
                 
                 $("#startMin").change(function(){
                     endMin.val($(this).val());

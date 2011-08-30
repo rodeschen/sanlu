@@ -139,7 +139,7 @@ class ExcelController extends BaseController {
 		response.setContentType("application/octet-stream")
 		//response.setContentType("application/vnd.ms-excel")
 
-			response.setHeader("Content-disposition", "attachment;filename="+ URLEncoder.encode(file.getName(), "UTF8"))
+		response.setHeader("Content-disposition", "attachment;filename="+ URLEncoder.encode(file.getName(), "UTF8"))
 
 		response.outputStream << file.newInputStream()
 	}
@@ -148,7 +148,7 @@ class ExcelController extends BaseController {
 	def productDaily = {
 		// create our workbook and sheet
 		def product = Product.findById(params.productId)
-		
+
 		def cal = Calendar.instance
 		def file = new File(ExcelUtility.fileRoot + "Excel/日執行表_"+params.exportYear+"-"+params.exportMonth+".xls")
 		def workbook = Workbook.createWorkbook(file,Workbook.getWorkbook(new File(ExcelUtility.fileRoot + "Excel/日執行表.xls")))
@@ -201,14 +201,14 @@ class ExcelController extends BaseController {
 
 		//def file = new File("addr.xls")
 		response.setContentType("application/octet-stream")
-		
+
 		response.setHeader("Content-disposition", "attachment;filename="+ URLEncoder.encode(file.getName(), "UTF8"))
 
 		response.outputStream << file.newInputStream()
 	}
 
 	//產出帳單
-	def bill = {
+	def internalBill = {
 		//def billDetails = BillDetail.findAllByProject(params.projectId)
 		def project = Project.findById(params.projectId)
 		def criteria = BillDetail.createCriteria()
@@ -323,26 +323,26 @@ class ExcelController extends BaseController {
 				def totalRow = row
 				WritableFont writableFont = new WritableFont(WritableFont.ARIAL,12);
 				WritableCellFormat wcf = new WritableCellFormat(writableFont);
-				wcf.setBackground(Colour.CORAL);
-				wcf.setAlignment(Alignment.CENTRE);
+				wcf.setBackground(format.Colour.CORAL);
+				wcf.setAlignment(format.Alignment.CENTRE);
 				//未稅合計
 				sheet.mergeCells 0, row, 6, row
 				sheet.addCell(new Label(0, row, "未稅合計",wcf))
 				//應收金額合計
-				sheet.addCell(new Formula(7, row, "SUM(H7:H"+row,wcf))
+				sheet.addCell(new Formula(7, row, "SUM(H7:H"+row+")",wcf))
 				//減號
 				sheet.addCell(new Label(8, row, "─",wcf))
 				//成本單價
 				sheet.addCell(new Label(9, row, " ",wcf))
 				//實收金額
-				sheet.addCell(new Formula(10, row, "SUM(K7:K"+row,wcf))
+				sheet.addCell(new Formula(10, row, "SUM(K7:K"+row+")",wcf))
 				//等號
 				sheet.addCell(new Label(11, row, "=",wcf))
 				//折讓金額
 				sheet.addCell(new Formula(12, row, "H"+row+"-K"+row,wcf))
 				row++
 				WritableCellFormat wcf2 = new WritableCellFormat(writableFont);
-				wcf2.setVerticalAlignment VerticalAlignment.TOP
+				wcf2.setVerticalAlignment format.VerticalAlignment.TOP
 				wcf2.setWrap(true);
 				//以上報價未稅，如需發票另計 5%。=
 				sheet.mergeCells 0, row, 2, row
@@ -379,6 +379,125 @@ class ExcelController extends BaseController {
 			}
 
 			//def file = new File("addr.xls")
+			response.setContentType("application/octet-stream")
+
+			//response.setHeader("Content-disposition", "attachment;filename=${file.getName()}")
+			response.setHeader("Content-disposition", "attachment;filename="+ URLEncoder.encode(file.getName(), "UTF8"))
+			response.outputStream << file.newInputStream()
+		}
+	}
+
+	def bill = {
+		//def billDetails = BillDetail.findAllByProject(params.projectId)
+		def project = Project.findById(params.projectId)
+		def criteria = BillDetail.createCriteria()
+		def billDetails = criteria.list {
+			eq("project",project)
+			projections { //groupProperty("product")
+				distinct("product") }
+			order("startTime", "asc")
+		}
+		if(project){
+			def cal = Calendar.instance
+			def file = new File(ExcelUtility.fileRoot + "Excel/外帳單-案名-" + project.projectName + "-" +cal.getTime().format("yyyy-MM-dd")+".xls")
+			// create our workbook and sheet
+			def workbook = Workbook.createWorkbook(file,Workbook.getWorkbook(new File(ExcelUtility.fileRoot + "Excel/外帳.xls")))
+
+			try{
+				def sheet = workbook.getSheet(0)
+				sheet.getSettings().setProtected(true);
+				def parameter = Parameters.findByType("excelPassword")
+				sheet.getSettings().setPassword(parameter.value);
+
+				def commonFormat = new WritableCellFormat(sheet.getCell(1,1).getCellFormat())
+				// write out our header
+				//案名
+				sheet.addCell(new Label(1, 1,project.projectName,commonFormat))
+				//禮儀公司
+				sheet.addCell(new Label(5, 1,project.funeralCompany.funeralCompanyName,commonFormat))
+				//禮儀師
+				//sheet.addCell(new Label(11, 2,project.funeraler.funeralerName,new WritableCellFormat(sheet.getCell(11,2).getCellFormat())))
+
+				def count = 1
+				def row = 2
+				//代叫供品明細：
+				def isAgencyTmp = ""
+				//提出商品明細：
+				def notAgencyTmp = ""
+				billDetails.each() {
+					//項目
+					sheet.addCell(new Label(0, row,it.productName,commonFormat))
+					//使用時間
+					def sallCount = 0
+
+					//合併欄位
+					//sheet.mergeCells(2, row, 3, row);
+					def productBills = BillDetail.findAllByProjectAndProduct(project,it)
+					//計價單位類別  0:次
+					if(it.costUnit==0){
+						def tmp = ""
+						productBills.each(){
+							tmp +=it.startTime.getMonth()+"/"+it.startTime.getDate()+""+"，"
+						}
+						tmp = tmp?.substring(0, tmp.length()-1)
+						sheet.addCell(new Label(1, row,tmp))
+						//次數
+						sallCount=productBills.size()
+						sheet.addCell(new Label(3, row,((int)(sallCount*it.costRange)).toString(),commonFormat))
+					}else if(it.costUnit==1){
+						productBills.each(){
+							//1:區間(時)
+							sheet.addCell(new Label(1, row,it.startTime.getMonth()+"/"+it.startTime.getDate()+"",commonFormat))
+							//次數
+							sheet.addCell(new Label(3, row,((int)it.quantity).toString(),commonFormat))
+						}
+					}else if(it.costUnit==2){
+						productBills.each(){
+							//2:區間(天)
+							sheet.addCell(new Label(1, row,it.startTime.getMonth()+"/"+it.startTime.getDate()+"~"+it.endTime.getMonth()+"/"+it.endTime.getDate()+"",commonFormat))
+							//次數
+							sheet.addCell(new Label(3, row,((int)it.quantity).toString(),commonFormat))
+						}
+					}
+					//顯示單位
+					sheet.addCell(new Label(4, row,it.unit,commonFormat))
+					//單價
+					sheet.addCell(new Label(6, row,((int)it.sallingPrice).toString(),commonFormat))
+					//應收金額
+					sheet.addCell(new Formula(8, row, "D"+(row+1)+"*G"+(row+1),commonFormat))
+					row++
+					count++
+				}
+				//表尾
+
+				//應收金額合計
+				WritableFont writableFont = new WritableFont(WritableFont.ARIAL,12,WritableFont.NO_BOLD,false,format.UnderlineStyle.NO_UNDERLINE,format.Colour.RED);
+				WritableCellFormat wcf = new WritableCellFormat(writableFont);
+				wcf.setVerticalAlignment format.VerticalAlignment.CENTRE
+				wcf.setAlignment format.Alignment.CENTRE
+				wcf.setFont(writableFont)
+				sheet.mergeCells 7, row, 8, row
+				sheet.addCell(new Formula(7, row, "SUM(I3:I"+row+")",wcf))
+				//以上項目總計
+				sheet.mergeCells 2, row, 6, row
+				sheet.addCell(new Label(2, row, "以上項目總計:",commonFormat))
+				//備註
+				sheet.mergeCells 0, row, 1, row
+				sheet.addCell(new Label(0, row, "備註",commonFormat))
+								
+				row++
+				//以上報價未稅如需發票稅外另計 5%。
+				sheet.mergeCells 0, row, 8, 21
+				sheet.addCell(new Label(0, row, "以上報價未稅如需發票稅外另計 5%。"))
+			}
+			catch(Exception e){
+				e.printStackTrace();
+			}finally{
+				// close
+				workbook.write()
+				workbook.close()
+			}
+			
 			response.setContentType("application/octet-stream")
 
 			//response.setHeader("Content-disposition", "attachment;filename=${file.getName()}")
