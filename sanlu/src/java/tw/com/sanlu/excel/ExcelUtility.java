@@ -1,7 +1,7 @@
 package tw.com.sanlu.excel;
 
-import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -12,25 +12,34 @@ import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
 
+import org.codehaus.groovy.grails.commons.ApplicationHolder;
+import org.springframework.core.io.Resource;
+
 /**
  * 
  * @author rick
- *
+ * 
  */
 public class ExcelUtility {
-	
-	public static String fileRoot = "d:/Sanlu/";
+
+	public static Resource getResource(String filePath) {
+		return ApplicationHolder.getApplication().getParentContext()
+				.getResource("classpath:resources/" + filePath);
+	}
+
 	/**
-	 * 讀取郵局7.1 »臺灣地區郵遞區號前3碼一覽表(Excel版 )
-	 * http://www.post.gov.tw/post/index.jsp
+	 * 讀取郵局7.1 »臺灣地區郵遞區號前3碼一覽表(Excel版 ) http://www.post.gov.tw/post/index.jsp
+	 * 
 	 * @param filePath
 	 * @return Map<String, List<String>>
 	 */
-	public static Map<String, List<String>> handleAddrExcel(String filePath) {
+	public static Map<String, List<String>> handleAddrExcel() {
+
 		Map<String, List<String>> map = new LinkedHashMap<String, List<String>>();
 		Workbook workbook = null;
 		try {
-			workbook = Workbook.getWorkbook(new File(filePath));
+			workbook = Workbook.getWorkbook(getResource("excel/addr.xls")
+					.getInputStream());
 			Sheet sheet = workbook.getSheet(0);
 			String city = null;
 			List<String> cityArea = null;
