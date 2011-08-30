@@ -45,7 +45,7 @@ class ComboboxController extends BaseController {
 	private static Map<String, List<String>> addrMap;
 	def city={
 		if(addrMap==null){
-			addrMap = ExcelUtility.handleAddrExcel(ExcelUtility.fileRoot + "Excel/addr.xls")
+			addrMap = ExcelUtility.handleAddrExcel()
 		}
 		render addrMap as JSON
 	}

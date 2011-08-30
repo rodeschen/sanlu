@@ -22,6 +22,7 @@ class ProjectController extends GridController {
 	}
 	@GridQuery
 	def queryNonClose = {
+		println  grailsApplication.getMainContext().getResourceByPath("js/jquery/jquery-1.6.1.js");
 		def rows=[]
 		def rowCount = Project.countByClosingDateOrClosingDateIsNull(new Date())
 		def projects = Project.findAllByClosingDateOrClosingDateIsNull(new Date(),[max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc"])
