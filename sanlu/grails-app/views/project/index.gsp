@@ -89,7 +89,7 @@
                             </select>
                         </span>
                     </div>
-                    <div class="field-row">
+                    <div class="field-row closeDate">
                         <span>
                             <button id="update">
                                 儲存修改專案資訊
@@ -133,20 +133,28 @@
             </fieldset>
         </g:form>
         <div>
-            <a id="add" href="#pdialog" class="button">新增</a>
-            <button id="modify1">
-                修改
+            <button id="modifyView" style="color:green">
+                修改顯示狀態
             </button>
-            <button id="delete1">
-                刪除
-            </button>
-            <!--  <button id="checkOut">結帳</button> -->
-            <button id="downloadInternalBill">
-                下載內帳單
-            </button>
-            <button id="downloadBill">
-                下載帳單
-            </button>
+            <span class="closeDate hide"><a id="add" href="#pdialog" class="button">新增</a>
+                <button id="modify1">
+                    修改商品
+                </button>
+                <button id="delete1">
+                    刪除
+                </button>
+                <button id="closing">
+                    結帳
+                </button>
+            </span>
+            <span class="download hide">
+                <button id="downloadInternalBill">
+                    下載內帳單
+                </button>
+                <button id="downloadBill">
+                    下載帳單
+                </button>
+            </span>
             <button id="calendar" style="float: right;">
                 專案行事曆
             </button>
@@ -170,6 +178,11 @@
                                     專案--></span>
                             </div>
                             <div id="productArea" style="">
+                                <!--
+                                <div class="field-row">
+                                <span class="th2">顯示於外帳單：</span>
+                                <span><input type="checkbox" id="showBill" name="showBill" class="" value="1" checked="checked" /></span>
+                                </div>-->
                                 <div id="type1" class="productArea" style="">
                                     <div class="field-row">
                                         <span class="th2">產品名稱：</span>
@@ -442,6 +455,15 @@
                     $("#contactAddrCity").val(json.contactAddrCity).trigger("change", [json.contactAddrArea]);
                     $("#contactAddr").val(json.contactAddr);
                     $("#memo").val(json.memo);
+                    if (json.closingDate) {
+                        $(".download").show();
+                        $(".closeDate").hide();
+                        $("#addForm").find(":input,select").attr("readonly", true).filter("select").prop("disabled", true).end().filter(".date").datepicker('destroy');
+                    }
+                    else {
+                        $(".download").hide();
+                        $(".closeDate").show();
+                    }
                     
                     document.title = json.projectName + " - 專案";
                 });
@@ -474,7 +496,22 @@
                     colModel: [{
                         name: 'id',
                         index: 'id',
+                        key: true,
                         hidden: true
+                    }, {
+                        header: "顯示",
+                        name: 'showBill',
+                        index: 'showBill',
+                        width: 60,
+                        align: 'center',
+                        formatter: 'checkbox',
+                        editoptions: {
+                            value: '1:0'
+                        },
+                        formatoptions: {
+                            disabled: false
+                        }
+                    
                     }, {
                         header: "品名",
                         name: 'productName',
@@ -540,45 +577,45 @@
                         index: 'productType',
                         align: "center",
                         hidden: true
-
+                    
                     }, {
                         name: 'startTime',
                         index: 'startTime',
                         align: "center",
                         hidden: true
-
+                    
                     }, {
                         name: 'endTime',
                         index: 'endTime',
                         align: "center",
                         hidden: true
-
+                    
                     }, {
                         name: 'productId',
                         index: 'product.id',
                         align: "center",
                         hidden: true
-
+                    
                     }, {
                         name: 'vendor',
                         index: 'vendor',
                         align: "center",
                         hidden: true
-
+                    
                     }, {
                         name: 'placeId',
                         index: 'place.id',
                         width: 80,
                         align: "center",
                         hidden: true
-
+                    
                     }, {
                         name: 'modifiedPrice',
                         index: 'modifiedPrice',
                         width: 80,
                         align: "center",
                         hidden: true
-
+                    
                     }, {
                         header: "建立人",
                         name: 'lastModifyBy.empName',
@@ -642,7 +679,7 @@
                         
                         form.find("#amount" + data.productType).val(data.quantity);
                         form.find("#vendor" + data.productType).val(data.vendor);
-						form.find("#modifiedPrice" + data.productType).val(data.modifiedPrice);
+                        form.find("#modifiedPrice" + data.productType).val(data.modifiedPrice);
                         var sd = data.startTime.split(" "), ed = data.endTime.split(" ");
                         var st = sd[1].split(":"), et = ed[1].split(":");
                         form.find("#startDate").val(sd[0]);
@@ -777,10 +814,41 @@
                             projectId: responseJSON.id
                         }
                     });
-                });                
+                });
                 
                 $("#startMin").change(function(){
                     endMin.val($(this).val());
+                });
+                
+                $("#modifyView").click(function(){
+                    var datas = grid1.getRowData();
+                    $.ajax({
+                        url: contextRoot + "/project/updateViewBill",
+                        data: {
+                            data: JSON.stringify(datas)
+                        },
+                        success: function(){
+                            alert("更新完成");
+                        }
+                    })
+                    for (var data in datas) {
+                        console.debug(datas[data])
+                    }
+                });
+                $("#closing").click(function(){
+                    $.ajax({
+                        url: contextRoot + "/project/updateClosing",
+                        data: {
+                            id: responseJSON.id
+                        },
+                        success: function(){
+                            $(".download").show();
+                            $(".closeDate").hide();
+							 $("#addForm").find(":input,select").attr("readonly", true).filter("select").prop("disabled", true).end().filter(".date").datepicker('destroy');
+                            alert("結帳完成");
+                        }
+                        
+                    })
                 })
             });
         </script>

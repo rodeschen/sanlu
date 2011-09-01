@@ -8,6 +8,8 @@ import java.util.Date;
  */
 class BillDetail {
 
+	//是否顯示於外帳單
+	boolean showBill = true
 	//產品
 	Product product
 	//使用產品起始時間

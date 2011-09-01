@@ -100,6 +100,8 @@ class ProjectController extends GridController {
 				}],"userdata":[amount:amount,price:itemCount,quantity:itemCount2]]
 	}
 
+	
+	
 	def queryid = {
 		def project = Project.findById(params.long("id"))
 		def res = [:] <<
@@ -116,11 +118,19 @@ class ProjectController extends GridController {
 					contactAddrCity:project.contactAddrCity,
 					contactAddrArea:project.contactAddrArea,
 					contactAddr:project.contactAddr,
+					closingDate:project.closingDate?.format("yyyy-MM-dd"),
 					memo:project.memo]
 
 		render res as JSON
 	}
 
+	def updateClosing = {
+		def project = Project.findById(params.long("id"))
+		project.closingDate = new Date()
+		project.save()
+		render [:] as JSON
+	}
+	
 	def addAction = {
 
 		DateFormat df = new SimpleDateFormat("yyyy-M-d HH:mm");
@@ -136,6 +146,27 @@ class ProjectController extends GridController {
 		}
 
 		def res = ["id" : project.id]
+		render res as JSON
+	}
+
+	def updateViewBill = {
+
+		def datas = JSON.parse(params.data)
+		def ids = []
+		def iddata = [:]
+		datas.each(){
+			ids.add(it.id.toLong())
+			iddata[it.id.toLong()] = it.showBill.toBoolean()
+			println iddata
+		}
+		def aBill = BillDetail.findAllByIdInList(ids)
+		BillDetail.withTransaction{ status ->
+			aBill?.each {
+				it.showBill = iddata[it.id].toBoolean()
+				it.save()
+			}
+		}
+		def res = ["" : ""]
 		render res as JSON
 	}
 
@@ -272,10 +303,10 @@ class ProjectController extends GridController {
 				oldProduct.save()
 			}
 		}
-		 
+
 		//copy from addProudct
-		
-		
+
+
 		def product = Product.findById(params.long("product" + type))
 		detail.product = product
 		DateFormat df = new SimpleDateFormat("yyyy-M-d HH:mm");
@@ -553,6 +584,7 @@ class ProjectController extends GridController {
 
 		}
 		detail.lastModifyBy = session.employee
+		//detail.showBill = params.boolean("showBill")
 		detail.save()
 		if(detail.hasErrors()){
 			println detail.errors
