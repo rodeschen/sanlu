@@ -21,11 +21,22 @@ class ProjectController extends GridController {
 		[rjson : params.responseJSON.toString()]
 	}
 	@GridQuery
-	def queryNonClose = {
-		println  grailsApplication.getMainContext().getResourceByPath("js/jquery/jquery-1.6.1.js");
+	def queryProjects = {
 		def rows=[]
-		def rowCount = Project.countByClosingDateOrClosingDateIsNull(new Date())
-		def projects = Project.findAllByClosingDateOrClosingDateIsNull(new Date(),[max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc"])
+		def rowCount
+		def projects
+		if(params.closing == "N"){
+			def cal1 = Calendar.getInstance();
+			cal1.set(Calendar.HOUR, 0)
+			cal1.set(Calendar.MINUTE, 0)
+			cal1.set(Calendar.SECOND, 0)
+			cal1.set(Calendar.MILLISECOND, 0)
+			rowCount = Project.countByClosingDateGreaterThanEqualsOrClosingDateIsNull(cal1.getTime())
+			projects = Project.findAllByClosingDateGreaterThanEqualsOrClosingDateIsNull(cal1.getTime(),[max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc"])
+		}else{
+			rowCount = Project.countByClosingDateIsNotNull()
+			projects = Project.findAllByClosingDateIsNotNull([max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc"])
+		}
 
 		//format
 		//return ["rowData":projects,"rowCount":rowCount,"format":["projectName":{str -> return "$str xxxxccc"}]]
@@ -100,8 +111,8 @@ class ProjectController extends GridController {
 				}],"userdata":[amount:amount,price:itemCount,quantity:itemCount2]]
 	}
 
-	
-	
+
+
 	def queryid = {
 		def project = Project.findById(params.long("id"))
 		def res = [:] <<
@@ -130,7 +141,7 @@ class ProjectController extends GridController {
 		project.save()
 		render [:] as JSON
 	}
-	
+
 	def addAction = {
 
 		DateFormat df = new SimpleDateFormat("yyyy-M-d HH:mm");
