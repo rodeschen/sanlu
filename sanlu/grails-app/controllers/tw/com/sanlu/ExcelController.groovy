@@ -15,7 +15,7 @@ class ExcelController extends BaseController {
 	//品項代叫報表
 	def agency = {
 		// create our workbook and sheet
-		
+
 		String fileName = "品項代叫記錄-"+params.exportYear+"-"+params.exportMonth+".xls";
 		def file = new File("Excel/品項代叫記錄-"+params.exportYear+"-"+params.exportMonth+".xls")
 		def workbook = Workbook.createWorkbook(file,Workbook.getWorkbook(ExcelUtility.getResource("excel/品項代叫記錄.xls").inputStream))
@@ -213,9 +213,11 @@ class ExcelController extends BaseController {
 		def project = Project.findById(params.projectId)
 		def criteria = BillDetail.createCriteria()
 		def billDetails = criteria.list {
-			eq("project",project)
-			projections { //groupProperty("product")
-				distinct("product") }
+			and {
+				eq("showBill",true)
+				eq("project",project)
+			}
+			projections {  distinct("product") }
 			order("startTime", "asc")
 		}
 		if(project){
@@ -255,67 +257,69 @@ class ExcelController extends BaseController {
 				//提出商品明細：
 				def notAgencyTmp = ""
 				billDetails.each() {
-					//序號
-					sheet.addCell(new Label(0, row,count.toString(),count%2!=0?oddFormat:evenFormat))
-					//項目
-					sheet.addCell(new Label(1, row,it.productName,count%2!=0?oddFormat:evenFormat))
-					if(it.isAgency){
-						//代叫供品明細：
-						isAgencyTmp+=it.productName + "，"
-					}else{
-						//提出商品明細：
-						notAgencyTmp+=it.productName + "，"
-					}
-					//使用時間
-					def sallCount = 0
+
+					//def productBills = BillDetail.findAllByProjectAndProductAndShowBill(project,it,true)
+					def productBills = BillDetail.findAllWhere(project:project, product:it,showBill:true)
+					if(productBills){
+						//合併欄位
+						sheet.mergeCells(2, row, 3, row);
 
 
-					//合併欄位
-					sheet.mergeCells(2, row, 3, row);
-					def productBills = BillDetail.findAllByProjectAndProduct(project,it)
-					//計價單位類別  0:次
-					if(it.costUnit==0){
-						def tmp = ""
-						productBills.each(){
-							tmp +=it.startTime.getMonth()+"月"+it.startTime.getDate()+"日"+"，"
+						//序號
+						sheet.addCell(new Label(0, row,count.toString(),count%2!=0?oddFormat:evenFormat))
+						//項目
+						sheet.addCell(new Label(1, row,it.productName,count%2!=0?oddFormat:evenFormat))
+						if(it.isAgency){
+							//代叫供品明細：
+							isAgencyTmp+=it.productName + "，"
+						}else{
+							//提出商品明細：
+							notAgencyTmp+=it.productName + "，"
 						}
-						tmp = tmp?.substring(0, tmp.length()-1)
-						sheet.addCell(new Label(2, row,tmp,count%2!=0?oddFormat:evenFormat))
-						//次數
-						sallCount=productBills.size()
-						sheet.addCell(new Label(4, row,((int)(sallCount*it.costRange)).toString(),count%2!=0?oddFormat:evenFormat))
-					}else if(it.costUnit==1){
-						productBills.each(){
-							//1:區間(時)
-							sheet.addCell(new Label(2, row,it.startTime.getMonth()+"月"+it.startTime.getDate()+"日",count%2!=0?oddFormat:evenFormat))
-							//次數
-							sheet.addCell(new Label(4, row,((int)it.quantity).toString(),count%2!=0?oddFormat:evenFormat))
+
+						//計價單位類別  0:次
+						if(it.costUnit==0){
+							def tmp = ""
+							productBills.each(){
+								tmp +=it.startTime.getMonth()+1+"月"+it.startTime.getDate()+"日"+"，"
+							}
+							tmp = tmp?.substring(0, tmp.length()-1)
+							sheet.addCell(new Label(2, row,tmp,count%2!=0?oddFormat:evenFormat))
+							//次數							
+							sheet.addCell(new Label(4, row,((int)(productBills.size()*it.costRange)).toString(),count%2!=0?oddFormat:evenFormat))
+						}else if(it.costUnit==1){
+							productBills.each(){
+								//1:區間(時)
+								sheet.addCell(new Label(2, row,it.startTime.getMonth()+1+"月"+it.startTime.getDate()+"日",count%2!=0?oddFormat:evenFormat))
+								//次數
+								sheet.addCell(new Label(4, row,((int)it.quantity).toString(),count%2!=0?oddFormat:evenFormat))
+							}
+						}else if(it.costUnit==2){
+							productBills.each(){
+								//2:區間(天)
+								sheet.addCell(new Label(2, row,it.startTime.getMonth()+1+"月"+it.startTime.getDate()+"日~"+it.endTime.getMonth()+"月"+it.endTime.getDate()+"日"  ,count%2!=0?oddFormat:evenFormat))
+								//次數
+								sheet.addCell(new Label(4, row,((int)it.quantity).toString(),count%2!=0?oddFormat:evenFormat))
+							}
 						}
-					}else if(it.costUnit==2){
-						productBills.each(){
-							//2:區間(天)
-							sheet.addCell(new Label(2, row,it.startTime.getMonth()+"月"+it.startTime.getDate()+"日~"+it.endTime.getMonth()+"月"+it.endTime.getDate()+"日"  ,count%2!=0?oddFormat:evenFormat))
-							//次數
-							sheet.addCell(new Label(4, row,((int)it.quantity).toString(),count%2!=0?oddFormat:evenFormat))
-						}
+						//顯示單位
+						sheet.addCell(new Label(5, row,it.unit,count%2!=0?oddFormat:evenFormat))
+						//單價
+						sheet.addCell(new Label(6, row,((int)it.sallingPrice).toString(),count%2!=0?oddFormat:evenFormat))
+						//應收金額
+						sheet.addCell(new Formula(7, row, "E"+(row+1)+"*G"+(row+1),count%2!=0?oddFormat:evenFormat))
+						//減號
+						sheet.addCell(new Label(8, row, "─",count%2!=0?oddFormat:evenFormat))
+						//成本單價
+						sheet.addCell(new Label(9, row,((int)it.price).toString(),count%2!=0?oddFormat:evenFormat))
+						//實收金額
+						sheet.addCell(new Formula(10, row, "E"+(row+1)+"*J"+(row+1),count%2!=0?oddFormat:evenFormat))
+						//等號
+						sheet.addCell(new Label(11, row, "=",count%2!=0?oddFormat:evenFormat))
+						//折讓金額
+						sheet.addCell(new Formula(12, row, "H"+(row+1)+"-K"+(row+1),count%2!=0?oddFormat:evenFormat))
+						row++
 					}
-					//顯示單位
-					sheet.addCell(new Label(5, row,it.unit,count%2!=0?oddFormat:evenFormat))
-					//單價
-					sheet.addCell(new Label(6, row,((int)it.sallingPrice).toString(),count%2!=0?oddFormat:evenFormat))
-					//應收金額
-					sheet.addCell(new Formula(7, row, "E"+(row+1)+"*G"+(row+1),count%2!=0?oddFormat:evenFormat))
-					//減號
-					sheet.addCell(new Label(8, row, "─",count%2!=0?oddFormat:evenFormat))
-					//成本單價
-					sheet.addCell(new Label(9, row,((int)it.price).toString(),count%2!=0?oddFormat:evenFormat))
-					//實收金額
-					sheet.addCell(new Formula(10, row, "E"+(row+1)+"*J"+(row+1),count%2!=0?oddFormat:evenFormat))
-					//等號
-					sheet.addCell(new Label(11, row, "=",count%2!=0?oddFormat:evenFormat))
-					//折讓金額
-					sheet.addCell(new Formula(12, row, "H"+(row+1)+"-K"+(row+1),count%2!=0?oddFormat:evenFormat))
-					row++
 					count++
 				}
 				//表尾
@@ -425,47 +429,47 @@ class ExcelController extends BaseController {
 				//提出商品明細：
 				def notAgencyTmp = ""
 				billDetails.each() {
-					//項目
-					sheet.addCell(new Label(0, row,it.productName,commonFormat))
-					//使用時間
-					def sallCount = 0
 
 					//合併欄位
 					//sheet.mergeCells(2, row, 3, row);
-					def productBills = BillDetail.findAllByProjectAndProduct(project,it)
-					//計價單位類別  0:次
-					if(it.costUnit==0){
-						def tmp = ""
-						productBills.each(){
-							tmp +=it.startTime.getMonth()+"/"+it.startTime.getDate()+""+"，"
-						}
-						tmp = tmp?.substring(0, tmp.length()-1)
-						sheet.addCell(new Label(1, row,tmp))
-						//次數
-						sallCount=productBills.size()
-						sheet.addCell(new Label(3, row,((int)(sallCount*it.costRange)).toString(),commonFormat))
-					}else if(it.costUnit==1){
-						productBills.each(){
-							//1:區間(時)
-							sheet.addCell(new Label(1, row,it.startTime.getMonth()+"/"+it.startTime.getDate()+"",commonFormat))
+					//def productBills = BillDetail.findAllByProjectAndProductAndShowBill(project,it,true)
+					def productBills = BillDetail.findAllWhere(project:project, product:it,showBill:true)
+					if(productBills){
+						//項目
+						sheet.addCell(new Label(0, row,it.productName,commonFormat))
+						//計價單位類別  0:次
+						if(it.costUnit==0){
+							def tmp = ""
+							productBills.each(){
+								tmp +=it.startTime.getMonth()+1+"/"+it.startTime.getDate()+""+"，"
+							}
+							tmp = tmp?.substring(0, tmp.length()-1)
+							sheet.addCell(new Label(1, row,tmp))
 							//次數
-							sheet.addCell(new Label(3, row,((int)it.quantity).toString(),commonFormat))
+							sheet.addCell(new Label(3, row,((int)(productBills.size()*it.costRange)).toString(),commonFormat))
+						}else if(it.costUnit==1){
+							productBills.each(){
+								//1:區間(時)
+								sheet.addCell(new Label(1, row,it.startTime.getMonth()+1+"/"+it.startTime.getDate()+"",commonFormat))
+								//次數
+								sheet.addCell(new Label(3, row,((int)it.quantity).toString(),commonFormat))
+							}
+						}else if(it.costUnit==2){
+							productBills.each(){
+								//2:區間(天)
+								sheet.addCell(new Label(1, row,it.startTime.getMonth()+1+"/"+it.startTime.getDate()+"~"+it.endTime.getMonth()+1+"/"+it.endTime.getDate()+"",commonFormat))
+								//次數
+								sheet.addCell(new Label(3, row,((int)it.quantity).toString(),commonFormat))
+							}
 						}
-					}else if(it.costUnit==2){
-						productBills.each(){
-							//2:區間(天)
-							sheet.addCell(new Label(1, row,it.startTime.getMonth()+"/"+it.startTime.getDate()+"~"+it.endTime.getMonth()+"/"+it.endTime.getDate()+"",commonFormat))
-							//次數
-							sheet.addCell(new Label(3, row,((int)it.quantity).toString(),commonFormat))
-						}
+						//顯示單位
+						sheet.addCell(new Label(4, row,it.unit,commonFormat))
+						//單價
+						sheet.addCell(new Label(6, row,((int)it.sallingPrice).toString(),commonFormat))
+						//應收金額
+						sheet.addCell(new Formula(8, row, "D"+(row+1)+"*G"+(row+1),commonFormat))
+						row++
 					}
-					//顯示單位
-					sheet.addCell(new Label(4, row,it.unit,commonFormat))
-					//單價
-					sheet.addCell(new Label(6, row,((int)it.sallingPrice).toString(),commonFormat))
-					//應收金額
-					sheet.addCell(new Formula(8, row, "D"+(row+1)+"*G"+(row+1),commonFormat))
-					row++
 					count++
 				}
 				//表尾
@@ -484,7 +488,7 @@ class ExcelController extends BaseController {
 				//備註
 				sheet.mergeCells 0, row, 1, row
 				sheet.addCell(new Label(0, row, "備註",commonFormat))
-								
+
 				row++
 				//以上報價未稅如需發票稅外另計 5%。
 				sheet.mergeCells 0, row, 8, 21
@@ -497,7 +501,7 @@ class ExcelController extends BaseController {
 				workbook.write()
 				workbook.close()
 			}
-			
+
 			response.setContentType("application/octet-stream")
 
 			//response.setHeader("Content-disposition", "attachment;filename=${file.getName()}")

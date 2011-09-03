@@ -603,4 +603,34 @@ class ProjectController extends GridController {
 		def res = ["IsSuccess" : true]
 		render res as JSON
 	}
+
+	def search={}
+
+	/**
+	 * 搜尋
+	 */
+	@GridQuery
+	def searchProject= {
+		def queryString = "from Project as p where "
+		DateFormat df = new SimpleDateFormat("yyyy-M-d");
+		
+		queryString <<= params.projectName?" p.projectName like '%"+params.projectName+"%' and":""
+		queryString <<= params.funeralCompany?" p.funeralCompany.id= "+params.long("funeralCompany")+" and":""
+		queryString <<= params.funeraler?" p.funeraler.id= "+params.long("funeraler")+" and":""
+		queryString <<= params.contact?" p.contact like '%"+params.contact+"%' and":""
+		queryString <<= params.contactPhone?" p.contactPhone like '%"+params.contactPhone+"%' and":""
+		queryString <<= params.contact?" p.contact like '%"+params.contact+"%' and":""
+		queryString <<= params.contactAddrCity?" p.contactAddrCity like '%"+params.contactAddrCity+"%' and":""
+		queryString <<= params.contactAddrArea?" p.contactAddrArea like '%"+params.contactAddrArea+"%' and":""
+		queryString <<= params.memo?" p.contactAddrArea like '%"+params.memo+"%' and":""
+		queryString <<= params.inDate?" p.inDate"+("B".equals(params.inDateKind) ?" <= ":" >= ")+ "'"+df.parse(params.inDate) + "' and":""
+		queryString <<= params.outDate?" p.outDate"+("B".equals(params.outDateKind) ?" <= ":" >= ")+"'"+ df.parse(params.outDate) + "' and":""
+
+		//def projects = Project.findAllByClosingDateOrClosingDateIsNull(new Date(),[max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc"])
+	
+		queryString = queryString.substring(0,queryString.length()-3)
+		println queryString
+		def projects= Project.findAll(queryString)
+		["rowData":projects,"rowCount":projects.size()]
+	}
 }

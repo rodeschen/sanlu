@@ -35,6 +35,9 @@
 							<a href="${request.contextPath}/main">首頁</a>
 						</li>
 						<li>
+							<a href="${request.contextPath}/project/search">搜尋案件</a>
+						</li>
+						<li>
 							<a href="#">商品</a>
 							<ul>
 								<li>
