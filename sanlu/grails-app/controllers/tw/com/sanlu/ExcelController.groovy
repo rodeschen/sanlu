@@ -290,14 +290,14 @@ class ExcelController extends BaseController {
 						}else if(it.costUnit==1){
 							productBills.each(){
 								//1:區間(時)
-								sheet.addCell(new Label(2, row,it.startTime.getMonth()+1+"月"+it.startTime.getDate()+"日",count%2!=0?oddFormat:evenFormat))
+								sheet.addCell(new Label(2, row,(it.startTime.getMonth()+1)+"月"+it.startTime.getDate()+"日",count%2!=0?oddFormat:evenFormat))
 								//次數
 								sheet.addCell(new Label(4, row,((int)it.quantity).toString(),count%2!=0?oddFormat:evenFormat))
 							}
 						}else if(it.costUnit==2){
 							productBills.each(){
 								//2:區間(天)
-								sheet.addCell(new Label(2, row,it.startTime.getMonth()+1+"月"+it.startTime.getDate()+"日~"+it.endTime.getMonth()+"月"+it.endTime.getDate()+"日"  ,count%2!=0?oddFormat:evenFormat))
+								sheet.addCell(new Label(2, row,(it.startTime.getMonth()+1)+"月"+it.startTime.getDate()+"日~"+(it.endTime.getMonth()+1)+"月"+it.endTime.getDate()+"日"  ,count%2!=0?oddFormat:evenFormat))
 								//次數
 								sheet.addCell(new Label(4, row,((int)it.quantity).toString(),count%2!=0?oddFormat:evenFormat))
 							}
@@ -441,7 +441,7 @@ class ExcelController extends BaseController {
 						if(it.costUnit==0){
 							def tmp = ""
 							productBills.each(){
-								tmp +=it.startTime.getMonth()+1+"/"+it.startTime.getDate()+""+"，"
+								tmp +=(it.startTime.getMonth()+1)+"/"+it.startTime.getDate()+""+"，"
 							}
 							tmp = tmp?.substring(0, tmp.length()-1)
 							sheet.addCell(new Label(1, row,tmp))
@@ -450,14 +450,14 @@ class ExcelController extends BaseController {
 						}else if(it.costUnit==1){
 							productBills.each(){
 								//1:區間(時)
-								sheet.addCell(new Label(1, row,it.startTime.getMonth()+1+"/"+it.startTime.getDate()+"",commonFormat))
+								sheet.addCell(new Label(1, row,(it.startTime.getMonth()+1)+"/"+it.startTime.getDate()+"",commonFormat))
 								//次數
 								sheet.addCell(new Label(3, row,((int)it.quantity).toString(),commonFormat))
 							}
 						}else if(it.costUnit==2){
 							productBills.each(){
 								//2:區間(天)
-								sheet.addCell(new Label(1, row,it.startTime.getMonth()+1+"/"+it.startTime.getDate()+"~"+it.endTime.getMonth()+1+"/"+it.endTime.getDate()+"",commonFormat))
+								sheet.addCell(new Label(1, row,(it.startTime.getMonth()+1)+"/"+it.startTime.getDate()+"~"+(it.endTime.getMonth()+1)+"/"+it.endTime.getDate()+"",commonFormat))
 								//次數
 								sheet.addCell(new Label(3, row,((int)it.quantity).toString(),commonFormat))
 							}
