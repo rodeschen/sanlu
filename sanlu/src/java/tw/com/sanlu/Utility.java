@@ -20,6 +20,9 @@ public class Utility {
 			.getDateTimeInstance();
 	public final static SimpleDateFormat dateFormat = new SimpleDateFormat(
 			"yyyy-MM-dd");
+	
+	public final static SimpleDateFormat dateTimeFormat = new SimpleDateFormat(
+			"M/d HH:mm");
 
 	public static Date stringToDate(String date, String formatter) {
 		SimpleDateFormat sdf = new SimpleDateFormat(formatter);

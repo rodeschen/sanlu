@@ -19,11 +19,11 @@ class EmployeeController extends GridController{
 
 	@GridQuery
 	def queryAll = {
-		["rowData":Employee.list(max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc"),
-					"rowCount":Employee.count()]
+		def employees = Employee.list(max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc")
+		["rowData":employees,"rowCount":employees.size()]
 	}
 
-	
+
 	def modifyAction={
 		def emp = Employee.findById(params.long("id"))
 		if(!emp) {

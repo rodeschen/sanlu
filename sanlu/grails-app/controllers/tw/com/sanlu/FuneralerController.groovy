@@ -19,8 +19,8 @@ class FuneralerController extends GridController{
 	@GridQuery
 	def queryByComp = {
 		def company = FuneralCompany.findById(params.long("funeralCompanyId"))
-		["rowData":Funeraler.findAllByFuneralCommpany(company,[max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc"]),
-					"rowCount":Funeraler.countByFuneralCommpany(company)]
+		def funeralers =Funeraler.findAllByFuneralCommpany(company,[max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc"])
+		["rowData":funeralers,"rowCount":funeralers.size()]
 	}
 
 	def deleteAction = {
@@ -36,7 +36,7 @@ class FuneralerController extends GridController{
 	def modifyAction={
 		def funeraler = Funeraler.findById(params.id)
 		if(!funeraler) {
-			return println("無法修改")
+			return throwError("無法修改");
 		}
 
 		funeraler.setFuneralerName params.funeralerName
@@ -48,7 +48,7 @@ class FuneralerController extends GridController{
 		def res = ["IsSuccess" : true]
 		render res as JSON
 	}
-	
+
 	def insertAction={
 		def company = FuneralCompany.findById(params.funeralCompanyId)
 		def funeraler = new Funeraler(
@@ -58,9 +58,6 @@ class FuneralerController extends GridController{
 				phone2:params.phone2,
 				lastModifyBy:session.employee)
 		funeraler.save()
-		if(funeraler.hasErrors()){
-			println funeraler.errors
-		}
 		def res = ["IsSuccess" : true]
 		render res as JSON
 	}

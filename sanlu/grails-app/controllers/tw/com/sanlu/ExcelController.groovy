@@ -2,6 +2,9 @@ package tw.com.sanlu
 import grails.converters.JSON
 
 import java.io.File
+import java.sql.Timestamp;
+import java.text.DateFormat
+import java.text.SimpleDateFormat
 import java.util.Calendar
 
 import jxl.*
@@ -209,7 +212,6 @@ class ExcelController extends BaseController {
 
 	//產出帳單
 	def internalBill = {
-		//def billDetails = BillDetail.findAllByProject(params.projectId)
 		def project = Project.findById(params.projectId)
 		def criteria = BillDetail.createCriteria()
 		def billDetails = criteria.list {
@@ -256,6 +258,7 @@ class ExcelController extends BaseController {
 				def isAgencyTmp = ""
 				//提出商品明細：
 				def notAgencyTmp = ""
+				def modifiedPrice,modifiedCostPrice
 				billDetails.each() {
 
 					//def productBills = BillDetail.findAllByProjectAndProductAndShowBill(project,it,true)
@@ -263,7 +266,6 @@ class ExcelController extends BaseController {
 					if(productBills){
 						//合併欄位
 						sheet.mergeCells(2, row, 3, row);
-
 
 						//序號
 						sheet.addCell(new Label(0, row,count.toString(),count%2!=0?oddFormat:evenFormat))
@@ -278,40 +280,57 @@ class ExcelController extends BaseController {
 						}
 
 						//計價單位類別  0:次
-						if(it.costUnit==0){
-							def tmp = ""
-							productBills.each(){
-								tmp +=it.startTime.getMonth()+1+"月"+it.startTime.getDate()+"日"+"，"
-							}
-							tmp = tmp?.substring(0, tmp.length()-1)
-							sheet.addCell(new Label(2, row,tmp,count%2!=0?oddFormat:evenFormat))
-							//次數							
-							sheet.addCell(new Label(4, row,((int)(productBills.size()*it.costRange)).toString(),count%2!=0?oddFormat:evenFormat))
-						}else if(it.costUnit==1){
-							productBills.each(){
-								//1:區間(時)
-								sheet.addCell(new Label(2, row,(it.startTime.getMonth()+1)+"月"+it.startTime.getDate()+"日",count%2!=0?oddFormat:evenFormat))
-								//次數
-								sheet.addCell(new Label(4, row,((int)it.quantity).toString(),count%2!=0?oddFormat:evenFormat))
-							}
-						}else if(it.costUnit==2){
-							productBills.each(){
-								//2:區間(天)
-								sheet.addCell(new Label(2, row,(it.startTime.getMonth()+1)+"月"+it.startTime.getDate()+"日~"+(it.endTime.getMonth()+1)+"月"+it.endTime.getDate()+"日"  ,count%2!=0?oddFormat:evenFormat))
-								//次數
-								sheet.addCell(new Label(4, row,((int)it.quantity).toString(),count%2!=0?oddFormat:evenFormat))
-							}
+						switch(it.costUnit){
+							case "0":
+								def tmp = ""
+								def place = ""
+								productBills.each(){
+									if(it.place&&"".equals(place)){
+										place = (it.place?"("+it.place.placeName+")":"")
+									}
+									tmp +=it.startTime.getMonth()+1+"/"+it.startTime.getDate()+"，"
+									modifiedPrice = it.modifiedPrice
+									modifiedCostPrice = it.modifiedInternalPrice
+								}
+								tmp = tmp?.substring(0, tmp.length()-1)
+								sheet.addCell(new Label(2, row,tmp+ place,count%2!=0?oddFormat:evenFormat))
+							//次數
+								sheet.addCell(new Label(4, row,((int)(productBills.size()*it.costRange)).toString(),count%2!=0?oddFormat:evenFormat))
+								break
+							case "1":
+								productBills.each(){
+
+									//1:區間(時)
+									sheet.addCell(new Label(2, row,Utility.dateTimeFormat.format(it.startTime) + (it.place?"("+it.place.placeName+")":"") ,count%2!=0?oddFormat:evenFormat))
+									//次數
+									sheet.addCell(new Label(4, row,((int)it.quantity).toString(),count%2!=0?oddFormat:evenFormat))
+
+									modifiedPrice = it.modifiedPrice
+									modifiedCostPrice = it.modifiedInternalPrice
+								}
+								break
+							case "2":
+								productBills.each(){
+
+									//2:區間(天)
+									sheet.addCell(new Label(2, row,Utility.dateTimeFormat.format(it.startTime) + " ~ "+ Utility.dateTimeFormat.format(it.endTime)+ (it.place?"("+it.place.placeName+")":""),count%2!=0?oddFormat:evenFormat))
+									//次數
+									sheet.addCell(new Label(4, row,((int)it.quantity).toString(),count%2!=0?oddFormat:evenFormat))
+									modifiedPrice = it.modifiedPrice
+									modifiedCostPrice = it.modifiedInternalPrice
+								}
+								break
 						}
 						//顯示單位
 						sheet.addCell(new Label(5, row,it.unit,count%2!=0?oddFormat:evenFormat))
 						//單價
-						sheet.addCell(new Label(6, row,((int)it.sallingPrice).toString(),count%2!=0?oddFormat:evenFormat))
+						sheet.addCell(new Label(6, row,((int)modifiedPrice).toString(),count%2!=0?oddFormat:evenFormat))
 						//應收金額
 						sheet.addCell(new Formula(7, row, "E"+(row+1)+"*G"+(row+1),count%2!=0?oddFormat:evenFormat))
 						//減號
 						sheet.addCell(new Label(8, row, "─",count%2!=0?oddFormat:evenFormat))
 						//成本單價
-						sheet.addCell(new Label(9, row,((int)it.price).toString(),count%2!=0?oddFormat:evenFormat))
+						sheet.addCell(new Label(9, row,((int)modifiedCostPrice).toString(),count%2!=0?oddFormat:evenFormat))
 						//實收金額
 						sheet.addCell(new Formula(10, row, "E"+(row+1)+"*J"+(row+1),count%2!=0?oddFormat:evenFormat))
 						//等號
@@ -437,35 +456,49 @@ class ExcelController extends BaseController {
 					if(productBills){
 						//項目
 						sheet.addCell(new Label(0, row,it.productName,commonFormat))
-						//計價單位類別  0:次
-						if(it.costUnit==0){
-							def tmp = ""
-							productBills.each(){
-								tmp +=(it.startTime.getMonth()+1)+"/"+it.startTime.getDate()+""+"，"
-							}
-							tmp = tmp?.substring(0, tmp.length()-1)
-							sheet.addCell(new Label(1, row,tmp))
+
+						def modifiedPrice
+						switch(it.costUnit){
+							//計價單位類別  0:次
+							case "0":
+								def tmp = ""
+								def place = ""
+								productBills.each(){
+									if(it.place&&"".equals(place)){
+										place = (it.place?"("+it.place.placeName+")":"")
+									}
+
+									tmp +=(it.startTime.getMonth()+1)+"/"+it.startTime.getDate()+"，"
+									modifiedPrice = it.modifiedPrice
+								}
+								tmp = tmp?.substring(0, tmp.length()-1)
+								sheet.addCell(new Label(1, row,tmp+place ,commonFormat))
 							//次數
-							sheet.addCell(new Label(3, row,((int)(productBills.size()*it.costRange)).toString(),commonFormat))
-						}else if(it.costUnit==1){
-							productBills.each(){
-								//1:區間(時)
-								sheet.addCell(new Label(1, row,(it.startTime.getMonth()+1)+"/"+it.startTime.getDate()+"",commonFormat))
-								//次數
-								sheet.addCell(new Label(3, row,((int)it.quantity).toString(),commonFormat))
-							}
-						}else if(it.costUnit==2){
-							productBills.each(){
-								//2:區間(天)
-								sheet.addCell(new Label(1, row,(it.startTime.getMonth()+1)+"/"+it.startTime.getDate()+"~"+(it.endTime.getMonth()+1)+"/"+it.endTime.getDate()+"",commonFormat))
-								//次數
-								sheet.addCell(new Label(3, row,((int)it.quantity).toString(),commonFormat))
-							}
+								sheet.addCell(new Label(3, row,((int)(productBills.size()*it.costRange)).toString(),commonFormat))
+								break
+							case "1":
+								productBills.each(){
+									//1:區間(時)
+									sheet.addCell(new Label(1, row,Utility.dateTimeFormat.format(it.startTime) + (it.place?"("+it.place.placeName+")":""),commonFormat))
+									//次數
+									sheet.addCell(new Label(3, row,((int)it.quantity).toString(),commonFormat))
+									modifiedPrice = it.modifiedPrice
+								}
+								break
+							case "2":
+								productBills.each(){
+									//2:區間(天)
+									sheet.addCell(new Label(1, row,Utility.dateTimeFormat.format(it.startTime) + " ~ "+ Utility.dateTimeFormat.format(it.endTime)+ (it.place?"("+it.place.placeName+")":"") ,commonFormat))
+									//次數
+									sheet.addCell(new Label(3, row,((int)it.quantity).toString(),commonFormat))
+									modifiedPrice = it.modifiedPrice
+								}
+								break
 						}
 						//顯示單位
 						sheet.addCell(new Label(4, row,it.unit,commonFormat))
 						//單價
-						sheet.addCell(new Label(6, row,((int)it.sallingPrice).toString(),commonFormat))
+						sheet.addCell(new Label(6, row,((int)modifiedPrice).toString(),commonFormat))
 						//應收金額
 						sheet.addCell(new Formula(8, row, "D"+(row+1)+"*G"+(row+1),commonFormat))
 						row++

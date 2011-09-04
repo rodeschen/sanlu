@@ -9,8 +9,8 @@ import tw.com.sanlu.annotation.GridQuery;
 class PlaceController extends GridController{
 	@GridQuery
 	def queryPlace = {
-		["rowData":Place.list(max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc"),
-					"rowCount":Place.count()]
+		def places =Place.list(max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc")
+		["rowData":places,"rowCount":places.size()]
 	}
 	def insertAction={
 

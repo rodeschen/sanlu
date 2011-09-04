@@ -17,8 +17,9 @@ class FuneralCompanyController extends GridController{
 
 	@GridQuery
 	def queryAll = {
-		["rowData":FuneralCompany.list(max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc"),
-					"rowCount":FuneralCompany.count()]
+		def funeralCompanys = FuneralCompany.list(max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc")
+		["rowData":funeralCompanys,
+					"rowCount":funeralCompanys.size()]
 	}
 
 	def deleteAction = {
@@ -53,8 +54,8 @@ class FuneralCompanyController extends GridController{
 		def res = ["IsSuccess" : true]
 		render res as JSON
 	}
-	
-	def insertAction={			
+
+	def insertAction={
 		def funeralCompany = new FuneralCompany(
 				funeralCompanyName:params.funeralCompanyName,
 				phone1:params.phone1,

@@ -18,12 +18,9 @@ class LoginController extends BaseController {
 			session.empName =employee.empName
 			session.empNo =employee.empNo
 			session.empLevel =employee.empLevel
-			session.employee = employee
-			
+			session.employee = employee			
 		}else{
-		log.debug userId+" login fail."
-			flash.message = "帳號或密碼不正確"
-			
+			log.debug userId+" login fail."			
 		}		
 		redirect(uri:"/")
 	}

@@ -22,10 +22,10 @@ class BillDetail {
 	BigDecimal price
 	//手動調整單價
 	BigDecimal modifiedPrice
-	//成本單價
-	BigDecimal costPrice
-	//手動調整成本單價
-	BigDecimal modifiedCostPrice
+	//內帳單價
+	BigDecimal internalPrice
+	//手動調整內帳單價
+	BigDecimal modifiedInternalPrice
 	//場地
 	Place place
 	//進貨廠商

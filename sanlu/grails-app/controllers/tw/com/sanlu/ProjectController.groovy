@@ -31,16 +31,17 @@ class ProjectController extends GridController {
 			cal1.set(Calendar.MINUTE, 0)
 			cal1.set(Calendar.SECOND, 0)
 			cal1.set(Calendar.MILLISECOND, 0)
-			rowCount = Project.countByClosingDateGreaterThanEqualsOrClosingDateIsNull(cal1.getTime())
+			//rowCount = Project.countByClosingDateGreaterThanEqualsOrClosingDateIsNull(cal1.getTime())
 			projects = Project.findAllByClosingDateGreaterThanEqualsOrClosingDateIsNull(cal1.getTime(),[max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc"])
+			
 		}else{
-			rowCount = Project.countByClosingDateIsNotNull()
-			projects = Project.findAllByClosingDateIsNotNull([max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc"])
+			//rowCount = Project.countByClosingDateIsNotNull()
+			projects = Project.findAllByClosingDateIsNotNull([max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc"])			
 		}
 
 		//format
 		//return ["rowData":projects,"rowCount":rowCount,"format":["projectName":{str -> return "$str xxxxccc"}]]
-		["rowData":projects,"rowCount":rowCount]
+		["rowData":projects,"rowCount":projects.size()]
 	}
 
 	@GridQuery
@@ -48,11 +49,11 @@ class ProjectController extends GridController {
 		def rows=[]
 
 		def bList = BillDetail.createCriteria()
-		def rowCount = bList.count{
-			project{
-				eq('id',params.id?params.long("id"):"")
-			}
-		}
+//		def rowCount = bList.count{
+//			project{
+//				eq('id',params.id?params.long("id"):"")
+//			}
+//		}
 
 		bList = BillDetail.createCriteria()
 		def projects = bList.list{
@@ -87,7 +88,7 @@ class ProjectController extends GridController {
 
 		//format
 		//return ["rowData":projects,"rowCount":rowCount,"format":["projectName":{str -> return "$str xxxxccc"}]]
-		["rowData":projects,"rowCount":rowCount,format:["amount":{str , data -> return data.modifiedPrice * data.quantity},
+		["rowData":projects,"rowCount":projects.size(),format:["amount":{str , data -> return data.modifiedPrice * data.quantity},
 				"useTime":{str,data->
 					switch(data.product.costUnit){
 						case 0:
@@ -528,8 +529,8 @@ class ProjectController extends GridController {
 				detail.price = detail.product.sallingPrice
 				detail.color = 1
 				detail.modifiedPrice = params.modifiedPrice1?new BigDecimal(params.modifiedPrice1):detail.price
-				detail.costPrice = product.costPrice
-				detail.modifiedCostPrice = detail.costPrice
+				detail.internalPrice = product.price
+				detail.modifiedInternalPrice = detail.internalPrice
 				detail.vendor=""
 
 			// history
@@ -551,8 +552,8 @@ class ProjectController extends GridController {
 				detail.price = product.sallingPrice
 				detail.color = 2
 				detail.modifiedPrice = params.modifiedPrice2?new BigDecimal(params.modifiedPrice2):detail.price
-				detail.costPrice = product.costPrice
-				detail.modifiedCostPrice = detail.costPrice
+				detail.internalPrice = product.price
+				detail.modifiedInternalPrice = detail.internalPrice
 				detail.vendor=params.vendor2
 
 
@@ -587,8 +588,8 @@ class ProjectController extends GridController {
 				detail.color = 3
 				detail.place = place
 				detail.modifiedPrice = params.modifiedPrice3?new BigDecimal(params.modifiedPrice3):detail.price
-				detail.costPrice = link.costPrice
-				detail.modifiedCostPrice = detail.costPrice
+				detail.internalPrice = link.price
+				detail.modifiedInternalPrice = detail.internalPrice
 				break;
 			case "4":
 				break;

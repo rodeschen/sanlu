@@ -143,7 +143,7 @@ class BootStrap {
 							product:leave,
 							place:place1,
 							price:2000,
-							sallingPrice:1000,
+							sallingPrice:3000,
 							costPrice:100,
 							lastModifyBy:emp1
 							)
@@ -151,8 +151,8 @@ class BootStrap {
 					def productLinkPlace1 = new ProductLinkPlace(
 							product:leave,
 							place:place3,
-							price:3000,
-							sallingPrice:2000,
+							price:1500,
+							sallingPrice:3000,
 							costPrice:200,
 							lastModifyBy:emp1
 							)
@@ -175,8 +175,8 @@ class BootStrap {
 					def product2LinkPlace = new ProductLinkPlace(
 							product:product2,
 							place:place2,
-							price:3000,
-							sallingPrice:2000,
+							price:2000,
+							sallingPrice:3000,
 							costPrice:200,
 							lastModifyBy:emp1
 							)
@@ -184,8 +184,8 @@ class BootStrap {
 					def product2LinkPlace2 = new ProductLinkPlace(
 							product:product2,
 							place:place3,
-							price:3000,
-							sallingPrice:2000,
+							price:2000,
+							sallingPrice:3000,
 							costPrice:200,
 							lastModifyBy:emp1
 							)
@@ -257,7 +257,7 @@ class BootStrap {
 					rice.save()
 
 					def readBook = new Product(
-							productNo:"000005",
+							productNo:"000006",
 							productName:"誦經",
 							totalQuantity:0,
 							price:400,
@@ -294,12 +294,12 @@ class BootStrap {
 							startTime:new Date(111,5,8,10,00,00),
 							endTime:new Date(111,5,8,12,00,00),
 							quantity:10,
-							price:550,
+							price:flower.sallingPrice,
 							color:1,
 							place:place8,
 							modifiedPrice:500,
-							costPrice:300,
-							modifiedCostPrice:300,
+							internalPrice:flower.price,
+							modifiedInternalPrice:flower.price,
 							lastModifyBy:emp2,
 							project:project1
 							)
@@ -309,11 +309,11 @@ class BootStrap {
 							startTime:new Date(111,5,9,10,00,00),
 							endTime:new Date(111,5,20,12,00,00),
 							quantity:10,
-							price:300,
+							price:rice.sallingPrice,
 							color:1,
-							modifiedPrice:300,
-							costPrice:100,
-							modifiedCostPrice:100,
+							modifiedPrice:rice.sallingPrice,
+							internalPrice:rice.price,
+							modifiedInternalPrice:rice.price,
 							lastModifyBy:emp2,
 							project:project1
 							)
@@ -326,12 +326,12 @@ class BootStrap {
 							startTime:new Date(111,5,6,10,00,00),
 							endTime:new Date(111,5,6,14,00,00),
 							quantity:10,
-							price:550,
+							price:washbasin.sallingPrice,
 							color:2,
 							place:place4,
-							modifiedPrice:500,
-							costPrice:300,
-							modifiedCostPrice:300,
+							modifiedPrice:washbasin.sallingPrice,
+							internalPrice:washbasin.price,
+							modifiedInternalPrice:washbasin.price,
 							lastModifyBy:emp2,
 							project:project1
 							)
@@ -344,11 +344,11 @@ class BootStrap {
 							startTime:new Date(111,5,9,10,00,00),
 							endTime:new Date(111,5,9,12,00,00),
 							quantity:1,
-							price:600,
+							price:readBook.sallingPrice,
 							color:1,
-							modifiedPrice:600,
-							costPrice:400,
-							modifiedCostPrice:400,
+							modifiedPrice:readBook.sallingPrice,
+							internalPrice:readBook.price,
+							modifiedInternalPrice:readBook.price,
 							lastModifyBy:emp2,
 							project:project1
 							)
@@ -361,11 +361,11 @@ class BootStrap {
 							startTime:new Date(111,5,11,10,00,00),
 							endTime:new Date(111,5,11,12,00,00),
 							quantity:1,
-							price:600,
+							price:readBook.sallingPrice,
 							color:1,
-							modifiedPrice:600,
-							costPrice:400,
-							modifiedCostPrice:400,
+							modifiedPrice:readBook.price,
+							internalPrice:readBook.price,
+							modifiedInternalPrice:readBook.price,
 							lastModifyBy:emp2,
 							project:project1
 							)
@@ -375,26 +375,59 @@ class BootStrap {
 							startTime:new Date(111,5,13,10,00,00),
 							endTime:new Date(111,5,13,12,00,00),
 							quantity:1,
-							price:600,
+							price:readBook.sallingPrice,
 							color:1,
-							modifiedPrice:600,
-							costPrice:400,
-							modifiedCostPrice:400,
+							modifiedPrice:readBook.price,
+							internalPrice:readBook.price,
+							modifiedInternalPrice:readBook.price,
 							lastModifyBy:emp2,
 							project:project1
 							)
 					readBookDetail3.save()
 					def productHistory =new ProductHistory(
-							product:hall,
+							product:flowerDetail,
 							project:project1,
 							isPurchase:false,
-							quantity:0,
-							date:new Date(),
+							quantity:flowerDetail.quantity,
+							date:flowerDetail.startTime,
 							totalQuantity:0,
 							vendor:"廠商一",
 							lastModifyBy: emp2
 							)
 					productHistory.save()
+					def productHistory3 =new ProductHistory(
+							product:readBookDetail,
+							project:project1,
+							isPurchase:false,
+							quantity:readBookDetail.quantity,
+							date:readBookDetail.startTime,
+							totalQuantity:0,
+							vendor:"廠商一",
+							lastModifyBy: emp2
+							)
+					productHistory3.save()
+					def productHistory4 =new ProductHistory(
+							product:readBookDetail2,
+							project:project1,
+							isPurchase:false,
+							quantity:readBookDetail2.quantity,
+							date:readBookDetail2.startTime,
+							totalQuantity:0,
+							vendor:"廠商一",
+							lastModifyBy: emp2
+							)
+					productHistory4.save()
+					def productHistory5 =new ProductHistory(
+							product:readBookDetail3,
+							project:project1,
+							isPurchase:false,
+							quantity:readBookDetail3.quantity,
+							date:readBookDetail3.startTime,
+							totalQuantity:0,
+							vendor:"廠商一",
+							lastModifyBy: emp2
+							)
+					productHistory5.save()
 					def productHistory2 =new ProductHistory(
 							product:washbasin,
 							//project:project1,
@@ -407,14 +440,14 @@ class BootStrap {
 							lastModifyBy: emp2
 							)
 					productHistory2.save()
-					
+
 					def excelPassword = new Parameters(
-						type:"excelPassword",
-						value:"ssanlu",
-						description:"Excel Password",
-						memo:"Excel Password",
-						lastModifyBy: emp1
-						)
+							type:"excelPassword",
+							value:"ssanlu",
+							description:"Excel Password",
+							memo:"Excel Password",
+							lastModifyBy: emp1
+							)
 					excelPassword.save()
 				}catch(Exception e){
 					println e.dump()

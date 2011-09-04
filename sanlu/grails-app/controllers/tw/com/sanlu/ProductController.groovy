@@ -18,13 +18,13 @@ class ProductController extends GridController{
 
 	@GridQuery
 	def queryProduct = {
-		["rowData":Product.list(max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc"),
-					"rowCount":Product.count()]
+		def products =Product.list(max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc")
+		["rowData":products,"rowCount":products.size()]
 	}
 	@GridQuery
 	def queryPlaceProduct = {
-		["rowData":ProductLinkPlace.findAllByProduct(Product.findById(params.get("product.id")),[max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc"]),
-					"rowCount":ProductLinkPlace.count()]
+		def productLinkPlace =ProductLinkPlace.findAllByProduct(Product.findById(params.get("product.id")),[max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc"])
+		["rowData":productLinkPlace,"rowCount":productLinkPlace.size()]
 	}
 
 	def insertAction={
@@ -127,7 +127,7 @@ class ProductController extends GridController{
 						break
 					case 'price':
 					case 'sallingPrice':
-					case 'costPrice':					
+					case 'costPrice':
 						productLinkPlace.putAt keyName,new BigDecimal(it.value)
 						break
 					default:
@@ -146,7 +146,7 @@ class ProductController extends GridController{
 					case 'productId':
 						break
 					case 'price':
-					case 'sallingPrice':		
+					case 'sallingPrice':
 					case 'costRange':
 					case 'costUnit':
 					case 'costPrice':
@@ -170,30 +170,30 @@ class ProductController extends GridController{
 	}
 	//product.lastModifyBy.empName
 	/*def setObj(keyNames,obj,val){
-		if(keyNames.indexOf('.') > -1){
-			def keyName = keyNames.substring(0,keyNames.indexOf('.'))
-			def lastKeyNames = keyNames.substring(keyNames.indexOf('.')+1)
-			setObj(lastKeyNames,obj.getAt(keyName),val)
-		}else{
-			switch( keyNames ){
-				case 'lastUpdated':
-					break
-				case 'outDate':
-					obj.putAt keyNames,Utility.shortFormat.parse(val)
-					break
-				case 'price':
-				case 'sallingPrice':
-				case 'costPrice':
-				case 'totalQuantity':
-				case 'cosRange':
-				case 'costUnit':
-					obj.putAt keyNames,new BigDecimal(val)
-					break
-				default:
-					obj.putAt keyNames,val
-			}
-		}
-	}*/
+	 if(keyNames.indexOf('.') > -1){
+	 def keyName = keyNames.substring(0,keyNames.indexOf('.'))
+	 def lastKeyNames = keyNames.substring(keyNames.indexOf('.')+1)
+	 setObj(lastKeyNames,obj.getAt(keyName),val)
+	 }else{
+	 switch( keyNames ){
+	 case 'lastUpdated':
+	 break
+	 case 'outDate':
+	 obj.putAt keyNames,Utility.shortFormat.parse(val)
+	 break
+	 case 'price':
+	 case 'sallingPrice':
+	 case 'costPrice':
+	 case 'totalQuantity':
+	 case 'cosRange':
+	 case 'costUnit':
+	 obj.putAt keyNames,new BigDecimal(val)
+	 break
+	 default:
+	 obj.putAt keyNames,val
+	 }
+	 }
+	 }*/
 
 	def purchase={
 
@@ -201,24 +201,24 @@ class ProductController extends GridController{
 		def purchaseQuantity = new BigDecimal(params.purchaseQuantity)
 		//原庫存數量 * 原成本單價 + 進貨數量 * 進貨單價
 		def totalCost = (product.totalQuantity?product.totalQuantity.multiply(product.costPrice):BigDecimal.ZERO).plus(purchaseQuantity.multiply(new BigDecimal(params.purchasePrice)))
-			
+
 		product.totalQuantity = (product.totalQuantity?product.totalQuantity:BigDecimal.ZERO).plus(purchaseQuantity)
-		
+
 		product.costPrice = totalCost.divide(product.totalQuantity,2,BigDecimal.ROUND_HALF_UP)
-		
+
 		product.save()
 		DateFormat df = new SimpleDateFormat("yyyy-M-d");
 		def productHistory =new ProductHistory(
-			product:product,
-			project:Project.findById(params.project),
-			isPurchase:true,
-			quantity:purchaseQuantity,
-			date:df.parse(params.date),
-			totalQuantity:product.totalQuantity,
-			vendor:params.vendor,
-			memo:params.memo,
-			LastModifyBy: session.employee
-			)
+				product:product,
+				project:Project.findById(params.project),
+				isPurchase:true,
+				quantity:purchaseQuantity,
+				date:df.parse(params.date),
+				totalQuantity:product.totalQuantity,
+				vendor:params.vendor,
+				memo:params.memo,
+				LastModifyBy: session.employee
+				)
 		productHistory.save()
 		def res = ["IsSuccess" : true]
 		render res as JSON
