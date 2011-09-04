@@ -166,6 +166,7 @@
 					mtype : 'POST',
 					caption : "搜尋結果",
 					pager : true,
+					sortname: 'inDate',
 					colModel : [{
 						name : 'id',
 						index : 'id',
@@ -192,13 +193,15 @@
 						name : 'inDate',
 						index : 'inDate',
 						align : "center",
-						width : 130
+						width : 130,
+						sorttype: "date"
 					}, {
 						header : "出館日期",
 						name : 'outDate',
 						index : 'outDate',
 						align : "center",
-						width : 130
+						width : 130,
+						sorttype: "date"
 					}, {
 						header : "承辦業務",
 						name : 'emp.empName',
