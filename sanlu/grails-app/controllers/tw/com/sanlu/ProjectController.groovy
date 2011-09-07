@@ -33,10 +33,10 @@ class ProjectController extends GridController {
 			cal1.set(Calendar.MILLISECOND, 0)
 			//rowCount = Project.countByClosingDateGreaterThanEqualsOrClosingDateIsNull(cal1.getTime())
 			projects = Project.findAllByClosingDateGreaterThanEqualsOrClosingDateIsNull(cal1.getTime(),[max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc"])
-			
+
 		}else{
 			//rowCount = Project.countByClosingDateIsNotNull()
-			projects = Project.findAllByClosingDateIsNotNull([max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc"])			
+			projects = Project.findAllByClosingDateIsNotNull([max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc"])
 		}
 
 		//format
@@ -49,11 +49,11 @@ class ProjectController extends GridController {
 		def rows=[]
 
 		def bList = BillDetail.createCriteria()
-//		def rowCount = bList.count{
-//			project{
-//				eq('id',params.id?params.long("id"):"")
-//			}
-//		}
+		//		def rowCount = bList.count{
+		//			project{
+		//				eq('id',params.id?params.long("id"):"")
+		//			}
+		//		}
 
 		bList = BillDetail.createCriteria()
 		def projects = bList.list{
@@ -108,6 +108,24 @@ class ProjectController extends GridController {
 						return "2"
 					}else{
 						return "1"
+					}
+				},"quantity":{str,data->
+					def unit;
+					switch(data.product.costUnit){
+						case 2:
+							unit = "小時"
+						case 3:
+							unit = unit ? unit:"天"
+						case 4:
+							unit = unit ? unit:"月"
+							if(data.product.costRange == 1){
+								return (str + data.product.unit) + "/" + (str * data.product.costRange) +unit
+							}else{
+								return (str + data.product.unit)
+							}
+							break;
+						default:
+							return (str + data.product.unit);
 					}
 				}],"userdata":[amount:amount,price:itemCount,quantity:itemCount2]]
 	}

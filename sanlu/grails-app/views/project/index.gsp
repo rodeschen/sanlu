@@ -541,17 +541,17 @@
                         header: "數量",
                         name: 'quantity',
                         index: 'quantity',
-                        width: 80,
+                        width: 100,
                         align: "right",
                         //formatter: "currency",
                         summaryType: 'sum'
-                    }, {
+                    }/*, {
                         header: "單位",
                         name: 'unit',
                         index: 'product.unit',
                         width: 30,
                         align: 'center'
-                    }, {
+                    }*/, {
                         header: "小計",
                         name: 'amount',
                         index: 'amount',
