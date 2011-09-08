@@ -4,6 +4,7 @@ import grails.web.JSONBuilder
 
 import java.text.DateFormat
 import java.text.SimpleDateFormat
+import java.util.Calendar
 
 import org.codehaus.groovy.grails.web.json.JSONObject
 
