@@ -539,12 +539,19 @@
                     
                     }, {
                         header: "數量",
-                        name: 'quantity',
-                        index: 'quantity',
+                        name: 'quantityView',
+                        index: 'quantityView',
                         width: 100,
                         align: "right",
                         //formatter: "currency",
                         summaryType: 'sum'
+                    }, {
+                        header: "數量",
+                        name: 'quantity',
+                        index: 'quantity',
+                        width: 100,
+                        align: "right",
+						hidden:true
                     }/*, {
                         header: "單位",
                         name: 'unit',
@@ -698,7 +705,8 @@
                         id: responseJSON.id,
                         type: "p",
                         data: {
-                            calendarName: $("#projectName").val()
+                            calendarName: $("#projectName").val(),
+							inDate:$("#inDate").val()
                         }
                     })
                 });

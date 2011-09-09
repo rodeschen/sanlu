@@ -110,7 +110,7 @@ class ProjectController extends GridController {
 					}else{
 						return "1"
 					}
-				},"quantity":{str,data->
+				},"quantityView":{str,data->
 					def unit;
 					switch(data.product.costUnit){
 						case 2:
@@ -119,14 +119,14 @@ class ProjectController extends GridController {
 							unit = unit ? unit:"天"
 						case 4:
 							unit = unit ? unit:"月"
-							if(data.product.costRange == 1){
-								return (str + data.product.unit) + "/" + (str * data.product.costRange) +unit
+							if(true/*ata.product.costRange == 1*/){
+								return (data.quantity + data.product.unit) + "/" + (data.quantity * data.product.costRange) +unit
 							}else{
-								return (str + data.product.unit)
+								return (data.quantity + data.product.unit)
 							}
 							break;
 						default:
-							return (str + data.product.unit);
+							return (data.quantity + data.product.unit);
 					}
 				}],"userdata":[amount:amount,price:itemCount,quantity:itemCount2]]
 	}
@@ -402,8 +402,10 @@ class ProjectController extends GridController {
 				detail.color = 1
 				detail.place = null
 				detail.modifiedPrice = params.modifiedPrice1?new BigDecimal(params.modifiedPrice1):detail.price
-				detail.costPrice = product.costPrice
-				detail.modifiedCostPrice = detail.costPrice
+				//detail.costPrice = product.costPrice
+				//detail.modifiedCostPrice = detail.costPrice
+				detail.internalPrice = product.price
+				detail.modifiedInternalPrice = detail.internalPrice
 				detail.vendor=""
 
 			// history
@@ -426,8 +428,10 @@ class ProjectController extends GridController {
 				detail.color = 2
 				detail.place = null
 				detail.modifiedPrice = params.modifiedPrice2?new BigDecimal(params.modifiedPrice2):detail.price
-				detail.costPrice = product.costPrice
-				detail.modifiedCostPrice = detail.costPrice
+				//detail.costPrice = product.costPrice
+				//detail.modifiedCostPrice = detail.costPrice
+				detail.internalPrice = product.price
+				detail.modifiedInternalPrice = detail.internalPrice
 				detail.vendor=params.vendor2
 
 

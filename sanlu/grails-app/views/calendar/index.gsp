@@ -9,6 +9,12 @@
 				$(document).ready( function() {
 					document.title = responseJSON.calendarName + " - 行事曆";
 					var view = "month";
+					var showDate;
+					try {
+						showDate = responseJSON.inDate ? new Date(responseJSON.inDate) : new Date();
+					}catch(e){
+						showDate = new Date();
+					}
 					var op = {
 						view: view,
 						extParam : (function(){
@@ -16,7 +22,7 @@
 						})(),
 						contextRoot: contextRoot,
 						url : contextRoot + "/calendar/query",
-						showday: new Date(),
+						showday: showDate,
 						//view action
 						ViewCmdhandler: function(){
 							//alert("XXX")
