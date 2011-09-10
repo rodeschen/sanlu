@@ -343,6 +343,7 @@
                                         }
                                     });
                                 }
+								refreshProduct();
                                 alert("產品/場地" + (action == "add1" || action == "add2" ? "新增" : "修改") + "成功");
                             }
                         })
@@ -383,7 +384,7 @@
                 costUnit.change(function(){
                 	var v = $(this).val();
                 	$("#costRangeDiv")[v.match(/[0-1]/)?'hide':'show']();
-                	$("#costRange").val(v.match(/[0-1]/)?0:'');
+                	$("#costRange").val(v.match(/[0-1]/)?1:'');
                 });
                 //下拉選單
                 //場地
@@ -523,7 +524,7 @@
                         </div>
                         <div class="field-row"  id="costRangeDiv">
                             <span class="th1">計價單位：</span>
-                            <span><input type="text" id="costRange" name="costRange" placeholder="計價單位" class="validate[required,custom[integer]] text-input"/>                                
+                            <span><input type="text" value='1' id="costRange" name="costRange" placeholder="計價單位" class="validate[required,custom[integer]] text-input"/>                                
                             </span>
                         </div>
                         <div class="field-row">                        	

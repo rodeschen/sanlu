@@ -37,7 +37,6 @@ class ProductController extends GridController{
 
 		if(isNomal){
 			if(hasPlace){
-				//println "aaaaaa "+json.getString("costRange")
 				product = new Product(
 						productNo:String.format("%06d", ++count),
 						productName:json.getString("productName"),
@@ -55,6 +54,7 @@ class ProductController extends GridController{
 						unit:json.getString("unit"),
 						hasPlace:"T".equals( json.getString("hasPlace")),
 						costRange:json.getInt("costRange"),
+						isAgency:"T".equals( json.getString("isAgency")),
 						lastModifyBy:session.employee)
 			}
 		}else{

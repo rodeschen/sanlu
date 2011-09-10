@@ -1,10 +1,10 @@
 <html>
-<head>
-<title>商品進貨管理</title>
-<meta name="layout" content="inner" />
-</head>
-<body>
-	<script>
+    <head>
+        <title>商品進貨管理</title>
+        <meta name="layout" content="inner" />
+    </head>
+    <body>
+        <script>
             $(document).ready(function(){
                 var grid1 = $("#grid1").jqGrid({
                     url: contextRoot + "/product/queryProduct",
@@ -34,14 +34,14 @@
                         formatter: function(el, cellval, opts){
                             return el ? "是" : "否";
                         }
-					 }, {
+                    }, {
                         header: "代叫品項",
                         name: 'isAgency',
                         index: 'isAgency',
                         width: 20,
                         formatter: function(el, cellval, opts){
                             return el ? "是" : "否";
-                        }                    
+                        }
                     }, {
                         header: "銷售單價",
                         name: 'sallingPrice',
@@ -81,6 +81,9 @@
                                 datatype: "json"
                             }).trigger("reloadGrid");
                         }
+                    },
+                    ondblClickRow: function(id){
+                        $("#purchaseBtn").trigger('click');
                     }
                 });
                 
@@ -131,29 +134,38 @@
                         width: 30
                     }]
                 });
-                                
+                
                 $("#pclose2,#pclose1").click(function(){
                     $.fancybox.close();
                 });
-				$("#purchaseBtn").fancybox({
-                        'titlePosition': 'inside',
-                        'transitionIn': 'elastic',
-                        'transitionOut': 'elastic',
-                        onClosed: function(){
-                            addForm2.reset();
+                
+                $("#purchaseBtn").fancybox({
+                    'titlePosition': 'inside',
+                    'transitionIn': 'elastic',
+                    'transitionOut': 'elastic',
+                    onStart: function(){						
+                        selrow = grid1.jqGrid('getGridParam', 'selrow');
+						
+                        if (selrow) {
+                            var id = grid1.getRowData(selrow);
+                            $('#normalProduct').val(id.id);
                         }
-                    });
-				$("#padd2").click(function(){
+                    },
+                    onClosed: function(){
+                        addForm2.reset();
+                    }
+                });
+                
+                $("#padd2").click(function(){
                     if ($('#addForm2').validationEngine('validate')) {
                         $.ajax({
                             url: contextRoot + "/product/purchase",
                             data: $.extend($("#addForm2").serializeData(), {
-                                    id: $('#normalProduct').val()
-                                })                               
-                            ,
+                                id: $('#normalProduct').val()
+                            }),
                             success: function(msg){
                                 $.fancybox.close();
-                                grid1.trigger("reloadGrid");                                
+                                grid1.trigger("reloadGrid");
                                 alert("進貨成功");
                             }
                         })
@@ -161,48 +173,47 @@
                 });
                 //下拉選單
                 
-				//一般商品
-				$.ajax({
+                //一般商品
+                $.ajax({
                     type: "POST",
                     url: contextRoot + "/combobox/normalProduct",
                     success: function(map){
                         $('#normalProduct').setDropdown(map);
                     }
                 });
-				$.ajax({
+                $.ajax({
                     type: "POST",
                     url: contextRoot + "/combobox/nonCloseProject",
                     success: function(map){
                         $('#project').setDropdown(map);
                     }
                 });
-				
+                
             });
-            
         </script>
         <fieldset>
             <legend>
                 商品 
             </legend>
             <div>
-				<a id="purchaseBtn" href="#pdialog2" class="button">進貨</a>
+                <a id="purchaseBtn" href="#pdialog2" class="button">進貨</a>
             </div>
-            <div style="margin-top:5px;" id="grid1" />
+            <div style="margin-top: 5px;" id="grid1" />
         </fieldset>
         <fieldset>
             <legend>
                 商品使用場地 
             </legend>
             <div id="grid2" />
-        </fieldset>        
-		<div class="hide">
-            <div id="pdialog2" class="dialog2" style="display:block;width:400px;">
+        </fieldset>
+        <div class="hide">
+            <div id="pdialog2" class="dialog2" style="display: block; width: 400px;">
                 <g:form name="addForm2" id="addForm2" onsubmit="return false;" autocomplete="off" novalidate="novalidate">
-                    <div class="dialog-body">                        
+                    <div class="dialog-body">
                         <div class="field-row" id='productDiv'>
                             <span class="th1">進貨產品：</span>
                             <span>
-                                <select id="normalProduct" name="normalProduct" class="validate[required]" >
+                                <select id="normalProduct" name="normalProduct" class="validate[required]">
                                     <option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
                                 </select>
                             </span>
@@ -210,33 +221,32 @@
                         <div class="field-row">
                             <span class="th1">進貨專案：</span>
                             <span>
-                                <select id="project" name="project" >
+                                <select id="project" name="project">
                                     <option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
                                 </select>
                             </span>
                         </div>
                         <div class="field-row" id="priceDiv">
                             <span class="th1">進貨廠商：</span>
-                            <span><input type="text" id="vendor" name="vendor" placeholder="進貨廠商" class="validate[required]"/></span>
+                            <span><input type="text" id="vendor" name="vendor" placeholder="進貨廠商" class="validate[required]" /></span>
                         </div>
                         <div class="field-row" id="priceDiv">
                             <span class="th1">進貨日期：</span>
-                            <span><input type="text" id="date" name="date" placeholder="進貨日期" class="validate[required] date"/></span>
-                        </div>                        
+                            <span><input type="text" id="date" name="date" placeholder="進貨日期" class="validate[required] date" /></span>
+                        </div>
                         <div class="field-row" id="priceDiv">
                             <span class="th1">進貨單價：</span>
-                            <span><input type="text" id="purchasePrice" name="purchasePrice" placeholder="進貨單價" class="validate[required]"/></span>
+                            <span><input type="text" id="purchasePrice" name="purchasePrice" placeholder="進貨單價" class="validate[required]" /></span>
                         </div>
                         <div class="field-row" id='totalDiv'>
                             <span class="th1">進貨數量：</span>
-                            <span><input type="text" id="purchaseQuantity" name="purchaseQuantity" placeholder="進貨數量" class="validate[required]"/></span>
+                            <span><input type="text" id="purchaseQuantity" name="purchaseQuantity" placeholder="進貨數量" class="validate[required]" /></span>
                         </div>
                         <div class="field-row" id='memoDiv'>
                             <span class="th1">備註：</span>
                             <span><input type="text" id="memo" name="memo" placeholder="memo" /></span>
-                        </div>
-                        <input type="hidden" id="id" name="id" />
-                        <div style="text-align:center;">
+                        </div><input type="hidden" id="id" name="id" />
+                        <div style="text-align: center;">
                             <button id="padd2" type="button">
                                 確定
                             </button>

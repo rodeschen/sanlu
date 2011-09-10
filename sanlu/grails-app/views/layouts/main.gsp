@@ -207,7 +207,7 @@
 							<div class="field-row">
 								<span class="th1">商品：</span>
                             <span>
-                                <select id="productId" name="productId" >
+                                <select id="productDailyId" name="productDailyId" >
                                     <option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
                                 </select>
                             </span>
@@ -402,13 +402,16 @@
 		});
 		//下拉選單
 		//一般商品
-		$.ajax({
-            type: "POST",
-            url: contextRoot + "/combobox/product",
-            success: function(map){
-                $('#productId').setDropdown(map);
-            }
-        });
+		function refreshProduct(){
+			$.ajax({
+				type: "POST",
+				url: contextRoot + "/combobox/product",
+				success: function(map){
+					$('#productDailyId').setDropdown(map);
+				}
+			});
+		}
+		refreshProduct();
 		</script>
 		</g:if>
 	</body>

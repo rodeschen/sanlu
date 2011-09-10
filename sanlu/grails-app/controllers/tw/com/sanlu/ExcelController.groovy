@@ -274,7 +274,7 @@ class ExcelController extends BaseController {
 						if(it.isAgency){
 							//代叫供品明細：
 							isAgencyTmp+=it.productName + "，"
-						}else{
+						}else if(!it.hasPlace){
 							//提出商品明細：
 							notAgencyTmp+=it.productName + "，"
 						}
@@ -371,7 +371,7 @@ class ExcelController extends BaseController {
 				sheet.mergeCells 0, row, 2, row
 				sheet.addCell(new Label(0, row, "以上報價未稅，如需發票另計 5%=	",wcf2))
 				//含稅
-				sheet.addCell(new Formula(3, row, "H"+row+"*0.05",wcf2))
+				sheet.addCell(new Formula(3, row, "ROUNDUP(H"+row+"*0.05,0)",wcf2))
 				//代叫供品明細：
 				sheet.mergeCells 4, row, 6, row+2
 				sheet.addCell(new Label(4, row, "代叫供品明細：",wcf2))

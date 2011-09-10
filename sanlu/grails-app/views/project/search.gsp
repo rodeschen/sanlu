@@ -46,10 +46,10 @@
 							size="12" />
 							之前
 							<input type="radio"
-							id="dateKind" name="inDateKind" value="B" checked='checked'>
+							id="inDateKind" name="inDateKind" value="B" checked='checked'>
 							&nbsp;之後
 							<input
-							type="radio" id="inDateKind" name="dateKind" value="A">
+							type="radio" id="inDateKind" name="inDateKind" value="A">
 							&nbsp; </span>
 					</div>
 					<div class="field-row">

@@ -131,11 +131,12 @@
         		            if(!isNormal){
                             	var grid1Data = grid1.getRowData(selrow2);
                             	$("#funeralCompanyName").val(grid1Data.funeralCompanyName);
+								
                             	$("#funeralCompanyId").val(grid1Data.id);
                         	}
                             $("#addrDiv")[isNormal ? 'show' : 'hide']();
                             $("#funeralerNameDiv")[!isNormal ? 'show' : 'hide']();
-                            //$("#funeralCompanyName")['readOnly'](!isNormal);
+                            $("#funeralCompanyName").attr('readonly',!isNormal);
                             if (action.indexOf("modify") > -1) {
                                 selrow = grid.jqGrid('getGridParam', 'selrow');
                                 if (!selrow) {
