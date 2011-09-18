@@ -748,14 +748,16 @@
                             break;
                         case "2":
                             startTime.show();
-                            endTime.show();
+							endTime.hide();
+                           // endTime.show();
                             costRange.show();
                             timeSelect.show();
                             mouth.hide();
                             break;
                         case "3":
                             startTime.show();
-                            endTime.show();
+							endTime.hide();
+                            //endTime.show();
                             timeSelect.hide();
                             mouth.hide();
                             break;
@@ -763,7 +765,7 @@
                             startTime.show();
                             endTime.hide();
                             timeSelect.hide();
-                            mouth.show();
+                            //mouth.show();
                             break;
                     }
                     costUnit.show().find("#costUnit").val(unit).end().find("#costRange").val(range);
