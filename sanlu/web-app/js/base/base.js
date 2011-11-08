@@ -1,6 +1,6 @@
 function checkError(xhr){
     if (xhr.responseText && xhr.responseText.indexOf("errorMessage:") == 0) {
-        alert(xhr.responseText || "程式錯誤，請通知資訊人員!");
+        alert(xhr.responseText || "程式錯誤，請通知資訊人員!"); 
     }
     else 
         if (xhr.responseText && xhr.responseText.indexOf("sessionError") == 0) {
