@@ -2,9 +2,6 @@ package tw.com.sanlu
 import grails.converters.JSON
 
 import java.io.File
-import java.sql.Timestamp;
-import java.text.DateFormat
-import java.text.SimpleDateFormat
 import java.util.Calendar
 
 import jxl.*
@@ -12,7 +9,9 @@ import jxl.write.*
 import tw.com.sanlu.excel.ExcelUtility
 
 class ExcelController extends BaseController {
+	def WorkbookSettings settings = new WorkbookSettings();
 	def index = {
+		settings.setWriteAccess(null);
 	}
 
 	//品項代叫報表
@@ -20,8 +19,9 @@ class ExcelController extends BaseController {
 		// create our workbook and sheet
 
 		String fileName = "品項代叫記錄-"+params.exportYear+"-"+params.exportMonth+".xls";
-		def file = new File("Excel/品項代叫記錄-"+params.exportYear+"-"+params.exportMonth+".xls")
-		def workbook = Workbook.createWorkbook(file,Workbook.getWorkbook(ExcelUtility.getResource("excel/品項代叫記錄.xls").inputStream))
+
+		def file = new File(ExcelUtility.REPORT_PATH+"/品項代叫記錄-"+params.exportYear+"-"+params.exportMonth+".xls")
+		def workbook = Workbook.createWorkbook(file,Workbook.getWorkbook(ExcelUtility.getResource("excel/品項代叫記錄.xls").inputStream),settings)
 		try{
 			def sheet = workbook.getSheet(0)
 			def cal = Calendar.instance
@@ -85,9 +85,8 @@ class ExcelController extends BaseController {
 	//商品提出明細
 	def productSale = {
 		// create our workbook and sheet
-
-		def file = new File("Excel/商品提出明細-"+params.exportYear+"-"+params.exportMonth+".xls")
-		def workbook = Workbook.createWorkbook(file,Workbook.getWorkbook(ExcelUtility.getResource("excel/商品提出明細.xls").inputStream))
+		def file = new File(ExcelUtility.REPORT_PATH+"/商品提出明細-"+params.exportYear+"-"+params.exportMonth+".xls")
+		def workbook = Workbook.createWorkbook(file,Workbook.getWorkbook(ExcelUtility.getResource("excel/商品提出明細.xls").inputStream),settings)
 		try{
 			def sheet = workbook.getSheet(0)
 			def cal = Calendar.instance
@@ -153,8 +152,8 @@ class ExcelController extends BaseController {
 		def product = Product.findById(params.productId)
 
 		def cal = Calendar.instance
-		def file = new File("Excel/日執行表_"+params.exportYear+"-"+params.exportMonth+".xls")
-		def workbook = Workbook.createWorkbook(file,Workbook.getWorkbook(ExcelUtility.getResource("excel/日執行表.xls").inputStream))
+		def file = new File(ExcelUtility.REPORT_PATH+"/日執行表_"+params.exportYear+"-"+params.exportMonth+".xls")
+		def workbook = Workbook.createWorkbook(file,Workbook.getWorkbook(ExcelUtility.getResource("excel/日執行表.xls").inputStream),settings)
 		try{
 			def sheet = workbook.getSheet(0)
 			cal.set params.int("exportYear"), params.int("exportMonth")-1, 00
@@ -224,9 +223,9 @@ class ExcelController extends BaseController {
 		}
 		if(project){
 			def cal = Calendar.instance
-			def file = new File("Excel/帳單-案名-" + project.projectName + "-" +cal.getTime().format("yyyy-MM-dd")+".xls")
+			def file = new File(ExcelUtility.BILL_PATH+"/帳單-案名-" + project.projectName + "-" +cal.getTime().format("yyyy-MM-dd")+".xls")
 			// create our workbook and sheet
-			def workbook = Workbook.createWorkbook(file,Workbook.getWorkbook(ExcelUtility.getResource("excel/bill.xls").inputStream))
+			def workbook = Workbook.createWorkbook(file,Workbook.getWorkbook(ExcelUtility.getResource("excel/bill.xls").inputStream),settings)
 
 			try{
 				def sheet = workbook.getSheet(0)
@@ -422,9 +421,9 @@ class ExcelController extends BaseController {
 		}
 		if(project){
 			def cal = Calendar.instance
-			def file = new File("Excel/外帳單-案名-" + project.projectName + "-" +cal.getTime().format("yyyy-MM-dd")+".xls")
+			def file = new File(ExcelUtility.BILL_PATH+"/外帳單-案名-" + project.projectName + "-" +cal.getTime().format("yyyy-MM-dd")+".xls")
 			// create our workbook and sheet
-			def workbook = Workbook.createWorkbook(file,Workbook.getWorkbook(ExcelUtility.getResource("excel/外帳.xls").inputStream))
+			def workbook = Workbook.createWorkbook(file,Workbook.getWorkbook(ExcelUtility.getResource("excel/外帳.xls").inputStream),settings)
 
 			try{
 				def sheet = workbook.getSheet(0)

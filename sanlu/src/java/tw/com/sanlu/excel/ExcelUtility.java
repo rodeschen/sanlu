@@ -1,7 +1,6 @@
 package tw.com.sanlu.excel;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -21,6 +20,8 @@ import org.springframework.core.io.Resource;
  * 
  */
 public class ExcelUtility {
+	public static String BILL_PATH = "Excel/Bill";
+	public static String REPORT_PATH = "Excel/Report";
 
 	public static Resource getResource(String filePath) {
 		return ApplicationHolder.getApplication().getParentContext()
@@ -34,7 +35,6 @@ public class ExcelUtility {
 	 * @return Map<String, List<String>>
 	 */
 	public static Map<String, List<String>> handleAddrExcel() {
-
 		Map<String, List<String>> map = new LinkedHashMap<String, List<String>>();
 		Workbook workbook = null;
 		try {

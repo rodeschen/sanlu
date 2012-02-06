@@ -2,13 +2,14 @@ import grails.util.GrailsUtil
 import tw.com.sanlu.BillDetail
 import tw.com.sanlu.Employee
 import tw.com.sanlu.FuneralCompany
-import tw.com.sanlu.Funeraler;
+import tw.com.sanlu.Funeraler
 import tw.com.sanlu.Parameters
 import tw.com.sanlu.Place
 import tw.com.sanlu.Product
 import tw.com.sanlu.ProductHistory
 import tw.com.sanlu.ProductLinkPlace
 import tw.com.sanlu.Project
+import tw.com.sanlu.excel.ExcelUtility
 
 class BootStrap {
 
@@ -454,7 +455,18 @@ class BootStrap {
 				}
 
 				break
-			case "production" : break
+			case "production" :
+			//init Path
+				def reportPath = new File(ExcelUtility.REPORT_PATH);
+				if(!reportPath.exists()){
+					reportPath.mkdirs();
+				}
+				def billPath = new File(ExcelUtility.BILL_PATH);
+				if(!billPath.exists()){
+					billPath.mkdirs();
+				}
+
+				break
 		}
 		def destroy = {
 		}
