@@ -1,6 +1,6 @@
 function checkError(xhr){
     if (xhr.responseText && xhr.responseText.indexOf("errorMessage:") == 0) {
-        alert(xhr.responseText || "程式錯誤，請通知資訊人員!"); 
+        alert(xhr.responseText || "程式錯誤，請通知資訊人員!");
     }
     else 
         if (xhr.responseText && xhr.responseText.indexOf("sessionError") == 0) {
@@ -123,7 +123,15 @@ $.extend($.fn, {
     injectData: function(datas){
     
     }
-})
+});
+$.datepicker.setDefaults({
+    dateFormat: 'yy-mm-dd',
+    showButtonPanel: true,
+    showOn: "button",
+    buttonImage: "/sanlu/images/calendar.gif",
+    buttonImageOnly: true,
+    showOn: 'both'
+});
 
 /**
  * override validationEngine
@@ -151,14 +159,7 @@ var API = {
         $this.find("form").each(function(){
             $(this).validationEngine({});
         })
-        $this.find(".date").datepicker({
-            dateFormat: 'yy-mm-dd',
-            showButtonPanel: true,
-            showOn: "button",
-            buttonImage: "/sanlu/images/calendar.gif",
-            buttonImageOnly: true,
-            showOn: 'both'
-        });
+        $this.find(".date").datepicker();
     },
     formSubmit: function(settings){
         settings = $.extend(true, {
