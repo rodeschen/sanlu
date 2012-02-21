@@ -187,6 +187,17 @@ class ProjectController extends GridController {
 		render [:] as JSON
 	}
 
+	def updateBeforeClosing = {
+		def project = Project.findById(params.long("id"))
+		project.sallingTotal = BigDecimal.ZERO
+		project.total = BigDecimal.ZERO
+		project.costTotal = BigDecimal.ZERO
+		project.closingDate = null
+		project.outDate = null
+		project.save()
+		render [:] as JSON
+	}
+	
 	def addAction = {
 
 		DateFormat df = new SimpleDateFormat("yyyy-M-d HH:mm");

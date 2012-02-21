@@ -1,380 +1,347 @@
 <html>
-    <head>
-        <title>專案</title>
-        <meta name="layout" content="project" />
-    </head>
-    <body>
-        <g:form name="addForm" id="addForm" onsubmit="return false;" autocomplete="off" novalidate="novalidate">
-            <input type="text" id="id" name="id" class="hide" />
-            <fieldset>
-                <legend>
-                    專案&家屬資訊
-                </legend>
-                <span style="display: inline-block; width: 460px">
-                    <div class="field-row">
-                        <span class="th1">案名：</span>
-                        <span><input type="text" id="projectName" name="projectName" placeholder="姓名" class="validate[required]" /></span>
-                    </div>
-                    <div class="field-row">
-                        <span class="th1">禮儀公司：</span>
-                        <span>
-                            <select id="funeralCompany" name="funeralCompany" class="validate[required]">
-                                <option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
-                            </select>
-                        </span>
-                    </div>
-                    <div class="field-row">
-                        <span class="th1">禮儀師：</span>
-                        <span>
-                            <select id="funeraler" name="funeraler" class="validate[required]">
-                                <option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
-                            </select>
-                        </span>
-                    </div>
-                    <div class="field-row">
-                        <span class="th1">承辦業務：</span>
-                        <span>
-                            <select id="employee" name="employee" class="validate[required]">
-                                <option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
-                            </select>
-                        </span>
-                    </div>
-                    <div class="field-row">
-                        <span class="th1">入館日期：</span>
-                        <span><input type="text" class="validate[required] date" id="inDate" name="inDate" size="12" /></span>
-                    </div>
-                    <div class="field-row">
-                        <span class="th1">時間：</span>
-                        <span>
-                            <select id="inHour" name="inHour">
-                                <option value="00">00</option>
-                                <option value="01">01</option>
-                                <option value="02">02</option>
-                                <option value="03">03</option>
-                                <option value="04">04</option>
-                                <option value="05">05</option>
-                                <option value="06">06</option>
-                                <option value="07">07</option>
-                                <option value="08">08</option>
-                                <option value="09">09</option>
-                                <option value="10">10</option>
-                                <option value="11">11</option>
-                                <option value="12">12</option>
-                                <option value="13">13</option>
-                                <option value="14">14</option>
-                                <option value="15">15</option>
-                                <option value="16">16</option>
-                                <option value="17">17</option>
-                                <option value="18">18</option>
-                                <option value="19">19</option>
-                                <option value="20">20</option>
-                                <option value="21">21</option>
-                                <option value="22">22</option>
-                                <option value="23">23</option>
-                            </select>
-                            ：
-                            <select id="inMin" name="inMin">
-                                <option value="00">00</option>
-                                <option value="05">05</option>
-                                <option value="10">10</option>
-                                <option value="15">15</option>
-                                <option value="20">20</option>
-                                <option value="25">25</option>
-                                <option value="30">30</option>
-                                <option value="35">35</option>
-                                <option value="40">40</option>
-                                <option value="45">45</option>
-                                <option value="50">50</option>
-                                <option value="55">55</option>
-                            </select>
-                        </span>
-                    </div>
-                    <div class="field-row closeDate">
-                        <span>
-                            <button id="update">
-                                儲存修改專案資訊
-                            </button>
-                        </span>
-                    </div>
-                </span>
-                <span style="padding-left: 10px; display: inline-block; width: 420px">
-                    <div class="field-row">
-                        <span class="th1">聯絡人：</span>
-                        <span><input type="text" id="contact" name="contact" placeholder="" /></span>
-                    </div>
-                    <div class="field-row">
-                        <span class="th1">電話：</span>
-                        <span><input type="text" id="contactPhone" name="contactPhone" placeholder="" /></span>
-                    </div>
-                    <div class="field-row">
-                        <span class="th1">地址：</span>
-                        <span>
-                            <select id="contactAddrCity" name="contactAddrCity">
-                                <option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
-                            </select>
-                            <!--縣/市-->
-                            <select id="contactAddrArea" name="contactAddrArea">
-                                <option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
-                            </select>
-                            <!--鄉鎮市區-->
-                        </span>
-                        <br/>
-                        <span class="th1">&nbsp;</span>
-                        <span><input type="text" id="contactAddr" name="contactAddr" placeholder="" size="40" /></span>
-                    </div>
-                    <div class="field-row">
-                        <span class="th1" style="vertical-align: top">備註：</span>
-                        <span>
-                            <textarea id="memo" name="memo" cols="30" rows="4">
-                            </textarea>
-                        </span>
-                    </div>
-                </span>
-            </fieldset>
-        </g:form>
-        <div>
-            <button id="modifyView" style="color:green">
-                修改顯示狀態
-            </button>
-            <span class="closeDate hide"><a id="add" href="#pdialog" class="button">新增</a>
-                <button id="modify1">
-                    修改商品
-                </button>
-                <button id="delete1">
-                    刪除
-                </button>
-                <button id="closing">
-                    結帳
-                </button>
-            </span>
-            <span class="download hide">
-                <button id="downloadInternalBill">
-                    下載內帳單
-                </button>
-                <button id="downloadBill">
-                    下載帳單
-                </button>
-            </span>
-            <button id="calendar" style="float: right;">
-                專案行事曆
-            </button>
-        </div>
-        <div style="padding-bottom: 10px" id="grid1">
-        </div>
-        <!-- dialog -->
-        <div class="hide">
-            <div id="pdialog" class="dialog" style="display: block; width: 470px;">
-                <g:form name="addProductForm" id="addProductForm" onsubmit="return false;" autocomplete="off" novalidate="novalidate">
-                    <input type="text" class="hide" id="isupdate" name="isupdate" value="N" /><input type="text" class="hide" id="detailid" name="detailid" />
-                    <div class="dialog-body">
-                        <fieldset style="margin:10 10px">
-                            <legend>
-                                新增使用商品
-                            </legend>
-                            <div class="field-row">
-                                <span class="th2" style="color:black">啇品類別：</span>
-                                <span><input type="radio" id="type" name="type" value="1" checked="checked" />一般 <input type="radio" id="type" name="type" value="2"/>代叫 <input type="radio" id="type" name="type" value="3"/>場地 <!--
+<head>
+<title>專案</title>
+<meta name="layout" content="project" />
+</head>
+<body>
+	<g:form name="addForm" id="addForm" onsubmit="return false;"
+		autocomplete="off" novalidate="novalidate">
+		<input type="text" id="id" name="id" class="hide" />
+		<fieldset>
+			<legend> 專案&家屬資訊 </legend>
+			<span style="display: inline-block; width: 460px">
+				<div class="field-row">
+					<span class="th1">案名：</span> <span><input type="text"
+						id="projectName" name="projectName" placeholder="姓名"
+						class="validate[required]" /> </span>
+				</div>
+				<div class="field-row">
+					<span class="th1">禮儀公司：</span> <span> <select
+						id="funeralCompany" name="funeralCompany"
+						class="validate[required]">
+							<option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+					</select> </span>
+				</div>
+				<div class="field-row">
+					<span class="th1">禮儀師：</span> <span> <select id="funeraler"
+						name="funeraler" class="validate[required]">
+							<option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+					</select> </span>
+				</div>
+				<div class="field-row">
+					<span class="th1">承辦業務：</span> <span> <select id="employee"
+						name="employee" class="validate[required]">
+							<option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+					</select> </span>
+				</div>
+				<div class="field-row">
+					<span class="th1">入館日期：</span> <span><input type="text"
+						class="validate[required] date" id="inDate" name="inDate"
+						size="12" /> </span>
+				</div>
+				<div class="field-row">
+					<span class="th1">時間：</span> <span> <select id="inHour"
+						name="inHour">
+							<option value="00">00</option>
+							<option value="01">01</option>
+							<option value="02">02</option>
+							<option value="03">03</option>
+							<option value="04">04</option>
+							<option value="05">05</option>
+							<option value="06">06</option>
+							<option value="07">07</option>
+							<option value="08">08</option>
+							<option value="09">09</option>
+							<option value="10">10</option>
+							<option value="11">11</option>
+							<option value="12">12</option>
+							<option value="13">13</option>
+							<option value="14">14</option>
+							<option value="15">15</option>
+							<option value="16">16</option>
+							<option value="17">17</option>
+							<option value="18">18</option>
+							<option value="19">19</option>
+							<option value="20">20</option>
+							<option value="21">21</option>
+							<option value="22">22</option>
+							<option value="23">23</option>
+					</select> ： <select id="inMin" name="inMin">
+							<option value="00">00</option>
+							<option value="05">05</option>
+							<option value="10">10</option>
+							<option value="15">15</option>
+							<option value="20">20</option>
+							<option value="25">25</option>
+							<option value="30">30</option>
+							<option value="35">35</option>
+							<option value="40">40</option>
+							<option value="45">45</option>
+							<option value="50">50</option>
+							<option value="55">55</option>
+					</select> </span>
+				</div>
+				<div class="field-row closeDate">
+					<span>
+						<button id="update">儲存修改專案資訊</button> </span>
+				</div> </span> <span
+				style="padding-left: 10px; display: inline-block; width: 420px">
+				<div class="field-row">
+					<span class="th1">聯絡人：</span> <span><input type="text"
+						id="contact" name="contact" placeholder="" /> </span>
+				</div>
+				<div class="field-row">
+					<span class="th1">電話：</span> <span><input type="text"
+						id="contactPhone" name="contactPhone" placeholder="" /> </span>
+				</div>
+				<div class="field-row">
+					<span class="th1">地址：</span> <span> <select
+						id="contactAddrCity" name="contactAddrCity">
+							<option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+					</select> <!--縣/市--> <select id="contactAddrArea" name="contactAddrArea">
+							<option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+					</select> <!--鄉鎮市區--> </span> <br /> <span class="th1">&nbsp;</span> <span><input
+						type="text" id="contactAddr" name="contactAddr" placeholder=""
+						size="40" /> </span>
+				</div>
+				<div class="field-row">
+					<span class="th1" style="vertical-align: top">備註：</span> <span>
+						<textarea id="memo" name="memo" cols="30" rows="4">
+                            </textarea> </span>
+				</div> </span>
+		</fieldset>
+	</g:form>
+	<div>
+		<button id="modifyView" style="color: green">修改顯示狀態</button>
+		<span class="closeDate hide"><a id="add" href="#pdialog"
+			class="button">新增</a>
+			<button id="modify1">修改商品</button>
+			<button id="delete1">刪除</button>
+			<button id="closing">結帳</button> </span> <span class="download hide">
+			<g:if test="${1==session.empLevel}">
+			<button id="updateBeforeClosing">修改帳單為結帳前狀態</button>
+			</g:if>
+			<button id="downloadInternalBill">下載內帳單</button>
+			<button id="downloadBill">下載帳單</button> </span>
+		<button id="calendar" style="float: right;">專案行事曆</button>
+	</div>
+	<div style="padding-bottom: 10px" id="grid1"></div>
+	<!-- dialog -->
+	<div class="hide">
+		<div id="pdialog" class="dialog" style="display: block; width: 470px;">
+			<g:form name="addProductForm" id="addProductForm"
+				onsubmit="return false;" autocomplete="off" novalidate="novalidate">
+				<input type="text" class="hide" id="isupdate" name="isupdate"
+					value="N" />
+				<input type="text" class="hide" id="detailid" name="detailid" />
+				<div class="dialog-body">
+					<fieldset style="margin: 10 10px">
+						<legend> 新增使用商品 </legend>
+						<div class="field-row">
+							<span class="th2" style="color: black">啇品類別：</span> <span><input
+								type="radio" id="type" name="type" value="1" checked="checked" />一般
+								<input type="radio" id="type" name="type" value="2" />代叫 <input
+								type="radio" id="type" name="type" value="3" />場地 <!--
                                     <input type="radio" id="type" name="type" value="3"/>
-                                    專案--></span>
-                            </div>
-                            <div id="productArea" style="">
-                                <!--
+                                    專案--> </span>
+						</div>
+						<div id="productArea" style="">
+							<!--
                                 <div class="field-row">
                                 <span class="th2">顯示於外帳單：</span>
                                 <span><input type="checkbox" id="showBill" name="showBill" class="" value="1" checked="checked" /></span>
                                 </div>-->
-                                <div id="type1" class="productArea" style="">
-                                    <div class="field-row">
-                                        <span class="th2">產品名稱：</span>
-                                        <span>
-                                            <select id="product1" name="product1" class="validate[required] product">
-                                                <option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
-                                            </select>
-                                        </span>
-                                    </div>
-                                    <g:if test="${1==session.empLevel}">
-                                        <div class="field-row">
-                                            <span class="th2">調整後單價：</span>
-                                            <span><input type="text" id="modifiedPrice1" name="modifiedPrice1" class="validate[custom[integer]]" /><span style="color:#AB8915;">&nbsp;空白為原價</span></span>
-                                        </div>
-                                    </g:if>
-                                    <div class="field-row">
-                                        <span class="th2">數量：</span>
-                                        <span><input id="amount1" name="amount1" class="validate[required,custom[integer]]" /></span>
-                                    </div>
-                                </div>
-                                <div id="type2" class="productArea" style="display:none;">
-                                    <div class="field-row">
-                                        <span class="th2">產品名稱：</span>
-                                        <span>
-                                            <select id="product2" name="product2" class="validate[required] product">
-                                                <option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
-                                            </select>
-                                        </span>
-                                    </div>
-                                    <g:if test="${1==session.empLevel}">
-                                        <div class="field-row">
-                                            <span class="th2">調整後單價：</span>
-                                            <span><input type="text" id="modifiedPrice2" name="modifiedPrice2" class="validate[custom[integer]]" /><span style="color:#AB8915;">&nbsp;空白為原價</span></span>
-                                        </div>
-                                    </g:if>
-                                    <div class="field-row">
-                                        <span class="th2">數量：</span>
-                                        <span><input id="amount2" name="amount2" class="validate[required,custom[integer]]" /></span>
-                                    </div>
-                                    <div class="field-row">
-                                        <span class="th2">廠商名稱：</span>
-                                        <span><input id="vendor2" name="vendor2" class="validate[required]" /></span>
-                                    </div>
-                                </div>
-                                <div id="type3" class="productArea" style="display:none";>
-                                    <div class="field-row">
-                                        <span class="th2">產品名稱：</span>
-                                        <span>
-                                            <select id="product3" name="product3" class="validate[required] product">
-                                                <option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
-                                            </select>
-                                        </span>
-                                    </div>
-                                    <g:if test="${1==session.empLevel}">
-                                        <div class="field-row">
-                                            <span class="th2">調整後單價：</span>
-                                            <span><input type="text" id="modifiedPrice3" name="modifiedPrice3" class="validate[custom[integer]]" /><span style="color:#AB8915;">&nbsp;空白為原價</span></span>
-                                        </div>
-                                    </g:if>
-                                    <div class="field-row">
-                                        <span class="th2">場地：</span>
-                                        <span>
-                                            <select id="place3" name="place3" class="validate[required]">
-                                                <option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
-                                            </select>
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="field-row costUnit hide">
-                                    <span class="th2">時間類型：</span>
-                                    <span>
-                                        <select id="costUnit" name="costUnit" disabled="disabled">
-                                            <option value="0">次</option>
-                                            <option value="1">次(時間)</option>
-                                            <option value="2">小時</option>
-                                            <option value="3">天</option>
-                                            <option value="4">月</option>
-                                        </select>
-                                    </span>
-                                    <span class="costRange" style="color:#AB8915;">&nbsp;&nbsp;單位：<input type="text" size="4" readonly="readonly" id="costRange" name="costRange" style="border:0px;background-color:#F1F1F1;"/></span>
-                                </div>
-                                <div class="field-row startTime hide">
-                                    <span class="th2">開始/使用時間：</span>
-                                    <span><input type="text" class="validate[required] date" id="startDate" name="startDate" size="12" /></span><span><span class="timeSelect">
-                                            <select id="startHour" name="startHour" class="timeSelect">
-                                                <option value="00">00</option>
-                                                <option value="01">01</option>
-                                                <option value="02">02</option>
-                                                <option value="03">03</option>
-                                                <option value="04">04</option>
-                                                <option value="05">05</option>
-                                                <option value="06">06</option>
-                                                <option value="07">07</option>
-                                                <option value="08">08</option>
-                                                <option value="09">09</option>
-                                                <option value="10">10</option>
-                                                <option value="11">11</option>
-                                                <option value="12">12</option>
-                                                <option value="13">13</option>
-                                                <option value="14">14</option>
-                                                <option value="15">15</option>
-                                                <option value="16">16</option>
-                                                <option value="17">17</option>
-                                                <option value="18">18</option>
-                                                <option value="19">19</option>
-                                                <option value="20">20</option>
-                                                <option value="21">21</option>
-                                                <option value="22">22</option>
-                                                <option value="23">23</option>
-                                            </select>
-                                            ：
-                                            <select id="startMin" name="startMin" class="timeSelect">
-                                                <option value="00">00</option>
-                                                <option value="05">05</option>
-                                                <option value="10">10</option>
-                                                <option value="15">15</option>
-                                                <option value="20">20</option>
-                                                <option value="25">25</option>
-                                                <option value="30">30</option>
-                                                <option value="35">35</option>
-                                                <option value="40">40</option>
-                                                <option value="45">45</option>
-                                                <option value="50">50</option>
-                                                <option value="55">55</option>
-                                            </select>
-                                        </span></span>
-                                </div>
-                                <div class="field-row mouth hide">
-                                    <span class="th2">共</span>
-                                    <span><input type="text" class="validate[required,custom[integer]]" id="mouth" name="mouth" size="3" /></span><span style="color:#AB8915;">&nbsp;個月</span>
-                                </div>
-                                <div class="field-row endTime hide">
-                                    <span class="th2">結束時間：</span>
-                                    <span><input type="text" class="validate[required] date" id="endDate" name="endDate" size="12" /></span><span><span class="timeSelect">
-                                            <select id="endHour" name="endHour">
-                                                <option value="00">00</option>
-                                                <option value="01">01</option>
-                                                <option value="02">02</option>
-                                                <option value="03">03</option>
-                                                <option value="04">04</option>
-                                                <option value="05">05</option>
-                                                <option value="06">06</option>
-                                                <option value="07">07</option>
-                                                <option value="08">08</option>
-                                                <option value="09">09</option>
-                                                <option value="10">10</option>
-                                                <option value="11">11</option>
-                                                <option value="12">12</option>
-                                                <option value="13">13</option>
-                                                <option value="14">14</option>
-                                                <option value="15">15</option>
-                                                <option value="16">16</option>
-                                                <option value="17">17</option>
-                                                <option value="18">18</option>
-                                                <option value="19">19</option>
-                                                <option value="20">20</option>
-                                                <option value="21">21</option>
-                                                <option value="22">22</option>
-                                                <option value="23">23</option>
-                                            </select>
-                                            ：
-                                            <select id="endMin" name="endMin" disabled="disable">
-                                                <option value="00">00</option>
-                                                <option value="05">05</option>
-                                                <option value="10">10</option>
-                                                <option value="15">15</option>
-                                                <option value="20">20</option>
-                                                <option value="25">25</option>
-                                                <option value="30">30</option>
-                                                <option value="35">35</option>
-                                                <option value="40">40</option>
-                                                <option value="45">45</option>
-                                                <option value="50">50</option>
-                                                <option value="55">55</option>
-                                            </select>
-                                        </span></span>
-                                </div>
-                            </div>
-                        </fieldset>
-                        <div style="text-align: center;">
-                            <button id="padd" type="button">
-                                確定
-                            </button>
-                            <button id="pclose" class="dialogClose" type="button">
-                                取消
-                            </button>
-                        </div>
-                    </div>
-                </g:form>
-            </div>
-        </div>
-        <script>
+							<div id="type1" class="productArea" style="">
+								<div class="field-row">
+									<span class="th2">產品名稱：</span> <span> <select
+										id="product1" name="product1"
+										class="validate[required] product">
+											<option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+									</select> </span>
+								</div>
+								<g:if test="${1==session.empLevel}">
+									<div class="field-row">
+										<span class="th2">調整後單價：</span> <span><input
+											type="text" id="modifiedPrice1" name="modifiedPrice1"
+											class="validate[custom[integer]]" /><span
+											style="color: #AB8915;">&nbsp;空白為原價</span> </span>
+									</div>
+								</g:if>
+								<div class="field-row">
+									<span class="th2">數量：</span> <span><input id="amount1"
+										name="amount1" class="validate[required,custom[integer]]" />
+									</span>
+								</div>
+							</div>
+							<div id="type2" class="productArea" style="display: none;">
+								<div class="field-row">
+									<span class="th2">產品名稱：</span> <span> <select
+										id="product2" name="product2"
+										class="validate[required] product">
+											<option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+									</select> </span>
+								</div>
+								<g:if test="${1==session.empLevel}">
+									<div class="field-row">
+										<span class="th2">調整後單價：</span> <span><input
+											type="text" id="modifiedPrice2" name="modifiedPrice2"
+											class="validate[custom[integer]]" /><span
+											style="color: #AB8915;">&nbsp;空白為原價</span> </span>
+									</div>
+								</g:if>
+								<div class="field-row">
+									<span class="th2">數量：</span> <span><input id="amount2"
+										name="amount2" class="validate[required,custom[integer]]" />
+									</span>
+								</div>
+								<div class="field-row">
+									<span class="th2">廠商名稱：</span> <span><input id="vendor2"
+										name="vendor2" class="validate[required]" /> </span>
+								</div>
+							</div>
+							<div id="type3" class="productArea" style="display: none";>
+								<div class="field-row">
+									<span class="th2">產品名稱：</span> <span> <select
+										id="product3" name="product3"
+										class="validate[required] product">
+											<option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+									</select> </span>
+								</div>
+								<g:if test="${1==session.empLevel}">
+									<div class="field-row">
+										<span class="th2">調整後單價：</span> <span><input
+											type="text" id="modifiedPrice3" name="modifiedPrice3"
+											class="validate[custom[integer]]" /><span
+											style="color: #AB8915;">&nbsp;空白為原價</span> </span>
+									</div>
+								</g:if>
+								<div class="field-row">
+									<span class="th2">場地：</span> <span> <select id="place3"
+										name="place3" class="validate[required]">
+											<option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+									</select> </span>
+								</div>
+							</div>
+							<div class="field-row costUnit hide">
+								<span class="th2">時間類型：</span> <span> <select
+									id="costUnit" name="costUnit" disabled="disabled">
+										<option value="0">次</option>
+										<option value="1">次(時間)</option>
+										<option value="2">小時</option>
+										<option value="3">天</option>
+										<option value="4">月</option>
+								</select> </span> <span class="costRange" style="color: #AB8915;">&nbsp;&nbsp;單位：<input
+									type="text" size="4" readonly="readonly" id="costRange"
+									name="costRange"
+									style="border: 0px; background-color: #F1F1F1;" /> </span>
+							</div>
+							<div class="field-row startTime hide">
+								<span class="th2">開始/使用時間：</span> <span><input
+									type="text" class="validate[required] date" id="startDate"
+									name="startDate" size="12" /> </span><span><span
+									class="timeSelect"> <select id="startHour"
+										name="startHour" class="timeSelect">
+											<option value="00">00</option>
+											<option value="01">01</option>
+											<option value="02">02</option>
+											<option value="03">03</option>
+											<option value="04">04</option>
+											<option value="05">05</option>
+											<option value="06">06</option>
+											<option value="07">07</option>
+											<option value="08">08</option>
+											<option value="09">09</option>
+											<option value="10">10</option>
+											<option value="11">11</option>
+											<option value="12">12</option>
+											<option value="13">13</option>
+											<option value="14">14</option>
+											<option value="15">15</option>
+											<option value="16">16</option>
+											<option value="17">17</option>
+											<option value="18">18</option>
+											<option value="19">19</option>
+											<option value="20">20</option>
+											<option value="21">21</option>
+											<option value="22">22</option>
+											<option value="23">23</option>
+									</select> ： <select id="startMin" name="startMin" class="timeSelect">
+											<option value="00">00</option>
+											<option value="05">05</option>
+											<option value="10">10</option>
+											<option value="15">15</option>
+											<option value="20">20</option>
+											<option value="25">25</option>
+											<option value="30">30</option>
+											<option value="35">35</option>
+											<option value="40">40</option>
+											<option value="45">45</option>
+											<option value="50">50</option>
+											<option value="55">55</option>
+									</select> </span> </span>
+							</div>
+							<div class="field-row mouth hide">
+								<span class="th2">共</span> <span><input type="text"
+									class="validate[required,custom[integer]]" id="mouth"
+									name="mouth" size="3" /> </span><span style="color: #AB8915;">&nbsp;個月</span>
+							</div>
+							<div class="field-row endTime hide">
+								<span class="th2">結束時間：</span> <span><input type="text"
+									class="validate[required] date" id="endDate" name="endDate"
+									size="12" /> </span><span><span class="timeSelect"> <select
+										id="endHour" name="endHour">
+											<option value="00">00</option>
+											<option value="01">01</option>
+											<option value="02">02</option>
+											<option value="03">03</option>
+											<option value="04">04</option>
+											<option value="05">05</option>
+											<option value="06">06</option>
+											<option value="07">07</option>
+											<option value="08">08</option>
+											<option value="09">09</option>
+											<option value="10">10</option>
+											<option value="11">11</option>
+											<option value="12">12</option>
+											<option value="13">13</option>
+											<option value="14">14</option>
+											<option value="15">15</option>
+											<option value="16">16</option>
+											<option value="17">17</option>
+											<option value="18">18</option>
+											<option value="19">19</option>
+											<option value="20">20</option>
+											<option value="21">21</option>
+											<option value="22">22</option>
+											<option value="23">23</option>
+									</select> ： <select id="endMin" name="endMin" disabled="disable">
+											<option value="00">00</option>
+											<option value="05">05</option>
+											<option value="10">10</option>
+											<option value="15">15</option>
+											<option value="20">20</option>
+											<option value="25">25</option>
+											<option value="30">30</option>
+											<option value="35">35</option>
+											<option value="40">40</option>
+											<option value="45">45</option>
+											<option value="50">50</option>
+											<option value="55">55</option>
+									</select> </span> </span>
+							</div>
+						</div>
+					</fieldset>
+					<div style="text-align: center;">
+						<button id="padd" type="button">確定</button>
+						<button id="pclose" class="dialogClose" type="button">取消
+						</button>
+					</div>
+				</div>
+			</g:form>
+		</div>
+	</div>
+	<script>
+        
             $(document).ready(function(){
             
                 var productArea = $("#productArea");
@@ -825,7 +792,7 @@
                         }
                     });
                 });
-                
+                                
                 $("#startMin").change(function(){
                     endMin.val($(this).val());
                 });
@@ -854,12 +821,29 @@
                         success: function(){
                             $(".download").show();
                             $(".closeDate").hide();
-							 $("#addForm").find(":input,select").attr("readonly", true).filter("select").prop("disabled", true).end().filter(".date").datepicker('destroy');
+							$("#addForm").find(":input,select").attr("readonly", true).filter("select").prop("disabled", true).end().filter(".date").datepicker('destroy');
                             alert("結帳完成");
                         }
                         
                     })
-                })
+                });
+                //修改帳單為結帳前狀態
+                $("#updateBeforeClosing").click(function(){
+                var datas = grid1.getRowData();
+                    $.ajax({
+                        url: contextRoot + "/project/updateBeforeClosing",
+                        data: {
+                            id: responseJSON.id
+                        },
+                        success: function(){
+                        	$(".download").hide();
+                            $(".closeDate").show();
+							$("#addForm").find(":input,select").attr("readonly", false).filter("select").prop("disabled", false).end().filter(".date").datepicker();                            
+                        	alert("修改帳單為結帳前狀態成功");                                                        
+                        }
+                    })
+                });
+                
             });
         </script>
     </body>

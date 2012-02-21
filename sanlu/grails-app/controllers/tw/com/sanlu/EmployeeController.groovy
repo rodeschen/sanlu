@@ -78,7 +78,7 @@ class EmployeeController extends GridController{
 				empNo:String.format("%05d", ++count),
 				empName:params.empName,
 				password:"1234".encodeAsMD5(),
-				hireDate:df.parse(params.get(params.hireDate)),
+				hireDate:df.parse(params.hireDate),
 				empLevel:params.int("empLevel"),
 				isLeft:params.boolean("isLeft"),
 				gender:"M")
