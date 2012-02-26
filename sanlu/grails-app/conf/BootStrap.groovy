@@ -455,18 +455,15 @@ class BootStrap {
 				}
 
 				break
-			case "production" :
-			//init Path
-				def reportPath = new File(ExcelUtility.REPORT_PATH);
-				if(!reportPath.exists()){
-					reportPath.mkdirs();
-				}
-				def billPath = new File(ExcelUtility.BILL_PATH);
-				if(!billPath.exists()){
-					billPath.mkdirs();
-				}
-
-				break
+		}
+		//init Path
+		def reportPath = new File(ExcelUtility.REPORT_PATH);
+		if(!reportPath.exists()){
+			reportPath.mkdirs();
+		}
+		def billPath = new File(ExcelUtility.BILL_PATH);
+		if(!billPath.exists()){
+			billPath.mkdirs();
 		}
 		def destroy = {
 		}
