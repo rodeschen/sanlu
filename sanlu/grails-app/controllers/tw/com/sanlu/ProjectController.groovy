@@ -141,6 +141,7 @@ class ProjectController extends GridController {
 		def project = Project.findById(params.long("id"))
 		def res = [:] <<
 				[id:project.id,
+					projectNo:project.projectNo,
 					projectName:project.projectName,
 					inDate:project.inDate?.format("yyyy-MM-dd"),
 					inHour:project.inDate?.format("HH"),
@@ -202,6 +203,8 @@ class ProjectController extends GridController {
 
 		DateFormat df = new SimpleDateFormat("yyyy-M-d HH:mm");
 		def project = new Project();
+		int count = Project.executeQuery("select max(id) from Project")[0];
+		project.projectNo = String.format("%07d", ++count);
 		project.projectName = params.projectName
 		project.funeralCompany = FuneralCompany.findById(params.long("funeralCompany"))
 		project.funeraler = Funeraler.findById(params.long("funeraler"))
@@ -687,7 +690,7 @@ class ProjectController extends GridController {
 	def searchProject= {
 		def queryString = "from Project as p where "
 		DateFormat df = new SimpleDateFormat("yyyy-M-d");
-
+		queryString <<= params.projectNo?" p.projectNo = '"+String.format("%07d", params.int("projectNo"))+"' and":""
 		queryString <<= params.projectName?" p.projectName like '%"+params.projectName+"%' and":""
 		queryString <<= params.funeralCompany?" p.funeralCompany.id= "+params.long("funeralCompany")+" and":""
 		queryString <<= params.funeraler?" p.funeraler.id= "+params.long("funeraler")+" and":""

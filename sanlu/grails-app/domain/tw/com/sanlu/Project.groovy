@@ -8,6 +8,8 @@ import java.util.Date;
  *
  */
 class Project {
+	//案號
+	String projectNo
 	//案名
 	String projectName
 	//禮儀公司
@@ -46,6 +48,7 @@ class Project {
 
 
 	static constraints = {
+		projectNo maxSize:7
 		projectName maxSize:40
 		memo nullable:true
 		outDate(validator: { val, obj ->

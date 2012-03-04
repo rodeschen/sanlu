@@ -65,22 +65,23 @@
         <servlet-class>org.codehaus.groovy.grails.web.pages.GroovyPagesServlet</servlet-class>
     </servlet>
     
-    <!-- Websocket servlet -->
+    <!-- Websocket servlet 
     <servlet>
         <servlet-name>WebSocketChatServlet</servlet-name>
         <servlet-class>tw.sanlu.servlet.WebSocketChatServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
+	<servlet-mapping>
+        <servlet-name>WebSocketChatServlet</servlet-name>
+        <url-pattern>/ws/*</url-pattern>
+    </servlet-mapping>-->
 	
     <servlet-mapping>
         <servlet-name>gsp</servlet-name>
         <url-pattern>*.gsp</url-pattern>
     </servlet-mapping>
     
-	<servlet-mapping>
-        <servlet-name>WebSocketChatServlet</servlet-name>
-        <url-pattern>/ws/*</url-pattern>
-    </servlet-mapping>
+	
     
     <welcome-file-list>
         <!--

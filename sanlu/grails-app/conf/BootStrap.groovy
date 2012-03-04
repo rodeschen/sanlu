@@ -275,6 +275,7 @@ class BootStrap {
 
 					//init Project
 					def project1 = new Project(
+							projectNo:String.format("%07d", 1),
 							projectName:"張一二",
 							funeralCompany : fCom,
 							funeraler:funer,

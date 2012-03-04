@@ -17,7 +17,7 @@ class BillDetail {
 	//使用產品結束時間
 	Date endTime
 	//消費產品數量
-	Integer quantity
+	BigDecimal quantity
 	//單價
 	BigDecimal price
 	//手動調整單價

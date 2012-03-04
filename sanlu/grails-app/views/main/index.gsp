@@ -3,8 +3,7 @@
         <title>首頁</title>
         <meta name="layout" content="inner" />
     </head>
-    <body>
-        ${flash.message}
+    <body>        
         <g:if test="${!session.empLevel}">
             <script type="text/javascript">
                 $("nav,aside").remove();
@@ -22,7 +21,11 @@
                         <div class="field-row">
                             <span class="th1">密碼：</span>
                             <span><input type="password" id="pw" name="pw" placeholder="密碼" class="validate[required]" /></span>
-                        </div><!--
+                        </div>
+                        <div style="text-align: center;">${session.errMsg}</div>
+                        <!-- 清空錯誤訊息 -->
+                        ${session.errMsg=""}
+                        <!--
                         <div class="field-row">
                         <span class="th1">分館：</span>
                         <span>
@@ -67,7 +70,10 @@
                     </button>
                 </div>
                 <div id="palceGrid" />
-            </fieldset><!-- dialog -->
+            </fieldset>
+            <!-- 
+            dialog 
+            -->
             <div class="hide">
                 <div id="pdialog" class="dialog" style="display: block; width: 400px;">
                     <g:form name="addForm" id="addForm" onsubmit="return false;" autocomplete="off" novalidate="novalidate">
@@ -199,6 +205,11 @@
                             index: 'id',
                             hidden: true
                         }, {
+                            header: "案號",
+                            name: 'projectNo',
+                            index: 'projectNo',
+                            width: 60
+                        }, {
                             header: "案名",
                             name: 'projectName',
                             index: 'projectName',
@@ -207,13 +218,13 @@
                             header: "禮儀公司",
                             name: 'funeralCompany.funeralCompanyName',
                             index: 'funeralCompany.funeralCompanyName',
-                            width: 80
+                            width: 70
                         
                         }, {
                             header: "禮儀師",
                             name: 'funeraler.funeralerName',
                             index: 'funeraler.funeralerName',
-                            width: 80
+                            width: 65
                         
                         }, {
                             header: "進館日期",
@@ -231,7 +242,7 @@
                             header: "承辦業務",
                             name: 'emp.empName',
                             index: 'emp.empName',
-                            width: 80
+                            width: 60
                         }, {
                             header: "消費總金額",
                             name: 'sallingTotal',
@@ -250,7 +261,7 @@
                             header: "備註",
                             name: 'memo',
                             index: 'memo',
-                            width: 150,
+                            width: 130,
                             sortable: false
                         }],
                         ondblClickRow: function(id){

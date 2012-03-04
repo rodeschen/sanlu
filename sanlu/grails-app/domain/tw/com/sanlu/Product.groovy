@@ -29,7 +29,7 @@ class Product {
 	Integer costUnit = 0
 	
 	//每次計價單位
-	Integer costRange
+	BigDecimal costRange
 	
 	//是否為場地類商品
 	boolean hasPlace

@@ -84,8 +84,13 @@
 				<div class="field-row closeDate">
 					<span>
 						<button id="update">儲存修改專案資訊</button> </span>
-				</div> </span> <span
+				</div> </span>
+				 <span
 				style="padding-left: 10px; display: inline-block; width: 420px">
+				<div class="field-row">
+					<span class="th1">案號：</span> <span><label
+						id="projectNo" name="projectNo"></label> </span>
+				</div>
 				<div class="field-row">
 					<span class="th1">聯絡人：</span> <span><input type="text"
 						id="contact" name="contact" placeholder="" /> </span>
@@ -106,7 +111,7 @@
 				</div>
 				<div class="field-row">
 					<span class="th1" style="vertical-align: top">備註：</span> <span>
-						<textarea id="memo" name="memo" cols="30" rows="4">
+						<textarea id="memo" name="memo" cols="30" rows="3">
                             </textarea> </span>
 				</div> </span>
 		</fieldset>
@@ -411,6 +416,7 @@
                     $('#funeralCompany').setDropdown(map);
                     $('#employee').setDropdown(map2);
                     $("#id").val(json.id);
+                    $("#projectNo").html(json.projectNo);
                     $("#projectName").val(json.projectName);
                     $("#inDate").val(json.inDate);
                     $("#inHour").val(json.inHour);

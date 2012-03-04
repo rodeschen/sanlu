@@ -524,7 +524,7 @@
                         </div>
                         <div class="field-row"  id="costRangeDiv">
                             <span class="th1">計價單位：</span>
-                            <span><input type="text" value='1' id="costRange" name="costRange" placeholder="計價單位" class="validate[required,custom[integer]] text-input"/>                                
+                            <span><input type="text" value='1' id="costRange" name="costRange" placeholder="計價單位" class="validate[required,custom[number]] text-input"/>                                
                             </span>
                         </div>
                         <div class="field-row">                        	

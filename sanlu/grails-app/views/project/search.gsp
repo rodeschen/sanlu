@@ -73,6 +73,12 @@
 					</div> </span><span
 				style="padding-left: 10px; display: inline-block; width: 420px">
 					<div class="field-row">
+						<span class="th1">案號：</span><span>
+							<input type="text"
+							id="projectNo" name="projectNo" placeholder="案號" class="validate[custom[integer]]"/>
+						</span>
+					</div>
+					<div class="field-row">
 						<span class="th1">聯絡人：</span><span>
 							<input type="text"
 							id="contact" name="contact" placeholder="" />
@@ -172,6 +178,11 @@
 						index : 'id',
 						hidden : true
 					}, {
+                        header: "案號",
+                        name: 'projectNo',
+                        index: 'projectNo',
+                        width: 60
+					}, {
 						header : "案名",
 						name : 'projectName',
 						index : 'projectName',
@@ -225,7 +236,7 @@
 						header : "備註",
 						name : 'memo',
 						index : 'memo',
-						width : 150,
+						width : 130,
 						sortable : false
 					}],
 					ondblClickRow : function(id) {
@@ -233,7 +244,7 @@
 					}
 				});
 
-				$("#search").click(function() {
+				$("#search").click(function() {					
 					if($("#addForm").validationEngine('validate')) {
 						grid1.jqGrid('setGridParam', {
 							postData : $("#addForm").serializeData(),
@@ -252,6 +263,8 @@
 						});
 					}
 				});
+				var today = new Date();
+				$("#inDate").val(today.getFullYear()+"-"+(today.getMonth() < 9 ?'0':'')+(today.getMonth()+1)+"-"+(today.getDate() < 10 ?'0':'')+today.getDate());
 			});
 
 		</script>

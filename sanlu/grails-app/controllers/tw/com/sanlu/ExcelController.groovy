@@ -239,6 +239,11 @@ class ExcelController extends BaseController {
 				WritableCellFormat evenFormat = new WritableCellFormat(sheet.getCell(0, 7).getCellFormat())
 
 				// write out our header
+				
+				//日期
+				sheet.addCell(new Label(4, 1,Utility.dateFormat.format(project.closingDate),new WritableCellFormat(sheet.getCell(4,1).getCellFormat())))
+				//案號
+				sheet.addCell(new Label(2, 1,project.projectNo,new WritableCellFormat(sheet.getCell(2,1).getCellFormat())))
 				//承辦人
 				sheet.addCell(new Label(8,0,project.emp.empName,new WritableCellFormat(sheet.getCell(8, 0).getCellFormat())))
 
@@ -361,7 +366,7 @@ class ExcelController extends BaseController {
 				//等號
 				sheet.addCell(new Label(11, row, "=",wcf))
 				//折讓金額
-				sheet.addCell(new Formula(12, row, "H"+row+"-K"+row,wcf))
+				sheet.addCell(new Formula(12, row, "H"+(row+1)+"-K"+(row+1),wcf))
 				row++
 				WritableCellFormat wcf2 = new WritableCellFormat(writableFont);
 				wcf2.setVerticalAlignment format.VerticalAlignment.TOP

@@ -19,8 +19,10 @@ class LoginController extends BaseController {
 			session.empNo =employee.empNo
 			session.empLevel =employee.empLevel
 			session.employee = employee			
+			session.errMsg = ""
 		}else{
-			log.debug userId+" login fail."			
+			log.debug userId+" login fail."
+			session.errMsg = "帳號或密碼錯誤"
 		}		
 		redirect(uri:"/")
 	}
