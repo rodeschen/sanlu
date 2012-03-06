@@ -30,6 +30,7 @@
                         header: "場地類",
                         name: 'hasPlace',
                         index: 'hasPlace',
+                        align: 'center',
                         width: 20,
                         formatter: function(el, cellval, opts){
                             return el ? "是" : "否";
@@ -38,6 +39,7 @@
                         header: "代叫品項",
                         name: 'isAgency',
                         index: 'isAgency',
+                        align: 'center',
                         width: 20,
                         formatter: function(el, cellval, opts){
                             return el ? "是" : "否";
@@ -46,17 +48,28 @@
                         header: "銷售單價",
                         name: 'sallingPrice',
                         index: 'sallingPrice',
-                        width: 20
+                        width: 20,
+                        align: 'right'
                     }, {
                         header: "庫存數量",
                         name: 'totalQuantity',
                         index: 'totalQuantity',
-                        width: 20
+                        width: 20,
+                        align: 'right'
                     }, {
-                        header: "計價單位",
+                        header: "顯示單位",
                         name: 'unit',
                         index: 'unit',
+                        align: 'center',
                         width: 20
+                    }, {
+                        header: "計價方式",
+                        name: 'costUnit_view',
+                        index: 'costUnit',
+                        width: 17,
+                        align: 'center',
+                        formatter: function(el, cellval, opts){
+                            return ["次","次(時間)","小時","天","月"][el];}
                     }, {
                         header: "最後修改時間",
                         name: 'lastUpdated',

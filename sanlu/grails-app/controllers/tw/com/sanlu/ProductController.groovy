@@ -78,10 +78,12 @@ class ProductController extends GridController{
 	}
 
 	def deleteAction = {
-		boolean isNomal = new Boolean(params.get("isNomal"))
-
-		//def productLinkPlace = !isNomal?ProductLinkPlace.findByPlaceAndProduct(Place.findById(params.get("place.id")),Product.findById(params.get("product.id"))):Product.findById(id)
+		boolean isNomal = new Boolean(params.get("isNomal"))		
 		def productLinkPlace = !isNomal?ProductLinkPlace.findById(id):Product.findById(id)
+		def billDetail = BillDetail.findByProduct(productLinkPlace)
+		if(billDetail){
+			return throwError(billDetail.product.productName+" 在案號:"+billDetail.project.projectNo+" 已購買，所以無法刪除!!");
+		}
 		def res = ["IsSuccess" : true]
 		if(productLinkPlace){
 			productLinkPlace.delete()

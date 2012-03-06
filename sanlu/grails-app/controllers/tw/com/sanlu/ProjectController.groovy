@@ -559,7 +559,7 @@ class ProjectController extends GridController {
 				detail.startTime = df.parse(params.startDate + " " + params.startHour + ":" + params.startMin)
 			//	detail.endTime = df.parse(params.endDate + " " + params.endHour + ":" + params.startMin)
 				cal1.setTime detail.startTime
-				cal1.add(Calendar.HOUR , product.costRange)
+				cal1.add(Calendar.HOUR , (int)product.costRange)
 				detail.endTime  = cal1.getTime();
 			//	cal1.setTime detail.startTime
 			//	cal2.setTime detail.endTime
@@ -573,7 +573,7 @@ class ProjectController extends GridController {
 
 			//	detail.endTime = df.parse(params.endDate + " 00:00")
 				cal1.setTime detail.startTime
-				cal1.add(Calendar.DATE, product.costRange)
+				cal1.add(Calendar.DATE, (int)product.costRange)
 				detail.endTime  = cal1.getTime();
 			//	cal2.setTime detail.endTime
 			//	if(cal2.compareTo(cal1) <= 0 || ((cal2.getTimeInMillis() - cal1.getTimeInMillis())%hour) != 0 ){
@@ -587,7 +587,7 @@ class ProjectController extends GridController {
 			//		return throwError("每次使用時間以 " + product.costRange + " 個月為單位");
 			//	}
 			//	cal1.add(Calendar.MONTH, params.int("mouth"))
-				cal1.add(Calendar.MONTH, product.costRange)
+				cal1.add(Calendar.MONTH, (int)product.costRange)
 				detail.endTime  = cal1.getTime();
 				break;
 
