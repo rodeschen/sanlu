@@ -10,7 +10,7 @@ class PlaceController extends GridController{
 	@GridQuery
 	def queryPlace = {
 		def places =Place.list(max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc")
-		["rowData":places,"rowCount":places.size()]
+		["rowData":places,"rowCount":Place.list().size()]
 	}
 	def insertAction={
 

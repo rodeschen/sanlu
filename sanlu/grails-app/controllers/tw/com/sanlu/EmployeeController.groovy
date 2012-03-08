@@ -20,7 +20,7 @@ class EmployeeController extends GridController{
 	@GridQuery
 	def queryAll = {
 		def employees = Employee.list(max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc")
-		["rowData":employees,"rowCount":employees.size()]
+		["rowData":employees,"rowCount":Employee.list().size()]
 	}
 
 

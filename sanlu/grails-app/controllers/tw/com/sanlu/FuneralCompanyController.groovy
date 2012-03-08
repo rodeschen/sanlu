@@ -19,7 +19,7 @@ class FuneralCompanyController extends GridController{
 	def queryAll = {
 		def funeralCompanys = FuneralCompany.list(max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc")
 		["rowData":funeralCompanys,
-					"rowCount":funeralCompanys.size()]
+					"rowCount":FuneralCompany.list().size()]
 	}
 
 	def deleteAction = {

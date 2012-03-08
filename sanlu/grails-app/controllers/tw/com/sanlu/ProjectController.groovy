@@ -32,17 +32,17 @@ class ProjectController extends GridController {
 			cal1.set(Calendar.MINUTE, 0)
 			cal1.set(Calendar.SECOND, 0)
 			cal1.set(Calendar.MILLISECOND, 0)
-			//rowCount = Project.countByClosingDateGreaterThanEqualsOrClosingDateIsNull(cal1.getTime())
+			rowCount = Project.countByClosingDateGreaterThanEqualsOrClosingDateIsNull(cal1.getTime())
 			projects = Project.findAllByClosingDateGreaterThanEqualsOrClosingDateIsNull(cal1.getTime(),[max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc"])
 
 		}else{
-			//rowCount = Project.countByClosingDateIsNotNull()
+			rowCount = Project.countByClosingDateIsNotNull()
 			projects = Project.findAllByClosingDateIsNotNull([max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc"])
 		}
 
 		//format
 		//return ["rowData":projects,"rowCount":rowCount,"format":["projectName":{str -> return "$str xxxxccc"}]]
-		["rowData":projects,"rowCount":projects.size()]
+		["rowData":projects,"rowCount":rowCount]
 	}
 
 	@GridQuery
