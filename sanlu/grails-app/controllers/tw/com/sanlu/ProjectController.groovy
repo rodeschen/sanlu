@@ -124,7 +124,7 @@ class ProjectController extends GridController {
 						case 4:
 							unit = unit ? unit:"月"
 							if(true/*ata.product.costRange == 1*/){
-								return (data.quantity + data.product.unit) + "/" + (/*data.quantity * */ data.product.costRange) +unit
+								return (data.quantity + data.product.unit) + "/" + (/*data.quantity * */ formatDecimal(data.product.costRange)) +unit
 							}else{
 								return (data.quantity + data.product.unit)
 							}
@@ -174,7 +174,7 @@ class ProjectController extends GridController {
 			println it.product.costPrice
 			if(it.product.hasPlace){
 				def linkPlace = ProductLinkPlace.findByProductAndPlace(it.product,it.place)
-				amount2 +=linkPlace.price 
+				amount2 +=linkPlace.price
 				amount3 +=linkPlace.costPrice
 			}else{
 				amount2 +=it.product.price * it.quantity
@@ -198,7 +198,7 @@ class ProjectController extends GridController {
 		project.save()
 		render [:] as JSON
 	}
-	
+
 	def addAction = {
 
 		DateFormat df = new SimpleDateFormat("yyyy-M-d HH:mm");
@@ -707,5 +707,10 @@ class ProjectController extends GridController {
 		println  "SearchProject:"+queryString
 		def projects= Project.findAll(queryString,[max:pageRows,offset:startRow])
 		["rowData":projects,"rowCount":projects.size()]
+	}
+
+	//去小數零
+	def formatDecimal(BigDecimal n){
+		return n.toString().indexOf(".0")==1?n.intValue():n;
 	}
 }

@@ -17,7 +17,7 @@ class BootStrap {
 		switch(GrailsUtil.environment){
 			case "development":
 				log.debug("development")
-				try{
+				try{/*
 					//init Employee
 					def emp1 = new Employee(
 							empNo:"00001",
@@ -128,14 +128,9 @@ class BootStrap {
 					//init Product
 					def leave = new Product(productNo:"000004",
 							productName:"告別式",
-							//							totalQuantity:50,
-							//							price:100,
-							//							sallingPrice:200,
-							//							costPrice:50,
-							//timeType:1,
 							unit:"場",
-							costUnit:1,
-							costRange:3,
+							costUnit:2,
+							costRange:2.5,
 							lastModifyBy:emp1,
 							hasPlace:true)
 					leave.save()
@@ -161,11 +156,6 @@ class BootStrap {
 					productLinkPlace1.save()
 					def product2 = new Product(productNo:"000005",
 							productName:"助念",
-							//							totalQuantity:50,
-							//							price:100,
-							//							sallingPrice:200,
-							//							costPrice:50,
-							//timetype:1,
 							unit:"場",
 							costUnit:1,
 							costRange:2,
@@ -450,7 +440,7 @@ class BootStrap {
 							memo:"Excel Password",
 							lastModifyBy: emp1
 							)
-					excelPassword.save()
+					excelPassword.save()*/
 				}catch(Exception e){
 					println e.dump()
 				}

@@ -32,5 +32,6 @@ class ProductHistory {
 		project nullable:true
 		vendor nullable:true
 		memo nullable:true
+		quantity scale:0
     }
 }

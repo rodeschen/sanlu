@@ -19,9 +19,10 @@ class ProductLinkPlace implements Serializable{
 	Date lastUpdated
 	//最後修改人員
 	Employee lastModifyBy
-	static mapping = {
-		//id composite:['product', 'place']
-	}	
+	
 	static constraints = {
+		sallingPrice scale:0
+		costPrice scale:0
+		price scale:0
 	}
 }

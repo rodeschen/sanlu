@@ -43,6 +43,10 @@ class BillDetail {
 		color nullable:true
 		place nullable:true
 		vendor nullable:true
-		quantity scale: 1
+		quantity scale:0
+		price scale:0
+		modifiedPrice scale:0
+		internalPrice scale:0
+		modifiedInternalPrice scale:0
 	}
 }

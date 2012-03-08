@@ -143,7 +143,7 @@
 					<fieldset style="margin: 10 10px">
 						<legend> 新增使用商品 </legend>
 						<div class="field-row">
-							<span class="th2" style="color: black">啇品類別：</span> <span><input
+							<span class="th2" style="color: black">商品類別：</span> <span><input
 								type="radio" id="type" name="type" value="1" checked="checked" />一般
 								<input type="radio" id="type" name="type" value="2" />代叫 <input
 								type="radio" id="type" name="type" value="3" />場地 <!--

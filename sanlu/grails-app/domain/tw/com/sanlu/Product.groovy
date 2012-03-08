@@ -35,6 +35,8 @@ class Product {
 	boolean hasPlace
 	//是否為代叫項目
 	boolean isAgency
+	//是否為無庫存項目
+	boolean noReserves
 	//最後修改日期
 	Date lastUpdated
 	//最後修改人員
@@ -50,11 +52,13 @@ class Product {
 		//timeType maxSize:10
 		unit maxSize:10
 		totalQuantity nullable:true
-		price nullable:true
-		sallingPrice nullable:true
-		costPrice nullable:true
+		price nullable:true,scale:0
+		sallingPrice nullable:true,scale:0
+		costPrice nullable:true,scale:0
 		hasPlace nullable:true
 		isAgency nullable:true
+		noReserves nullable:true
 		costRange nullable:true,scale: 1
+		 
 	}
 }
