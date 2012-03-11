@@ -34,7 +34,6 @@ class ProjectController extends GridController {
 			cal1.set(Calendar.MILLISECOND, 0)
 			rowCount = Project.countByClosingDateGreaterThanEqualsOrClosingDateIsNull(cal1.getTime())
 			projects = Project.findAllByClosingDateGreaterThanEqualsOrClosingDateIsNull(cal1.getTime(),[max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc"])
-
 		}else{
 			rowCount = Project.countByClosingDateIsNotNull()
 			projects = Project.findAllByClosingDateIsNotNull([max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc"])
@@ -203,7 +202,8 @@ class ProjectController extends GridController {
 
 		DateFormat df = new SimpleDateFormat("yyyy-M-d HH:mm");
 		def project = new Project();
-		int count = Project.executeQuery("select max(id) from Project")[0];
+		int count = Project.executeQuery("select count(id) from Project")[0];
+		
 		project.projectNo = String.format("%07d", ++count);
 		project.projectName = params.projectName
 		project.funeralCompany = FuneralCompany.findById(params.long("funeralCompany"))

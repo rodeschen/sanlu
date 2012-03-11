@@ -72,7 +72,7 @@ class EmployeeController extends GridController{
 	}
 
 	def insertAction={
-		int count = Employee.executeQuery("select max(id) from Employee")[0]
+		int count = Employee.executeQuery("select count(id) from Employee")[0]		
 		DateFormat df = new SimpleDateFormat("yyyy-M-d");
 		def emp = new Employee(
 				empNo:String.format("%05d", ++count),

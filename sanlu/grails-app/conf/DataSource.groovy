@@ -1,12 +1,11 @@
 dataSource {
-
 	logSql = true	
 	pooled = true
 	dbCreate = "update"
 	url = "jdbc:mysql://localhost/yourDB"
 	driverClassName = "com.mysql.jdbc.Driver"
     username = "root"
-	password = ""
+	password = "r&rSanlu"
 	properties {
 		maxActive = 50
 		maxIdle = 25
@@ -28,7 +27,7 @@ hibernate {
 environments {
 	development {
 		dataSource {
-			dbCreate = "create" // one of 'create', 'create-drop','update'
+			dbCreate = "update" // one of 'create', 'create-drop','update'
 			//jndiName = "java:comp/env/jdbc/sanlu"
 			url = "jdbc:mysql://localhost/sanlu?useUnicode=true&characterEncoding=UTF-8"
 		}

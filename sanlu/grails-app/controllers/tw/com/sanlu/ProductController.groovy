@@ -31,7 +31,7 @@ class ProductController extends GridController{
 
 		def json = new JSONObject(params.get("data"))
 		boolean isNomal = new Boolean(params.get("isNomal"))
-		int count = isNomal?Product.executeQuery("select max(id) from Product")[0]:0
+		int count = isNomal?Product.executeQuery("select count(id) from Product")[0]:0		
 		boolean hasPlace = "T".equals( json.getString("hasPlace"))
 		def product = null
 
