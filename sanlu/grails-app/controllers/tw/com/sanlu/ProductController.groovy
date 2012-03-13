@@ -54,7 +54,7 @@ class ProductController extends GridController{
 						unit:json.getString("unit"),
 						hasPlace:"T".equals( json.getString("hasPlace")),
 						costRange:json.getInt("costRange"),
-						isAgency:"T".equals( json.getString("isAgency")),
+						productType:json.getInt("productType"),
 						lastModifyBy:session.employee)
 			}
 		}else{
@@ -154,8 +154,7 @@ class ProductController extends GridController{
 					case 'costPrice':
 						productLinkPlace.putAt keyName,new BigDecimal(it.value)
 						break
-					case 'hasPlace':
-					case 'isAgency':
+					case 'hasPlace':					
 						productLinkPlace.putAt keyName,new Boolean("T".equals(it.value))
 						break
 					default:

@@ -71,16 +71,26 @@ class ComboboxController extends BaseController {
 
 	//一般商品
 	def normalProduct ={
-		def l = Product.findAllByHasPlaceAndIsAgency(false,false)
+		def l = Product.findAllByHasPlaceAndProductType(false,0)
 		def res = [:]
 		l?.each(){
 			res[it.id] = ["value":it.id,"unit":it.costUnit,range:it.costRange,"text":it.productName]
 		}
 		render res as JSON
 	}
-
+	//代叫商品
 	def normalProduct2 = {
-		def l = Product.findAllByHasPlaceAndIsAgency(false,true)
+		def l = Product.findAllByHasPlaceAndProductType(false,2)
+		def res = [:]
+		l?.each(){
+			res[it.id] = ["value":it.id,"unit":it.costUnit,range:it.costRange,"text":it.productName]
+		}
+		render res as JSON
+	}
+	
+	//一般無庫存商品
+	def normalProduct1 = {
+		def l = Product.findAllByHasPlaceAndProductType(false,1)
 		def res = [:]
 		l?.each(){
 			res[it.id] = ["value":it.id,"unit":it.costUnit,range:it.costRange,"text":it.productName]

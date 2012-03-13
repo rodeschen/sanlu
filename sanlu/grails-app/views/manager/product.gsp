@@ -1,618 +1,860 @@
 <html>
 <head>
-<title>產品管理</title>
-<meta name="layout" content="inner" />
+<title>專案</title>
+<meta name="layout" content="project" />
 </head>
 <body>
-	<script>        
+	<g:form name="addForm" id="addForm" onsubmit="return false;"
+		autocomplete="off" novalidate="novalidate">
+		<input type="text" id="id" name="id" class="hide" />
+		<fieldset>
+			<legend> 專案&家屬資訊 </legend>
+			<span style="display: inline-block; width: 460px">
+				<div class="field-row">
+					<span class="th1">案名：</span> <span><input type="text"
+						id="projectName" name="projectName" placeholder="姓名"
+						class="validate[required]" /> </span>
+				</div>
+				<div class="field-row">
+					<span class="th1">禮儀公司：</span> <span> <select
+						id="funeralCompany" name="funeralCompany"
+						class="validate[required]">
+							<option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+					</select> </span>
+				</div>
+				<div class="field-row">
+					<span class="th1">禮儀師：</span> <span> <select id="funeraler"
+						name="funeraler" class="validate[required]">
+							<option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+					</select> </span>
+				</div>
+				<div class="field-row">
+					<span class="th1">承辦業務：</span> <span> <select id="employee"
+						name="employee" class="validate[required]">
+							<option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+					</select> </span>
+				</div>
+				<div class="field-row">
+					<span class="th1">入館日期：</span> <span><input type="text"
+						class="validate[required] date" id="inDate" name="inDate"
+						size="12" /> </span>
+				</div>
+				<div class="field-row">
+					<span class="th1">時間：</span> <span> <select id="inHour"
+						name="inHour">
+							<option value="00">00</option>
+							<option value="01">01</option>
+							<option value="02">02</option>
+							<option value="03">03</option>
+							<option value="04">04</option>
+							<option value="05">05</option>
+							<option value="06">06</option>
+							<option value="07">07</option>
+							<option value="08">08</option>
+							<option value="09">09</option>
+							<option value="10">10</option>
+							<option value="11">11</option>
+							<option value="12">12</option>
+							<option value="13">13</option>
+							<option value="14">14</option>
+							<option value="15">15</option>
+							<option value="16">16</option>
+							<option value="17">17</option>
+							<option value="18">18</option>
+							<option value="19">19</option>
+							<option value="20">20</option>
+							<option value="21">21</option>
+							<option value="22">22</option>
+							<option value="23">23</option>
+					</select> ： <select id="inMin" name="inMin">
+							<option value="00">00</option>
+							<option value="05">05</option>
+							<option value="10">10</option>
+							<option value="15">15</option>
+							<option value="20">20</option>
+							<option value="25">25</option>
+							<option value="30">30</option>
+							<option value="35">35</option>
+							<option value="40">40</option>
+							<option value="45">45</option>
+							<option value="50">50</option>
+							<option value="55">55</option>
+					</select> </span>
+				</div>
+				<div class="field-row closeDate">
+					<span>
+						<button id="update">儲存修改專案資訊</button> </span>
+				</div> </span>
+				 <span
+				style="padding-left: 10px; display: inline-block; width: 420px">
+				<div class="field-row">
+					<span class="th1">案號：</span> <span><label
+						id="projectNo" name="projectNo"></label> </span>
+				</div>
+				<div class="field-row">
+					<span class="th1">聯絡人：</span> <span><input type="text"
+						id="contact" name="contact" placeholder="" /> </span>
+				</div>
+				<div class="field-row">
+					<span class="th1">電話：</span> <span><input type="text"
+						id="contactPhone" name="contactPhone" placeholder="" /> </span>
+				</div>
+				<div class="field-row">
+					<span class="th1">地址：</span> <span> <select
+						id="contactAddrCity" name="contactAddrCity">
+							<option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+					</select> <!--縣/市--> <select id="contactAddrArea" name="contactAddrArea">
+							<option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+					</select> <!--鄉鎮市區--> </span> <br /> <span class="th1">&nbsp;</span> <span><input
+						type="text" id="contactAddr" name="contactAddr" placeholder=""
+						size="40" /> </span>
+				</div>
+				<div class="field-row">
+					<span class="th1" style="vertical-align: top">備註：</span> <span>
+						<textarea id="memo" name="memo" cols="30" rows="3">
+                            </textarea> </span>
+				</div> </span>
+		</fieldset>
+	</g:form>
+	<div>
+		<button id="modifyView" style="color: green">修改顯示狀態</button>
+		<span class="closeDate hide"><a id="add" href="#pdialog"
+			class="button">新增</a>
+			<button id="modify1">修改商品</button>
+			<button id="delete1">刪除</button>
+			<button id="closing">結帳</button> </span> <span class="download hide">
+			<g:if test="${1==session.empLevel}">
+			<button id="updateBeforeClosing">修改帳單為結帳前狀態</button>
+			</g:if>
+			<button id="downloadInternalBill">下載內帳單</button>
+			<button id="downloadBill">下載帳單</button> </span>
+		<button id="calendar" style="float: right;">專案行事曆</button>
+	</div>
+	<div style="padding-bottom: 10px" id="grid1"></div>
+	<!-- dialog -->
+	<div class="hide">
+		<div id="pdialog" class="dialog" style="display: block; width: 470px;">
+			<g:form name="addProductForm" id="addProductForm"
+				onsubmit="return false;" autocomplete="off" novalidate="novalidate">
+				<input type="text" class="hide" id="isupdate" name="isupdate"
+					value="N" />
+				<input type="text" class="hide" id="detailid" name="detailid" />
+				<div class="dialog-body">
+					<fieldset style="margin: 10 10px">
+						<legend> 新增使用商品 </legend>
+						<div class="field-row">
+							<span class="th2" style="color: black">商品類別：</span> <span><input
+								type="radio" id="type" name="type" value="1" checked="checked" />一般
+								<input type="radio" id="type" name="type" value="3" />場地 <!--
+                                    <input type="radio" id="type" name="type" value="3"/>
+                                    專案--> </span>
+						</div>
+						<div id="productArea" style="">
+							<!--
+                                <div class="field-row">
+                                <span class="th2">顯示於外帳單：</span>
+                                <span><input type="checkbox" id="showBill" name="showBill" class="" value="1" checked="checked" /></span>
+                                </div>-->
+							<div id="type1" class="productArea" style="">
+								<div class="field-row">
+									<span class="th2">一般產品類型：</span> 
+									<span> 
+										<select id="productType" name="productType" class="validate[required]">                                    
+		                                    <option value="0" >一般商品</option>
+		                                    <option value="1" >無庫存商品</option>
+		                                    <option value="2" selected=selected>代叫商品</option>
+                                		</select>
+                                	</span>
+								</div>
+								<div class="field-row">
+									<span class="th2">產品名稱：</span> <span> <select
+										id="product1" name="product1"
+										class="validate[required] product">
+											<option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+									</select> </span>
+								</div>								
+								<g:if test="${1==session.empLevel}">
+									<div class="field-row">
+										<span class="th2">調整後單價：</span> <span><input
+											type="text" id="modifiedPrice1" name="modifiedPrice1"
+											class="validate[custom[integer]]" /><span
+											style="color: #AB8915;">&nbsp;空白為原價</span> </span>
+									</div>
+								</g:if>
+								<div class="field-row">
+									<span class="th2">數量：</span> <span><input id="amount1"
+										name="amount1" class="validate[required,custom[integer]]" />
+									</span>
+								</div>
+								<div class="field-row" id="vendor1Div" style="display: none;">
+									<span class="th2">廠商名稱：</span> <span><input id="vendor1"
+										name="vendor1" class="validate[required]" /> </span>
+								</div>
+							</div>							
+							<div id="type3" class="productArea" style="display: none;">
+								<div class="field-row">
+									<span class="th2">產品名稱：</span> <span> <select
+										id="product3" name="product3"
+										class="validate[required] product">
+											<option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+									</select> </span>
+								</div>
+								<g:if test="${1==session.empLevel}">
+									<div class="field-row">
+										<span class="th2">調整後單價：</span> <span><input
+											type="text" id="modifiedPrice3" name="modifiedPrice3"
+											class="validate[custom[integer]]" /><span
+											style="color: #AB8915;">&nbsp;空白為原價</span> </span>
+									</div>
+								</g:if>
+								<div class="field-row">
+									<span class="th2">場地：</span> <span> <select id="place3"
+										name="place3" class="validate[required]">
+											<option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+									</select> </span>
+								</div>
+							</div>
+							<div class="field-row costUnit hide">
+								<span class="th2">時間類型：</span> <span> <select
+									id="costUnit" name="costUnit" disabled="disabled">
+										<option value="0">次</option>
+										<option value="1">次(時間)</option>
+										<option value="2">小時</option>
+										<option value="3">天</option>
+										<option value="4">月</option>
+								</select> </span> <span class="costRange" style="color: #AB8915;">&nbsp;&nbsp;單位：<input
+									type="text" size="4" readonly="readonly" id="costRange"
+									name="costRange"
+									style="border: 0px; background-color: #F1F1F1;" /> </span>
+							</div>
+							<div class="field-row startTime hide">
+								<span class="th2">開始/使用時間：</span> <span><input
+									type="text" class="validate[required] date" id="startDate"
+									name="startDate" size="12" /> </span><span><span
+									class="timeSelect"> <select id="startHour"
+										name="startHour" class="timeSelect">
+											<option value="00">00</option>
+											<option value="01">01</option>
+											<option value="02">02</option>
+											<option value="03">03</option>
+											<option value="04">04</option>
+											<option value="05">05</option>
+											<option value="06">06</option>
+											<option value="07">07</option>
+											<option value="08">08</option>
+											<option value="09">09</option>
+											<option value="10">10</option>
+											<option value="11">11</option>
+											<option value="12">12</option>
+											<option value="13">13</option>
+											<option value="14">14</option>
+											<option value="15">15</option>
+											<option value="16">16</option>
+											<option value="17">17</option>
+											<option value="18">18</option>
+											<option value="19">19</option>
+											<option value="20">20</option>
+											<option value="21">21</option>
+											<option value="22">22</option>
+											<option value="23">23</option>
+									</select> ： <select id="startMin" name="startMin" class="timeSelect">
+											<option value="00">00</option>
+											<option value="05">05</option>
+											<option value="10">10</option>
+											<option value="15">15</option>
+											<option value="20">20</option>
+											<option value="25">25</option>
+											<option value="30">30</option>
+											<option value="35">35</option>
+											<option value="40">40</option>
+											<option value="45">45</option>
+											<option value="50">50</option>
+											<option value="55">55</option>
+									</select> </span> </span>
+							</div>
+							<div class="field-row mouth hide">
+								<span class="th2">共</span> <span><input type="text"
+									class="validate[required,custom[integer]]" id="mouth"
+									name="mouth" size="3" /> </span><span style="color: #AB8915;">&nbsp;個月</span>
+							</div>
+							<div class="field-row endTime hide">
+								<span class="th2">結束時間：</span> <span><input type="text"
+									class="validate[required] date" id="endDate" name="endDate"
+									size="12" /> </span><span><span class="timeSelect"> <select
+										id="endHour" name="endHour">
+											<option value="00">00</option>
+											<option value="01">01</option>
+											<option value="02">02</option>
+											<option value="03">03</option>
+											<option value="04">04</option>
+											<option value="05">05</option>
+											<option value="06">06</option>
+											<option value="07">07</option>
+											<option value="08">08</option>
+											<option value="09">09</option>
+											<option value="10">10</option>
+											<option value="11">11</option>
+											<option value="12">12</option>
+											<option value="13">13</option>
+											<option value="14">14</option>
+											<option value="15">15</option>
+											<option value="16">16</option>
+											<option value="17">17</option>
+											<option value="18">18</option>
+											<option value="19">19</option>
+											<option value="20">20</option>
+											<option value="21">21</option>
+											<option value="22">22</option>
+											<option value="23">23</option>
+									</select> ： <select id="endMin" name="endMin" disabled="disable">
+											<option value="00">00</option>
+											<option value="05">05</option>
+											<option value="10">10</option>
+											<option value="15">15</option>
+											<option value="20">20</option>
+											<option value="25">25</option>
+											<option value="30">30</option>
+											<option value="35">35</option>
+											<option value="40">40</option>
+											<option value="45">45</option>
+											<option value="50">50</option>
+											<option value="55">55</option>
+									</select> </span> </span>
+							</div>
+						</div>
+					</fieldset>
+					<div style="text-align: center;">
+						<button id="padd" type="button">確定</button>
+						<button id="pclose" class="dialogClose" type="button">取消
+						</button>
+					</div>
+				</div>
+			</g:form>
+		</div>
+	</div>
+	<script>
+        
             $(document).ready(function(){
-                var hasPlace = $("#hasPlace"), placeId = $("#placeId"), productName = $('#productName'), productId = $('#productId'),costUnit = $("#costUnit"),isAgency = $("#isAgency");
-                var grid1 = $("#grid1").jqGrid({
-                    url: contextRoot + "/product/queryProduct",
-                    pager: true,
-                    sortname: 'productNo',
-                    caption: "商品清單",
-                    colModel: [{
-                        name: 'id',
-                        index: 'id',
-                        hidden: true,
-                        key: true
-                    }, {
-                        header: "商品代號",
-                        name: 'productNo',
-                        index: 'productNo',
-                        width: 20,
-                        align: 'center',
-                    }, {
-                        header: "產品名稱",
-                        name: 'productName',
-                        index: 'productName',
-                        align: 'center',
-                        width: 20
-                    }, {
-                        header: "類別",
-                        name: 'hasPlace',
-                        index: 'hasPlace',
-                        width: 15,
-                        formatter: function(el, cellval, opts){
-                            return el ? "場地" : "一般";
-                        },
-                        align: 'center'
-                    }, {
-                        header: "代叫品項",
-                        name: 'isAgency',
-                        index: 'isAgency',
-                        width: 17,
-                        align: 'center',
-                        formatter: function(el, cellval, opts){
-                            return el ? "是" : "否";
-                        }
-                    }, {
-                        header: "內帳單價",
-                        name: 'price',
-                        index: 'price',
-                        width: 20,
-                        align: 'right',
-                        formatter: "currency"
-                    }, {
-                        header: "銷售單價",
-                        name: 'sallingPrice',
-                        index: 'sallingPrice',
-                        width: 20,
-                        align: 'right',
-                        formatter: "currency"
-                    }, {
-                        header: "成本單價",
-                        name: 'costPrice',
-                        index: 'costPrice',
-                        width: 20,
-                        align: 'right',
-                        formatter: "currency"
-                    }, {
-                        header: "庫存數量",
-                        name: 'totalQuantity',
-                        index: 'totalQuantity',
-                        width: 20,
-                        align: 'right'
-                    }, {
-                        header: "顯示單位",
-                        name: 'unit',
-                        index: 'unit',
-                        width: 20,
-                        align: 'center'
-                    }, {
-                        header: "計價方式",
-                        name: 'costUnit_view',
-                        index: 'costUnit',
-                        width: 17,
-                        align: 'center',
-                        formatter: function(el, cellval, opts){
-                            return ["次","次(時間)","小時","天","月"][el];//el == 0 ? "次" : (el == 1 ? "時" : "天");
-                        }
-                    }, {
-                        header: "計價方式",
-                        name: 'costUnit',
-                        index: 'costUnit',
-                        width: 17,
-                        align: 'center',
-						hidden:true
-                    }, {
-                        header: "計價單位",
-                        name: 'costRange',
-                        index: 'costRange',
-                        width: 17,
-                        align: 'center'
-                    }, {
-                        header: "最後修改時間",
-                        name: 'lastUpdated',
-                        index: 'lastUpdated',
-                        width: 40,
-                        sorttype: "date",
-                        align: 'center'
-                    }, {
-                        header: "最後修改者",
-                        name: 'lastModifyBy.empName',
-                        index: 'lastModifyBy.empName',
-                        width: 25,
-                        align: 'center'
-                    }],
-                    onSelectRow: function(id){
-                        grid2.clearGridData();                        
-                        var product = grid1.getRowData(id);
-                        $("#placeMDiv")[product.hasPlace == '場地' ? 'show' : 'hide']();
-                        if (product.hasPlace == '場地') {
-                            grid2.jqGrid('setGridParam', {
-                                postData: {
-                                    'product.id': product.id
-                                },
-                                datatype: "json"
-                            }).trigger("reloadGrid");
-                        }
-                    }
-                });
-                
-                var grid2 = $("#grid2").jqGrid({
-                    url: contextRoot + "/product/queryPlaceProduct",
-                    datatype: "local",
-                    pager: true,
-                    //grouping: true,
-                    //groupingView: {
-                    //groupField: ['product.productName'],
-                    //    groupColumnShow: [false]
-                    //},
-                    sortname: 'place',
-                    caption: "場地清單",
-                    colModel: [{
-                        name: 'id',
-                        index: 'id',
-                        hidden: true,
-                        key: true
-                    }, {
-                        name: 'product.id',
-                        index: 'product.id',
-                        hidden: true
-                    }, {
-                        name: 'place.id',
-                        index: 'place.id',
-                        hidden: true
-                    }, {
-                        header: "產品名稱",
-                        name: 'product.productName',
-                        index: 'product.productName',
-                        width: 20,
-                        align: 'center'
-                    }, {
-                        header: "場地名稱",
-                        name: 'place.placeName',
-                        index: 'place.placeName',
-                        width: 20,
-                        align: 'center'
-                    }, {
-                        header: "內帳銷售單價",
-                        name: 'price',
-                        index: 'price',
-                        width: 20,
-                        align: 'right',
-                        formatter: "currency"
-                    }, {
-                        header: "銷售單價",
-                        name: 'sallingPrice',
-                        index: 'sallingPrice',
-                        width: 20,
-                        align: 'right',
-                        formatter: "currency"
-                    }, {
-                        header: "成本單價",
-                        name: 'costPrice',
-                        index: 'costPrice',
-                        width: 20,
-                        align: 'right',
-                        formatter: "currency"
-                    }, {
-                        header: "最後修改時間",
-                        name: 'lastUpdated',
-                        index: 'lastUpdated',
-                        width: 35,
-                        sorttype: "date",
-                        align: 'center'
-                    }, {
-                        header: "最後修改者",
-                        name: 'product.lastModifyBy.empName',
-                        index: 'product.lastModifyBy.empName',
-                        width: 30,
-                        align: 'center'
-                    }]
-                });
-                
-                
-                
-                $("#delete1,#delete2").click(function(){
-                    var action = $(this).prop("id");
-                    var grid = action.indexOf('2') > -1 ? grid2 : grid1
-                    var selrow = grid.jqGrid('getGridParam', 'selrow');
-                    if (!selrow) {
-                        alert("請先選擇刪除列");
-                        return false;
-                    }
-                    var isNomal = action.indexOf('1') > -1;
-                                        
-                    if (isNomal && grid2.getGridParam("reccount") > 0) {
-                        alert("請先刪除商品使用場地");
-                        return false;
-                    }
-                    if (!confirm("確定要刪除?")) {
-                        return;
-                    }
-                    var id = grid.getRowData(selrow);
-                    $.extend(id, {
-                        isNomal: isNomal
-                    });
-                    $.ajax({
-                        type: "POST",
-                        url: contextRoot + "/product/delete",
-                        data: id,
-                        success: function(msg){
-                            grid.trigger("reloadGrid");
-                            if (isNomal) {
-                                $.ajax({
-                                    type: "POST",
-                                    url: contextRoot + "/combobox/placeOfProduct",
-                                    success: function(map){
-                                        productId.setDropdown(map);
-                                    }
-                                });
-                                $("#placeMDiv").hide();
-                            }
-                            alert("刪除成功");
-                        }
-                    })
-                });
-                
-                var action = "";
-                $("#add1,#modify1,#add2,#modify2").each(function(){
-                
-                    $(this).fancybox({
-                        action: $(this).prop("id"),
-                        onStart: function(){
-                            var selrow;
-                            action = this.action;
-							//1:商品 2:商品使用場地
-                            var isNomal = action.indexOf('1') > -1;
-                            var grid = (isNomal ? grid1 : grid2);
-                            
-                            $("#placeDiv,#productId")[isNomal ? 'hide' : 'show']();
-                            $("#productName,#hasPlaceDiv,#unitDiv,#isAgencyDiv,#costUnitDiv,#costRangeDiv")[!isNomal ? 'hide' : 'show']();
-                            
-                            if (action.indexOf("modify") > -1) {
-                                selrow = grid.jqGrid('getGridParam', 'selrow');
-                                if (!selrow) {
-                                    alert("請先選擇修改列");
-                                    return false;
-                                }
-                                var id = grid.getRowData(selrow);
-                                var hasplace = id.hasPlace == '場地';
-                                $("#id").val(id.id);
-                                $("#productNo").val(isNomal ? id.productNo : '');
-                                $("#totalQuantity").val(isNomal ? id.totalQuantity : '');
-                                $("#price").val(id.price);
-                                $("#sallingPrice").val(id.sallingPrice);
-                                $("#costPrice").val(id.costPrice);                                
-                                $("#unit").val(isNomal ? id.unit : id['product.unit']);
-                                if (isNomal) {
-                                	isAgency.val("是"==id.isAgency?"T" : "F");
-                                    hasPlace.val(hasplace ? "T" : "F");
-                                    productName.val(id.productName);                                    
-									costUnit.val(id.costUnit);
-                                    $("#costRange").val(id.costRange);
-                                }
-                                else {
-                                    placeId.val(id['place.id']);
-                                    productId.val(id['product.id']);
-                                }
-                                
-                            }
-                            else {
-                            	if (isNomal) {
-                            		costUnit.trigger("change");
-                            	}
-                            }
-                            var product = grid1.getRowData(grid1.jqGrid('getGridParam', 'selrow'));
-                            productId.val(product.id);
-                            if (isNomal) {
-                                hasPlace.trigger("change");                                
-                            }
-                        },
-                        'titlePosition': 'inside',
-                        'transitionIn': 'elastic',
-                        'transitionOut': 'elastic',
-                        onClosed: function(){
-                            addForm.reset();
-                            hasPlace.val("F").trigger("change");
-                        }
-                    });
-                });
-                $("#padd1").click(function(){
-                    if ($('#addForm').validationEngine('validate')) {
-                        var isNomal = action.indexOf('1') > -1;
-                        var grid = isNomal ? grid1 : grid2;
+            
+                var productArea = $("#productArea");
+                var startTime = $(".startTime"), endTime = $(".endTime"), costUnit = $(".costUnit"), costRange = $(".costRange"), timeSelect = $(".timeSelect");
+                var endMin = $("#endMin"), mouth = $(".mouth"), productType=$("#productType");
+                //禮儀師
+                $('#funeralCompany').change(function(event, value){
+                    if ($(this).val()) {
                         $.ajax({
-                            url: contextRoot + "/product/" + (action == "add1" || action == "add2" ? "insert" : "modify"),
+                            type: "POST",
+                            url: contextRoot + "/combobox/funeraler",
                             data: {
-                                //columnParam: JSON.stringify(grid.jqGrid('getGridParam', 'colModel')),
-                                data: JSON.stringify($.extend($("#addForm").serializeData(), {
-                                    productId: productId.val()
-                                })),
-                                isNomal: isNomal
+                                id: $(this).val()
                             },
-                            success: function(msg){
-                                $.fancybox.close();
-                                grid.trigger("reloadGrid");
-                                if (isNomal) {
-                                    $.ajax({
-                                        type: "POST",
-                                        url: contextRoot + "/combobox/placeOfProduct",
-                                        success: function(map){
-                                            productId.setDropdown(map);
-                                        }
-                                    });
-                                    $.ajax({
-                                        type: "POST",
-                                        url: contextRoot + "/combobox/normalProduct",
-                                        success: function(map){
-                                            $('#normalProduct').setDropdown(map);
-                                        }
-                                    });
-                                }
-								refreshProduct();
-                                alert("產品/場地" + (action == "add1" || action == "add2" ? "新增" : "修改") + "成功");
+                            success: function(map){
+                                $('#funeraler').setDropdown(map).val(value);
                             }
                         })
                     }
+                    else {
+                        $('#funeraler').html('')
+                    }
                 });
-                $("#pclose2,#pclose1").click(function(){
-                    $.fancybox.close();
-                });
-                $("#purchaseBtn").fancybox({
+                var addrMap = {};
+                
+                $("#add").fancybox({
                     'titlePosition': 'inside',
                     'transitionIn': 'elastic',
                     'transitionOut': 'elastic',
                     onClosed: function(){
-                        addForm2.reset();
+                        $("#pdialog").find("form").each(function(){
+                            this.reset();
+                        }).end().find("#type[value=1]").trigger("click");
+                        productArea.find(".productArea").hide().end().find("#type1").show().end().find(".startTime,.endTime,.mouth,.costUnit").hide();
                     }
                 });
-                $("#padd2").click(function(){
-                    if ($('#addForm2').validationEngine('validate')) {
+                
+                //cityArea
+                $('#contactAddrCity').change(function(event, value){
+                    if ($(this).val()) {
+                        var val = $(this).val();
+                        var areaMap = {};
+                        $.each(addrMap[val], function(index, value){
+                            areaMap[value] = value;
+                        });
+                        $('#contactAddrArea').setDropdown(areaMap).val(value);
+                    }
+                    else {
+                        $('#contactAddrArea').html('')
+                    }
+                });
+                //禮儀公司,承辦業務,city,queryData
+                $.when($.post(contextRoot + "/combobox/funeralCompany"), $.post(contextRoot + "/combobox/employee"), $.post(contextRoot + "/combobox/city"), $.post(contextRoot + "/project/queryid", {
+                    id: responseJSON.id
+                })).then(function(map, map2, map3, json){
+                    map = map[0];
+                    map2 = map2[0];
+                    map3 = map3[0];
+                    json = json[0];
+                    
+                    addrMap = map3;
+                    var cityMap = {};
+                    $.each(addrMap, function(value, text){
+                        cityMap[value] = value;
+                    });
+                    $('#contactAddrCity').setDropdown(cityMap);
+                    $('#funeralCompany').setDropdown(map);
+                    $('#employee').setDropdown(map2);
+                    $("#id").val(json.id);
+                    $("#projectNo").html(json.projectNo);
+                    $("#projectName").val(json.projectName);
+                    $("#inDate").val(json.inDate);
+                    $("#inHour").val(json.inHour);
+                    $("#inMin").val(json.inMin);
+                    $("#employee").val(json.employee);
+                    $("#funeralCompany").val(json.funeralCompany).trigger("change", [json.funeraler]);
+                    $("#contact").val(json.contact);
+                    $("#contactPhone").val(json.contactPhone);
+                    $("#contactAddrCity").val(json.contactAddrCity).trigger("change", [json.contactAddrArea]);
+                    $("#contactAddr").val(json.contactAddr);
+                    $("#memo").val(json.memo);
+                    if (json.closingDate) {
+                        $(".download").show();
+                        $(".closeDate").hide();
+                        $("#addForm").find(":input,select").attr("readonly", true).filter("select").prop("disabled", true).end().filter(".date").datepicker('destroy');
+                    }
+                    else {
+                        $(".download").hide();
+                        $(".closeDate").show();
+                    }
+                    
+                    document.title = json.projectName + " - 專案";
+                });
+                var grid1 = $("#grid1").jqGrid({
+                    url: contextRoot + "/project/queryDetail",
+                    height: 200,
+                    postData: {
+                        id: responseJSON.id
+                    },
+                    caption: "商品使用清單",
+                    //multiboxonly:true,
+                    autowidth: true,
+                    pager: true,
+                    grouping: true,
+                    groupingView: {
+                        groupField: ['productName'],
+                        groupColumnShow: [false],
+                        groupText: ['<b style="color:#009">{0}</b>'],
+                        groupCollapse: false,
+                        // groupOrder: ['asc'],
+                        groupSummary: [true],
+                        showSummaryOnHide: true//,
+                        //  groupDataSorted: true
+                    },
+                    pgbuttons: false,
+                    pginput: false,
+                    forceFit: false,
+                    footerrow: true,
+                    userDataOnFooter: true,
+                    colModel: [{
+                        name: 'id',
+                        index: 'id',
+                        key: true,
+                        hidden: true
+                    }, {
+                        header: "顯示",
+                        name: 'showBill',
+                        index: 'showBill',
+                        width: 60,
+                        align: 'center',
+                        formatter: 'checkbox',
+                        editoptions: {
+                            value: '1:0'
+                        },
+                        formatoptions: {
+                            disabled: false
+                        }
+                    
+                    }, {
+                        header: "品名",
+                        name: 'productName',
+                        index: 'product.productName',
+                        width: 60,
+                        align: 'center',
+                        hidden: true
+                    }, {
+                        header: "單價",
+                        name: 'price',
+                        index: 'price',
+                        width: 80,
+                        align: "right",
+                        formatter: "currency",
+                        summaryType: 'count',
+                        summaryTpl: '筆數：{0}'
+                    
+                    }, {
+                        header: "調整後單價",
+                        name: 'modifiedPrice',
+                        index: 'modifiedPrice',
+                        width: 80,
+                        align: "right",
+                        formatter: "currency"
+                    
+                    }, {
+                        header: "數量",
+                        name: 'quantityView',
+                        index: 'quantityView',
+                        width: 100,
+                        align: "right",
+                        //formatter: "currency",
+                        summaryType: 'sum'
+                    }, {
+                        header: "數量",
+                        name: 'quantity',
+                        index: 'quantity',
+                        width: 100,
+                        align: "right",
+						hidden:true
+                    }/*, {
+                        header: "單位",
+                        name: 'unit',
+                        index: 'product.unit',
+                        width: 30,
+                        align: 'center'
+                    }*/, {
+                        header: "小計",
+                        name: 'amount',
+                        index: 'amount',
+                        width: 80,
+                        align: "right",
+                        formatter: "currency",
+                        summaryType: 'sum'
+                    
+                    }, {
+                        header: "使用場地",
+                        name: 'placeName‧',
+                        index: 'place.placeName',
+                        width: 80,
+                        align: "center"
+                    }, {
+                        header: "使用時間",
+                        name: 'useTime',
+                        index: 'useTime',
+                        width: 300,
+                        align: "center"
+                    }, {
+                        name: 'productType',
+                        index: 'productType',
+                        align: "center",
+                        hidden: true
+                    }, {
+                        name: 'type',
+                        index: 'type',
+                        align: "center",
+                        hidden: true
+                    
+                    }, {
+                        name: 'startTime',
+                        index: 'startTime',
+                        align: "center",
+                        hidden: true
+                    
+                    }, {
+                        name: 'endTime',
+                        index: 'endTime',
+                        align: "center",
+                        hidden: true
+                    
+                    }, {
+                        name: 'productId',
+                        index: 'product.id',
+                        align: "center",
+                        hidden: true
+                    
+                    }, {
+                        name: 'vendor',
+                        index: 'vendor',
+                        align: "center",
+                        hidden: true
+                    
+                    }, {
+                        name: 'placeId',
+                        index: 'place.id',
+                        width: 80,
+                        align: "center",
+                        hidden: true
+                    
+                    }, {
+                        name: 'modifiedPrice',
+                        index: 'modifiedPrice',
+                        width: 80,
+                        align: "center",
+                        hidden: true
+                    
+                    }, {
+                        header: "建立人",
+                        name: 'lastModifyBy.empName',
+                        index: 'lastModifyBy.empName',
+                        width: 100,
+                        align: "center"
+                    
+                    }, {
+                        header: "建立日期",
+                        name: 'lastUpdated',
+                        index: 'lastUpdated',
+                        width: 150,
+                        align: "center"
+                    }]
+                    /*,
+                     ondblClickRow: function(id) {
+                     var data = grid1.getRowData(id);
+                     API.openCalendar({
+                     type: "project",
+                     id: data.id,
+                     data: $.extend(data, {})
+                     });
+                     }*/
+                });
+                
+                $("#delete1").click(function(){
+                    var selrow = grid1.jqGrid('getGridParam', 'selrow');
+                    if (!selrow) {
+                        alert("請先選擇刪除列");
+                        return;
+                    }
+                    if (!confirm("確定要刪除?")) {
+                        return;
+                    }
+                    var id = grid1.getRowData(selrow);
+                    $.ajax({
+                        url: contextRoot + "/project/delete",
+                        data: id,
+                        success: function(msg){
+                            grid1.trigger("reloadGrid");
+                            alert("刪除成功");
+                        }
+                    })
+                });
+                $("#modify1").click(function(){
+                    var selrow = grid1.jqGrid('getGridParam', 'selrow');
+                    if (!selrow) {
+                        alert("請先選擇修改列");
+                        return;
+                    }
+                    var data = grid1.getRowData(selrow);
+                    $("#add").click();
+                    var form = $("#addProductForm");
+                    form.find(":radio[value=" + data.type + "]").click();
+                    var product = form.find("#product" + data.type);
+                    setTimeout(function(){
+                        window.inputModify = function(){
+                            $('#place3').val(data.placeId);
+                        }
+                        productType.val(data.productType).change();
+                        product.val(data.productId).change();                        
+                        form.find("#amount" + data.type).val(data.quantity);
+                        form.find("#vendor" + data.type).val(data.vendor);
+                        form.find("#modifiedPrice" + data.type).val(data.modifiedPrice);
+                        var sd = data.startTime.split(" "), ed = data.endTime.split(" ");
+                        var st = sd[1].split(":"), et = ed[1].split(":");
+                        form.find("#startDate").val(sd[0]);
+                        form.find("#endDate").val(ed[0]);
+                        form.find("#startHour").val(st[0]);
+                        form.find("#startMin").val(st[1]);
+                        form.find("#endHour").val(et[0]);
+                        form.find("#endMin").val(et[1]);
+                        form.find("#isupdate").val("Y");
+                        form.find("#detailid").val(data.id);
+                    }, 500);
+                    
+                });
+                $("#calendar").click(function(){
+                    API.openCalendar({
+                        id: responseJSON.id,
+                        type: "p",
+                        data: {
+                            calendarName: $("#projectName").val(),
+							inDate:$("#inDate").val()
+                        }
+                    })
+                });
+                $("#update").click(function(){
+                    if ($("#addForm").validationEngine('validate')) {
                         $.ajax({
-                            url: contextRoot + "/product/purchase",
-                            data: $.extend($("#addForm2").serializeData(), {
-                                id: $('#normalProduct').val()
-                            }),
-                            success: function(msg){
-                                $.fancybox.close();
-                                grid1.trigger("reloadGrid");
-                                alert("進貨成功");
-                            }
-                        })
+                            url: contextRoot + "/project/updateAction",
+                            data: $("#addForm").serializeData()
+                        }).done(function(){
+                            opener.$("#projectGrid").trigger("reloadGrid");
+                            alert("修改完成!")
+                        });
                     }
                 });
-                hasPlace.change(function(){
-                    var v = $(this).val();
-                    $("#priceDiv,#sallingPriceDiv,#totalDiv,#costPriceDiv,#isAgencyDiv")[v == "F" ? 'show' : 'hide']();
-                   
-                    isAgency.val(v == "T"?"F":isAgency.val());
+                $(":input[name=type]").click(function(){
+                    var val = $(this).val();
+                    productArea.find(".productArea:visible").hide('slide', 200, function(){
+                        productArea.find("#type" + val).show("slide", 200).end().find(".startTime,.endTime,.mouth").hide().end().find(".product").val("").trigger("change");
+                        costUnit.hide();
+                    });
                 });
-                costUnit.change(function(){
-                	var v = $(this).val();
-                	$("#costRangeDiv")[v.match(/[0-1]/)?'hide':'show']();
-                	$("#costRange").val(v.match(/[0-1]/)?1:'');
+                
+                function productChange(){
+                    var $this = $(this), opt = $this.find("option[value=" + $this.val() + "]"), unit = opt.attr("unit"), range = opt.attr("range");
+                    switch (unit) {
+                        case "0":
+                            startTime.show();
+                            endTime.hide();
+                            costRange.hide();
+                            timeSelect.show();
+                            mouth.hide();
+                            break;
+                        case "1":
+                            startTime.show();
+                            endTime.show();
+                            costRange.hide();
+                            timeSelect.show();
+                            mouth.hide();
+                            break;
+                        case "2":
+                            startTime.show();
+							endTime.hide();
+                           // endTime.show();
+                            costRange.show();
+                            timeSelect.show();
+                            mouth.hide();
+                            break;
+                        case "3":
+                            startTime.show();
+							endTime.hide();
+                            //endTime.show();
+                            timeSelect.hide();
+                            mouth.hide();
+                            break;
+                        case "4":
+                            startTime.show();
+                            endTime.hide();
+                            timeSelect.hide();
+                            //mouth.show();
+                            break;
+                    }
+                    costUnit.show().find("#costUnit").val(unit).end().find("#costRange").val(range);
+                }
+                
+                //init project
+                var productMap = [];
+
+                $.post(contextRoot + "/combobox/normalProduct", function(map){
+                    productMap[0] = map;
+                    $("#product").setDropdown(map).change(productChange);
                 });
-                //下拉選單
-                //場地
-                $.ajax({
-                    type: "POST",
-                    url: contextRoot + "/combobox/place",
-                    success: function(map){
-                        placeId.setDropdown(map);
+                $.post(contextRoot + "/combobox/normalProduct1", function(map){
+                    productMap[1] = map;
+                });
+                $.post(contextRoot + "/combobox/normalProduct2", function(map){
+                    productMap[2] = map;
+                });
+                productType.change(function(){
+                	var val = $(this).val();
+                	$("#product").setDropdown(productMap[val]).change(productChange);  
+                	$("#vendor1Div")[val==2?'show':'hide']();              	
+                });
+                $.post(contextRoot + "/combobox/placeOfProduct", function(map){
+                    $('#product3').setDropdown(map).change(productChange);
+                });
+                $('#product3').change(function(){
+                    $.post(contextRoot + "/combobox/placeByProduct", {
+                        id: $(this).val()
+                    }, function(map){
+                        $('#place3').setDropdown(map);
+                    }).done(function(json){
+                        window.inputModify && inputModify(json);
+                        window.inputModify = null;
+                    });
+                });
+                
+                $("#padd").click(function(){
+                    var form = $("#addProductForm");
+                    if (form.validationEngine('validate')) {
+                        $.ajax({
+                            url: contextRoot + (form.find("#isupdate").val() == "Y" ? "/project/updateProduct" : "/project/addProduct"),
+                            data: $.extend(responseJSON, form.serializeData())
+                        }).done(function(json){
+                            $.fancybox.close();
+                            grid1.trigger("reloadGrid");
+                        });
                     }
                 });
-                //場地型商品
-                $.ajax({
-                    type: "POST",
-                    url: contextRoot + "/combobox/placeOfProduct",
-                    success: function(map){
-                        productId.setDropdown(map);
+                $("#pclose").click(function(){
+                    $.fancybox.close();
+                });
+                
+                $("#downloadBill").click(function(){
+                    API.formSubmit({
+                        url: contextRoot + "/excel/bill",
+                        target: "_self",
+                        data: {
+                            projectId: responseJSON.id
+                        }
+                    });
+                });
+                $("#downloadInternalBill").click(function(){
+                    API.formSubmit({
+                        url: contextRoot + "/excel/internalBill",
+                        target: "_self",
+                        data: {
+                            projectId: responseJSON.id
+                        }
+                    });
+                });
+                                
+                $("#startMin").change(function(){
+                    endMin.val($(this).val());
+                });
+                
+                $("#modifyView").click(function(){
+                    var datas = grid1.getRowData();
+                    $.ajax({
+                        url: contextRoot + "/project/updateViewBill",
+                        data: {
+                            data: JSON.stringify(datas)
+                        },
+                        success: function(){
+                            alert("更新完成");
+                        }
+                    })
+                    for (var data in datas) {
+                        console.debug(datas[data])
                     }
                 });
-                //一般商品
-                $.ajax({
-                    type: "POST",
-                    url: contextRoot + "/combobox/normalProduct",
-                    success: function(map){
-                        $('#normalProduct').setDropdown(map);
-                    }
+                $("#closing").click(function(){
+                    $.ajax({
+                        url: contextRoot + "/project/updateClosing",
+                        data: {
+                            id: responseJSON.id
+                        },
+                        success: function(){
+                            $(".download").show();
+                            $(".closeDate").hide();
+							$("#addForm").find(":input,select").attr("readonly", true).filter("select").prop("disabled", true).end().filter(".date").datepicker('destroy');
+                            alert("結帳完成");
+                        }
+                        
+                    })
                 });
-                $.ajax({
-                    type: "POST",
-                    url: contextRoot + "/combobox/nonCloseProject",
-                    success: function(map){
-                        $('#project').setDropdown(map);
-                    }
+                //修改帳單為結帳前狀態
+                $("#updateBeforeClosing").click(function(){
+                var datas = grid1.getRowData();
+                    $.ajax({
+                        url: contextRoot + "/project/updateBeforeClosing",
+                        data: {
+                            id: responseJSON.id
+                        },
+                        success: function(){
+                        	$(".download").hide();
+                            $(".closeDate").show();
+							$("#addForm").find(":input,select").attr("readonly", false).filter("select").prop("disabled", false).end().filter(".date").datepicker();                            
+                        	alert("修改帳單為結帳前狀態成功");                                                        
+                        }
+                    })
                 });
+                
             });
         </script>
-        <fieldset>
-            <legend>
-                商品 
-            </legend>
-            <div>
-                <a id="add1" href="#pdialog" class="button">新增商品</a>
-                <a id="modify1" href="#pdialog" class="button">修改商品</a>
-                <button id="delete1">
-                    刪除商品
-                </button>
-                <a id="purchaseBtn" href="#pdialog2" class="button">進貨</a>
-            </div>
-            <div id="grid1" />
-        </fieldset>
-        <fieldset>
-            <legend>
-                商品使用場地 
-            </legend>
-            <div id='placeMDiv' class="hide">
-                <a id="add2" href="#pdialog" class="button">新增場地</a>
-                <a id="modify2" href="#pdialog" class="button">修改場地</a>
-                <button id="delete2">
-                    刪除場地
-                </button>
-            </div>
-            <div id="grid2" />
-        </fieldset>
-        <div class="hide">
-            <div id="pdialog" class="dialog" style="display:block;width:400px;">
-                <g:form name="addForm" id="addForm" onsubmit="return false;" autocomplete="off" novalidate="novalidate">
-                    <div class="dialog-body">
-                        <!-- <div class="field-row" id='productNoDiv'>
-                        <span class="th1">商品代號：</span>
-                        <span><input type="text" id="productNo" name="productNo" readonly='readonly' /></span>
-                        </div> -->
-                        <div class="field-row" id='productNameDiv'>
-                            <span class="th1">產品名稱：</span>
-                            <span><input type="text" id="productName" name="productName" placeholder="產品名稱" class="validate[required]"/>
-                                <select id="productId" name="productId" class="validate[required]" disabled>
-                                    <option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
-                                </select>
-                            </span>
-                        </div>
-                        <div class="field-row" id='hasPlaceDiv'>
-                            <span class="th1">場地類：</span>
-                            <span>
-                                <select id="hasPlace" name="hasPlace">
-                                    <option value="T">是</option>
-                                    <option value="F" selected='selected'>否</option>
-                                </select>
-                            </span>
-                        </div>
-                        <div class="field-row" id="placeDiv">
-                            <span class="th1">使用場地：</span>
-                            <span>
-                                <select id="placeId" name="placeId" class="validate[required]">
-                                    <option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
-                                </select>
-                            </span>
-                        </div>
-                        <div class="field-row" id='isAgencyDiv'>
-                            <span class="th1">代叫品項：</span>
-                            <span>
-                                <select id="isAgency" name="isAgency">
-                                    <option value="T">是</option>
-                                    <option value="F" selected=selected>否</option>
-                                </select>
-                            </span>
-                        </div>
-                        <div class="field-row" id="priceDiv">
-                            <span class="th1">內帳單價：</span>
-                            <span><input type="text" id="price" name="price" placeholder="內帳單價" class="validate[required]"/></span>
-                        </div>
-                        <div class="field-row" id="sallingPriceDiv">
-                            <span class="th1">銷售單價：</span>
-                            <span><input type="text" id="sallingPrice" name="sallingPrice" placeholder="銷售單價" class="validate[required]"/></span>
-                        </div>
-                        <div class="field-row" id="costPriceDiv">
-                        <span class="th1">成本單價：</span>
-                        <span><input type="text" id="costPrice" name="costPrice" placeholder="成本單價" class="validate[required]"/></span>
-                        </div>
-                        <!-- 
-                        <div class="field-row" id='totalDiv'>
-                        <span class="th1">庫存數量：</span>
-                        <span><input type="text" id="totalQuantity" name="totalQuantity" placeholder="庫存數量" class="validate[required]"/></span>
-                        </div>-->
-                        <div class="field-row" id="unitDiv">
-                            <span class="th1">顯示單位：</span>
-                            <span><input type="text" id="unit" name="unit" placeholder="顯示單位" class="validate[required]"/></span>
-                        </div>
-                        <div class="field-row" id="costUnitDiv">
-                            <span class="th1">計價方式：</span>
-                            <span>
-                                <select id="costUnit" name="costUnit">
-                                    <option value="0" selected="selected">次</option>
-                                    <option value="1">次(時間)</option>
-                                    <option value="2">小時</option>
-                                    <option value="3">天</option>
-                                    <option value="4">月</option>
-                                </select>
-                            </span>
-                        </div>
-                        <div class="field-row"  id="costRangeDiv">
-                            <span class="th1">計價單位：</span>
-                            <span><input type="text" value='1' id="costRange" name="costRange" placeholder="計價單位" class="validate[required,custom[number]] text-input"/>                                
-                            </span>
-                        </div>
-                        <div class="field-row">                        	
-                                <span style="padding-left:25px;disply:block;color:#900;font-weight:bold;font-size:11px;">註：
-                                    <br/>
-                                    <ul>
-                                        <li>
-                                            次&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-以次為單位
-                                        </li>
-                                        <li>
-                                            次(時間)&nbsp;-以次為單位(可設定使用時間)
-                                        </li>
-                                        <li>
-                                            時&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-每次幾小時(新增時可連續)
-                                        </li>
-                                        <li>
-                                            天&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-每次幾天(新增時可連續多天)
-                                        </li>
-                                        <li>
-                                            月&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-每次幾個月(新增時可連續多月)
-                                        </li>
-                                    </ul>
-                                </span>
-                        </div>
-                        <input type="hidden" id="id" name="id" />
-                        <div style="text-align:center;">
-                            <button id="padd1" type="button">
-                                確定
-                            </button>
-                            <button id="pclose1" type="button">
-                                取消
-                            </button>
-                        </div>
-                    </div>
-                </g:form>
-            </div>
-        </div>
-        <div class="hide">
-            <div id="pdialog2" class="dialog2" style="display:block;width:400px;">
-                <g:form name="addForm2" id="addForm2" onsubmit="return false;" autocomplete="off" novalidate="novalidate">
-                    <div class="dialog-body">
-                        <div class="field-row" id='productDiv'>
-                            <span class="th1">進貨產品：</span>
-                            <span>
-                                <select id="normalProduct" name="normalProduct" class="validate[required]">
-                                    <option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
-                                </select>
-                            </span>
-                        </div>
-                        <div class="field-row">
-                            <span class="th1">進貨專案：</span>
-                            <span>
-                                <select id="project" name="project">
-                                    <option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
-                                </select>
-                            </span>
-                        </div>
-                        <div class="field-row" id="priceDiv">
-                            <span class="th1">進貨廠商：</span>
-                            <span><input type="text" id="vendor" name="vendor" placeholder="進貨廠商" class="validate[required]"/></span>
-                        </div>
-                        <div class="field-row" id="priceDiv">
-                            <span class="th1">進貨日期：</span>
-                            <span><input type="text" id="date" name="date" placeholder="進貨日期" class="validate[required] date"/></span>
-                        </div>
-                        <div class="field-row" id="priceDiv">
-                            <span class="th1">進貨單價：</span>
-                            <span><input type="text" id="purchasePrice" name="purchasePrice" placeholder="進貨單價" class="validate[required]"/></span>
-                        </div>
-                        <div class="field-row" id='totalDiv'>
-                            <span class="th1">進貨數量：</span>
-                            <span><input type="text" id="purchaseQuantity" name="purchaseQuantity" placeholder="進貨數量" class="validate[required]"/></span>
-                        </div>
-                        <div class="field-row" id='memoDiv'>
-                            <span class="th1">備註：</span>
-                            <span><input type="text" id="memo" name="memo" placeholder="memo" /></span>
-                        </div><input type="hidden" id="id" name="id" />
-                        <div style="text-align:center;">
-                            <button id="padd2" type="button">
-                                確定
-                            </button>
-                            <button id="pclose2" type="button">
-                                取消
-                            </button>
-                        </div>
-                    </div>
-                </g:form>
-            </div>
-        </div>
     </body>
 </html>

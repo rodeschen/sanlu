@@ -28,9 +28,8 @@ class ExcelController extends BaseController {
 			cal.set params.int("exportYear"), params.int("exportMonth")-1, 00
 			def cal2 = Calendar.instance
 			cal2.set params.int("exportYear"), params.int("exportMonth"), 00
-			//cal2.add Calendar.MONTH, 1
-			//def productHistorys =ProductHistory.findAllByProduct(Product.findAllByIsAgency(true))
-			def products = Product.findAllByIsAgency(true)
+
+			def products = Product.findAllByProductType(2)
 			def criteria = ProductHistory.createCriteria()
 			def productHistorys = criteria {
 				and {
@@ -93,9 +92,8 @@ class ExcelController extends BaseController {
 			cal.set params.int("exportYear"), params.int("exportMonth")-1, 00
 			def cal2 = Calendar.instance
 			cal2.set params.int("exportYear"), params.int("exportMonth"), 00
-			//cal2.add Calendar.MONTH, 1
-			//def productHistorys =ProductHistory.findAllByProduct(Product.findAllByIsAgency(true))
-			def products = Product.findAllByIsAgency(false)
+			
+			def products = Product.findAllByProductType(0)
 			def criteria = ProductHistory.createCriteria()
 			def productHistorys = criteria {
 				and {
@@ -275,7 +273,7 @@ class ExcelController extends BaseController {
 						sheet.addCell(new Label(0, row,count.toString(),count%2!=0?oddFormat:evenFormat))
 						//項目
 						sheet.addCell(new Label(1, row,it.productName,count%2!=0?oddFormat:evenFormat))
-						if(it.isAgency){
+						if(it.productType == 2){
 							//代叫供品明細：
 							isAgencyTmp+=it.productName + "，"
 						}else if(!it.hasPlace){
