@@ -240,6 +240,14 @@ nav a {
     display: none;
 }
 
+.r-grid .ui-jqgrid .ui-pg-table {
+    font-size: 12px;
+}
+
+.r-grid .ui-jqgrid .ui-pg-table input {
+    height: 16px;
+}
+
 /** button **/
 button {
     margin: 5px 0px
@@ -250,45 +258,46 @@ button {
     line-height: 11px;
 }
 
-.field-row span.th1{
-	color:#AB8915 ;
-	font-weight:bold;
-	width:100px;
-	display:inline-block;
-	padding:5px;
-	text-align:right;
+.field-row span.th1 {
+    color: #AB8915;
+    font-weight: bold;
+    width: 100px;
+    display: inline-block;
+    padding: 5px;
+    text-align: right;
 }
 
-.field-row span.th2{
-	color:#AB8915 ;
-	font-weight:bold;
-	width:130px;
-	display:inline-block;
-	padding:5px;
-	text-align:right;
+.field-row span.th2 {
+    color: #AB8915;
+    font-weight: bold;
+    width: 130px;
+    display: inline-block;
+    padding: 5px;
+    text-align: right;
 }
 
-.field-row span.td1{
+.field-row span.td1 {
 }
 
-
-.hide{ display:none;}
-
-.dialog .dialog-body{
-	background:#F1F1F1;
-	padding:10px 0 10px 0;
+.hide {
+    display: none;
 }
 
-#fancybox-outer,#fancybox-content,.dialog-body{
-	-webkit-border-radius: 15px;
+.dialog .dialog-body {
+    background: #F1F1F1;
+    padding: 10px 0 10px 0;
+}
+
+#fancybox-outer, #fancybox-content, .dialog-body {
+    -webkit-border-radius: 15px;
     -moz-border-radius: 15px;
     border-radius: 15px;
 }
 
-.fancybox-bg{
-	display:none;
+.fancybox-bg {
+    display: none;
 }
 
-#ui-datepicker-div{
-	font-size:11px;
+#ui-datepicker-div {
+    font-size: 11px;
 }
