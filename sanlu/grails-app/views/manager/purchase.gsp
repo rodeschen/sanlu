@@ -36,14 +36,20 @@
                             return el ? "是" : "否";
                         }
                     }, {
-                        header: "代叫品項",
-                        name: 'isAgency',
-                        index: 'isAgency',
-                        align: 'center',
+                        header: "商品類型",
+                        name: 'productType_view',
+                        index: 'productType',
                         width: 20,
+                        align: 'center',
                         formatter: function(el, cellval, opts){
-                            return el ? "是" : "否";
+                        //0:一般商品 1:無庫存商品 2:代叫商品
+                            return el==1 ? "無庫存商品" : el==2 ? "代叫商品":"一般商品";
                         }
+                     }, {
+                        name: 'productType',
+                        index: 'productType',
+                        align: "center",
+                        hidden: true
                     }, {
                         header: "銷售單價",
                         name: 'sallingPrice',

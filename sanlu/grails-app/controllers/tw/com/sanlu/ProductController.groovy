@@ -152,6 +152,7 @@ class ProductController extends GridController{
 					case 'costRange':
 					case 'costUnit':
 					case 'costPrice':
+					case 'productType':
 						productLinkPlace.putAt keyName,new BigDecimal(it.value)
 						break
 					case 'hasPlace':					
