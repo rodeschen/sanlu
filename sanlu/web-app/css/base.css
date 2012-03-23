@@ -246,6 +246,7 @@ nav a {
 
 .r-grid .ui-jqgrid .ui-pg-table input {
     height: 16px;
+	text-align:center;
 }
 
 /** button **/
