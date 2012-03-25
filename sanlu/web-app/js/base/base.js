@@ -17,7 +17,7 @@ function checkError(xhr){
 (function($){
     $.extend($.jgrid.defaults, {
         rowNum: 10,
-        // scroll: 1,
+        scroll: 1,
         hidegrid: false,
         datatype: "json",
         height: 100,
