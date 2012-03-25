@@ -505,7 +505,11 @@
 				gridcontainer.find("td[abbr]").each(function(){
 					$(this).find(".monthdayshow").removeClass("good normal bad").addClass(json[$(this).attr("abbr")] || "normal");
 				}).click(function(){
-					gridcontainer.gotoDate(parseDate($(this).attr("abbr"))).swtichView("week");
+					option.isloading = true;
+					gridcontainer.swtichView("week");
+					gridcontainer.gotoDate(parseDate($(this).attr("abbr")));
+					option.isloading = false;
+					gridcontainer.reload();
 					$("#caltoolbar").find("#showweekbtn").addClass("fcurrent")
 					.end().find("#showmonthbtn").removeClass("fcurrent");
 				});
@@ -821,7 +825,7 @@
             var startformat = getymformat(event[2], null, showtime, true);
             var endformat = getymformat(event[3], event[2], showtime, true);
             timeshow = dateFormat.call(event[2], endformat) + " - " + dateFormat.call(event[3], endformat);
-            locationshow = (event[9] != undefined && event[9] != "") ? event[9] : i18n.xgcalendar.i_undefined;
+            locationshow = (event[9] != undefined && event[9] != "") ? event[9] : "";//i18n.xgcalendar.i_undefined; change by rodes
             attendsshow = (event[10] != undefined && event[10] != "") ? event[10] : "";
             var ret = [];
 			//Rodes modify
@@ -836,7 +840,7 @@
                     ret.push("[" + i18n.xgcalendar.repeat_event + "]",$.browser.mozilla?"":"");
                 }
             }
-            ret.push(i18n.xgcalendar.time + ":" + timeshow, i18n.xgcalendar.event + ":" +  eventshow, i18n.xgcalendar.location + ":" + locationshow);
+            ret.push(i18n.xgcalendar.time + ":" + timeshow, i18n.xgcalendar.event + ":" +  eventshow, locationshow && (i18n.xgcalendar.location + ":" + locationshow) || "");
 
             return ret.join("<br/>");
         }
@@ -847,8 +851,7 @@
             var startformat = getymformat(event[2], null, showtime, true);
             var endformat = getymformat(event[3], event[2], showtime, true);
             timeshow = dateFormat.call(event[2], startformat) + " - " + dateFormat.call(event[3], endformat);
-			console.debug(timeshow);
-            locationshow = (event[9] != undefined && event[9] != "") ? event[9] : i18n.xgcalendar.i_undefined;
+            locationshow = (event[9] != undefined && event[9] != "") ? event[9] : "" //i18n.xgcalendar.i_undefined; change by rodes
             attendsshow = (event[10] != undefined && event[10] != "") ? event[10] : "";
             var ret = [];
 			//Rodes modify
@@ -863,7 +866,7 @@
                     ret.push("[" + i18n.xgcalendar.repeat_event + "]",$.browser.mozilla?"":"\r\n");
                 }
             }
-            ret.push(i18n.xgcalendar.time + ":", timeshow, $.browser.mozilla?"":"\r\n", i18n.xgcalendar.event + ":", eventshow,$.browser.mozilla?"":"\r\n", i18n.xgcalendar.location + ":", locationshow);
+            ret.push(i18n.xgcalendar.time + ":", timeshow, $.browser.mozilla?"":"\r\n", i18n.xgcalendar.event + ":", eventshow,$.browser.mozilla?"":"\r\n", locationshow ? (i18n.xgcalendar.location + ":" + locationshow) : "");
 //            if (attendsshow != "") {
 //               // ret.push($.browser.mozilla?"":"\r\n", i18n.xgcalendar.participant + ":", attendsshow);
 //            }
