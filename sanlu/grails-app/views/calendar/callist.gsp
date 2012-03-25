@@ -20,7 +20,8 @@
                     groupingView: {
                         groupField: ['date'],
                         groupColumnShow: [false],
-                        groupCollapse: false
+                        groupCollapse: false,
+					    groupOrder:['desc']
                     },
                     caption: "工作記錄事項總覽",
                     colModel: [{
