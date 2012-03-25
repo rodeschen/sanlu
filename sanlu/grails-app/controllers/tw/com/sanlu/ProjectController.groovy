@@ -535,9 +535,8 @@ class ProjectController extends GridController {
 	def addProduct={
 		def type = params.type
 		def detail= new BillDetail();
-		detail.project = Project.findById(params.long("id"))
-
-		def product = Product.findById("1".equals(type)?params.long("product"):params.long("product3"))
+		detail.project = Project.findById(params.long("id"))		
+		def product = Product.findById("1".equals(type)?params.long("product1"):params.long("product3"))
 		detail.product = product
 		DateFormat df = new SimpleDateFormat("yyyy-M-d HH:mm");
 		def cal1 = Calendar.getInstance();
