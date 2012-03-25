@@ -26,7 +26,7 @@ abstract class GridController extends BaseController {
 			def action = delegate.class.declaredFields.find{it.name == actionName}
 			if(action && action.isAnnotationPresent(GridQuery)){
 				params.delegateAction = actionName
-				query()
+				_query()
 				return false
 			}
 		}
@@ -35,7 +35,7 @@ abstract class GridController extends BaseController {
 	def index = {
 	}
 
-	def query={
+	def _query={
 		def result=[:];
 		try{
 			pages= params.containsKey(GridEnum.PAGE.getCode())

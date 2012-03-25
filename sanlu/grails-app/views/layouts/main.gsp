@@ -1,5 +1,6 @@
 <html>
 	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>
 			<g:layoutTitle default="三蘆關懷會館" />
 		</title>
@@ -58,6 +59,9 @@
 									<a id="productDaily" href="#agencyDialog3">商品日執行表</a>
 								</li>
 							</ul>
+						</li>
+						<li>
+							<a href="${request.contextPath}/calendar/callist">日曆</a>
 						</li>
 						<g:if test="${session.empLevel.equals(1)}">
 							<li>

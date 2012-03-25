@@ -8,8 +8,14 @@ import java.util.Calendar;
 
 import javax.servlet.http.HttpServletResponse;
 
+import tw.com.sanlu.annotation.GridQuery;
 
-class CalendarController extends BaseController {
+
+class CalendarController extends GridController {
+
+	def callist = {
+	}
+
 	def index = {
 		[rjson : params.responseJSON.toString()]
 	}
@@ -60,7 +66,7 @@ class CalendarController extends BaseController {
 		}
 		render res as JSON
 	}
-	
+
 	def query={
 		def startAndEnd = calCalendar();
 		//def billDetails = BillDetail.findAllByStartTimeBetween(startAndEnd.start,startAndEnd.end)
@@ -128,8 +134,10 @@ class CalendarController extends BaseController {
 		switch(params.viewtype){
 			case "month":
 				cal.set(Calendar.DAY_OF_MONTH, 1); // first day of month
+				cal.set(Calendar.DATE, -7);
 				res["start"] = cal.getTime()
 				cal.add(Calendar.MONTH, 1); // next first day of month
+				cal.add(Calendar.DATE, 14);
 				res["end"] = cal.getTime()
 				break
 			case "week":
@@ -144,6 +152,92 @@ class CalendarController extends BaseController {
 				res["end"] = cal.getTime()
 				break
 		}
+		System.out.println res;
 		return res
+	}
+
+	def commmCal = {
+		[rjson : params.responseJSON.toString()]
+	}
+
+	def queryCal={
+		def startAndEnd = calCalendar();
+		//def billDetails = BillDetail.findAllByStartTimeBetween(startAndEnd.start,startAndEnd.end)
+		def cData = CalendarData.createCriteria()
+		def calDetails = cData.list{
+			and{
+				eq("type",params.type)
+				between('startTime',startAndEnd.start,startAndEnd.end)
+			}
+		}
+		//if(BillDetail.hasErrors()){
+		//	println bList.errors;
+		//}
+		//def billDetails = BillDetail.findAllByStartTimeBetween(startAndEnd.start,startAndEnd.end)
+		def events = []
+		def event
+		def cal1 = Calendar.getInstance();
+		def cal2 = Calendar.getInstance();
+		for (calDetail in calDetails){
+			//[id,text,startDate,endDate,isallday,crossday,recurring,color,editable,local,?]
+			event = []
+			event.add calDetail.id               //oid
+			event.add calDetail.description      //description
+			event.add calDetail.startTime        //startTime
+			event.add calDetail.endTime          //endTime
+			event.add 0                           //isAllDay 0 1
+			//multiDay
+			cal1.setTime calDetail.startTime
+			cal1.set Calendar.HOUR_OF_DAY, 0
+			cal1.set Calendar.MINUTE, 0
+			cal1.set Calendar.SECOND, 0
+			cal2.setTime calDetail.endTime
+			cal2.set Calendar.HOUR_OF_DAY, 0
+			cal2.set Calendar.MINUTE, 0
+			cal2.set Calendar.SECOND, 0
+			event.add cal2.compareTo(cal1) > 0 ?1:0//crossday (multiDay) 0 1
+			event.add 0                           // recurring 0 1
+			event.add 1            // color 0..21
+			event.add 0                           // editable 0 1
+			event.add ""        //location
+			event.add ""                         //people(String)
+			events.add event
+		}
+		def res = ["events":events,
+					"issort":true,
+					"start":Utility.dateToString(startAndEnd.start,"yyyy-MM-dd HH:mm:ss")
+					,"end":Utility.dateToString(startAndEnd.end,"yyyy-MM-dd HH:mm:ss")
+					,"error":null]
+		//response.status HttpServletResponse.SC_INTERNAL_SERVER_ERROR
+		//render(status: 400, contentType:"text/json", text: res)
+		render res as JSON
+	}
+
+
+	@GridQuery
+	def queryGridCal = {
+		def data = CalendarData.findAllByType(params.type,[max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc"])
+		def cont = CalendarData.countByType(params.type)
+		["rowData":data,"rowCount":cont,"format":["date":{str,bean-> return Utility.ADFormat.format(bean.startTime).substring(0,10)}]]
+	}
+
+
+	def addCal = {
+		DateFormat df = new SimpleDateFormat("yyyy-M-d HH:mm")
+		def calData = new CalendarData(
+				type:"1",
+				description : params.description,
+				startTime : df.parse(params.startDate + " " + params.startHour + ":" + params.startMin),
+				endTime : df.parse(params.endDate + " " + params.endHour + ":" + params.startMin),
+				lastModifyBy: session.employee
+				).save()
+		def res = ["IsSuccess" : true]
+		render res as JSON
+	}
+	
+	def delCal = {
+		CalendarData.findById(params.long("id")).delete()
+		def res = ["IsSuccess" : true]
+		render res as JSON
 	}
 }

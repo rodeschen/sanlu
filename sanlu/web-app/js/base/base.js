@@ -16,8 +16,8 @@ function checkError(xhr){
  */
 (function($){
     $.extend($.jgrid.defaults, {
-        rowNum: 50,
-        scroll: 1,
+        rowNum: 10,
+        // scroll: 1,
         hidegrid: false,
         datatype: "json",
         height: 100,
@@ -191,6 +191,16 @@ var API = {
             data: $.extend(s.data || {}, {
                 type: s.type,
                 id: s.id
+            })
+        });
+    },
+    
+    openCommCalendar: function(s){
+        API.formSubmit({
+            url: contextRoot + "/calendar/commmCal",
+            target: s.type + "calendar",
+            data: $.extend(s.data || {}, {
+                type: s.type
             })
         });
     },
