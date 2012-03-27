@@ -1,12 +1,12 @@
 <html>
-<head>
-<title>產品管理</title>
-<meta name="layout" content="inner" />
-</head>
-<body>
-	<script>        
+    <head>
+        <title>產品管理</title>
+        <meta name="layout" content="inner" />
+    </head>
+    <body>
+        <script>
             $(document).ready(function(){
-                var hasPlace = $("#hasPlace"), placeId = $("#placeId"), productName = $('#productName'), productId = $('#productId'),costUnit = $("#costUnit"),productType = $("#productType");
+                var hasPlace = $("#hasPlace"), placeId = $("#placeId"), productName = $('#productName'), productId = $('#productId'), costUnit = $("#costUnit"),costRange=$("#costRange"), productType = $("#productType");
                 var grid1 = $("#grid1").jqGrid({
                     url: contextRoot + "/product/queryProduct",
                     pager: true,
@@ -45,10 +45,10 @@
                         width: 20,
                         align: 'center',
                         formatter: function(el, cellval, opts){
-                        //0:一般商品 1:無庫存商品 2:代叫商品
-                            return el==1 ? "無庫存商品" : el==2 ? "代叫商品":"一般商品";
+                            //0:一般商品 1:無庫存商品 2:代叫商品
+                            return el == 1 ? "無庫存商品" : el == 2 ? "代叫商品" : "一般商品";
                         }
-                     }, {
+                    }, {
                         name: 'productType',
                         index: 'productType',
                         align: "center",
@@ -93,7 +93,7 @@
                         width: 17,
                         align: 'center',
                         formatter: function(el, cellval, opts){
-                            return ["次","次(時間)","小時","天","月"][el];//el == 0 ? "次" : (el == 1 ? "時" : "天");
+                            return ["次", "次(時間)", "小時", "天", "月"][el];//el == 0 ? "次" : (el == 1 ? "時" : "天");
                         }
                     }, {
                         header: "計價方式",
@@ -101,7 +101,7 @@
                         index: 'costUnit',
                         width: 17,
                         align: 'center',
-						hidden:true
+                        hidden: true
                     }, {
                         header: "計價單位",
                         name: 'costRange',
@@ -123,7 +123,7 @@
                         align: 'center'
                     }],
                     onSelectRow: function(id){
-                        grid2.clearGridData();                        
+                        grid2.clearGridData();
                         var product = grid1.getRowData(id);
                         $("#placeMDiv")[product.hasPlace == '場地' ? 'show' : 'hide']();
                         if (product.hasPlace == '場地') {
@@ -206,7 +206,7 @@
                         name: 'product.lastModifyBy.empName',
                         index: 'product.lastModifyBy.empName',
                         width: 30,
-                        align: 'center'                   
+                        align: 'center'
                     }]
                 });
                 
@@ -221,7 +221,7 @@
                         return false;
                     }
                     var isNomal = action.indexOf('1') > -1;
-                                        
+                    
                     if (isNomal && grid2.getGridParam("reccount") > 0) {
                         alert("請先刪除商品使用場地");
                         return false;
@@ -262,12 +262,12 @@
                         onStart: function(){
                             var selrow;
                             action = this.action;
-							//1:商品 2:商品使用場地
+                            //1:商品 2:商品使用場地
                             var isNomal = action.indexOf('1') > -1;
                             var grid = (isNomal ? grid1 : grid2);
                             
                             $("#placeDiv,#productId")[isNomal ? 'hide' : 'show']();
-                            $("#productName,#hasPlaceDiv,#unitDiv,#productTypeDiv,#costUnitDiv,#costRangeDiv")[!isNomal ? 'hide' : 'show']();                            
+                            $("#productName,#hasPlaceDiv,#unitDiv,#productTypeDiv,#costUnitDiv,#costRangeDiv")[!isNomal ? 'hide' : 'show']();
                             if (action.indexOf("modify") > -1) {
                                 selrow = grid.jqGrid('getGridParam', 'selrow');
                                 if (!selrow) {
@@ -281,30 +281,33 @@
                                 $("#totalQuantity").val(isNomal ? id.totalQuantity : '');
                                 $("#price").val(id.price);
                                 $("#sallingPrice").val(id.sallingPrice);
-                                $("#costPrice").val(id.costPrice);                                
+                                $("#costPrice").val(id.costPrice);
                                 $("#unit").val(isNomal ? id.unit : id['product.unit']);
                                 if (isNomal) {
-                                	productType.val(id.productType);
+                                    productType.val(id.productType);
                                     hasPlace.val(hasplace ? "T" : "F");
-                                    productName.val(id.productName);                                    
-									costUnit.val(id.costUnit);
-                                    $("#costRange").val(id.costRange);
+                                    productName.val(id.productName);
+                                    costUnit.val(id.costUnit);     
+									costRange.val(id.costRange);                               
                                 }
                                 else {
                                     placeId.val(id['place.id']);
                                     productId.val(id['product.id']);
+                                    
                                 }
                                 
                             }
                             else {
-                            	if (isNomal) {
-                            		costUnit.trigger("change");
-                            	}
+                                if (isNomal) {
+                                    costUnit.trigger("change");
+                                }
                             }
                             var product = grid1.getRowData(grid1.jqGrid('getGridParam', 'selrow'));
                             productId.val(product.id);
                             if (isNomal) {
-                                hasPlace.trigger("change");                                
+                                hasPlace.trigger("change");
+                            }else{
+                                
                             }
                         },
                         'titlePosition': 'inside',
@@ -348,7 +351,7 @@
                                         }
                                     });
                                 }
-								refreshProduct();
+                                refreshProduct();
                                 alert("產品/場地" + (action == "add1" || action == "add2" ? "新增" : "修改") + "成功");
                             }
                         })
@@ -382,14 +385,24 @@
                 });
                 hasPlace.change(function(){
                     var v = $(this).val();
-                    $("#priceDiv,#sallingPriceDiv,#totalDiv,#costPriceDiv,#productTypeDiv")[v == "F" ? 'show' : 'hide']();
-                   
-                    productType.val(v == "T"?"2":productType.val());
+                    $("#priceDiv,#sallingPriceDiv,#totalDiv,#costPriceDiv,#productTypeDiv")[v == "F" ? 'show' : 'hide']();                    
+                    productType.val(v == "T" ? "2" : productType.val());
+					
+                    //選擇場地時不可選'次'
+                    if(v == "F"){
+                        costUnit.find("option[value='2']").removeAttr('selected', 'selected').end().find("option[value='0']").show().attr('selected', 'selected').trigger('change');                        
+                    }else{
+                        costUnit.find("option[value='0']").hide().removeAttr('selected', 'selected').end().find("option[value='2']").show().attr('selected', 'selected').trigger('change');
+
+                    }                    
                 });
                 costUnit.change(function(){
-                	var v = $(this).val();
-                	$("#costRangeDiv")[v.match(/[0-1]/)?'hide':'show']();
-                	$("#costRange").val(v.match(/[0-1]/)?1:'');
+                    var v = $(this).val();
+					
+                    $("#costRangeDiv")[v.match(/[0-1]/) ? 'hide' : 'show']();
+                    if(v.match(/[0-1]/)){
+                        costRange.val(1);
+                    }                    
                 });
                 //下拉選單
                 //場地
@@ -489,8 +502,7 @@
                             <span class="th1">商品類型：</span>
                             <span>
                                 <select id="productType" name="productType">
-                                    <!--0:一般商品 1:無庫存商品 2:代叫商品-->
-                                    <option value="0">一般商品</option>
+                                    <!--0:一般商品 1:無庫存商品 2:代叫商品--><option value="0">一般商品</option>
                                     <option value="1">無庫存商品</option>
                                     <option value="2" selected=selected>代叫商品</option>
                                 </select>
@@ -505,10 +517,9 @@
                             <span><input type="text" id="sallingPrice" name="sallingPrice" placeholder="銷售單價" class="validate[required]"/></span>
                         </div>
                         <div class="field-row" id="costPriceDiv">
-                        <span class="th1">成本單價：</span>
-                        <span><input type="text" id="costPrice" name="costPrice" placeholder="成本單價" class="validate[required]"/></span>
-                        </div>
-                        <!-- 
+                            <span class="th1">成本單價：</span>
+                            <span><input type="text" id="costPrice" name="costPrice" placeholder="成本單價" class="validate[required]"/></span>
+                        </div><!--
                         <div class="field-row" id='totalDiv'>
                         <span class="th1">庫存數量：</span>
                         <span><input type="text" id="totalQuantity" name="totalQuantity" placeholder="庫存數量" class="validate[required]"/></span>
@@ -522,39 +533,37 @@
                             <span>
                                 <select id="costUnit" name="costUnit">
                                     <option value="0" selected="selected">次</option>
-                                    <!--<option value="1">次(時間)</option>-->
-                                    <option value="2">小時</option>
+                                    <!--<option value="1">次(時間)</option>--><option value="2">小時</option>
                                     <option value="3">天</option>
                                     <option value="4">月</option>
                                 </select>
                             </span>
                         </div>
-                        <div class="field-row"  id="costRangeDiv">
+                        <div class="field-row" id="costRangeDiv">
                             <span class="th1">計價單位：</span>
-                            <span><input type="text" value='1' id="costRange" name="costRange" placeholder="計價單位" class="validate[required,custom[number]] text-input"/>                                
-                            </span>
+                            <span><input type="text" value='1' id="costRange" name="costRange" placeholder="計價單位" class="validate[required,custom[number]]"/></span>
                         </div>
-                        <div class="field-row">                        	
-                                <span style="padding-left:25px;disply:block;color:#900;font-weight:bold;font-size:11px;">註：
-                                    <br/>
-                                    <ul>
-                                        <li>
-                                            次&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-以次為單位
-                                        </li>
-                                        <li>
-                                            次(時間)&nbsp;-以次為單位(可設定使用時間)
-                                        </li>
-                                        <li>
-                                            時&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-每次幾小時(新增時可連續)
-                                        </li>
-                                        <li>
-                                            天&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-每次幾天(新增時可連續多天)
-                                        </li>
-                                        <li>
-                                            月&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-每次幾個月(新增時可連續多月)
-                                        </li>
-                                    </ul>
-                                </span>
+                        <div class="field-row">
+                            <span style="padding-left:25px;disply:block;color:#900;font-weight:bold;font-size:11px;">註：
+                                <br/>
+                                <ul>
+                                    <li>
+                                        次&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-以次為單位
+                                    </li>
+                                    <!--<li>
+                                    次(時間)&nbsp;-以次為單位(可設定使用時間)
+                                    </li>-->
+                                    <li>
+                                        時&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-每次幾小時(新增時可連續)
+                                    </li>
+                                    <li>
+                                        天&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-每次幾天(新增時可連續多天)
+                                    </li>
+                                    <li>
+                                        月&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-每次幾個月(新增時可連續多月)
+                                    </li>
+                                </ul>
+                            </span>
                         </div>
                         <input type="hidden" id="id" name="id" />
                         <div style="text-align:center;">

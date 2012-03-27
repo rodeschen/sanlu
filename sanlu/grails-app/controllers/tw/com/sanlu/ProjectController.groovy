@@ -121,7 +121,7 @@ class ProjectController extends GridController {
 						case 3:
 							unit = unit ? unit:"天"
 						case 4:
-							unit = unit ? unit:"月"
+							unit = unit ? unit:"月"							
 							if(true/*ata.product.costRange == 1*/){
 								return (data.quantity + data.product.unit) + "/" + (/*data.quantity * */ formatDecimal(data.product.costRange)) +unit
 							}else{
@@ -535,12 +535,13 @@ class ProjectController extends GridController {
 	def addProduct={
 		def type = params.type
 		def detail= new BillDetail();
-		detail.project = Project.findById(params.long("id"))		
-		def product = Product.findById("1".equals(type)?params.long("product1"):params.long("product3"))
+		detail.project = Project.findById(params.long("id"))
+		def product = Product.findById(params.long("1".equals(type)?"product1":"product3"))
 		detail.product = product
 		DateFormat df = new SimpleDateFormat("yyyy-M-d HH:mm");
 		def cal1 = Calendar.getInstance();
 		def cal2 = Calendar.getInstance();
+		def amount = params.int("1".equals(type)?"amount1":"amount3")
 		switch(product.costUnit){
 			case "0":
 				detail.startTime = df.parse(params.startDate + " " + params.startHour + ":" + params.startMin)
@@ -561,8 +562,8 @@ class ProjectController extends GridController {
 			//	detail.endTime = df.parse(params.endDate + " " + params.endHour + ":" + params.startMin)
 				cal1.setTime detail.startTime
 				int costRange = product.costRange.intValue()
-				cal1.add(Calendar.HOUR ,costRange)
-				cal1.add(Calendar.MINUTE , product.costRange.subtract(new BigDecimal(costRange)).multiply(new BigDecimal(60)).intValue())
+				cal1.add(Calendar.HOUR ,costRange * amount)
+				cal1.add(Calendar.MINUTE , product.costRange.subtract(new BigDecimal(costRange)).multiply(new BigDecimal(amount)).multiply(new BigDecimal(60)).intValue())
 				detail.endTime  = cal1.getTime();
 			//	cal1.setTime detail.startTime
 			//	cal2.setTime detail.endTime
@@ -577,8 +578,8 @@ class ProjectController extends GridController {
 			//	detail.endTime = df.parse(params.endDate + " 00:00")
 				cal1.setTime detail.startTime
 				int costRange = product.costRange.intValue()
-				cal1.add(Calendar.DATE, costRange)
-				cal1.add(Calendar.HOUR , product.costRange.subtract(new BigDecimal(costRange)).multiply(new BigDecimal(24)).intValue())
+				cal1.add(Calendar.DATE, costRange * amount)
+				cal1.add(Calendar.HOUR , product.costRange.subtract(new BigDecimal(costRange)).multiply(new BigDecimal(amount)).multiply(new BigDecimal(24)).intValue())
 				detail.endTime  = cal1.getTime();
 			//	cal2.setTime detail.endTime
 			//	if(cal2.compareTo(cal1) <= 0 || ((cal2.getTimeInMillis() - cal1.getTimeInMillis())%hour) != 0 ){
@@ -593,22 +594,19 @@ class ProjectController extends GridController {
 			//	}
 			//	cal1.add(Calendar.MONTH, params.int("mouth"))
 				int costRange = product.costRange.intValue()
-				cal1.add(Calendar.MONTH, costRange)
-				cal1.add(Calendar.DATE , product.costRange.subtract(new BigDecimal(costRange)).multiply(new BigDecimal(30)).intValue())
+				cal1.add(Calendar.MONTH, costRange * amount)
+				cal1.add(Calendar.DATE , product.costRange.subtract(new BigDecimal(costRange)).multiply(new BigDecimal(amount)).multiply(new BigDecimal(30)).intValue())
 				detail.endTime  = cal1.getTime();
 				break;
-
 		}
 
-
-		def productHistory = new ProductHistory();
 		if("1".equals(type)){
 			if(0 == params.productType){
 				//一般
 				if(product.totalQuantity < params.int("amount1")){
 					return throwError("目前剩餘庫存量:" + product.totalQuantity);
 				}
-				detail.quantity = params.int("amount1")
+				detail.quantity = amount
 				product.totalQuantity -= detail.quantity
 				detail.price = detail.product.sallingPrice
 				detail.color = 1
@@ -632,7 +630,7 @@ class ProjectController extends GridController {
 				//無庫存/代叫商品
 				//detail.startTime = df.parse(params.date2 + " " + params.hour2 + ":" + params.min2)
 				//detail.endTime = detail.startTime
-				detail.quantity = params.int("amount1")
+				detail.quantity = amount
 				detail.price = product.sallingPrice
 				detail.color = 2
 				detail.modifiedPrice = params.modifiedPrice2?new BigDecimal(params.modifiedPrice2):detail.price
@@ -668,7 +666,7 @@ class ProjectController extends GridController {
 			if(hasUse.size()>0){
 				return throwError("此時間場地使用中!!")
 			}
-			detail.quantity = 1
+			detail.quantity = amount
 			detail.price = link.sallingPrice
 			detail.color = 3
 			detail.place = place
@@ -717,6 +715,6 @@ class ProjectController extends GridController {
 
 	//去小數零
 	def formatDecimal(BigDecimal n){
-		return n.toString().indexOf(".0")==1?n.intValue():n;
+		return n.toString().indexOf(".0")>0?n.intValue():n;
 	}
 }
