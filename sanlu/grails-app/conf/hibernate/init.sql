@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主機: localhost
--- 建立日期: Mar 25, 2012, 06:56 �U��
+-- 建立日期: Mar 25, 2012, 06:56 �U��
 -- 伺服器版本: 5.5.8
 -- PHP 版本: 5.3.5
 
@@ -54,13 +54,14 @@ CREATE TABLE IF NOT EXISTS `bill_detail` (
 --
 -- 列出以下資料庫的數據： `bill_detail`
 --
-
+/*
 INSERT INTO `bill_detail` (`id`, `version`, `color`, `end_time`, `internal_price`, `last_modify_by_id`, `last_updated`, `modified_internal_price`, `modified_price`, `place_id`, `price`, `product_id`, `project_id`, `quantity`, `show_bill`, `start_time`, `vendor`) VALUES
 (4, 0, '2', '2012-03-13 02:30:00', 1500, 1, '2012-03-13 21:32:06', 1500, 1500, NULL, 1500, 280, 2, 1, '1', '2012-03-13 00:00:00', ''),
 (5, 1, '2', '2012-03-13 00:00:00', 120, 1, '2012-03-14 00:41:45', 120, 120, NULL, 120, 192, 2, 1, '1', '2012-03-13 00:00:00', '3333'),
 (6, 0, '2', '2012-03-13 00:00:00', 120, 1, '2012-03-13 22:07:10', 120, 120, NULL, 120, 192, 2, 2, '1', '2012-03-13 00:00:00', '3333'),
 (7, 0, '2', '2012-03-07 00:00:00', 600, 1, '2012-03-13 22:07:53', 600, 600, NULL, 600, 347, 2, 1, '1', '2012-03-07 00:00:00', ''),
 (8, 0, '2', '2012-03-14 04:00:00', 600, 1, '2012-03-13 22:08:07', 600, 600, NULL, 600, 347, 2, 1, '1', '2012-03-14 04:00:00', '');
+*/
 
 -- --------------------------------------------------------
 
@@ -323,16 +324,147 @@ CREATE TABLE IF NOT EXISTS `place` (
 -- 列出以下資料庫的數據： `place`
 --
 
-INSERT INTO `place` (`id`, `version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES
-(1, 0, 1, '2012-03-07 23:47:57', '助念室'),
-(2, 0, 1, '2012-03-07 23:47:57', '功德廳'),
-(3, 0, 1, '2012-03-07 23:47:57', '大忠廳'),
-(4, 0, 1, '2012-03-07 23:47:57', '靈位區'),
-(5, 0, 1, '2012-03-07 23:47:57', '至正廳'),
-(6, 0, 1, '2012-03-07 23:47:57', '誦經室(一)'),
-(7, 0, 1, '2012-03-07 23:47:57', '誦經室(二)'),
-(8, 0, 1, '2012-03-07 23:47:57', '誦經室(三)'),
-(9, 0, 1, '2012-03-07 23:47:57', '誦經室(五)');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('10',0, 1, NOW(), '助念室(A)');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('11',0, 1, NOW(), '助念室(B)');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('12',0, 1, NOW(), '功德廳');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('13',0, 1, NOW(), '大忠廳');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('14',0, 1, NOW(), '至正廳');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('15',0, 1, NOW(), '協商室');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('16',0, 1, NOW(), '誦經室(一)');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('17',0, 1, NOW(), '誦經室(二)');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('18',0, 1, NOW(), '誦經室(三)');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('19',0, 1, NOW(), '誦經室(五)');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('20',0, 1, NOW(), '誦經至正(A)');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('21',0, 1, NOW(), '誦經至正(B)');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('22',0, 1, NOW(), '停棺室1');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('23',0, 1, NOW(), '停棺室2');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('24',0, 1, NOW(), '停棺室3');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('25',0, 1, NOW(), '停棺室4');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('26',0, 1, NOW(), '停棺室5');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('27',0, 1, NOW(), '停棺室6');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('28',0, 1, NOW(), '停棺室7');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('29',0, 1, NOW(), '停棺室8');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('30',0, 1, NOW(), '停棺室9');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('31',0, 1, NOW(), '停棺室10');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('32',0, 1, NOW(), '停棺室11');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('33',0, 1, NOW(), '停棺室12');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('34',0, 1, NOW(), '牌位1');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('35',0, 1, NOW(), '牌位2');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('36',0, 1, NOW(), '牌位3');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('37',0, 1, NOW(), '牌位4');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('38',0, 1, NOW(), '牌位5');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('39',0, 1, NOW(), '牌位6');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('40',0, 1, NOW(), '牌位7');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('41',0, 1, NOW(), '牌位8');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('42',0, 1, NOW(), '牌位9');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('43',0, 1, NOW(), '牌位10');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('44',0, 1, NOW(), '牌位11');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('45',0, 1, NOW(), '牌位12');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('46',0, 1, NOW(), '牌位13');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('47',0, 1, NOW(), '牌位14');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('48',0, 1, NOW(), '牌位15');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('49',0, 1, NOW(), '牌位16');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('50',0, 1, NOW(), '牌位17');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('51',0, 1, NOW(), '牌位18');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('52',0, 1, NOW(), '牌位19');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('53',0, 1, NOW(), '牌位20');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('54',0, 1, NOW(), '牌位21');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('55',0, 1, NOW(), '牌位22');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('56',0, 1, NOW(), '牌位23');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('57',0, 1, NOW(), '牌位24');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('58',0, 1, NOW(), '牌位25');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('59',0, 1, NOW(), '牌位26');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('60',0, 1, NOW(), '牌位27');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('61',0, 1, NOW(), '牌位28');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('62',0, 1, NOW(), '牌位29');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('63',0, 1, NOW(), '牌位30');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('64',0, 1, NOW(), '牌位31');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('65',0, 1, NOW(), '牌位32');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('66',0, 1, NOW(), '牌位33');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('67',0, 1, NOW(), '牌位34');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('68',0, 1, NOW(), '牌位35');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('69',0, 1, NOW(), '牌位36');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('70',0, 1, NOW(), '牌位37');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('71',0, 1, NOW(), '牌位38');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('72',0, 1, NOW(), '牌位39');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('73',0, 1, NOW(), '牌位40');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('74',0, 1, NOW(), '牌位41');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('75',0, 1, NOW(), '牌位42');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('76',0, 1, NOW(), '牌位43');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('77',0, 1, NOW(), '牌位44');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('78',0, 1, NOW(), '牌位45');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('79',0, 1, NOW(), '牌位46');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('80',0, 1, NOW(), '牌位47');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('81',0, 1, NOW(), '牌位48');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('82',0, 1, NOW(), '牌位49');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('83',0, 1, NOW(), '牌位50');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('84',0, 1, NOW(), '牌位51');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('85',0, 1, NOW(), '牌位52');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('86',0, 1, NOW(), '牌位53');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('87',0, 1, NOW(), '牌位54');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('88',0, 1, NOW(), '牌位55');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('89',0, 1, NOW(), '牌位56');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('90',0, 1, NOW(), '牌位57');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('91',0, 1, NOW(), '骨罐位1');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('92',0, 1, NOW(), '骨罐位2');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('93',0, 1, NOW(), '骨罐位3');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('94',0, 1, NOW(), '骨罐位4');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('95',0, 1, NOW(), '骨罐位5');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('96',0, 1, NOW(), '骨罐位6');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('97',0, 1, NOW(), '骨罐位7');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('98',0, 1, NOW(), '骨罐位8');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('99',0, 1, NOW(), '骨罐位9');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('100',0, 1, NOW(), '骨罐位10');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('101',0, 1, NOW(), '骨罐位11');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('102',0, 1, NOW(), '骨罐位12');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('103',0, 1, NOW(), '骨罐位13');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('104',0, 1, NOW(), '骨罐位14');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('105',0, 1, NOW(), '骨罐位15');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('106',0, 1, NOW(), '骨罐位16');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('107',0, 1, NOW(), '骨罐位17');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('108',0, 1, NOW(), '骨罐位18');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('109',0, 1, NOW(), '骨罐位19');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('110',0, 1, NOW(), '骨罐位20');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('111',0, 1, NOW(), '骨罐位21');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('112',0, 1, NOW(), '骨罐位22');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('113',0, 1, NOW(), '骨罐位23');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('114',0, 1, NOW(), '骨罐位24');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('115',0, 1, NOW(), '骨罐位25');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('116',0, 1, NOW(), '骨罐位26');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('117',0, 1, NOW(), '骨罐位27');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('118',0, 1, NOW(), '骨罐位28');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('119',0, 1, NOW(), '骨罐位29');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('120',0, 1, NOW(), '骨罐位30');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('121',0, 1, NOW(), '骨罐位31');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('122',0, 1, NOW(), '骨罐位32');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('123',0, 1, NOW(), '骨罐位33');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('124',0, 1, NOW(), '骨罐位34');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('125',0, 1, NOW(), '骨罐位35');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('126',0, 1, NOW(), '骨罐位36');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('127',0, 1, NOW(), '固定冰櫃1');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('128',0, 1, NOW(), '固定冰櫃2');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('129',0, 1, NOW(), '固定冰櫃3');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('130',0, 1, NOW(), '固定冰櫃4');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('131',0, 1, NOW(), '固定冰櫃5');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('132',0, 1, NOW(), '固定冰櫃6');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('133',0, 1, NOW(), '固定冰櫃7');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('134',0, 1, NOW(), '固定冰櫃8');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('135',0, 1, NOW(), '固定冰櫃9');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('136',0, 1, NOW(), '固定冰櫃10');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('137',0, 1, NOW(), '固定冰櫃11');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('138',0, 1, NOW(), '固定冰櫃12');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('139',0, 1, NOW(), '固定冰櫃13');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('140',0, 1, NOW(), '移動冰櫃1');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('141',0, 1, NOW(), '移動冰櫃2');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('142',0, 1, NOW(), '移動冰櫃3');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('143',0, 1, NOW(), '移動冰櫃4');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('144',0, 1, NOW(), '移動冰櫃5');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('145',0, 1, NOW(), '移動冰櫃6');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('146',0, 1, NOW(), '移動冰櫃7');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('147',0, 1, NOW(), '移動冰櫃8');
+INSERT INTO `place` (`id`,`version`, `last_modify_by_id`, `last_updated`, `place_name`) VALUES ('148',0, 1, NOW(), '庫錢金爐');
+
+
 
 -- --------------------------------------------------------
 
@@ -366,251 +498,210 @@ CREATE TABLE IF NOT EXISTS `product` (
 -- 列出以下資料庫的數據： `product`
 --
 
-INSERT INTO `product` (`id`, `version`, `cost_price`, `cost_range`, `cost_unit`, `has_place`, `last_modify_by_id`, `last_updated`, `price`, `product_name`, `product_no`, `salling_price`, `total_quantity`, `unit`, `product_type`) VALUES
-(192, 0, 100, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 120, '發糕2', '000001', 120, NULL, '組', 2),
-(193, 0, 50, 1.0, 3, '0', 1, '2012-03-03 22:26:49', 50, '臉盆水逾期', '000002', 50, NULL, '天', 2),
-(194, 0, 320, 1.0, 3, '1', 1, '2012-03-03 22:26:49', 500, '火葬位停柩', '000003', 500, NULL, '天', 3),
-(195, 0, 400, 1.0, 3, '1', 1, '2012-03-03 22:26:49', 500, '土葬位停柩', '000004', 500, NULL, '天', 3),
-(196, 0, 400, 1.0, 3, '1', 1, '2012-03-03 22:26:49', 500, '固定式冰櫃冰存', '000005', 500, NULL, '天', 3),
-(197, 0, 500, 1.0, 3, '1', 1, '2012-03-03 22:26:49', 550, '移動式冰櫃冰存', '000006', 550, NULL, '天', 3),
-(198, 0, 240, 1.0, 3, '1', 1, '2012-03-03 22:26:49', 300, '靈位寄存', '000007', 300, NULL, '天', 3),
-(199, 0, 2500, 1.0, 3, '1', 1, '2012-03-03 22:26:49', 3000, '個人靈堂-大', '000008', 3000, NULL, '天', 3),
-(200, 0, 2000, 1.0, 3, '1', 1, '2012-03-03 22:26:49', 2500, '個人靈堂-中', '000009', 2500, NULL, '天', 3),
-(201, 0, 1500, 1.0, 3, '1', 1, '2012-03-03 22:26:49', 2000, '個人靈堂-小', '000010', 2000, NULL, '天', 3),
-(202, 0, 2000, 1.0, 3, '1', 1, '2012-03-03 22:26:49', 2500, '個人靈堂-商', '000011', 2500, NULL, '天', 3),
-(203, 0, 100, 1.0, 3, '1', 1, '2012-03-03 22:26:49', 100, '牌位暫存-普通位(天)', '000012', 100, NULL, '天', 3),
-(204, 0, 3000, 1.0, 4, '1', 1, '2012-03-03 22:26:49', 3000, '牌位暫存-普通位(1月)', '000013', 3000, NULL, '月', 3),
-(205, 0, 7000, 3.0, 4, '1', 1, '2012-03-03 22:26:49', 7000, '牌位暫存-普通位(3月)', '000014', 7000, NULL, '月', 3),
-(206, 0, 12000, 6.0, 4, '1', 1, '2012-03-03 22:26:49', 12000, '牌位暫存-普通位(6月)', '000015', 12000, NULL, '月', 3),
-(207, 0, 19000, 12.0, 4, '1', 1, '2012-03-03 22:26:49', 19000, '牌位暫存-普通位(12月)', '000016', 19000, NULL, '月', 3),
-(208, 0, 100, 1.0, 3, '1', 1, '2012-03-03 22:26:49', 100, '骨罐暫存(天)', '000017', 100, NULL, '天', 3),
-(209, 0, 3000, 1.0, 4, '1', 1, '2012-03-03 22:26:49', 3000, '骨罐暫存(1月)', '000018', 3000, NULL, '月', 3),
-(210, 0, 7000, 3.0, 4, '1', 1, '2012-03-03 22:26:49', 7000, '骨罐暫存(3月)', '000019', 7000, NULL, '月', 3),
-(211, 0, 12000, 6.0, 4, '1', 1, '2012-03-03 22:26:49', 12000, '骨罐暫存(6月)', '000020', 12000, NULL, '月', 3),
-(212, 0, 19000, 12.0, 4, '1', 1, '2012-03-03 22:26:49', 19000, '骨罐暫存(12月)', '000021', 19000, NULL, '月', 3),
-(213, 0, 200, 1.0, 3, '1', 1, '2012-03-03 22:26:49', 200, '牌位暫存-豪華位(天)', '000022', 200, NULL, '天', 3),
-(214, 0, 6000, 1.0, 4, '1', 1, '2012-03-03 22:26:49', 6000, '牌位暫存-豪華位(1月)', '000023', 6000, NULL, '月', 3),
-(215, 0, 14000, 3.0, 4, '1', 1, '2012-03-03 22:26:49', 14000, '牌位暫存-豪華位(3月)', '000024', 14000, NULL, '月', 3),
-(216, 0, 24000, 6.0, 4, '1', 1, '2012-03-03 22:26:49', 24000, '牌位暫存-豪華位(6月)', '000025', 24000, NULL, '月', 3),
-(217, 0, 38000, 12.0, 4, '1', 1, '2012-03-03 22:26:49', 38000, '牌位暫存-豪華位(12月)', '000026', 38000, NULL, '月', 3),
-(218, 0, 4, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 5, '大銀(散裝)', '000027', 5, NULL, '支', 2),
-(219, 0, 4, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 5, '小銀(散裝)', '000028', 5, NULL, '支', 2),
-(220, 0, 4, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 5, '刈金(散裝)', '000029', 5, NULL, '支', 2),
-(221, 0, 4, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 5, '壽金(散裝)', '000030', 5, NULL, '支', 2),
-(222, 0, 4, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 5, '福金(散裝)', '000031', 5, NULL, '支', 2),
-(223, 0, 60, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 80, '捻香粉', '000032', 80, NULL, '斤', 2),
-(224, 0, 90, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 150, '白雙連', '000033', 150, NULL, '包', 2),
-(225, 0, 90, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 150, '紅雙連', '000034', 150, NULL, '包', 2),
-(226, 0, 15, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 30, '白包袋', '000035', 30, NULL, '包', 2),
-(227, 0, 15, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 30, '紅包袋', '000036', 30, NULL, '包', 2),
-(228, 0, 80, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 100, '胸花', '000037', 100, NULL, '包', 2),
-(229, 0, 55, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 65, '往生蓮花紙', '000038', 65, NULL, '包', 2),
-(230, 0, 60, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 75, '單面彩色蓮花紙', '000039', 75, NULL, '包', 2),
-(231, 0, 65, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 85, '雙面彩色元寶紙', '000040', 85, NULL, '包', 2),
-(232, 0, 8, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 10, '香爐粉', '000041', 10, NULL, '包', 2),
-(233, 0, 80, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 100, '金元寶', '000042', 100, NULL, '包', 2),
-(234, 0, 80, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 100, '銀元寶', '000043', 100, NULL, '包', 2),
-(235, 0, 5, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 10, '金炮燭', '000044', 10, NULL, '包', 2),
-(236, 0, 25, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 35, '禮簿', '000045', 35, NULL, '本', 2),
-(237, 0, 25, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 35, '題名簿', '000046', 35, NULL, '本', 2),
-(238, 0, 25, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 35, '謝簿', '000047', 35, NULL, '本', 2),
-(239, 0, 45, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 80, '貼肉仁', '000048', 80, NULL, '件', 2),
-(240, 0, 10, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 30, '長袖雨衣', '000049', 30, NULL, '件', 2),
-(241, 0, 200, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 250, '大銀(50/件)', '000050', 250, NULL, '件', 2),
-(242, 0, 200, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 250, '小銀(63/件)', '000051', 250, NULL, '件', 2),
-(243, 0, 200, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 250, '刈金(50/件)', '000052', 250, NULL, '件', 2),
-(244, 0, 200, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 250, '壽金(50/件)', '000053', 250, NULL, '件', 2),
-(245, 0, 200, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 250, '福金(50/件)', '000054', 250, NULL, '件', 2),
-(246, 0, 190, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 250, '麻衣', '000055', 250, NULL, '件', 2),
-(247, 0, 90, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 100, '苧衣', '000056', 100, NULL, '件', 2),
-(248, 0, 30, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 50, '女頭罩', '000057', 50, NULL, '件', 2),
-(249, 0, 120, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 150, '女婿服', '000058', 150, NULL, '件', 2),
-(250, 0, 130, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 150, '男用白袍', '000059', 150, NULL, '件', 2),
-(251, 0, 80, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 100, '第三代孝服', '000060', 100, NULL, '件', 2),
-(252, 0, 40, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 50, '第三代頭罩', '000061', 50, NULL, '件', 2),
-(253, 0, 80, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 100, '第五代孝服', '000062', 100, NULL, '件', 2),
-(254, 0, 40, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 50, '第五代頭罩', '000063', 50, NULL, '件', 2),
-(255, 0, 600, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 750, '素三牲', '000064', 750, NULL, '份', 2),
-(256, 0, 600, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 750, '葷三牲', '000065', 750, NULL, '份', 2),
-(257, 0, 1400, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 1500, '素五牲', '000066', 1500, NULL, '份', 2),
-(258, 0, 1400, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 1600, '五牲-豬頭', '000067', 1600, NULL, '份', 2),
-(259, 0, 1500, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 1600, '五牲-原蹄', '000068', 1600, NULL, '份', 2),
-(260, 0, 1500, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 1700, '五牲-全豬頭', '000069', 1700, NULL, '份', 2),
-(261, 0, 250, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 250, '素小三牲', '000070', 250, NULL, '份', 2),
-(262, 0, 150, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 250, '葷小三牲', '000071', 250, NULL, '份', 2),
-(263, 0, 300, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 350, '四果', '000072', 350, NULL, '份', 2),
-(264, 0, 100, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 200, '綜合果', '000073', 200, NULL, '份', 2),
-(265, 0, 300, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 350, '十二菜碗', '000074', 350, NULL, '份', 2),
-(266, 0, 150, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 200, '六菜碗', '000075', 200, NULL, '份', 2),
-(267, 0, 12800, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 12800, '羽蝶A款', '000076', 12800, NULL, '式', 2),
-(268, 0, 13800, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 13800, '羽蝶B款', '000077', 13800, NULL, '式', 2),
-(269, 0, 13800, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 13800, '羽蝶C款', '000078', 13800, NULL, '式', 2),
-(270, 0, 15000, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 15000, '羽蝶彩妝組合', '000079', 15000, NULL, '式', 2),
-(271, 0, 17800, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 17800, '羽蝶超值組合', '000080', 17800, NULL, '式', 2),
-(272, 0, 19800, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 19800, '羽蝶淨化組合', '000081', 19800, NULL, '式', 2),
-(273, 0, 24800, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 24800, '羽蝶尊貴組合', '000082', 24800, NULL, '式', 2),
-(274, 0, 3000, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 3500, '移動式冰櫃下架費', '000083', 3500, NULL, '趟', 2),
-(275, 0, 1300, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 3000, '淨身服務', '000084', 3000, NULL, '次', 2),
-(276, 0, 38, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 150, '庫錢', '000085', 150, NULL, '包', 2),
-(277, 0, 38, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 150, '庫錢2', '000086', 150, NULL, '包', 2),
-(278, 0, 52, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 80, '壽內庫錢', '000087', 80, NULL, '包', 2),
-(279, 0, 415, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 800, '臉盆水服務', '000088', 800, NULL, '式', 2),
-(280, 3, 1500, 2.5, 2, '0', 1, '2012-03-23 22:27:17', 1500, 'LED外牌地毯', '000089', 1500, NULL, '次', 1),
-(281, 0, 2000, 2.5, 2, '0', 1, '2012-03-03 22:26:49', 3000, '全採LED投射燈租用', '000090', 3000, NULL, '次', 1),
-(282, 0, 1000, 2.5, 2, '1', 1, '2012-03-03 22:26:49', 3000, '投影機租用', '000091', 3000, NULL, '次', 3),
-(283, 0, 1000, 2.0, 2, '1', 1, '2012-03-03 22:26:49', 1000, 'SPA場租', '000092', 1000, NULL, '次', 3),
-(284, 0, 800, 1.0, 0, '1', 1, '2012-03-03 22:26:49', 1000, '淨身場租', '000093', 1000, NULL, '次', 3),
-(285, 0, 2400, 1.0, 0, '1', 1, '2012-03-03 22:26:49', 3000, '隔夜守靈', '000094', 3000, NULL, '次', 3),
-(286, 0, 35, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 40, '紅龜', '000095', 40, NULL, '個', 2),
-(287, 0, 35, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 40, '發糕', '000096', 40, NULL, '個', 2),
-(288, 0, 10, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 12, '水煮蛋', '000097', 12, NULL, '個', 2),
-(289, 0, 150, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 150, '大發粿', '000098', 150, NULL, '個', 2),
-(290, 0, 12, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 15, '鹹鴨蛋', '000099', 15, NULL, '個', 2),
-(291, 0, 30, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 50, '乳頭糕', '000100', 50, NULL, '個', 2),
-(292, 0, 60, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 80, '筆架糕', '000101', 80, NULL, '個', 2),
-(293, 0, 60, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 80, '筆架山糕', '000102', 80, NULL, '個', 2),
-(294, 0, 50, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 80, '竹圈', '000103', 80, NULL, '個', 2),
-(295, 0, 50, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 80, '香爐', '000104', 80, NULL, '個', 2),
-(296, 0, 18, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 18, '空冥大箱', '000105', 18, NULL, '個', 2),
-(297, 0, 5, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 5, '紅百寶袋', '000106', 5, NULL, '個', 2),
-(298, 0, 28, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 35, '紅皮箱', '000107', 35, NULL, '個', 2),
-(299, 0, 45, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 100, '牌位(彿)', '000108', 100, NULL, '個', 2),
-(300, 0, 45, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 100, '牌位(道)', '000109', 100, NULL, '個', 2),
-(301, 0, 200, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 600, '念彿機', '000110', 600, NULL, '個', 2),
-(302, 0, 25, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 100, '魂幡布(彿)', '000111', 100, NULL, '個', 2),
-(303, 0, 25, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 100, '魂幡布(道)', '000112', 100, NULL, '個', 2),
-(304, 0, 120, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 200, '水被(彿)', '000113', 200, NULL, '個', 2),
-(305, 0, 120, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 200, '水被(道)', '000114', 200, NULL, '個', 2),
-(306, 0, 70, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 100, '乞水盆', '000115', 100, NULL, '個', 2),
-(307, 0, 120, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 180, '木製牌位', '000116', 180, NULL, '個', 2),
-(308, 0, 100, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 300, '卍字被(黃)', '000117', 300, NULL, '個', 2),
-(309, 0, 100, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 300, '卍字被(紅)', '000118', 300, NULL, '個', 2),
-(310, 0, 40, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 100, '往生被', '000119', 100, NULL, '個', 2),
-(311, 0, 30, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 50, '男麻草圈', '000120', 50, NULL, '個', 2),
-(312, 0, 30, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 50, '男綁頭', '000121', 50, NULL, '個', 2),
-(313, 0, 1000, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 1450, '壽衣-男西裝', '000122', 1450, NULL, '套', 2),
-(314, 0, 1000, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 1450, '壽衣-鳳仙裝', '000123', 1450, NULL, '套', 2),
-(315, 0, 1000, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 1450, '壽衣-女絲緞', '000124', 1450, NULL, '套', 2),
-(316, 0, 30, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 30, '紅絲線', '000125', 30, NULL, '捆', 2),
-(317, 0, 10, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 20, '五色線', '000126', 20, NULL, '捆', 2),
-(318, 0, 800, 1.0, 2, '1', 1, '2012-03-03 22:26:49', 1000, '大忠廳功德場租', '000127', 1000, NULL, '時', 3),
-(319, 0, 560, 1.0, 2, '1', 1, '2012-03-03 22:26:49', 700, '至正廳功德場租', '000128', 700, NULL, '時', 3),
-(320, 0, 800, 1.0, 2, '1', 1, '2012-03-03 22:26:49', 1000, '大忠廳助念場租', '000129', 1000, NULL, '時', 3),
-(321, 0, 560, 1.0, 2, '1', 1, '2012-03-03 22:26:49', 700, '至正廳助念場租', '000130', 700, NULL, '時', 3),
-(322, 0, 800, 1.0, 2, '1', 1, '2012-03-03 22:26:49', 1000, '大忠廳入殮場租', '000131', 1000, NULL, '時', 3),
-(323, 0, 560, 1.0, 2, '1', 1, '2012-03-03 22:26:49', 700, '至正廳入殮場租', '000132', 700, NULL, '時', 3),
-(324, 0, 800, 1.0, 2, '1', 1, '2012-03-03 22:26:49', 1000, '大忠廳誦經場租', '000133', 1000, NULL, '時', 3),
-(325, 0, 560, 1.0, 2, '1', 1, '2012-03-03 22:26:49', 700, '至正廳誦經場租', '000134', 700, NULL, '時', 3),
-(326, 0, 400, 1.0, 2, '1', 1, '2012-03-03 22:26:49', 500, '二樓功德場租', '000135', 500, NULL, '時', 3),
-(327, 0, 400, 1.0, 2, '1', 1, '2012-03-03 22:26:49', 500, '二樓誦經場租', '000136', 500, NULL, '時', 3),
-(328, 0, 400, 1.0, 2, '1', 1, '2012-03-03 22:26:49', 500, '助念室', '000137', 500, NULL, '時', 3),
-(329, 0, 400, 1.0, 2, '1', 1, '2012-03-03 22:26:49', 500, ' 入殮', '000138', 500, NULL, '時', 3),
-(330, 0, 33, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 70, '回禮毛巾', '000139', 70, NULL, '條', 2),
-(331, 0, 30, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 35, '七呎紅布', '000140', 35, NULL, '條', 2),
-(332, 0, 120, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 200, '一般清白巾禮盒', '000141', 200, NULL, '盒', 2),
-(333, 0, 25, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 35, '環香', '000142', 35, NULL, '盒', 2),
-(334, 0, 200, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 200, '項鍊戒指組', '000143', 200, NULL, '盒', 2),
-(335, 0, 50, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 300, '冥大', '000144', 300, NULL, '盒', 2),
-(336, 0, 200, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 600, '財寶盒', '000145', 600, NULL, '盒', 2),
-(337, 0, 150, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 600, '黃金萬兩', '000146', 600, NULL, '盒', 2),
-(338, 0, 650, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 650, '代洗燈片', '000147', 650, NULL, '組', 2),
-(339, 0, 600, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 600, '代洗相片', '000148', 600, NULL, '組', 2),
-(340, 0, 58, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 150, '藥壺', '000149', 150, NULL, '組', 2),
-(341, 0, 80, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 120, '童男女', '000150', 120, NULL, '組', 2),
-(342, 0, 60, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 150, '壽內用品', '000151', 150, NULL, '組', 2),
-(343, 0, 6400, 2.5, 2, '1', 1, '2012-03-03 22:26:49', 8000, 'SPA場租2', '000152', 8000, NULL, '場', 3),
-(344, 0, 3200, 2.5, 2, '1', 1, '2012-03-03 22:26:49', 4000, '告別禮廳-至正廳', '000153', 4000, NULL, '場', 3),
-(345, 0, 1500, 2.5, 2, '1', 1, '2012-03-03 22:26:49', 2500, '告別禮廳-助念室', '000154', 2500, NULL, '場', 3),
-(346, 0, 600, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 600, '靈屋清潔費', '000155', 600, NULL, '棟', 1),
-(347, 0, 600, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 600, '場地清潔費', '000156', 600, NULL, '棟', 1),
-(348, 1, 600, 1.0, 0, '0', 1, '2012-03-23 22:16:48', 600, '庫錢清潔費', '000157', 600, NULL, '棟', 49),
-(349, 0, 250, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 600, '元寶船', '000158', 600, NULL, '搜', 2),
-(350, 0, 35, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 40, '湯圓', '000159', 40, NULL, '碗', 2),
-(351, 0, 200, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 300, '代換瓶花-小', '000160', 300, NULL, '對', 2),
-(352, 0, 150, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 300, '代換瓶花-大', '000161', 300, NULL, '對', 2),
-(353, 0, 600, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 1200, '代換前蘭花', '000162', 1200, NULL, '對', 2),
-(354, 0, 800, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 1000, '高架花籃', '000163', 1000, NULL, '對', 2),
-(355, 0, 1000, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 1200, '高架花籃2', '000164', 1200, NULL, '對', 2),
-(356, 0, 1200, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 1500, '高架花籃3', '000165', 1500, NULL, '對', 2),
-(357, 0, 1400, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 2000, '罐頭塔-五層(品牌)', '000166', 2000, NULL, '對', 2),
-(358, 0, 2200, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 3000, '罐頭塔-七層(品牌)', '000167', 3000, NULL, '對', 2),
-(359, 0, 1100, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 1700, '罐頭塔-五層(果汁)', '000168', 1700, NULL, '對', 2),
-(360, 0, 2000, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 2700, '罐頭塔-七層(果汁)', '000169', 2700, NULL, '對', 2),
-(361, 0, 70, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 100, '壽禮燭', '000170', 100, NULL, '對', 2),
-(362, 0, 70, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 100, '大斗燭', '000171', 100, NULL, '對', 2),
-(363, 0, 70, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 100, '光神胖胖燭', '000172', 100, NULL, '對', 2),
-(364, 0, 35, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 100, '寶光洋燭', '000173', 100, NULL, '對', 2),
-(365, 0, 25, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 60, '彿杯(黃)', '000174', 60, NULL, '對', 2),
-(366, 0, 25, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 60, '彿杯(紅)', '000175', 60, NULL, '對', 2),
-(367, 0, 35, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 60, '葫蘆燭(黃)', '000176', 60, NULL, '對', 2),
-(368, 0, 35, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 60, '葫蘆燭(紅)', '000177', 60, NULL, '對', 2),
-(369, 0, 100, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 200, '代換水果', '000178', 200, NULL, '盤', 2),
-(370, 0, 1500, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 1500, '接體車-北部', '000179', 1500, NULL, '趟', 2),
-(371, 0, 5, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 10, '小酥油粒', '000180', 10, NULL, '顆', 2),
-(372, 0, 100, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 100, '一般菜盤', '000181', 100, NULL, '籃', 2),
-(373, 0, 150, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 150, '高級菜盤', '000182', 150, NULL, '籃', 2),
-(374, 0, 800, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 1000, '水果籃', '000183', 1000, NULL, '籃', 2),
-(375, 0, 1000, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 1200, '水果籃2', '000184', 1200, NULL, '籃', 2),
-(376, 0, 3, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 10, '孝誌', '000185', 10, NULL, '疊', 2),
-(377, 0, 3, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 10, '手尾錢', '000186', 10, NULL, '疊', 2),
-(378, 0, 25, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 100, '竹子', '000187', 100, NULL, '疊', 2),
-(379, 0, 20, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 50, '台幣', '000188', 50, NULL, '疊', 2),
-(380, 0, 20, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 50, '美金', '000189', 50, NULL, '疊', 2),
-(381, 0, 20, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 50, '佛祖幣', '000190', 50, NULL, '疊', 2),
-(382, 0, 20, 1.0, 0, '0', 1, '2012-03-03 22:26:49', 50, '人民幣', '000191', 50, NULL, '疊', 2),
-(384, 1, 111, 1.0, 0, '0', 1, '2012-03-23 22:37:14', 12, 'nomal', '000192', 13, 11, 'unit', 0);
+INSERT INTO product (id,version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(385,0,0, 1,3,1, 3, 1, NOW() ,0, '火葬位停柩','000001',0, Null, '天');
+INSERT INTO product (id,version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(386,0,0, 1,4,1, 3, 1, NOW() ,0, '土葬位停柩','000002',0, Null, '天');
+INSERT INTO product (id,version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(387,0,0, 1,4,1, 3, 1, NOW() ,0, '固定式冰櫃冰存','000003',0, Null, '天');
+INSERT INTO product (id,version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(388,0,0, 1,3,1, 3, 1, NOW() ,0, '移動式冰櫃冰存','000004',0, Null, '天');
+INSERT INTO product (id,version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(389,0,0, 1,3,1, 3, 1, NOW() ,0, '靈位寄存','000005',0, Null, '天');
+INSERT INTO product (id,version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(390,0,0, 1,3,1, 3, 1, NOW() ,0, '個人靈堂-大','000006',0, Null, '天');
+INSERT INTO product (id,version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(391,0,0, 1,3,1, 3, 1, NOW() ,0, '個人靈堂-中','000007',0, Null, '天');
+INSERT INTO product (id,version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(392,0,0, 1,3,1, 3, 1, NOW() ,0, '個人靈堂-小','000008',0, Null, '天');
+INSERT INTO product (id,version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(393,0,0, 1,3,1, 3, 1, NOW() ,0, '個人靈堂-商','000009',0, Null, '天');
+INSERT INTO product (id,version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(394,0,0, 1,3,1, 3, 1, NOW() ,0, '牌位暫存-普通位(天)','000010',0, Null, '天');
+INSERT INTO product (id,version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(395,0,0, 1,4,1, 3, 1, NOW() ,0, '牌位暫存-普通位(1月)','000011',0, Null, '月');
+INSERT INTO product (id,version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(396,0,0, 3,4,1, 3, 1, NOW() ,0, '牌位暫存-普通位(3月)','000012',0, Null, '月');
+INSERT INTO product (id,version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(397,0,0, 6,4,1, 3, 1, NOW() ,0, '牌位暫存-普通位(6月)','000013',0, Null, '月');
+INSERT INTO product (id,version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(398,0,0, 12,4,1, 3, 1, NOW() ,0, '牌位暫存-普通位(12月)','000014',0, Null, '月');
+INSERT INTO product (id,version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(399,0,0, 1,3,1, 3, 1, NOW() ,0, '骨罐暫存(天)','000015',0, Null, '天');
+INSERT INTO product (id,version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(400,0,0, 1,4,1, 3, 1, NOW() ,0, '骨罐暫存(1月)','000016',0, Null, '月');
+INSERT INTO product (id,version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(401,0,0, 3,4,1, 3, 1, NOW() ,0, '骨罐暫存(3月)','000017',0, Null, '月');
+INSERT INTO product (id,version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(402,0,0, 6,4,1, 3, 1, NOW() ,0, '骨罐暫存(6月)','000018',0, Null, '月');
+INSERT INTO product (id,version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(403,0,0, 12,4,1, 3, 1, NOW() ,0, '骨罐暫存(12月)','000019',0, Null, '月');
+INSERT INTO product (id,version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(404,0,0, 1,3,1, 3, 1, NOW() ,0, '牌位暫存-豪華位(天)','000020',0, Null, '天');
+INSERT INTO product (id,version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(405,0,0, 1,4,1, 3, 1, NOW() ,0, '牌位暫存-豪華位(1月)','000021',0, Null, '月');
+INSERT INTO product (id,version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(406,0,0, 3,4,1, 3, 1, NOW() ,0, '牌位暫存-豪華位(3月)','000022',0, Null, '月');
+INSERT INTO product (id,version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(407,0,0, 6,4,1, 3, 1, NOW() ,0, '牌位暫存-豪華位(6月)','000023',0, Null, '月');
+INSERT INTO product (id,version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(408,0,0, 12,4,1, 3, 1, NOW() ,0, '牌位暫存-豪華位(12月)','000024',0, Null, '月');
+INSERT INTO product (id,version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(409,0,0, 1,0,1, 3, 1, NOW() ,0, '淨身場租','000025',0, Null, '次');
+INSERT INTO product (id,version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(410,0,0, 1,0,1, 3, 1, NOW() ,0, '隔夜守靈','000026',0, Null, '次');
+INSERT INTO product (id,version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(411,0,0, 1,2,1, 3, 1, NOW() ,0, '大忠廳功德場租','000027',0, Null, '時');
+INSERT INTO product (id,version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(412,0,0, 1,2,1, 3, 1, NOW() ,0, '至正廳功德場租','000028',0, Null, '時');
+INSERT INTO product (id,version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(413,0,0, 1,2,1, 3, 1, NOW() ,0, '大忠廳助念場租','000029',0, Null, '時');
+INSERT INTO product (id,version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(414,0,0, 1,2,1, 3, 1, NOW() ,0, '至正廳助念場租','000030',0, Null, '時');
+INSERT INTO product (id,version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(415,0,0, 1,2,1, 3, 1, NOW() ,0, '大忠廳入殮場租','000031',0, Null, '時');
+INSERT INTO product (id,version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(416,0,0, 1,2,1, 3, 1, NOW() ,0, '至正廳入殮場租','000032',0, Null, '時');
+INSERT INTO product (id,version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(417,0,0, 1,2,1, 3, 1, NOW() ,0, '大忠廳誦經場租','000033',0, Null, '時');
+INSERT INTO product (id,version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(418,0,0, 1,2,1, 3, 1, NOW() ,0, '至正廳誦經場租','000034',0, Null, '時');
+INSERT INTO product (id,version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(419,0,0, 1,2,1, 3, 1, NOW() ,0, '二樓功德場租','000035',0, Null, '時');
+INSERT INTO product (id,version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(420,0,0, 1,2,1, 3, 1, NOW() ,0, '二樓誦經場租','000036',0, Null, '時');
+INSERT INTO product (id,version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(421,0,0, 1,2,1, 3, 1, NOW() ,0, '一樓誦經場租','000037',0, Null, '時');
+INSERT INTO product (id,version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(422,0,0, 1,2,1, 3, 1, NOW() ,0, '助念場租','000038',0, Null, '時');
+INSERT INTO product (id,version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(423,0,0, 1,2,1, 3, 1, NOW() ,0, ' 入殮場租','000039',0, Null, '時');
+INSERT INTO product (id,version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(424,0,0, 2,2,1, 3, 1, NOW() ,0, 'SPA場租2','000040',0, Null, '場');
+INSERT INTO product (id,version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(425,0,0, 3,2,1, 3, 1, NOW() ,0, '告別禮廳-至正廳(上)','000041',0, Null, '場');
+INSERT INTO product (id,version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(426,0,0, 3,2,1, 3, 1, NOW() ,0, '告別禮廳-至正廳(中)','000042',0, Null, '場');
+INSERT INTO product (id,version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(427,0,0, 3,2,1, 3, 1, NOW() ,0, '告別禮廳-至正廳(下)','000043',0, Null, '場');
+INSERT INTO product (id,version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(428,0,0, 3,2,1, 3, 1, NOW() ,0, '告別禮廳-大忠廳(上)','000044',0, Null, '場');
+INSERT INTO product (id,version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(429,0,0, 3,2,1, 3, 1, NOW() ,0, '告別禮廳-大忠廳(中)','000045',0, Null, '場');
+INSERT INTO product (id,version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(430,0,0, 3,2,1, 3, 1, NOW() ,0, '告別禮廳-大忠廳(下)','000046',0, Null, '場');
+INSERT INTO product (id,version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(431,0,0, 3,2,1, 3, 1, NOW() ,0, '告別禮廳-助念室(上)','000047',0, Null, '場');
+INSERT INTO product (id,version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(432,0,0, 3,2,1, 3, 1, NOW() ,0, '告別禮廳-助念室(中)','000048',0, Null, '場');
+INSERT INTO product (id,version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(433,0,0, 3,2,1, 3, 1, NOW() ,0, '告別禮廳-助念室(下)','000049',0, Null, '場');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,100, 1,0,0, 2, 1, NOW(), 120, '發糕2','010001',120, Null, '組');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,50, 1,3,0, 1, 1, NOW(), 50, '臉盆水逾期','010002',50, Null, '天');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,4, 1,0,0, 0, 1, NOW(), 5, '大銀(散裝)','010003',5, Null, '支');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,4, 1,0,0, 0, 1, NOW(), 5, '小銀(散裝)','010004',5, Null, '支');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,4, 1,0,0, 0, 1, NOW(), 5, '刈金(散裝)','010005',5, Null, '支');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,4, 1,0,0, 0, 1, NOW(), 5, '壽金(散裝)','010006',5, Null, '支');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,4, 1,0,0, 0, 1, NOW(), 5, '福金(散裝)','010007',5, Null, '支');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,60, 1,0,0, 2, 1, NOW(), 80, '捻香粉','010008',80, Null, '斤');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,90, 1,0,0, 0, 1, NOW(), 150, '白雙連','010009',150, Null, '包');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,90, 1,0,0, 0, 1, NOW(), 150, '紅雙連','010010',150, Null, '包');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,15, 1,0,0, 0, 1, NOW(), 30, '白包袋','010011',30, Null, '包');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,15, 1,0,0, 0, 1, NOW(), 30, '紅包袋','010012',30, Null, '包');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,80, 1,0,0, 0, 1, NOW(), 100, '胸花','010013',100, Null, '包');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,55, 1,0,0, 0, 1, NOW(), 65, '往生蓮花紙','010014',65, Null, '包');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,60, 1,0,0, 0, 1, NOW(), 75, '單面彩色蓮花紙','010015',75, Null, '包');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,65, 1,0,0, 0, 1, NOW(), 85, '雙面彩色元寶紙','010016',85, Null, '包');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,8, 1,0,0, 2, 1, NOW(), 10, '香爐粉','010017',10, Null, '包');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,80, 1,0,0, 0, 1, NOW(), 100, '金元寶','010018',100, Null, '包');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,80, 1,0,0, 0, 1, NOW(), 100, '銀元寶','010019',100, Null, '包');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,5, 1,0,0, 0, 1, NOW(), 10, '金炮燭','010020',10, Null, '包');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,25, 1,0,0, 0, 1, NOW(), 35, '禮簿','010021',35, Null, '本');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,25, 1,0,0, 0, 1, NOW(), 35, '題名簿','010022',35, Null, '本');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,25, 1,0,0, 0, 1, NOW(), 35, '謝簿','010023',35, Null, '本');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,45, 1,0,0, 0, 1, NOW(), 80, '貼肉仁','010024',80, Null, '件');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,10, 1,0,0, 0, 1, NOW(), 30, '長袖雨衣','010025',30, Null, '件');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,200, 50,0,0, 0, 1, NOW(), 250, '大銀(50/件)','010026',250, Null, '支');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,200, 63,0,0, 0, 1, NOW(), 250, '小銀(63/件)','010027',250, Null, '支');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,200, 50,0,0, 0, 1, NOW(), 250, '刈金(50/件)','010028',250, Null, '支');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,200, 50,0,0, 0, 1, NOW(), 250, '壽金(50/件)','010029',250, Null, '支');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,200, 50,0,0, 0, 1, NOW(), 250, '福金(50/件)','010030',250, Null, '支');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,190, 1,0,0, 0, 1, NOW(), 250, '麻衣','010031',250, Null, '件');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,90, 1,0,0, 0, 1, NOW(), 100, '苧衣','010032',100, Null, '件');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,30, 1,0,0, 0, 1, NOW(), 50, '女頭罩','010033',50, Null, '件');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,120, 1,0,0, 0, 1, NOW(), 150, '女婿服','010034',150, Null, '件');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,130, 1,0,0, 0, 1, NOW(), 150, '男用白袍','010035',150, Null, '件');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,80, 1,0,0, 0, 1, NOW(), 100, '第三代孝服','010036',100, Null, '件');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,40, 1,0,0, 0, 1, NOW(), 50, '第三代頭罩','010037',50, Null, '件');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,80, 1,0,0, 0, 1, NOW(), 100, '第五代孝服','010038',100, Null, '件');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,40, 1,0,0, 0, 1, NOW(), 50, '第五代頭罩','010039',50, Null, '件');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,600, 1,0,0, 2, 1, NOW(), 750, '素三牲','010040',750, Null, '份');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,600, 1,0,0, 2, 1, NOW(), 750, '葷三牲','010041',750, Null, '份');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,1400, 1,0,0, 2, 1, NOW(), 1500, '素五牲','010042',1500, Null, '份');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,1400, 1,0,0, 2, 1, NOW(), 1600, '五牲-豬頭','010043',1600, Null, '份');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,1500, 1,0,0, 2, 1, NOW(), 1600, '五牲-原蹄','010044',1600, Null, '份');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,1500, 1,0,0, 2, 1, NOW(), 1700, '五牲-全豬頭','010045',1700, Null, '份');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,150, 1,0,0, 2, 1, NOW(), 250, '素小三牲','010046',250, Null, '份');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,150, 1,0,0, 2, 1, NOW(), 250, '葷小三牲','010047',250, Null, '份');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,300, 1,0,0, 2, 1, NOW(), 350, '四果','010048',350, Null, '份');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,100, 1,0,0, 2, 1, NOW(), 200, '綜合果','010049',200, Null, '份');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,300, 1,0,0, 2, 1, NOW(), 350, '十二菜碗','010050',350, Null, '份');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,150, 1,0,0, 2, 1, NOW(), 200, '六菜碗','010051',200, Null, '份');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,9000, 1,0,0, 2, 1, NOW(), 12800, '羽蝶A款','010052',12800, Null, '式');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,10000, 1,0,0, 2, 1, NOW(), 13800, '羽蝶B款','010053',13800, Null, '式');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,10000, 1,0,0, 2, 1, NOW(), 13800, '羽蝶C款','010054',13800, Null, '式');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,17000, 1,0,0, 2, 1, NOW(), 20800, '羽蝶淨化組合A','010055',20800, Null, '式');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,18000, 1,0,0, 2, 1, NOW(), 21800, '羽蝶淨化組合B','010056',21800, Null, '式');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,18000, 1,0,0, 2, 1, NOW(), 21800, '羽蝶淨化組合C','010057',21800, Null, '式');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,3000, 1,0,0, 2, 1, NOW(), 3500, '移動式冰櫃下架費','010058',3500, Null, '趟');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,1500, 1,0,0, 2, 1, NOW(), 3000, '淨身服務(IN)','010059',3000, Null, '次');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,2400, 1,0,0, 2, 1, NOW(), 3000, '淨身服務(O)','010060',3000, Null, '次');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,2500, 1,0,0, 2, 1, NOW(), 3000, '淨身服務(S)','010061',3000, Null, '次');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,1800, 1,0,0, 2, 1, NOW(), 3000, '淨身服務(O)(IN)','010062',3000, Null, '次');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,38, 1,0,0, 0, 1, NOW(), 150, '庫錢','010063',150, Null, '包');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,38, 1,0,0, 0, 1, NOW(), 150, '庫錢(O)','010064',150, Null, '包');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,52, 1,0,0, 0, 1, NOW(), 80, '壽內庫錢','010065',80, Null, '包');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,415, 1,3,0, 2, 1, NOW(), 800, '臉盆水服務','010066',800, Null, '式');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,1200, 1,0,0, 2, 1, NOW(), 1500, 'LED外牌地毯','010067',1500, Null, '次');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,2000, 1,0,0, 2, 1, NOW(), 3000, '全採LED投射燈租用','010068',3000, Null, '次');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,35, 1,0,0, 2, 1, NOW(), 40, '紅龜','010069',40, Null, '個');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,35, 1,0,0, 2, 1, NOW(), 40, '發糕','010070',40, Null, '個');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,10, 1,0,0, 2, 1, NOW(), 12, '水煮蛋','010071',12, Null, '個');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,150, 1,0,0, 2, 1, NOW(), 150, '大發粿','010072',150, Null, '個');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,12, 1,0,0, 2, 1, NOW(), 15, '鹹鴨蛋','010073',15, Null, '個');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,30, 1,0,0, 2, 1, NOW(), 50, '乳頭糕','010074',50, Null, '個');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,60, 1,0,0, 2, 1, NOW(), 80, '筆架糕','010075',80, Null, '個');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,60, 1,0,0, 2, 1, NOW(), 80, '筆架山糕','010076',80, Null, '個');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,50, 1,0,0, 0, 1, NOW(), 80, '竹圈','010077',80, Null, '個');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,50, 1,0,0, 0, 1, NOW(), 80, '香爐','010078',80, Null, '個');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,18, 1,0,0, 0, 1, NOW(), 18, '空冥大箱','010079',18, Null, '個');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,5, 1,0,0, 0, 1, NOW(), 5, '紅百寶袋','010080',5, Null, '個');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,28, 1,0,0, 0, 1, NOW(), 35, '紅皮箱','010081',35, Null, '個');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,45, 1,0,0, 0, 1, NOW(), 100, '牌位(彿)','010082',100, Null, '個');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,45, 1,0,0, 0, 1, NOW(), 100, '牌位(道)','010083',100, Null, '個');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,200, 1,0,0, 0, 1, NOW(), 600, '念彿機','010084',600, Null, '個');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,25, 1,0,0, 0, 1, NOW(), 100, '魂幡布(彿)','010085',100, Null, '個');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,25, 1,0,0, 0, 1, NOW(), 100, '魂幡布(道)','010086',100, Null, '個');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,120, 1,0,0, 0, 1, NOW(), 200, '水被(彿)','010087',200, Null, '個');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,120, 1,0,0, 0, 1, NOW(), 200, '水被(道)','010088',200, Null, '個');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,70, 1,0,0, 0, 1, NOW(), 100, '乞水盆','010089',100, Null, '個');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,120, 1,0,0, 0, 1, NOW(), 180, '木製牌位','010090',180, Null, '個');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,100, 1,0,0, 0, 1, NOW(), 300, '卍字被(黃)','010091',300, Null, '個');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,100, 1,0,0, 0, 1, NOW(), 300, '卍字被(紅)','010092',300, Null, '個');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,40, 1,0,0, 0, 1, NOW(), 100, '往生被','010093',100, Null, '個');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,30, 1,0,0, 0, 1, NOW(), 50, '男麻草圈','010094',50, Null, '個');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,30, 1,0,0, 0, 1, NOW(), 50, '男綁頭','010095',50, Null, '個');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,1000, 1,0,0, 0, 1, NOW(), 1450, '壽衣-男西裝','010096',1450, Null, '套');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,1000, 1,0,0, 0, 1, NOW(), 1450, '壽衣-鳳仙裝','010097',1450, Null, '套');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,1000, 1,0,0, 0, 1, NOW(), 1450, '壽衣-女絲緞','010098',1450, Null, '套');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,30, 1,0,0, 0, 1, NOW(), 30, '紅絲線','010099',30, Null, '捆');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,10, 1,0,0, 0, 1, NOW(), 20, '五色線','010100',20, Null, '捆');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,33, 1,0,0, 0, 1, NOW(), 70, '回禮毛巾','010101',70, Null, '條');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,30, 1,0,0, 0, 1, NOW(), 35, '七呎紅布','010102',35, Null, '條');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,120, 1,0,0, 0, 1, NOW(), 200, '一般清白巾禮盒','010103',200, Null, '盒');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,25, 1,0,0, 0, 1, NOW(), 35, '環香','010104',35, Null, '盒');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,200, 1,0,0, 0, 1, NOW(), 200, '項鍊戒指組','010105',200, Null, '盒');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,50, 1,0,0, 0, 1, NOW(), 300, '冥大','010106',300, Null, '盒');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,200, 1,0,0, 0, 1, NOW(), 600, '財寶盒','010107',600, Null, '盒');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,150, 1,0,0, 0, 1, NOW(), 600, '黃金萬兩','010108',600, Null, '盒');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,650, 1,0,0, 2, 1, NOW(), 650, '代洗燈片','010109',650, Null, '組');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,600, 1,0,0, 2, 1, NOW(), 600, '代洗相片','010110',600, Null, '組');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,58, 1,0,0, 0, 1, NOW(), 150, '藥壺','010111',150, Null, '組');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,80, 1,0,0, 0, 1, NOW(), 120, '童男女','010112',120, Null, '組');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,60, 1,0,0, 0, 1, NOW(), 150, '壽內用品','010113',150, Null, '組');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,300, 1,0,0, 1, 1, NOW(), 600, '靈屋清潔費','010114',600, Null, '棟');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,300, 1,0,0, 1, 1, NOW(), 600, '場地清潔費','010115',600, Null, '棟');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,30, 1,0,0, 1, 1, NOW(), 50, '庫錢清潔費','010116',50, Null, '包');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,250, 1,0,0, 2, 1, NOW(), 600, '元寶船','010117',600, Null, '搜');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,35, 1,0,0, 2, 1, NOW(), 40, '湯圓','010118',40, Null, '碗');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,200, 1,0,0, 2, 1, NOW(), 300, '代換瓶花-小','010119',300, Null, '對');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,150, 1,0,0, 2, 1, NOW(), 300, '代換瓶花-大','010120',300, Null, '對');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,600, 1,0,0, 2, 1, NOW(), 1200, '代換前蘭花','010121',1200, Null, '對');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,800, 1,0,0, 2, 1, NOW(), 1000, '高架花籃','010122',1000, Null, '對');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,1000, 1,0,0, 2, 1, NOW(), 1200, '高架花籃2','010123',1200, Null, '對');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,1200, 1,0,0, 2, 1, NOW(), 1500, '高架花籃3','010124',1500, Null, '對');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,1400, 1,0,0, 2, 1, NOW(), 2000, '罐頭塔-五層(品牌)','010125',2000, Null, '對');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,2200, 1,0,0, 2, 1, NOW(), 3000, '罐頭塔-七層(品牌)','010126',3000, Null, '對');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,1100, 1,0,0, 2, 1, NOW(), 1700, '罐頭塔-五層(果汁)','010127',1700, Null, '對');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,2000, 1,0,0, 2, 1, NOW(), 2700, '罐頭塔-七層(果汁)','010128',2700, Null, '對');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,70, 1,0,0, 0, 1, NOW(), 100, '壽禮燭','010129',100, Null, '對');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,70, 1,0,0, 0, 1, NOW(), 100, '大斗燭','010130',100, Null, '對');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,70, 1,0,0, 0, 1, NOW(), 100, '光神胖胖燭','010131',100, Null, '對');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,35, 1,0,0, 0, 1, NOW(), 100, '寶光洋燭','010132',100, Null, '對');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,25, 1,0,0, 0, 1, NOW(), 60, '彿杯(黃)','010133',60, Null, '對');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,25, 1,0,0, 0, 1, NOW(), 60, '彿杯(紅)','010134',60, Null, '對');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,35, 1,0,0, 0, 1, NOW(), 60, '葫蘆燭(黃)','010135',60, Null, '對');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,35, 1,0,0, 0, 1, NOW(), 60, '葫蘆燭(紅)','010136',60, Null, '對');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,100, 1,0,0, 2, 1, NOW(), 200, '代換水果','010137',200, Null, '盤');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,1500, 1,0,0, 2, 1, NOW(), 1500, '接體車-北部','010138',1500, Null, '趟');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,5, 1,0,0, 0, 1, NOW(), 10, '小酥油粒','010139',10, Null, '顆');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,100, 1,0,0, 2, 1, NOW(), 100, '一般菜盤','010140',100, Null, '籃');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,150, 1,0,0, 2, 1, NOW(), 150, '高級菜盤','010141',150, Null, '籃');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,800, 1,0,0, 2, 1, NOW(), 1000, '水果籃','010142',1000, Null, '籃');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,1000, 1,0,0, 2, 1, NOW(), 1200, '水果籃2','010143',1200, Null, '籃');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,3, 1,0,0, 0, 1, NOW(), 10, '孝誌','010144',10, Null, '疊');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,3, 1,0,0, 0, 1, NOW(), 10, '手尾錢','010145',10, Null, '疊');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,25, 1,0,0, 0, 1, NOW(), 100, '竹子','010146',100, Null, '疊');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,20, 1,0,0, 0, 1, NOW(), 50, '台幣','010147',50, Null, '疊');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,20, 1,0,0, 0, 1, NOW(), 50, '美金','010148',50, Null, '疊');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,20, 1,0,0, 0, 1, NOW(), 50, '佛祖幣','010149',50, Null, '疊');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,20, 1,0,0, 0, 1, NOW(), 50, '人民幣','010150',50, Null, '疊');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,1000, 1,0,0, 1, 1, NOW(), 3000, '投影機租用','010151',3000, Null, '次');
+INSERT INTO product (version, cost_price, cost_range, cost_unit, has_place, product_type, last_modify_by_id, last_updated, price, product_name, product_no, salling_price, total_quantity, unit) VALUES(0,1000, 1,0,0, 1, 1, NOW(), 1000, 'SPA場租','010152',1000, Null, '次');
 
--- --------------------------------------------------------
 
---
--- 資料表格式： `product_history`
---
 
-DROP TABLE IF EXISTS `product_history`;
-CREATE TABLE IF NOT EXISTS `product_history` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `version` bigint(20) NOT NULL,
-  `date` datetime NOT NULL,
-  `is_purchase` bit(1) NOT NULL,
-  `last_modify_by_id` bigint(20) NOT NULL,
-  `last_updated` datetime NOT NULL,
-  `memo` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `product_id` bigint(20) NOT NULL,
-  `project_id` bigint(20) DEFAULT NULL,
-  `quantity` decimal(19,0) NOT NULL,
-  `total_quantity` int(11) NOT NULL,
-  `vendor` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FKC8B4F9441B7C2B1D` (`project_id`),
-  KEY `FKC8B4F944E623C052` (`last_modify_by_id`),
-  KEY `FKC8B4F944F961D35D` (`product_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=21 ;
-
---
--- 列出以下資料庫的數據： `product_history`
---
-
-INSERT INTO `product_history` (`id`, `version`, `date`, `is_purchase`, `last_modify_by_id`, `last_updated`, `memo`, `product_id`, `project_id`, `quantity`, `total_quantity`, `vendor`) VALUES
-(1, 0, '2012-03-13 00:00:00', '0', 1, '2012-03-13 20:58:48', NULL, 280, 2, 1, 0, NULL),
-(2, 0, '2012-03-13 21:17:48', '0', 1, '2012-03-13 21:17:48', NULL, 280, 2, -1, 0, NULL),
-(3, 0, '2012-03-13 00:00:00', '0', 1, '2012-03-13 21:27:49', NULL, 280, 2, 1, 0, NULL),
-(4, 0, '2012-03-13 21:28:17', '0', 1, '2012-03-13 21:28:17', NULL, 280, 2, -1, 0, NULL),
-(5, 0, '2012-03-13 00:00:00', '0', 1, '2012-03-13 21:28:25', NULL, 280, 2, 1, 0, NULL),
-(6, 0, '2012-03-13 21:31:51', '0', 1, '2012-03-13 21:31:51', NULL, 280, 2, -1, 0, NULL),
-(7, 0, '2012-03-13 00:00:00', '0', 1, '2012-03-13 21:32:06', NULL, 280, 2, 1, 0, NULL),
-(8, 0, '2012-03-13 00:00:00', '0', 1, '2012-03-13 22:06:11', NULL, 192, 2, 1, 0, '1'),
-(9, 0, '2012-03-13 00:00:00', '0', 1, '2012-03-13 22:07:10', NULL, 192, 2, 2, 0, '3333'),
-(10, 0, '2012-03-07 00:00:00', '0', 1, '2012-03-13 22:07:53', NULL, 347, 2, 1, 0, NULL),
-(11, 0, '2012-03-14 04:00:00', '0', 1, '2012-03-13 22:08:07', NULL, 347, 2, 1, 0, NULL),
-(12, 0, '2012-03-14 00:27:58', '0', 1, '2012-03-14 00:27:58', NULL, 192, 2, -1, 0, '1'),
-(13, 0, '2012-03-14 00:28:25', '0', 1, '2012-03-14 00:28:25', NULL, 192, 2, -1, 0, '1'),
-(14, 0, '2012-03-14 00:32:12', '0', 1, '2012-03-14 00:32:12', NULL, 192, 2, -1, 0, '1'),
-(15, 0, '2012-03-14 00:32:28', '0', 1, '2012-03-14 00:32:28', NULL, 192, 2, -1, 0, '1'),
-(16, 0, '2012-03-14 00:38:08', '0', 1, '2012-03-14 00:38:08', NULL, 192, 2, -1, 0, '1'),
-(17, 0, '2012-03-14 00:39:15', '0', 1, '2012-03-14 00:39:15', NULL, 192, 2, -1, 0, '1'),
-(18, 0, '2012-03-14 00:41:45', '0', 1, '2012-03-14 00:41:45', NULL, 192, 2, -1, 0, '1'),
-(19, 0, '2012-03-13 00:00:00', '0', 1, '2012-03-14 00:41:45', NULL, 192, 2, 1, 0, '3333'),
-(20, 0, '2012-03-24 00:00:00', '1', 1, '2012-03-23 22:37:14', NULL, 384, 2, 11, 11, '11');
 
 -- --------------------------------------------------------
 
@@ -638,6 +729,584 @@ CREATE TABLE IF NOT EXISTS `product_link_place` (
 --
 -- 列出以下資料庫的數據： `product_link_place`
 --
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 320,  '1',  NOW(),  '22',  320,  '385',  500);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 320,  '1',  NOW(),  '23',  320,  '385',  500);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 320,  '1',  NOW(),  '24',  320,  '385',  500);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 320,  '1',  NOW(),  '25',  320,  '385',  500);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 320,  '1',  NOW(),  '26',  320,  '385',  500);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 320,  '1',  NOW(),  '27',  320,  '385',  500);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 320,  '1',  NOW(),  '28',  320,  '385',  500);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 320,  '1',  NOW(),  '29',  320,  '385',  500);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 320,  '1',  NOW(),  '30',  320,  '385',  500);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 320,  '1',  NOW(),  '31',  320,  '385',  500);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 400,  '1',  NOW(),  '32',  400,  '386',  500);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 400,  '1',  NOW(),  '33',  400,  '386',  500);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 300,  '1',  NOW(),  '127',  400,  '387',  500);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 300,  '1',  NOW(),  '128',  400,  '387',  500);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 300,  '1',  NOW(),  '129',  400,  '387',  500);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 300,  '1',  NOW(),  '130',  400,  '387',  500);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 300,  '1',  NOW(),  '131',  400,  '387',  500);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 300,  '1',  NOW(),  '132',  400,  '387',  500);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 300,  '1',  NOW(),  '133',  400,  '387',  500);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 300,  '1',  NOW(),  '134',  400,  '387',  500);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 300,  '1',  NOW(),  '135',  400,  '387',  500);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 300,  '1',  NOW(),  '136',  400,  '387',  500);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 300,  '1',  NOW(),  '137',  400,  '387',  500);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 300,  '1',  NOW(),  '138',  400,  '387',  500);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 300,  '1',  NOW(),  '139',  400,  '387',  500);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 250,  '1',  NOW(),  '140',  500,  '388',  550);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 250,  '1',  NOW(),  '141',  500,  '388',  550);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 250,  '1',  NOW(),  '142',  500,  '388',  550);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 250,  '1',  NOW(),  '143',  500,  '388',  550);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 250,  '1',  NOW(),  '144',  500,  '388',  550);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 250,  '1',  NOW(),  '145',  500,  '388',  550);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 250,  '1',  NOW(),  '146',  500,  '388',  550);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 250,  '1',  NOW(),  '147',  500,  '388',  550);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 240,  '1',  NOW(),  '34',  240,  '389',  300);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 240,  '1',  NOW(),  '35',  240,  '389',  300);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 240,  '1',  NOW(),  '36',  240,  '389',  300);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 240,  '1',  NOW(),  '37',  240,  '389',  300);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 240,  '1',  NOW(),  '38',  240,  '389',  300);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 240,  '1',  NOW(),  '39',  240,  '389',  300);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 240,  '1',  NOW(),  '40',  240,  '389',  300);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 240,  '1',  NOW(),  '41',  240,  '389',  300);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 240,  '1',  NOW(),  '42',  240,  '389',  300);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 240,  '1',  NOW(),  '43',  240,  '389',  300);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 240,  '1',  NOW(),  '44',  240,  '389',  300);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 240,  '1',  NOW(),  '45',  240,  '389',  300);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 240,  '1',  NOW(),  '46',  240,  '389',  300);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 240,  '1',  NOW(),  '47',  240,  '389',  300);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 240,  '1',  NOW(),  '48',  240,  '389',  300);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 240,  '1',  NOW(),  '49',  240,  '389',  300);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 240,  '1',  NOW(),  '50',  240,  '389',  300);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 240,  '1',  NOW(),  '51',  240,  '389',  300);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 240,  '1',  NOW(),  '52',  240,  '389',  300);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 240,  '1',  NOW(),  '53',  240,  '389',  300);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 240,  '1',  NOW(),  '54',  240,  '389',  300);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 240,  '1',  NOW(),  '55',  240,  '389',  300);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 240,  '1',  NOW(),  '56',  240,  '389',  300);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 240,  '1',  NOW(),  '57',  240,  '389',  300);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 240,  '1',  NOW(),  '58',  240,  '389',  300);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 240,  '1',  NOW(),  '59',  240,  '389',  300);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 240,  '1',  NOW(),  '60',  240,  '389',  300);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 240,  '1',  NOW(),  '61',  240,  '389',  300);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 240,  '1',  NOW(),  '62',  240,  '389',  300);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 240,  '1',  NOW(),  '63',  240,  '389',  300);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 240,  '1',  NOW(),  '64',  240,  '389',  300);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 240,  '1',  NOW(),  '65',  240,  '389',  300);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 240,  '1',  NOW(),  '66',  240,  '389',  300);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 240,  '1',  NOW(),  '67',  240,  '389',  300);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 240,  '1',  NOW(),  '68',  240,  '389',  300);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 240,  '1',  NOW(),  '69',  240,  '389',  300);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 240,  '1',  NOW(),  '90',  240,  '389',  300);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2500,  '1',  NOW(),  '18',  2400,  '390',  3000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2000,  '1',  NOW(),  '16',  2000,  '391',  2500);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 1500,  '1',  NOW(),  '17',  1600,  '392',  2000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2000,  '1',  NOW(),  '15',  2000,  '393',  2500);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 100,  '1',  NOW(),  '70',  100,  '394',  100);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 100,  '1',  NOW(),  '71',  100,  '394',  100);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 100,  '1',  NOW(),  '72',  100,  '394',  100);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 100,  '1',  NOW(),  '73',  100,  '394',  100);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 100,  '1',  NOW(),  '74',  100,  '394',  100);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 100,  '1',  NOW(),  '75',  100,  '394',  100);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 100,  '1',  NOW(),  '76',  100,  '394',  100);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 100,  '1',  NOW(),  '77',  100,  '394',  100);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 100,  '1',  NOW(),  '78',  100,  '394',  100);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 100,  '1',  NOW(),  '79',  100,  '394',  100);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 100,  '1',  NOW(),  '80',  100,  '394',  100);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 100,  '1',  NOW(),  '81',  100,  '394',  100);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 100,  '1',  NOW(),  '82',  100,  '394',  100);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 100,  '1',  NOW(),  '83',  100,  '394',  100);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 100,  '1',  NOW(),  '84',  100,  '394',  100);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 100,  '1',  NOW(),  '85',  100,  '394',  100);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 100,  '1',  NOW(),  '86',  100,  '394',  100);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 100,  '1',  NOW(),  '87',  100,  '394',  100);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 100,  '1',  NOW(),  '88',  100,  '394',  100);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 100,  '1',  NOW(),  '89',  100,  '394',  100);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 500,  '1',  NOW(),  '70',  1000,  '395',  3000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 500,  '1',  NOW(),  '71',  1000,  '395',  3000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 500,  '1',  NOW(),  '72',  1000,  '395',  3000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 500,  '1',  NOW(),  '73',  1000,  '395',  3000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 500,  '1',  NOW(),  '74',  1000,  '395',  3000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 500,  '1',  NOW(),  '75',  1000,  '395',  3000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 500,  '1',  NOW(),  '76',  1000,  '395',  3000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 500,  '1',  NOW(),  '77',  1000,  '395',  3000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 500,  '1',  NOW(),  '78',  1000,  '395',  3000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 500,  '1',  NOW(),  '79',  1000,  '395',  3000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 500,  '1',  NOW(),  '80',  1000,  '395',  3000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 500,  '1',  NOW(),  '81',  1000,  '395',  3000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 500,  '1',  NOW(),  '82',  1000,  '395',  3000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 500,  '1',  NOW(),  '83',  1000,  '395',  3000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 500,  '1',  NOW(),  '84',  1000,  '395',  3000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 500,  '1',  NOW(),  '85',  1000,  '395',  3000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 500,  '1',  NOW(),  '86',  1000,  '395',  3000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 500,  '1',  NOW(),  '87',  1000,  '395',  3000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 500,  '1',  NOW(),  '88',  1000,  '395',  3000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 500,  '1',  NOW(),  '89',  1000,  '395',  3000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2000,  '1',  NOW(),  '70',  3000,  '396',  7000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2000,  '1',  NOW(),  '71',  3000,  '396',  7000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2000,  '1',  NOW(),  '72',  3000,  '396',  7000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2000,  '1',  NOW(),  '73',  3000,  '396',  7000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2000,  '1',  NOW(),  '74',  3000,  '396',  7000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2000,  '1',  NOW(),  '75',  3000,  '396',  7000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2000,  '1',  NOW(),  '76',  3000,  '396',  7000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2000,  '1',  NOW(),  '77',  3000,  '396',  7000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2000,  '1',  NOW(),  '78',  3000,  '396',  7000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2000,  '1',  NOW(),  '79',  3000,  '396',  7000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2000,  '1',  NOW(),  '80',  3000,  '396',  7000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2000,  '1',  NOW(),  '81',  3000,  '396',  7000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2000,  '1',  NOW(),  '82',  3000,  '396',  7000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2000,  '1',  NOW(),  '83',  3000,  '396',  7000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2000,  '1',  NOW(),  '84',  3000,  '396',  7000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2000,  '1',  NOW(),  '85',  3000,  '396',  7000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2000,  '1',  NOW(),  '86',  3000,  '396',  7000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2000,  '1',  NOW(),  '87',  3000,  '396',  7000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2000,  '1',  NOW(),  '88',  3000,  '396',  7000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2000,  '1',  NOW(),  '89',  3000,  '396',  7000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '70',  6000,  '397',  12000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '71',  6000,  '397',  12000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '72',  6000,  '397',  12000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '73',  6000,  '397',  12000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '74',  6000,  '397',  12000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '75',  6000,  '397',  12000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '76',  6000,  '397',  12000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '77',  6000,  '397',  12000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '78',  6000,  '397',  12000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '79',  6000,  '397',  12000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '80',  6000,  '397',  12000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '81',  6000,  '397',  12000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '82',  6000,  '397',  12000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '83',  6000,  '397',  12000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '84',  6000,  '397',  12000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '85',  6000,  '397',  12000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '86',  6000,  '397',  12000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '87',  6000,  '397',  12000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '88',  6000,  '397',  12000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '89',  6000,  '397',  12000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 19000,  '1',  NOW(),  '70',  19000,  '398',  19000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 19000,  '1',  NOW(),  '71',  19000,  '398',  19000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 19000,  '1',  NOW(),  '72',  19000,  '398',  19000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 19000,  '1',  NOW(),  '73',  19000,  '398',  19000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 19000,  '1',  NOW(),  '74',  19000,  '398',  19000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 19000,  '1',  NOW(),  '75',  19000,  '398',  19000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 19000,  '1',  NOW(),  '76',  19000,  '398',  19000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 19000,  '1',  NOW(),  '77',  19000,  '398',  19000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 19000,  '1',  NOW(),  '78',  19000,  '398',  19000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 19000,  '1',  NOW(),  '79',  19000,  '398',  19000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 19000,  '1',  NOW(),  '80',  19000,  '398',  19000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 19000,  '1',  NOW(),  '81',  19000,  '398',  19000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 19000,  '1',  NOW(),  '82',  19000,  '398',  19000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 19000,  '1',  NOW(),  '83',  19000,  '398',  19000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 19000,  '1',  NOW(),  '84',  19000,  '398',  19000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 19000,  '1',  NOW(),  '85',  19000,  '398',  19000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 19000,  '1',  NOW(),  '86',  19000,  '398',  19000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 19000,  '1',  NOW(),  '87',  19000,  '398',  19000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 19000,  '1',  NOW(),  '88',  19000,  '398',  19000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 19000,  '1',  NOW(),  '89',  19000,  '398',  19000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 100,  '1',  NOW(),  '91',  100,  '399',  100);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 100,  '1',  NOW(),  '92',  100,  '399',  100);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 100,  '1',  NOW(),  '93',  100,  '399',  100);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 100,  '1',  NOW(),  '94',  100,  '399',  100);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 100,  '1',  NOW(),  '95',  100,  '399',  100);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 100,  '1',  NOW(),  '96',  100,  '399',  100);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 100,  '1',  NOW(),  '97',  100,  '399',  100);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 100,  '1',  NOW(),  '98',  100,  '399',  100);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 100,  '1',  NOW(),  '99',  100,  '399',  100);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 100,  '1',  NOW(),  '100',  100,  '399',  100);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 100,  '1',  NOW(),  '101',  100,  '399',  100);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 100,  '1',  NOW(),  '102',  100,  '399',  100);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 100,  '1',  NOW(),  '103',  100,  '399',  100);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 100,  '1',  NOW(),  '104',  100,  '399',  100);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 100,  '1',  NOW(),  '105',  100,  '399',  100);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 100,  '1',  NOW(),  '106',  100,  '399',  100);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 100,  '1',  NOW(),  '107',  100,  '399',  100);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 100,  '1',  NOW(),  '108',  100,  '399',  100);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 100,  '1',  NOW(),  '109',  100,  '399',  100);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 100,  '1',  NOW(),  '110',  100,  '399',  100);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 100,  '1',  NOW(),  '111',  100,  '399',  100);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 100,  '1',  NOW(),  '112',  100,  '399',  100);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 100,  '1',  NOW(),  '113',  100,  '399',  100);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 100,  '1',  NOW(),  '114',  100,  '399',  100);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 100,  '1',  NOW(),  '115',  100,  '399',  100);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 100,  '1',  NOW(),  '116',  100,  '399',  100);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 100,  '1',  NOW(),  '117',  100,  '399',  100);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 100,  '1',  NOW(),  '118',  100,  '399',  100);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 100,  '1',  NOW(),  '119',  100,  '399',  100);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 100,  '1',  NOW(),  '120',  100,  '399',  100);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 100,  '1',  NOW(),  '121',  100,  '399',  100);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 100,  '1',  NOW(),  '122',  100,  '399',  100);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 100,  '1',  NOW(),  '123',  100,  '399',  100);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 100,  '1',  NOW(),  '124',  100,  '399',  100);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 100,  '1',  NOW(),  '125',  100,  '399',  100);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 100,  '1',  NOW(),  '126',  100,  '399',  100);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2500,  '1',  NOW(),  '91',  1000,  '400',  3000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2500,  '1',  NOW(),  '92',  1000,  '400',  3000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2500,  '1',  NOW(),  '93',  1000,  '400',  3000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2500,  '1',  NOW(),  '94',  1000,  '400',  3000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2500,  '1',  NOW(),  '95',  1000,  '400',  3000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2500,  '1',  NOW(),  '96',  1000,  '400',  3000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2500,  '1',  NOW(),  '97',  1000,  '400',  3000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2500,  '1',  NOW(),  '98',  1000,  '400',  3000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2500,  '1',  NOW(),  '99',  1000,  '400',  3000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2500,  '1',  NOW(),  '100',  1000,  '400',  3000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2500,  '1',  NOW(),  '101',  1000,  '400',  3000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2500,  '1',  NOW(),  '102',  1000,  '400',  3000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2500,  '1',  NOW(),  '103',  1000,  '400',  3000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2500,  '1',  NOW(),  '104',  1000,  '400',  3000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2500,  '1',  NOW(),  '105',  1000,  '400',  3000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2500,  '1',  NOW(),  '106',  1000,  '400',  3000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2500,  '1',  NOW(),  '107',  1000,  '400',  3000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2500,  '1',  NOW(),  '108',  1000,  '400',  3000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2500,  '1',  NOW(),  '109',  1000,  '400',  3000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2500,  '1',  NOW(),  '110',  1000,  '400',  3000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2500,  '1',  NOW(),  '111',  1000,  '400',  3000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2500,  '1',  NOW(),  '112',  1000,  '400',  3000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2500,  '1',  NOW(),  '113',  1000,  '400',  3000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2500,  '1',  NOW(),  '114',  1000,  '400',  3000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2500,  '1',  NOW(),  '115',  1000,  '400',  3000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2500,  '1',  NOW(),  '116',  1000,  '400',  3000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2500,  '1',  NOW(),  '117',  1000,  '400',  3000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2500,  '1',  NOW(),  '118',  1000,  '400',  3000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2500,  '1',  NOW(),  '119',  1000,  '400',  3000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2500,  '1',  NOW(),  '120',  1000,  '400',  3000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2500,  '1',  NOW(),  '121',  1000,  '400',  3000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2500,  '1',  NOW(),  '122',  1000,  '400',  3000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2500,  '1',  NOW(),  '123',  1000,  '400',  3000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2500,  '1',  NOW(),  '124',  1000,  '400',  3000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2500,  '1',  NOW(),  '125',  1000,  '400',  3000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2500,  '1',  NOW(),  '126',  1000,  '400',  3000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2000,  '1',  NOW(),  '91',  3000,  '401',  7000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2000,  '1',  NOW(),  '92',  3000,  '401',  7000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2000,  '1',  NOW(),  '93',  3000,  '401',  7000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2000,  '1',  NOW(),  '94',  3000,  '401',  7000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2000,  '1',  NOW(),  '95',  3000,  '401',  7000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2000,  '1',  NOW(),  '96',  3000,  '401',  7000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2000,  '1',  NOW(),  '97',  3000,  '401',  7000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2000,  '1',  NOW(),  '98',  3000,  '401',  7000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2000,  '1',  NOW(),  '99',  3000,  '401',  7000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2000,  '1',  NOW(),  '100',  3000,  '401',  7000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2000,  '1',  NOW(),  '101',  3000,  '401',  7000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2000,  '1',  NOW(),  '102',  3000,  '401',  7000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2000,  '1',  NOW(),  '103',  3000,  '401',  7000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2000,  '1',  NOW(),  '104',  3000,  '401',  7000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2000,  '1',  NOW(),  '105',  3000,  '401',  7000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2000,  '1',  NOW(),  '106',  3000,  '401',  7000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2000,  '1',  NOW(),  '107',  3000,  '401',  7000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2000,  '1',  NOW(),  '108',  3000,  '401',  7000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2000,  '1',  NOW(),  '109',  3000,  '401',  7000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2000,  '1',  NOW(),  '110',  3000,  '401',  7000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2000,  '1',  NOW(),  '111',  3000,  '401',  7000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2000,  '1',  NOW(),  '112',  3000,  '401',  7000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2000,  '1',  NOW(),  '113',  3000,  '401',  7000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2000,  '1',  NOW(),  '114',  3000,  '401',  7000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2000,  '1',  NOW(),  '115',  3000,  '401',  7000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2000,  '1',  NOW(),  '116',  3000,  '401',  7000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2000,  '1',  NOW(),  '117',  3000,  '401',  7000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2000,  '1',  NOW(),  '118',  3000,  '401',  7000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2000,  '1',  NOW(),  '119',  3000,  '401',  7000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2000,  '1',  NOW(),  '120',  3000,  '401',  7000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2000,  '1',  NOW(),  '121',  3000,  '401',  7000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2000,  '1',  NOW(),  '122',  3000,  '401',  7000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2000,  '1',  NOW(),  '123',  3000,  '401',  7000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2000,  '1',  NOW(),  '124',  3000,  '401',  7000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2000,  '1',  NOW(),  '125',  3000,  '401',  7000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2000,  '1',  NOW(),  '126',  3000,  '401',  7000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '91',  6000,  '402',  12000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '92',  6000,  '402',  12000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '93',  6000,  '402',  12000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '94',  6000,  '402',  12000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '95',  6000,  '402',  12000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '96',  6000,  '402',  12000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '97',  6000,  '402',  12000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '98',  6000,  '402',  12000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '99',  6000,  '402',  12000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '100',  6000,  '402',  12000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '101',  6000,  '402',  12000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '102',  6000,  '402',  12000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '103',  6000,  '402',  12000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '104',  6000,  '402',  12000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '105',  6000,  '402',  12000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '106',  6000,  '402',  12000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '107',  6000,  '402',  12000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '108',  6000,  '402',  12000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '109',  6000,  '402',  12000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '110',  6000,  '402',  12000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '111',  6000,  '402',  12000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '112',  6000,  '402',  12000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '113',  6000,  '402',  12000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '114',  6000,  '402',  12000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '115',  6000,  '402',  12000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '116',  6000,  '402',  12000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '117',  6000,  '402',  12000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '118',  6000,  '402',  12000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '119',  6000,  '402',  12000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '120',  6000,  '402',  12000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '121',  6000,  '402',  12000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '122',  6000,  '402',  12000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '123',  6000,  '402',  12000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '124',  6000,  '402',  12000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '125',  6000,  '402',  12000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '126',  6000,  '402',  12000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 10000,  '1',  NOW(),  '91',  12000,  '403',  19000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 10000,  '1',  NOW(),  '92',  12000,  '403',  19000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 10000,  '1',  NOW(),  '93',  12000,  '403',  19000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 10000,  '1',  NOW(),  '94',  12000,  '403',  19000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 10000,  '1',  NOW(),  '95',  12000,  '403',  19000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 10000,  '1',  NOW(),  '96',  12000,  '403',  19000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 10000,  '1',  NOW(),  '97',  12000,  '403',  19000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 10000,  '1',  NOW(),  '98',  12000,  '403',  19000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 10000,  '1',  NOW(),  '99',  12000,  '403',  19000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 10000,  '1',  NOW(),  '100',  12000,  '403',  19000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 10000,  '1',  NOW(),  '101',  12000,  '403',  19000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 10000,  '1',  NOW(),  '102',  12000,  '403',  19000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 10000,  '1',  NOW(),  '103',  12000,  '403',  19000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 10000,  '1',  NOW(),  '104',  12000,  '403',  19000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 10000,  '1',  NOW(),  '105',  12000,  '403',  19000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 10000,  '1',  NOW(),  '106',  12000,  '403',  19000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 10000,  '1',  NOW(),  '107',  12000,  '403',  19000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 10000,  '1',  NOW(),  '108',  12000,  '403',  19000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 10000,  '1',  NOW(),  '109',  12000,  '403',  19000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 10000,  '1',  NOW(),  '110',  12000,  '403',  19000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 10000,  '1',  NOW(),  '111',  12000,  '403',  19000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 10000,  '1',  NOW(),  '112',  12000,  '403',  19000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 10000,  '1',  NOW(),  '113',  12000,  '403',  19000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 10000,  '1',  NOW(),  '114',  12000,  '403',  19000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 10000,  '1',  NOW(),  '115',  12000,  '403',  19000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 10000,  '1',  NOW(),  '116',  12000,  '403',  19000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 10000,  '1',  NOW(),  '117',  12000,  '403',  19000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 10000,  '1',  NOW(),  '118',  12000,  '403',  19000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 10000,  '1',  NOW(),  '119',  12000,  '403',  19000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 10000,  '1',  NOW(),  '120',  12000,  '403',  19000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 10000,  '1',  NOW(),  '121',  12000,  '403',  19000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 10000,  '1',  NOW(),  '122',  12000,  '403',  19000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 10000,  '1',  NOW(),  '123',  12000,  '403',  19000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 10000,  '1',  NOW(),  '124',  12000,  '403',  19000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 10000,  '1',  NOW(),  '125',  12000,  '403',  19000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 10000,  '1',  NOW(),  '126',  12000,  '403',  19000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 200,  '1',  NOW(),  '91',  200,  '404',  200);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 200,  '1',  NOW(),  '92',  200,  '404',  200);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 200,  '1',  NOW(),  '93',  200,  '404',  200);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 200,  '1',  NOW(),  '94',  200,  '404',  200);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 200,  '1',  NOW(),  '95',  200,  '404',  200);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 200,  '1',  NOW(),  '96',  200,  '404',  200);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 200,  '1',  NOW(),  '97',  200,  '404',  200);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 200,  '1',  NOW(),  '98',  200,  '404',  200);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 200,  '1',  NOW(),  '99',  200,  '404',  200);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 200,  '1',  NOW(),  '100',  200,  '404',  200);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 200,  '1',  NOW(),  '101',  200,  '404',  200);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 200,  '1',  NOW(),  '102',  200,  '404',  200);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 200,  '1',  NOW(),  '103',  200,  '404',  200);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 200,  '1',  NOW(),  '104',  200,  '404',  200);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 200,  '1',  NOW(),  '105',  200,  '404',  200);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 200,  '1',  NOW(),  '106',  200,  '404',  200);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 200,  '1',  NOW(),  '107',  200,  '404',  200);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 200,  '1',  NOW(),  '108',  200,  '404',  200);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 200,  '1',  NOW(),  '109',  200,  '404',  200);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 200,  '1',  NOW(),  '110',  200,  '404',  200);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 200,  '1',  NOW(),  '111',  200,  '404',  200);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 200,  '1',  NOW(),  '112',  200,  '404',  200);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 200,  '1',  NOW(),  '113',  200,  '404',  200);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 200,  '1',  NOW(),  '114',  200,  '404',  200);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 200,  '1',  NOW(),  '115',  200,  '404',  200);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 200,  '1',  NOW(),  '116',  200,  '404',  200);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 200,  '1',  NOW(),  '117',  200,  '404',  200);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 200,  '1',  NOW(),  '118',  200,  '404',  200);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 200,  '1',  NOW(),  '119',  200,  '404',  200);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 200,  '1',  NOW(),  '120',  200,  '404',  200);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 200,  '1',  NOW(),  '121',  200,  '404',  200);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 200,  '1',  NOW(),  '122',  200,  '404',  200);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 200,  '1',  NOW(),  '123',  200,  '404',  200);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 200,  '1',  NOW(),  '124',  200,  '404',  200);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 200,  '1',  NOW(),  '125',  200,  '404',  200);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 200,  '1',  NOW(),  '126',  200,  '404',  200);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 1500,  '1',  NOW(),  '91',  2000,  '405',  6000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 1500,  '1',  NOW(),  '92',  2000,  '405',  6000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 1500,  '1',  NOW(),  '93',  2000,  '405',  6000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 1500,  '1',  NOW(),  '94',  2000,  '405',  6000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 1500,  '1',  NOW(),  '95',  2000,  '405',  6000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 1500,  '1',  NOW(),  '96',  2000,  '405',  6000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 1500,  '1',  NOW(),  '97',  2000,  '405',  6000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 1500,  '1',  NOW(),  '98',  2000,  '405',  6000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 1500,  '1',  NOW(),  '99',  2000,  '405',  6000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 1500,  '1',  NOW(),  '100',  2000,  '405',  6000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 1500,  '1',  NOW(),  '101',  2000,  '405',  6000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 1500,  '1',  NOW(),  '102',  2000,  '405',  6000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 1500,  '1',  NOW(),  '103',  2000,  '405',  6000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 1500,  '1',  NOW(),  '104',  2000,  '405',  6000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 1500,  '1',  NOW(),  '105',  2000,  '405',  6000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 1500,  '1',  NOW(),  '106',  2000,  '405',  6000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 1500,  '1',  NOW(),  '107',  2000,  '405',  6000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 1500,  '1',  NOW(),  '108',  2000,  '405',  6000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 1500,  '1',  NOW(),  '109',  2000,  '405',  6000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 1500,  '1',  NOW(),  '110',  2000,  '405',  6000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 1500,  '1',  NOW(),  '111',  2000,  '405',  6000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 1500,  '1',  NOW(),  '112',  2000,  '405',  6000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 1500,  '1',  NOW(),  '113',  2000,  '405',  6000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 1500,  '1',  NOW(),  '114',  2000,  '405',  6000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 1500,  '1',  NOW(),  '115',  2000,  '405',  6000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 1500,  '1',  NOW(),  '116',  2000,  '405',  6000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 1500,  '1',  NOW(),  '117',  2000,  '405',  6000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 1500,  '1',  NOW(),  '118',  2000,  '405',  6000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 1500,  '1',  NOW(),  '119',  2000,  '405',  6000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 1500,  '1',  NOW(),  '120',  2000,  '405',  6000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 1500,  '1',  NOW(),  '121',  2000,  '405',  6000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 1500,  '1',  NOW(),  '122',  2000,  '405',  6000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 1500,  '1',  NOW(),  '123',  2000,  '405',  6000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 1500,  '1',  NOW(),  '124',  2000,  '405',  6000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 1500,  '1',  NOW(),  '125',  2000,  '405',  6000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 1500,  '1',  NOW(),  '126',  2000,  '405',  6000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '91',  6000,  '406',  14000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '92',  6000,  '406',  14000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '93',  6000,  '406',  14000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '94',  6000,  '406',  14000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '95',  6000,  '406',  14000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '96',  6000,  '406',  14000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '97',  6000,  '406',  14000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '98',  6000,  '406',  14000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '99',  6000,  '406',  14000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '100',  6000,  '406',  14000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '101',  6000,  '406',  14000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '102',  6000,  '406',  14000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '103',  6000,  '406',  14000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '104',  6000,  '406',  14000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '105',  6000,  '406',  14000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '106',  6000,  '406',  14000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '107',  6000,  '406',  14000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '108',  6000,  '406',  14000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '109',  6000,  '406',  14000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '110',  6000,  '406',  14000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '111',  6000,  '406',  14000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '112',  6000,  '406',  14000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '113',  6000,  '406',  14000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '114',  6000,  '406',  14000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '115',  6000,  '406',  14000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '116',  6000,  '406',  14000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '117',  6000,  '406',  14000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '118',  6000,  '406',  14000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '119',  6000,  '406',  14000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '120',  6000,  '406',  14000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '121',  6000,  '406',  14000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '122',  6000,  '406',  14000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '123',  6000,  '406',  14000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '124',  6000,  '406',  14000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '125',  6000,  '406',  14000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 5000,  '1',  NOW(),  '126',  6000,  '406',  14000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 24000,  '1',  NOW(),  '91',  12000,  '407',  24000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 24000,  '1',  NOW(),  '92',  12000,  '407',  24000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 24000,  '1',  NOW(),  '93',  12000,  '407',  24000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 24000,  '1',  NOW(),  '94',  12000,  '407',  24000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 24000,  '1',  NOW(),  '95',  12000,  '407',  24000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 24000,  '1',  NOW(),  '96',  12000,  '407',  24000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 24000,  '1',  NOW(),  '97',  12000,  '407',  24000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 24000,  '1',  NOW(),  '98',  12000,  '407',  24000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 24000,  '1',  NOW(),  '99',  12000,  '407',  24000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 24000,  '1',  NOW(),  '100',  12000,  '407',  24000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 24000,  '1',  NOW(),  '101',  12000,  '407',  24000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 24000,  '1',  NOW(),  '102',  12000,  '407',  24000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 24000,  '1',  NOW(),  '103',  12000,  '407',  24000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 24000,  '1',  NOW(),  '104',  12000,  '407',  24000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 24000,  '1',  NOW(),  '105',  12000,  '407',  24000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 24000,  '1',  NOW(),  '106',  12000,  '407',  24000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 24000,  '1',  NOW(),  '107',  12000,  '407',  24000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 24000,  '1',  NOW(),  '108',  12000,  '407',  24000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 24000,  '1',  NOW(),  '109',  12000,  '407',  24000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 24000,  '1',  NOW(),  '110',  12000,  '407',  24000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 24000,  '1',  NOW(),  '111',  12000,  '407',  24000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 24000,  '1',  NOW(),  '112',  12000,  '407',  24000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 24000,  '1',  NOW(),  '113',  12000,  '407',  24000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 24000,  '1',  NOW(),  '114',  12000,  '407',  24000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 24000,  '1',  NOW(),  '115',  12000,  '407',  24000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 24000,  '1',  NOW(),  '116',  12000,  '407',  24000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 24000,  '1',  NOW(),  '117',  12000,  '407',  24000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 24000,  '1',  NOW(),  '118',  12000,  '407',  24000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 24000,  '1',  NOW(),  '119',  12000,  '407',  24000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 24000,  '1',  NOW(),  '120',  12000,  '407',  24000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 24000,  '1',  NOW(),  '121',  12000,  '407',  24000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 24000,  '1',  NOW(),  '122',  12000,  '407',  24000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 24000,  '1',  NOW(),  '123',  12000,  '407',  24000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 24000,  '1',  NOW(),  '124',  12000,  '407',  24000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 24000,  '1',  NOW(),  '125',  12000,  '407',  24000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 24000,  '1',  NOW(),  '126',  12000,  '407',  24000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 22000,  '1',  NOW(),  '91',  24000,  '408',  30000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 22000,  '1',  NOW(),  '92',  24000,  '408',  30000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 22000,  '1',  NOW(),  '93',  24000,  '408',  30000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 22000,  '1',  NOW(),  '94',  24000,  '408',  30000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 22000,  '1',  NOW(),  '95',  24000,  '408',  30000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 22000,  '1',  NOW(),  '96',  24000,  '408',  30000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 22000,  '1',  NOW(),  '97',  24000,  '408',  30000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 22000,  '1',  NOW(),  '98',  24000,  '408',  30000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 22000,  '1',  NOW(),  '99',  24000,  '408',  30000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 22000,  '1',  NOW(),  '100',  24000,  '408',  30000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 22000,  '1',  NOW(),  '101',  24000,  '408',  30000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 22000,  '1',  NOW(),  '102',  24000,  '408',  30000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 22000,  '1',  NOW(),  '103',  24000,  '408',  30000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 22000,  '1',  NOW(),  '104',  24000,  '408',  30000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 22000,  '1',  NOW(),  '105',  24000,  '408',  30000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 22000,  '1',  NOW(),  '106',  24000,  '408',  30000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 22000,  '1',  NOW(),  '107',  24000,  '408',  30000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 22000,  '1',  NOW(),  '108',  24000,  '408',  30000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 22000,  '1',  NOW(),  '109',  24000,  '408',  30000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 22000,  '1',  NOW(),  '110',  24000,  '408',  30000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 22000,  '1',  NOW(),  '111',  24000,  '408',  30000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 22000,  '1',  NOW(),  '112',  24000,  '408',  30000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 22000,  '1',  NOW(),  '113',  24000,  '408',  30000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 22000,  '1',  NOW(),  '114',  24000,  '408',  30000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 22000,  '1',  NOW(),  '115',  24000,  '408',  30000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 22000,  '1',  NOW(),  '116',  24000,  '408',  30000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 22000,  '1',  NOW(),  '117',  24000,  '408',  30000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 22000,  '1',  NOW(),  '118',  24000,  '408',  30000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 22000,  '1',  NOW(),  '119',  24000,  '408',  30000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 22000,  '1',  NOW(),  '120',  24000,  '408',  30000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 22000,  '1',  NOW(),  '121',  24000,  '408',  30000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 22000,  '1',  NOW(),  '122',  24000,  '408',  30000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 22000,  '1',  NOW(),  '123',  24000,  '408',  30000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 22000,  '1',  NOW(),  '124',  24000,  '408',  30000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 22000,  '1',  NOW(),  '125',  24000,  '408',  30000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 22000,  '1',  NOW(),  '126',  24000,  '408',  30000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 800,  '1',  NOW(),  '10',  1000,  '409',  1000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 800,  '1',  NOW(),  '11',  1000,  '409',  1000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 800,  '1',  NOW(),  '20',  1000,  '409',  1000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 2400,  '1',  NOW(),  '21',  2400,  '410',  3000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 600,  '1',  NOW(),  '13',  800,  '411',  1000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 400,  '1',  NOW(),  '14',  560,  '412',  700);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 600,  '1',  NOW(),  '13',  800,  '413',  1000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 400,  '1',  NOW(),  '14',  560,  '414',  700);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 600,  '1',  NOW(),  '13',  800,  '415',  1000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 400,  '1',  NOW(),  '14',  560,  '416',  700);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 600,  '1',  NOW(),  '13',  800,  '417',  1000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 400,  '1',  NOW(),  '14',  560,  '418',  700);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 300,  '1',  NOW(),  '19',  400,  '419',  500);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 300,  '1',  NOW(),  '12',  400,  '419',  500);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 300,  '1',  NOW(),  '16',  400,  '420',  500);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 300,  '1',  NOW(),  '17',  400,  '420',  500);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 300,  '1',  NOW(),  '18',  400,  '420',  500);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 300,  '1',  NOW(),  '19',  400,  '420',  500);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 300,  '1',  NOW(),  '12',  400,  '420',  500);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 300,  '1',  NOW(),  '20',  400,  '421',  500);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 300,  '1',  NOW(),  '21',  400,  '421',  500);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 300,  '1',  NOW(),  '10',  400,  '421',  500);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 300,  '1',  NOW(),  '11',  400,  '421',  500);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 300,  '1',  NOW(),  '10',  400,  '422',  500);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 300,  '1',  NOW(),  '11',  400,  '422',  500);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 300,  '1',  NOW(),  '20',  400,  '422',  500);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 300,  '1',  NOW(),  '21',  400,  '422',  500);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 300,  '1',  NOW(),  '10',  400,  '423',  500);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 300,  '1',  NOW(),  '11',  400,  '423',  500);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 300,  '1',  NOW(),  '20',  400,  '423',  500);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 300,  '1',  NOW(),  '21',  400,  '423',  500);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 800,  '1',  NOW(),  '10',  1000,  '424',  1000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 3200,  '1',  NOW(),  '14',  3200,  '425',  4000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 3200,  '1',  NOW(),  '14',  3200,  '426',  4000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 3200,  '1',  NOW(),  '14',  3200,  '427',  4000);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 6400,  '1',  NOW(),  '13',  8000,  '428',  6400);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 6400,  '1',  NOW(),  '13',  8000,  '429',  6400);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 6400,  '1',  NOW(),  '13',  8000,  '430',  6400);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 1500,  '1',  NOW(),  '10',  1500,  '431',  2500);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 1500,  '1',  NOW(),  '11',  1500,  '431',  2500);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 1500,  '1',  NOW(),  '10',  1500,  '432',  2500);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 1500,  '1',  NOW(),  '11',  1500,  '432',  2500);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 1500,  '1',  NOW(),  '10',  1500,  '433',  2500);
+INSERT INTO  `sanlu`.`product_link_place` (`version` ,`cost_price` ,`last_modify_by_id` ,`last_updated` ,`place_id` ,`price` ,`product_id` ,`salling_price`)VALUES ('0', 1500,  '1',  NOW(),  '11',  1500,  '433',  2500);
 
 
 -- --------------------------------------------------------
@@ -679,9 +1348,40 @@ CREATE TABLE IF NOT EXISTS `project` (
 --
 -- 列出以下資料庫的數據： `project`
 --
-
+/*
 INSERT INTO `project` (`id`, `version`, `closer_id`, `closing_date`, `contact`, `contact_addr`, `contact_addr_area`, `contact_addr_city`, `contact_phone`, `cost_total`, `emp_id`, `funeral_company_id`, `funeraler_id`, `in_date`, `last_updated`, `memo`, `out_date`, `project_name`, `project_no`, `salling_total`, `total`) VALUES
 (2, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0.00, 1, 1, 1, '2012-03-11 00:00:00', '2012-03-13 22:20:31', NULL, NULL, 'ddsd', '0000001', 0.00, 0.00);
+*/
+
+--
+-- Table structure for table `product_history`
+--
+
+DROP TABLE IF EXISTS `product_history`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `product_history` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `version` bigint(20) NOT NULL,
+  `date` datetime NOT NULL,
+  `is_purchase` bit(1) NOT NULL,
+  `last_modify_by_id` bigint(20) NOT NULL,
+  `last_updated` datetime NOT NULL,
+  `memo` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `product_id` bigint(20) NOT NULL,
+  `project_id` bigint(20) DEFAULT NULL,
+  `quantity` decimal(19,2) NOT NULL,
+  `total_quantity` int(11) NOT NULL,
+  `vendor` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKC8B4F9441B7C2B1D` (`project_id`),
+  KEY `FKC8B4F944E623C052` (`last_modify_by_id`),
+  KEY `FKC8B4F944F961D35D` (`product_id`),
+  CONSTRAINT `FKC8B4F944F961D35D` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`),
+  CONSTRAINT `FKC8B4F9441B7C2B1D` FOREIGN KEY (`project_id`) REFERENCES `project` (`id`),
+  CONSTRAINT `FKC8B4F944E623C052` FOREIGN KEY (`last_modify_by_id`) REFERENCES `employee` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- 備份資料表限制
@@ -746,14 +1446,6 @@ ALTER TABLE `place`
 --
 ALTER TABLE `product`
   ADD CONSTRAINT `FKED8DCCEFE623C052` FOREIGN KEY (`last_modify_by_id`) REFERENCES `employee` (`id`);
-
---
--- 資料表限制 `product_history`
---
-ALTER TABLE `product_history`
-  ADD CONSTRAINT `FKC8B4F9441B7C2B1D` FOREIGN KEY (`project_id`) REFERENCES `project` (`id`),
-  ADD CONSTRAINT `FKC8B4F944E623C052` FOREIGN KEY (`last_modify_by_id`) REFERENCES `employee` (`id`),
-  ADD CONSTRAINT `FKC8B4F944F961D35D` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`);
 
 --
 -- 資料表限制 `product_link_place`
