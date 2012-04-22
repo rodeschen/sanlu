@@ -24,7 +24,7 @@ class ProductController extends GridController{
 	@GridQuery
 	def queryPlaceProduct = {
 		def productLinkPlace =ProductLinkPlace.findAllByProduct(Product.findById(params.get("product.id")),[max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc"])
-		["rowData":productLinkPlace,"rowCount":ProductLinkPlace.list().size()]
+		["rowData":productLinkPlace,"rowCount":productLinkPlace.size()]
 	}
 
 	def insertAction={
