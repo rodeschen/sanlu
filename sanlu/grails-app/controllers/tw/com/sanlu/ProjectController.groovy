@@ -202,8 +202,8 @@ class ProjectController extends GridController {
 
 		DateFormat df = new SimpleDateFormat("yyyy-M-d HH:mm");
 		def project = new Project();
-		int count = Project.executeQuery("select max(id) from Project")[0];
-
+		int count = Project.executeQuery("select MAX( id ) from Project")[0];
+		count = count==null?0:count;
 		project.projectNo = String.format("%07d", ++count);
 		project.projectName = params.projectName
 		project.funeralCompany = FuneralCompany.findById(params.long("funeralCompany"))
@@ -264,7 +264,7 @@ class ProjectController extends GridController {
 	def delete = {
 		def detail = BillDetail.findById(params.long("id"))
 		def product = detail.product
-		if(!product.hasPlace){
+		if(!product.hasPlace){			
 			if(product.productType != 0){
 				new ProductHistory(
 						product:product,
@@ -603,7 +603,7 @@ class ProjectController extends GridController {
 		}
 
 		if("1".equals(type)){
-			if(0 == params.productType){
+			if(params.productType=="0"){
 				//一般
 				if(product.totalQuantity < params.int("amount1")){
 					return throwError("目前剩餘庫存量:" + product.totalQuantity);
