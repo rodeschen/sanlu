@@ -32,11 +32,13 @@ class ProjectController extends GridController {
 			cal1.set(Calendar.MINUTE, 0)
 			cal1.set(Calendar.SECOND, 0)
 			cal1.set(Calendar.MILLISECOND, 0)
-			rowCount = Project.countByClosingDateGreaterThanEqualsOrClosingDateIsNull(cal1.getTime())
-			projects = Project.findAllByClosingDateGreaterThanEqualsOrClosingDateIsNull(cal1.getTime(),[max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc"])
+			def where = "ClosingDateGreaterThanEqualsOrClosingDateIsNull";
+			rowCount = Project."countBy${where}"(cal1.getTime())
+			projects = Project."findAllBy${where}"(cal1.getTime(),[max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc"])
 		}else{
-			rowCount = Project.countByClosingDateIsNotNull()
-			projects = Project.findAllByClosingDateIsNotNull([max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc"])
+			def where = "ClosingDateIsNotNull"
+			rowCount = Project."countBy${where}"()
+			projects = Project."findAllBy${where}"([max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc"])
 		}
 
 		//format
