@@ -19,19 +19,19 @@ class ProductController extends GridController{
 	@GridQuery
 	def queryProduct = {
 		def products =Product.list(max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc")
-		["rowData":products,"rowCount":Product.list().size()]
+		["rowData":products,"rowCount":Product.count()]
 	}
 	@GridQuery
 	def queryPlaceProduct = {
 		def productLinkPlace =ProductLinkPlace.findAllByProduct(Product.findById(params.get("product.id")),[max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc"])
-		["rowData":productLinkPlace,"rowCount":productLinkPlace.size()]
+		["rowData":productLinkPlace,"rowCount":ProductLinkPlace.countByProduct(Product.findById(params.get("product.id")))]
 	}
 
 	def insertAction={
 
 		def json = new JSONObject(params.get("data"))
 		boolean isNomal = new Boolean(params.get("isNomal"))
-		int count = isNomal?Product.executeQuery("select count(id) from Product")[0]:0		
+		int count = isNomal?Product.executeQuery("select max(id) from Product")[0]:0
 		boolean hasPlace = "T".equals( json.getString("hasPlace"))
 		def product = null
 
@@ -78,7 +78,7 @@ class ProductController extends GridController{
 	}
 
 	def deleteAction = {
-		boolean isNomal = new Boolean(params.get("isNomal"))		
+		boolean isNomal = new Boolean(params.get("isNomal"))
 		def productLinkPlace = !isNomal?ProductLinkPlace.findById(id):Product.findById(id)
 		def billDetail = BillDetail.findByProduct(productLinkPlace)
 		if(billDetail){
@@ -155,7 +155,7 @@ class ProductController extends GridController{
 					case 'productType':
 						productLinkPlace.putAt keyName,new BigDecimal(it.value)
 						break
-					case 'hasPlace':					
+					case 'hasPlace':
 						productLinkPlace.putAt keyName,new Boolean("T".equals(it.value))
 						break
 					default:

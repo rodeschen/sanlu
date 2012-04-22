@@ -51,13 +51,13 @@ class ProjectController extends GridController {
 		def rows=[]
 
 		def bList = BillDetail.createCriteria()
-		//		def rowCount = bList.count{
-		//			project{
-		//				eq('id',params.id?params.long("id"):"")
-		//			}
-		//		}
+		def rowCount = bList.count{
+			project{
+				eq('id',params.id?params.long("id"):"")
+			}
+		}
 
-		//bList = BillDetail.createCriteria()
+		bList = BillDetail.createCriteria()
 		def projects = bList.list{
 			project{
 				eq('id',params.id?params.long("id"):"")
@@ -90,7 +90,7 @@ class ProjectController extends GridController {
 
 		//format
 		//return ["rowData":projects,"rowCount":rowCount,"format":["projectName":{str -> return "$str xxxxccc"}]]
-		["rowData":projects,"rowCount":projects.size(),format:["amount":{str , data -> return data.modifiedPrice * data.quantity},
+		["rowData":projects,"rowCount":rowCount,format:["amount":{str , data -> return data.modifiedPrice * data.quantity},
 				"useTime":{str,data->
 					switch(data.product.costUnit){
 						case 0:
@@ -123,7 +123,7 @@ class ProjectController extends GridController {
 						case 3:
 							unit = unit ? unit:"天"
 						case 4:
-							unit = unit ? unit:"月"							
+							unit = unit ? unit:"月"
 							if(true/*ata.product.costRange == 1*/){
 								return (data.quantity + data.product.unit) + "/" + (/*data.quantity * */ formatDecimal(data.product.costRange)) +unit
 							}else{
@@ -202,7 +202,7 @@ class ProjectController extends GridController {
 
 		DateFormat df = new SimpleDateFormat("yyyy-M-d HH:mm");
 		def project = new Project();
-		int count = Project.executeQuery("select count(id) from Project")[0];
+		int count = Project.executeQuery("select max(id) from Project")[0];
 
 		project.projectNo = String.format("%07d", ++count);
 		project.projectName = params.projectName
@@ -694,25 +694,116 @@ class ProjectController extends GridController {
 	 */
 	@GridQuery
 	def searchProject= {
-		def queryString = "from Project as p where "
+		def pList = Project.createCriteria()
 		DateFormat df = new SimpleDateFormat("yyyy-M-d");
-		queryString <<= params.projectNo?" p.projectNo = '"+String.format("%07d", params.int("projectNo"))+"' and":""
-		queryString <<= params.projectName?" p.projectName like '%"+params.projectName+"%' and":""
-		queryString <<= params.funeralCompany?" p.funeralCompany.id= "+params.long("funeralCompany")+" and":""
-		queryString <<= params.funeraler?" p.funeraler.id= "+params.long("funeraler")+" and":""
-		queryString <<= params.contact?" p.contact like '%"+params.contact+"%' and":""
-		queryString <<= params.contactPhone?" p.contactPhone like '%"+params.contactPhone+"%' and":""
-		queryString <<= params.contact?" p.contact like '%"+params.contact+"%' and":""
-		queryString <<= params.contactAddrCity?" p.contactAddrCity like '%"+params.contactAddrCity+"%' and":""
-		queryString <<= params.contactAddrArea?" p.contactAddrArea like '%"+params.contactAddrArea+"%' and":""
-		queryString <<= params.memo?" p.contactAddrArea like '%"+params.memo+"%' and":""
-		queryString <<= params.inDate?" p.inDate"+("B".equals(params.inDateKind) ?" <= ":" >= ")+ "'"+df.parse(params.inDate) + "' and":""
-		queryString <<= params.outDate?" p.outDate"+("B".equals(params.outDateKind) ?" <= ":" >= ")+"'"+ df.parse(params.outDate) + "' and":""
-
-		queryString = queryString.substring(0,queryString.length()-3)  + (" order by p."+sortBy +(isAsc?" asc":" desc"))
-		println  "SearchProject:"+queryString
-		def projects= Project.findAll(queryString,[max:pageRows,offset:startRow])
-		["rowData":projects,"rowCount":projects.size()]
+		def projects = pList.list{
+			firstResult (startRow)
+			maxResults(pageRows)
+			if(sortBy){
+				order(sortBy,isAsc?"asc":"desc")
+			}
+			and{
+				if(params.projectNo){
+					eq("projectNo",String.format("%07d", params.int("projectNo")))
+				}
+				if (params.projectName){
+					like('projectName',"%"+params.projectName+"%")
+				}
+				if(params.funeralCompany){
+					funeralCompany{eq("id",params.long("funeralCompany"))}
+				}
+				if(params.funeraler){
+					funeraler{eq("id",params.long("funeraler"))}
+				}
+				if(params.contact){
+					like('contact',"%"+params.contact+"%")
+				}
+				if(params.contactAddrCity){
+					like('contactAddrCity',"%"+params.contactAddrCity+"%")
+				}
+				if(params.contactAddrArea){
+					like('contactAddrArea',"%"+params.contactAddrArea+"%")
+				}
+				if(params.memo){
+					like('contactAddrArea',"%"+params.memo+"%")
+				}
+				if(params.inDate){
+					if("B".equals(params.inDateKind)){
+						le("inDate",df.parse(params.inDate))
+					}else{
+						ge("inDate",df.parse(params.inDate))
+					}
+				}
+				if(params.outDate){
+					if("B".equals(params.outDateKind)){
+						le("outDate",df.parse(params.outDate))
+					}else{
+						ge("outDate",df.parse(params.outDate))
+					}
+				}
+			}
+		}
+		pList = Project.createCriteria()
+		def projectCount = pList.count{
+			and{
+				if(params.projectNo){
+					eq("projectNo",String.format("%07d", params.int("projectNo")))
+				}
+				if (params.projectName){
+					like('projectName',"%"+params.projectName+"%")
+				}
+				if(params.funeralCompany){
+					funeralCompany{eq("id",params.long("funeralCompany"))}
+				}
+				if(params.funeraler){
+					funeraler{eq("id",params.long("funeraler"))}
+				}
+				if(params.contact){
+					like('contact',"%"+params.contact+"%")
+				}
+				if(params.contactAddrCity){
+					like('contactAddrCity',"%"+params.contactAddrCity+"%")
+				}
+				if(params.contactAddrArea){
+					like('contactAddrArea',"%"+params.contactAddrArea+"%")
+				}
+				if(params.memo){
+					like('contactAddrArea',"%"+params.memo+"%")
+				}
+				if(params.inDate){
+					if("B".equals(params.inDateKind)){
+						le("inDate",df.parse(params.inDate))
+					}else{
+						ge("inDate",df.parse(params.inDate))
+					}
+				}
+				if(params.outDate){
+					if("B".equals(params.outDateKind)){
+						le("outDate",df.parse(params.outDate))
+					}else{
+						ge("outDate",df.parse(params.outDate))
+					}
+				}
+			}
+		}
+		/*
+		 def queryString = "from Project as p where "
+		 queryString <<= params.projectNo?" p.projectNo = '"+String.format("%07d", params.int("projectNo"))+"' and":""
+		 queryString <<= params.projectName?" p.projectName like '%"+params.projectName+"%' and":""
+		 queryString <<= params.funeralCompany?" p.funeralCompany.id= "+params.long("funeralCompany")+" and":""
+		 queryString <<= params.funeraler?" p.funeraler.id= "+params.long("funeraler")+" and":""
+		 queryString <<= params.contact?" p.contact like '%"+params.contact+"%' and":""
+		 queryString <<= params.contactPhone?" p.contactPhone like '%"+params.contactPhone+"%' and":""
+		 queryString <<= params.contact?" p.contact like '%"+params.contact+"%' and":""
+		 queryString <<= params.contactAddrCity?" p.contactAddrCity like '%"+params.contactAddrCity+"%' and":""
+		 queryString <<= params.contactAddrArea?" p.contactAddrArea like '%"+params.contactAddrArea+"%' and":""
+		 queryString <<= params.memo?" p.contactAddrArea like '%"+params.memo+"%' and":""
+		 queryString <<= params.inDate?" p.inDate"+("B".equals(params.inDateKind) ?" <= ":" >= ")+ "'"+df.parse(params.inDate) + "' and":""
+		 queryString <<= params.outDate?" p.outDate"+("B".equals(params.outDateKind) ?" <= ":" >= ")+"'"+ df.parse(params.outDate) + "' and":""
+		 queryString = queryString.substring(0,queryString.length()-3)  + (" order by p."+sortBy +(isAsc?" asc":" desc"))
+		 println  "SearchProject:"+queryString*/
+		//def projects= Project.findAll(queryString,[max:pageRows,offset:startRow])
+		["rowData":projects,"rowCount":projectCount]
 	}
 
 	//去小數零
