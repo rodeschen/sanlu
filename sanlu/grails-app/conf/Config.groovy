@@ -62,8 +62,8 @@ grails.logging.jul.usebridge = true
 grails.spring.bean.packages = []
 
 //log4j
-def log4jConsoleLogLevel = Priority.INFO
-def log4jAppFileLogLevel = Priority.INFO
+def log4jConsoleLogLevel = org.apache.log4j.Level.INFO
+def log4jAppFileLogLevel = org.apache.log4j.Level.INFO
 
 // request parameters to mask when logging exceptions
 grails.exceptionresolver.params.exclude = ['password']
@@ -73,8 +73,8 @@ environments {
 	production { grails.serverURL = "http://www.changeme.com" }
 	development {
 		grails.serverURL = "http://localhost:8080/${appName}"
-		log4jConsoleLogLevel = Priority.DEBUG
-		log4jAppFileLogLevel = Priority.DEBUG
+		log4jConsoleLogLevel = org.apache.log4j.Level.DEBUG
+		log4jAppFileLogLevel = org.apache.log4j.Level.DEBUG
 	}
 	test { grails.serverURL = "http://localhost:8080/${appName}" }
 }
@@ -83,7 +83,7 @@ environments {
 log4j = {
 	println "Log4j consoleLevel: ${log4jConsoleLogLevel} appFile Level: ${log4jAppFileLogLevel}"
 
-	def logLayoutPattern = new PatternLayout("%d [%t] %-5p %c %x - %m%n")
+	def logLayoutPattern = new PatternLayout("%d [%t] %X{empNo} %X{URL}  %-5p %c %x - %m%n")
 
 	error 'org.codehaus.groovy.grails.commons', // core / classloading
 			'org.codehaus.groovy.grails.plugins', // plugins
@@ -100,7 +100,7 @@ log4j = {
 			'org.codehaus.groovy.grails.web.mapping.filter', // URL mapping
 			'org.codehaus.groovy.grails.web.mapping' // URL mapping
 
-	debug 'com.mycompany'
+	debug 'grails.app.controller'
 
 	appenders {
 		appender new ConsoleAppender(name: "console",
@@ -109,14 +109,14 @@ log4j = {
 				)
 		appender new DailyRollingFileAppender(name: "appFile",
 				threshold: log4jAppFileLogLevel,
-				file: "sanlu.log",
+				file: "logs/sanlu.log",
 				datePattern: "'.'yyyy-MM-dd",
 				layout: logLayoutPattern
 				)
 	}
 
 	root {
-		error 'stdout', 'appFile'
+		error 'console', 'appFile'
 		additivity = true
 	}
 }

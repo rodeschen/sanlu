@@ -23,6 +23,8 @@ public class Utility {
 	
 	public final static SimpleDateFormat dateTimeFormat = new SimpleDateFormat(
 			"M/d HH:mm");
+	
+	public final static String LOGSEXP = "^[a-z0-9.-]+$";
 
 	public static Date stringToDate(String date, String formatter) {
 		SimpleDateFormat sdf = new SimpleDateFormat(formatter);

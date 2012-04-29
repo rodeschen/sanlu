@@ -2,13 +2,16 @@ package tw.com.sanlu
 
 import java.util.List;
 import java.util.Map;
+
+import org.apache.commons.io.comparator.LastModifiedFileComparator;
+
 import tw.com.sanlu.excel.ExcelUtility;
 import grails.converters.JSON
 
 class ComboboxController extends BaseController {
 
 
-	
+
 	//禮儀公司
 	def funeralCompany = {
 		def l = FuneralCompany.findAll()
@@ -87,7 +90,7 @@ class ComboboxController extends BaseController {
 		}
 		render res as JSON
 	}
-	
+
 	//一般無庫存商品
 	def normalProduct1 = {
 		def l = Product.findAllByHasPlaceAndProductType(false,1)
@@ -125,6 +128,18 @@ class ComboboxController extends BaseController {
 		def res = [:]
 		projects?.each(){
 			res[it.id] = it.projectName
+		}
+		render res as JSON
+	}
+
+	//View Logs
+	def logs={
+		def res = [:]
+		def dir = new File("logs");
+		File[] files = dir.listFiles(new LogFileNameFilter());
+		Arrays.sort(files, LastModifiedFileComparator.LASTMODIFIED_REVERSE);
+		files?.each(){
+			res[it.getName()] = it.getName()
 		}
 		render res as JSON
 	}

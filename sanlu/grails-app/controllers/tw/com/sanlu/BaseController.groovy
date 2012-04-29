@@ -13,12 +13,12 @@ import java.util.concurrent.ThreadPoolExecutor.AbortPolicy;
  */
 abstract class BaseController {
 	def manageUrl = [
-		"product",
 		"funeraler",
 		"funeralercompany",
 		"employee"
 	]
 	def beforeInterceptor ={
+		log.info "";
 		def b = true;
 		if(manageUrl.contains(params.controller)?1==session.empLevel:session.empLevel ){
 			def res = [:]

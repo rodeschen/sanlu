@@ -15,7 +15,14 @@
         <param-name>webAppRootKey</param-name>
         <param-value>@grails.project.key@</param-value>
     </context-param>
-
+	<filter>
+  		<filter-name>set log4j MDC for log2userId</filter-name>
+  		<filter-class>tw.com.sanlu.Log4jFilter</filter-class>
+  	</filter>
+  	<filter-mapping>
+	  <filter-name>set log4j MDC for log2userId</filter-name>
+	  <url-pattern>/*</url-pattern>
+  	</filter-mapping>
     <filter>
         <filter-name>sitemesh</filter-name>
         <filter-class>org.codehaus.groovy.grails.web.sitemesh.GrailsPageFilter</filter-class>

@@ -14,14 +14,14 @@ class LoginController extends BaseController {
 		def pw = params.get("pw").encodeAsMD5()
 		Employee employee = Employee.findByEmpNameAndPassword(userId,pw)
 		if(employee){
-			log.debug userId+" login sucess"
+			log.info userId+" login sucess"
 			session.empName =employee.empName
 			session.empNo =employee.empNo
 			session.empLevel =employee.empLevel
 			session.employee = employee			
 			session.errMsg = ""
 		}else{
-			log.debug userId+" login fail."
+			log.info userId+" login fail."
 			session.errMsg = "帳號或密碼錯誤"
 		}		
 		redirect(uri:"/")
