@@ -26,19 +26,95 @@ class ProjectController extends GridController {
 		def rows=[]
 		def rowCount
 		def projects
+		def pList = Project.createCriteria()
 		if(params.closing == "N"){
 			def cal1 = Calendar.getInstance();
 			cal1.set(Calendar.HOUR, 0)
 			cal1.set(Calendar.MINUTE, 0)
 			cal1.set(Calendar.SECOND, 0)
 			cal1.set(Calendar.MILLISECOND, 0)
-			def where = "ClosingDateGreaterThanEqualsOrClosingDateIsNull";
-			rowCount = Project."countBy${where}"(cal1.getTime())
-			projects = Project."findAllBy${where}"(cal1.getTime(),[max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc"])
+			//			def where = "ClosingDateGreaterThanEqualsOrClosingDateIsNull";
+			//			rowCount = Project."countBy${where}"(cal1.getTime())
+			//			projects = Project."findAllBy${where}"(cal1.getTime(),[max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc"])
+			rowCount = pList.count{
+				isNull("deleter")
+				or{
+					ge("closingDate",cal1.getTime())
+					isNull("closingDate")
+				}
+			}
+			pList = Project.createCriteria()
+			projects = pList.list{
+				isNull("deleter")
+				or{
+					ge("closingDate",cal1.getTime())
+					isNull("closingDate")
+				}
+				firstResult (startRow)
+				maxResults(pageRows)
+				if(sortBy){
+					switch(sortBy){
+						case "funeralCompany.funeralCompanyName" :
+							funeralCompany{
+								order("funeralCompanyName",isAsc?"asc":"desc")
+							}
+							break;
+						case "funeraler.funeralerName" :
+							funeraler{
+								order("funeralerName",isAsc?"asc":"desc")
+							}
+							break;
+						case "emp.empName" :
+							emp{
+								order("empName",isAsc?"asc":"desc")
+							}
+							break;
+						default:
+							order(sortBy,isAsc?"asc":"desc")
+					}
+				}
+			}
 		}else{
-			def where = "ClosingDateIsNotNull"
-			rowCount = Project."countBy${where}"()
-			projects = Project."findAllBy${where}"([max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc"])
+			//			def where = "ClosingDateIsNotNull"
+			//			rowCount = Project."countBy${where}"()
+			//			projects = Project."findAllBy${where}"([max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc"])
+			rowCount = pList.count{
+				and{
+					isNull("deleter")
+					isNull("closingDate")
+				}
+
+			}
+			pList = Project.createCriteria()
+			projects = pList.list{
+				and{
+					isNull("deleter")
+					isNull("closingDate")
+				}
+				firstResult (startRow)
+				maxResults(pageRows)
+				if(sortBy){
+					switch(sortBy){
+						case "funeralCompany.funeralCompanyName" :
+							funeralCompany{
+								order("funeralCompanyName",isAsc?"asc":"desc")
+							}
+							break;
+						case "funeraler.funeralerName" :
+							funeraler{
+								order("funeralerName",isAsc?"asc":"desc")
+							}
+							break;
+						case "emp.empName" :
+							emp{
+								order("empName",isAsc?"asc":"desc")
+							}
+							break;
+						default:
+							order(sortBy,isAsc?"asc":"desc")
+					}
+				}
+			}
 		}
 
 		//format
@@ -262,36 +338,44 @@ class ProjectController extends GridController {
 	}
 
 	def delete = {
-		def detail = BillDetail.findById(params.long("id"))
-		def product = detail.product
-		if(!product.hasPlace){			
-			if(product.productType != 0){
-				new ProductHistory(
-						product:product,
-						project:detail.project,
-						isPurchase:false,
-						quantity:(detail.quantity * -1),
-						date:new Date(),
-						totalQuantity:0,
-						vendor:detail.vendor,
-						LastModifyBy: session.employee
-						).save()
-			}else{
-				product.totalQuantity += detail.quantity
-				new ProductHistory(
-						product:product,
-						project:detail.project,
-						isPurchase:false,
-						quantity:(detail.quantity * -1),
-						date:new Date(),
-						totalQuantity:(product.totalQuantity),
-						vendor:"",
-						LastModifyBy: session.employee
-						).save()
-				product.save()
+		def project = Project.findById(params.id)
+		def details = BillDetail.findAllByProject(project)
+
+		details?.each(){
+			def product = it.product
+
+			if(!product.hasPlace){
+				if(product.productType != 0){
+					new ProductHistory(
+							product:product,
+							project:project,
+							isPurchase:false,
+							quantity:(it.quantity * -1),
+							date:new Date(),
+							totalQuantity:0,
+							vendor:it.vendor,
+							lastModifyBy: session.employee
+							).save()
+				}else{
+					product.totalQuantity += it.quantity
+					new ProductHistory(
+							product:product,
+							project:project,
+							isPurchase:false,
+							quantity:(it.quantity * -1),
+							date:new Date(),
+							totalQuantity:(product.totalQuantity),
+							vendor:"",
+							lastModifyBy: session.employee
+							).save()
+					product.save()
+				}
 			}
+			it.delete()
 		}
-		detail.delete()
+		//刪除Project，只放刪除人員		
+		project.deleter = session.employee;
+		project.save();
 		def res = ["IsSuccess" : true]
 		render res as JSON
 	}

@@ -33,7 +33,7 @@ class Project {
 	//最後修改日期
 	Date lastUpdated
 	//結帳日期
-	Date closingDate
+	Date closingDate	
 	//結帳人員
 	Employee closer
 	//聯絡人
@@ -44,6 +44,8 @@ class Project {
 	String contactAddrCity
 	String contactAddrArea
 	String contactAddr
+	//刪除人員
+	Employee deleter
 	static hasMany = [bill:BillDetail]
 
 
@@ -56,6 +58,7 @@ class Project {
 		})
 		outDate nullable:true
 		closingDate nullable:true
+		deleter nullable:true
 		closer nullable:true
 		contact maxSize:40,nullable:true
 		contactPhone maxSize:20,nullable:true

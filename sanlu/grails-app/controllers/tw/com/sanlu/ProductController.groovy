@@ -219,7 +219,7 @@ class ProductController extends GridController{
 				totalQuantity:product.totalQuantity,
 				vendor:params.vendor,
 				memo:params.memo,
-				LastModifyBy: session.employee
+				lastModifyBy: session.employee
 				)
 		productHistory.save()
 		def res = ["IsSuccess" : true]
