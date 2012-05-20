@@ -1329,6 +1329,7 @@ CREATE TABLE IF NOT EXISTS `project` (
   `project_no` varchar(7) COLLATE utf8_unicode_ci NOT NULL,
   `salling_total` decimal(19,2) NOT NULL,
   `total` decimal(19,2) NOT NULL,
+  `deleter` bigint(20),
   PRIMARY KEY (`id`),
   KEY `FKED904B19F1FE910B` (`closer_id`),
   KEY `FKED904B19C4CF7A7D` (`funeraler_id`),
