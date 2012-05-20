@@ -371,7 +371,7 @@ class ProjectController extends GridController {
 					product.save()
 				}
 			}
-			it.delete()
+			it.delete(flush: true)
 		}
 		//刪除Project，只放刪除人員		
 		project.deleter = session.employee;
@@ -382,12 +382,12 @@ class ProjectController extends GridController {
 
 	def deleteAction = {
 		def project = Project.findById(id)
-		return project?project.delete():println("無法刪除")
+		return project?project.delete(flush: true):throwError("無法刪除");
 	}
 	def modifyAction={
 		def project = Project.findById(id)
 		if(!project) {
-			return println("無法修改")
+			return throwError("無法修改");
 		}
 		new JSONObject(params.get("data")).each(){
 			switch( it.key ){

@@ -26,7 +26,7 @@ class FuneralCompanyController extends GridController{
 		def company = FuneralCompany.findById(id)
 		def res = ["IsSuccess" : true]
 		if(company){
-			company.delete()
+			company.delete(flush: true)
 		}else{
 			res =["IsSuccess" : false]
 		}
@@ -35,7 +35,7 @@ class FuneralCompanyController extends GridController{
 	def modifyAction={
 		def company = FuneralCompany.findById(id)
 		if(!company) {
-			return println("無法修改")
+			return throwError("無法修改");			
 		}
 
 		new JSONObject(params.get("data")).each(){

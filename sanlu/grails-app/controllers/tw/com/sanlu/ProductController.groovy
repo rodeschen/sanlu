@@ -86,7 +86,7 @@ class ProductController extends GridController{
 		}
 		def res = ["IsSuccess" : true]
 		if(productLinkPlace){
-			productLinkPlace.delete()
+			productLinkPlace.delete(flush: true)
 			if(productLinkPlace.hasErrors()){
 				println productLinkPlace.errors
 				render(status: 400, contentType:"text/json", productLinkPlace.errors)

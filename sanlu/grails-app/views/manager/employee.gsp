@@ -207,7 +207,7 @@
                                 $("#empName").val(id.empName);
                                 $("#gender").val('男' == id.gender ? 'M' : 'F');
                                 $("#hireDate").val(id.hireDate);
-                                $("#isLeft").val(id.isLeft);
+                                $("#isLeft").val('是' == id.isLeft?'true':'false');
                                 $("#empLevel").val(id.empLevel);
                             }
                         },

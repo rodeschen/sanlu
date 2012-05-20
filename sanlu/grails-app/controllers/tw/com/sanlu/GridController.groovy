@@ -6,6 +6,8 @@ import java.sql.Timestamp
 
 import org.codehaus.groovy.grails.web.json.JSONArray
 import org.codehaus.groovy.grails.web.json.JSONObject
+import org.hibernate.exception.ConstraintViolationException
+
 
 import tw.com.sanlu.annotation.GridQuery
 
@@ -94,7 +96,7 @@ abstract class GridController extends BaseController {
 			render result as JSON
 		}catch(Exception e){
 			log.error e.dump()
-			render(status: 400, contentType:"text/json", text: e.dump())
+			return throwError(e.dump());
 		}
 	}
 
@@ -120,7 +122,12 @@ abstract class GridController extends BaseController {
 		try{
 			id  = params.containsKey("id")?params.long("id"):null
 			deleteAction()
-		}catch(Exception e){
+		}catch(Exception e){			
+			if(e.toString().indexOf("ConstraintViolationException")>-1){				
+				println e.message
+				throwError("有其它地方使用，故無法刪除!!");
+				return;
+			}
 			log.error e.dump()
 			render(status: 400, contentType:"text/json", text: e.dump())
 		}
@@ -136,7 +143,7 @@ abstract class GridController extends BaseController {
 			modifyAction()
 		}catch(Exception e){
 			log.error e.printStackTrace()
-			render(status: 400, contentType:"text/json", text: e.dump())
+			return throwError(e.dump());			
 		}
 	}
 	def modifyAction={}
@@ -146,7 +153,7 @@ abstract class GridController extends BaseController {
 			insertAction()
 		}catch(Exception e){
 			log.error e.printStackTrace()
-			render(status: 400, contentType:"text/json", text: e.dump())
+			return throwError(e.dump());
 		}
 	}
 	def insertAction={}

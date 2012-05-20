@@ -27,27 +27,30 @@ class EmployeeController extends GridController{
 	def modifyAction={
 		def emp = Employee.findById(params.long("id"))
 		if(!emp) {
-			return println("無法修改")
+			return throwError("無法修改");		
 		}
 
 		def ids = [
 			"empName",
 			"gender",
 			"empLevel",
-			"hireDate"
+			"hireDate",
+			"isLeft"
 		]
 		DateFormat df = new SimpleDateFormat("yyyy-M-d");
 		ids.each(){
 			switch( it ){
-				case 'empName':
-				case 'gender':
-					emp.putAt it,params.get(it)
-					break
+				case 'isLeft':
+					emp.putAt it,params.boolean(it)
+					break;
 				case 'empLevel':
 					emp.putAt it,params.int(it)
 					break
 				case 'hireDate':
 					emp.putAt it,df.parse(params.get(it))
+					break
+				default:
+					emp.putAt it,params.get(it)
 					break
 			}
 		}
@@ -62,7 +65,7 @@ class EmployeeController extends GridController{
 	def pwreset = {
 		def emp = Employee.findById(params.long("id"))
 		if(!emp) {
-			return println("無法修改")
+			return throwError("無法修改");		
 		}
 
 		emp.setPassword(params.get("pw").encodeAsMD5())

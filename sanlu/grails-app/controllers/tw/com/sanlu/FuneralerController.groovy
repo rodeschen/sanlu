@@ -26,8 +26,9 @@ class FuneralerController extends GridController{
 	def deleteAction = {
 		def funeraler = Funeraler.findById(id)
 		def res = ["IsSuccess" : true]
+		
 		if(funeraler){
-			funeraler.delete()
+			funeraler.delete(flush: true)
 		}else{
 			res =["IsSuccess" : false]
 		}

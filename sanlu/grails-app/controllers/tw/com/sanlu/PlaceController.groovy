@@ -26,7 +26,7 @@ class PlaceController extends GridController{
 	def modifyAction={
 		def place = Place.findById(params.long("id"))
 		if(!place) {
-			return println("無法修改")
+			return throwError("無法修改");
 		}
 		place.setPlaceName params.placeName
 		place.setLastModifyBy session.employee
@@ -39,7 +39,7 @@ class PlaceController extends GridController{
 		def place = Place.findById(params.long("id"))
 		def res = ["IsSuccess" : true]
 		if(place){
-			place.delete()
+			place.delete(flush: true)
 		}else{
 			res =["IsSuccess" : false]
 		}
