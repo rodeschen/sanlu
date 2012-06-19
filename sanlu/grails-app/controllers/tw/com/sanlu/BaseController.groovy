@@ -20,7 +20,7 @@ abstract class BaseController {
 	def beforeInterceptor ={
 		log.info "";
 		def b = true;
-		if(manageUrl.contains(params.controller)?1==session.empLevel:session.empLevel ){
+		if(manageUrl.contains(params.controller)?3>=session.empLevel:session.empLevel ){
 			def res = [:]
 			params.keySet().each (){
 				res[it] = params.get(it);

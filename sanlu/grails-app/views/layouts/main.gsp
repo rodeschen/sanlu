@@ -58,26 +58,31 @@
 							<li><a id="productDaily" href="#agencyDialog3">商品日執行表</a></li>
 						</ul></li>
 					<li><a href="${request.contextPath}/calendar/callist">日曆</a></li>
-					<g:if test="${session.empLevel.equals(1)}">
-						<li><a href="#">系統管理</a>
-							<ul>
+					<li><a href="#">系統管理</a>
+						<ul>
+							<g:if test="${session.empLevel.equals(1)}">
 								<li><a href="${request.contextPath}/manager/place">場地管理</a>
 								</li>
 								<li><a href="${request.contextPath}/manager/product">商品管理</a>
 								</li>
+							</g:if>
+							<g:if test="${session.empLevel <= 3}">
 								<li><a href="${request.contextPath}/manager/funeralcompany">禮儀公司管理</a>
 								</li>
-								<li>
-									<hr />
-								</li>
-								<li><a href="${request.contextPath}/manager/employee">員工管理</a>
-								</li>
-								<li><a id="resetExcelPW" href="#agencyDialog4">重設Excel保護密碼</a>
-								</li>
-								<li><a id="downloadLog" href="#agencyDialog5">Log
-										download</a></li>
-							</ul></li>
-					</g:if>
+							</g:if>
+							<g:if test="${session.empLevel.equals(1)}">
+							<li>
+								<hr />
+							</li>
+							<li><a href="${request.contextPath}/manager/employee">員工管理</a>
+							</li>
+							<li><a id="resetExcelPW" href="#agencyDialog4">重設Excel保護密碼</a>
+							</li>
+							<li><a id="downloadLog" href="#agencyDialog5">Log
+									download</a></li>
+							</g:if>
+						</ul></li>
+
 					<li style="float: right;"><a id="logout"
 						href="${request.contextPath}/login/logout">登出</a></li>
 					<li
