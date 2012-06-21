@@ -46,11 +46,13 @@
 					<li class="current"><a href="${request.contextPath}/main">首頁</a>
 					</li>
 					<li><a href="${request.contextPath}/project/search">搜尋案件</a></li>
+					<g:if test="${session.empLevel <= 3}">
 					<li><a href="#">商品</a>
 						<ul>
 							<li><a href="${request.contextPath}/manager/purchase">商品進貨</a>
 							</li>
 						</ul></li>
+					</g:if>
 					<li><a href="#">報表</a>
 						<ul>
 							<li><a id="agency" href="#agencyDialog1">品項代叫報表</a></li>
@@ -58,6 +60,7 @@
 							<li><a id="productDaily" href="#agencyDialog3">商品日執行表</a></li>
 						</ul></li>
 					<li><a href="${request.contextPath}/calendar/callist">日曆</a></li>
+					<g:if test="${session.empLevel <= 3}">
 					<li><a href="#">系統管理</a>
 						<ul>
 							<g:if test="${session.empLevel.equals(1)}">
@@ -82,7 +85,7 @@
 									download</a></li>
 							</g:if>
 						</ul></li>
-
+					</g:if>
 					<li style="float: right;"><a id="logout"
 						href="${request.contextPath}/login/logout">登出</a></li>
 					<li
