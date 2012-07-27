@@ -3,7 +3,7 @@
         <title>首頁</title>
         <meta name="layout" content="inner" />
     </head>
-    <body>        
+    <body>
         <g:if test="${!session.empLevel}">
             <script type="text/javascript">
                 $("nav,aside").remove();
@@ -22,10 +22,10 @@
                             <span class="th1">密碼：</span>
                             <span><input type="password" id="pw" name="pw" placeholder="密碼" class="validate[required]" /></span>
                         </div>
-                        <div style="text-align: center;">${session.errMsg}</div>
-                        <!-- 清空錯誤訊息 -->
-                        ${session.errMsg=""}
-                        <!--
+                        <div style="text-align: center;">
+                            ${session.errMsg}
+                        </div>
+                        <!-- 清空錯誤訊息 -->${session.errMsg=""}<!--
                         <div class="field-row">
                         <span class="th1">分館：</span>
                         <span>
@@ -49,16 +49,18 @@
                 <legend>
                     專案清單 
                 </legend>
-                <div>
-                    <a id="add" href="#pdialog" class="button">新增</a>
-                    <button id="modify">
-                        修改
-                    </button>
-                    <button id="delete">
-                        刪除
-                    </button>
-                    <span style="float: right;"><input type="radio" id="closing" name="closing" value="N" checked="checked" />未結案 <input type="radio" id="closing" name="closing" value="Y" />結案</span>
-                </div><div id="projectGrid" />
+                <g:if test="${session.empLevel <= 4}">
+                    <div>
+                        <a id="add" href="#pdialog" class="button">新增</a>
+                        <button id="modify">
+                            修改
+                        </button>
+                        <button id="delete">
+                            刪除
+                        </button>
+                        <span style="float: right;"><input type="radio" id="closing" name="closing" value="N" checked="checked" />未結案 <input type="radio" id="closing" name="closing" value="Y" />結案</span>
+                    </div>
+                </g:if><div id="projectGrid" />
             </fieldset>
             <fieldset>
                 <legend>
@@ -70,9 +72,8 @@
                     </button>
                 </div>
                 <div id="palceGrid" />
-            </fieldset>
-            <!-- 
-            dialog 
+            </fieldset><!--
+            dialog
             -->
             <div class="hide">
                 <div id="pdialog" class="dialog" style="display: block; width: 400px;">
@@ -84,8 +85,8 @@
                             </div>
                             <div class="field-row">
                                 <span class="th1">禮儀公司：</span>
-                                <span>
-                                    <select id="funeralCompany" name="funeralCompany" class="validate[required]">
+                                <span><input class="validate[required]" id="funeralCompanyAuto" autocomplete="off" role="textbox" aria-autocomplete="list" aria-haspopup="true">
+                                    <select id="funeralCompany" name="funeralCompany" class="validate[required] hide">
                                         <option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
                                     </select>
                                 </span>
@@ -265,11 +266,13 @@
                             sortable: false
                         }],
                         ondblClickRow: function(id){
-                            var data = grid1.getRowData(id);
-                            API.openProject({
-                                id: data.id,
-                                data: data
-                            });
+                            if ($("#add").size()) {
+                                var data = grid1.getRowData(id);
+                                API.openProject({
+                                    id: data.id,
+                                    data: data
+                                });
+                            }
                         }
                     });
                     
@@ -396,8 +399,8 @@
                             $('#funeralCompany').setDropdown(map);
                         }
                     });
-                    
-                    $('#funeralCompany').change(function(){
+                    var funeralCompany = $('#funeralCompany');
+                    funeralCompany.change(function(){
                         if ($(this).val()) {
                             $.ajax({
                                 type: "POST",
@@ -429,9 +432,17 @@
                                 closing: $(this).val()
                             }
                         });
-						grid1.trigger("reloadGrid");
+                        grid1.trigger("reloadGrid");
                         
-                    })
+                    });
+                    var funeralCompanyAuto = $("#funeralCompanyAuto");
+                    funeralCompanyAuto.autocomplete({
+                        source: contextRoot + "/combobox/funeralCompanyAuto",
+                        select: function(){                            
+                            funeralCompany.find("option:contains("+$(this).val()+")").attr('selected', 'selected').trigger("change");
+                        }
+                    });
+                    
                 });
             </script>
         </g:else>

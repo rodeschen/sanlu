@@ -21,6 +21,16 @@ class ComboboxController extends BaseController {
 		}
 		render res as JSON
 	}
+	
+	def funeralCompanyAuto = {
+		def l = FuneralCompany.findAllByFuneralCompanyNameLike("%"+params.term+"%")
+		def res = []
+		int i=0;
+		l?.each(){
+			res[i++] = it.funeralCompanyName
+		}
+		render res as JSON
+	}
 
 	//禮儀師
 	def funeraler = {

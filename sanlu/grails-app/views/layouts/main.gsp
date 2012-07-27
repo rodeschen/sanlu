@@ -42,10 +42,12 @@
 		<hr />
 		<g:if test="${session.empLevel}">
 			<nav>
-				<ul id="nav">
+				<ul id="nav">					
 					<li class="current"><a href="${request.contextPath}/main">首頁</a>
 					</li>
+					<g:if test="${session.empLevel <= 4}">
 					<li><a href="${request.contextPath}/project/search">搜尋案件</a></li>
+					</g:if>
 					<g:if test="${session.empLevel <= 3}">
 					<li><a href="#">商品</a>
 						<ul>
@@ -53,12 +55,15 @@
 							</li>
 						</ul></li>
 					</g:if>
+					<g:if test="${session.empLevel <= 4}">
 					<li><a href="#">報表</a>
 						<ul>
 							<li><a id="agency" href="#agencyDialog1">品項代叫報表</a></li>
 							<li><a id="productSale" href="#agencyDialog2">商品提出明細</a></li>
 							<li><a id="productDaily" href="#agencyDialog3">商品日執行表</a></li>
-						</ul></li>
+						</ul>
+					</li>
+					</g:if>		
 					<li><a href="${request.contextPath}/calendar/callist">日曆</a></li>
 					<g:if test="${session.empLevel <= 3}">
 					<li><a href="#">系統管理</a>

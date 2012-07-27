@@ -55,22 +55,22 @@ class ProjectController extends GridController {
 				if(sortBy){
 					switch(sortBy){
 						case "funeralCompany.funeralCompanyName" :
-							funeralCompany{
-								order("funeralCompanyName",isAsc?"asc":"desc")
-							}
-							break;
+						funeralCompany{
+							order("funeralCompanyName",isAsc?"asc":"desc")
+						}
+						break;
 						case "funeraler.funeralerName" :
-							funeraler{
-								order("funeralerName",isAsc?"asc":"desc")
-							}
-							break;
+						funeraler{
+							order("funeralerName",isAsc?"asc":"desc")
+						}
+						break;
 						case "emp.empName" :
-							emp{
-								order("empName",isAsc?"asc":"desc")
-							}
-							break;
+						emp{
+							order("empName",isAsc?"asc":"desc")
+						}
+						break;
 						default:
-							order(sortBy,isAsc?"asc":"desc")
+						order(sortBy,isAsc?"asc":"desc")
 					}
 				}
 			}
@@ -96,22 +96,22 @@ class ProjectController extends GridController {
 				if(sortBy){
 					switch(sortBy){
 						case "funeralCompany.funeralCompanyName" :
-							funeralCompany{
-								order("funeralCompanyName",isAsc?"asc":"desc")
-							}
-							break;
+						funeralCompany{
+							order("funeralCompanyName",isAsc?"asc":"desc")
+						}
+						break;
 						case "funeraler.funeralerName" :
-							funeraler{
-								order("funeralerName",isAsc?"asc":"desc")
-							}
-							break;
+						funeraler{
+							order("funeralerName",isAsc?"asc":"desc")
+						}
+						break;
 						case "emp.empName" :
-							emp{
-								order("empName",isAsc?"asc":"desc")
-							}
-							break;
+						emp{
+							order("empName",isAsc?"asc":"desc")
+						}
+						break;
 						default:
-							order(sortBy,isAsc?"asc":"desc")
+						order(sortBy,isAsc?"asc":"desc")
 					}
 				}
 			}
@@ -143,17 +143,17 @@ class ProjectController extends GridController {
 			if(sortBy){
 				switch(sortBy){
 					case "product.productName" :
-						product{
-							order("productName",isAsc?"asc":"desc")
-						}
-						break;
+					product{
+						order("productName",isAsc?"asc":"desc")
+					}
+					break;
 					case "place.placeName" :
-						place{
-							order("placeName",isAsc?"asc":"desc")
-						}
-						break;
+					place{
+						order("placeName",isAsc?"asc":"desc")
+					}
+					break;
 					default:
-						order(sortBy,isAsc?"asc":"desc")
+					order(sortBy,isAsc?"asc":"desc")
 				}
 			}
 		}
@@ -170,14 +170,14 @@ class ProjectController extends GridController {
 				"useTime":{str,data->
 					switch(data.product.costUnit){
 						case 0:
-							return Utility.ADFormat.format(data.startTime)
-							break;
+						return Utility.ADFormat.format(data.startTime)
+						break;
 						case 3:
 						case 4:
-							return Utility.dateToString(data.startTime,"yyyy-MM-dd") + " ~ "+ Utility.dateToString(data.endTime,"yyyy-MM-dd");
-							break;
+						return Utility.dateToString(data.startTime,"yyyy-MM-dd") + " ~ "+ Utility.dateToString(data.endTime,"yyyy-MM-dd");
+						break;
 						default:
-							return Utility.ADFormat.format(data.startTime) + " ~ "+ Utility.ADFormat.format(data.endTime)
+						return Utility.ADFormat.format(data.startTime) + " ~ "+ Utility.ADFormat.format(data.endTime)
 					}
 				},"type":{str,data->
 					if(data.product.hasPlace){
@@ -191,23 +191,23 @@ class ProjectController extends GridController {
 					def unit;
 					switch(data.product.costUnit){
 						case 1:
-							def useTime = data.endTime.getTime() - data.startTime.getTime()
-							return data.quantity + data.product.unit + "/" + (useTime / 1000 / 60 / 60) + "小時";
-							break;
+						def useTime = data.endTime.getTime() - data.startTime.getTime()
+						return data.quantity + data.product.unit + "/" + (useTime / 1000 / 60 / 60) + "小時";
+						break;
 						case 2:
-							unit = "小時"
+						unit = "小時"
 						case 3:
-							unit = unit ? unit:"天"
+						unit = unit ? unit:"天"
 						case 4:
-							unit = unit ? unit:"月"
-							if(true/*ata.product.costRange == 1*/){
-								return (data.quantity + data.product.unit) + "/" + (/*data.quantity * */ formatDecimal(data.product.costRange)) +unit
-							}else{
-								return (data.quantity + data.product.unit)
-							}
-							break;
+						unit = unit ? unit:"月"
+						if(true/*ata.product.costRange == 1*/){
+							return (data.quantity + data.product.unit) + "/" + (/*data.quantity * */ formatDecimal(data.product.costRange)) +unit
+						}else{
+							return (data.quantity + data.product.unit)
+						}
+						break;
 						default:
-							return (data.quantity + data.product.unit);
+						return (data.quantity + data.product.unit);
 					}
 				}],"userdata":[amount:amount,price:itemCount,quantity:itemCount2],]
 	}
@@ -215,22 +215,22 @@ class ProjectController extends GridController {
 	def queryid = {
 		def project = Project.findById(params.long("id"))
 		def res = [:] <<
-				[id:project.id,
-					projectNo:project.projectNo,
-					projectName:project.projectName,
-					inDate:project.inDate?.format("yyyy-MM-dd"),
-					inHour:project.inDate?.format("HH"),
-					inMin: project.inDate?.format("mm"),
-					funeralCompany:project.funeralCompany.id,
-					funeraler:project.funeraler.id,
-					employee:project.emp.empNo,
-					contact:project.contact,
-					contactPhone:project.contactPhone,
-					contactAddrCity:project.contactAddrCity,
-					contactAddrArea:project.contactAddrArea,
-					contactAddr:project.contactAddr,
-					closingDate:project.closingDate?.format("yyyy-MM-dd"),
-					memo:project.memo]
+		[id:project.id,
+			projectNo:project.projectNo,
+			projectName:project.projectName,
+			inDate:project.inDate?.format("yyyy-MM-dd"),
+			inHour:project.inDate?.format("HH"),
+			inMin: project.inDate?.format("mm"),
+			funeralCompany:project.funeralCompany.id,
+			funeraler:project.funeraler.id,
+			employee:project.emp.empNo,
+			contact:project.contact,
+			contactPhone:project.contactPhone,
+			contactAddrCity:project.contactAddrCity,
+			contactAddrArea:project.contactAddrArea,
+			contactAddr:project.contactAddr,
+			closingDate:project.closingDate?.format("yyyy-MM-dd"),
+			memo:project.memo]
 
 		render res as JSON
 	}
@@ -347,33 +347,33 @@ class ProjectController extends GridController {
 			if(!product.hasPlace){
 				if(product.productType != 0){
 					new ProductHistory(
-							product:product,
-							project:project,
-							isPurchase:false,
-							quantity:(it.quantity * -1),
-							date:new Date(),
-							totalQuantity:0,
-							vendor:it.vendor,
-							lastModifyBy: session.employee
-							).save()
+					product:product,
+					project:project,
+					isPurchase:false,
+					quantity:(it.quantity * -1),
+					date:new Date(),
+					totalQuantity:0,
+					vendor:it.vendor,
+					lastModifyBy: session.employee
+					).save()
 				}else{
 					product.totalQuantity += it.quantity
 					new ProductHistory(
-							product:product,
-							project:project,
-							isPurchase:false,
-							quantity:(it.quantity * -1),
-							date:new Date(),
-							totalQuantity:(product.totalQuantity),
-							vendor:"",
-							lastModifyBy: session.employee
-							).save()
+					product:product,
+					project:project,
+					isPurchase:false,
+					quantity:(it.quantity * -1),
+					date:new Date(),
+					totalQuantity:(product.totalQuantity),
+					vendor:"",
+					lastModifyBy: session.employee
+					).save()
 					product.save()
 				}
 			}
 			it.delete(flush: true)
 		}
-		//刪除Project，只放刪除人員		
+		//刪除Project，只放刪除人員
 		project.deleter = session.employee;
 		project.save();
 		def res = ["IsSuccess" : true]
@@ -392,18 +392,18 @@ class ProjectController extends GridController {
 		new JSONObject(params.get("data")).each(){
 			switch( it.key ){
 				case 'projectName':
-					project.putAt it.key,it.value
-					break
+				project.putAt it.key,it.value
+				break
 				case 'inDate':
 				case 'outDate':
-					project.putAt it.key,Utility.shortFormat.parse(it.value)
-					break
+				project.putAt it.key,Utility.shortFormat.parse(it.value)
+				break
 				case 'sallingTotal':
 				case 'total':
-					project.putAt it.key,new BigDecimal( it.value)
-					break
+				project.putAt it.key,new BigDecimal( it.value)
+				break
 				default:
-					break
+				break
 			}
 		}
 		project.save()
@@ -433,27 +433,27 @@ class ProjectController extends GridController {
 		if(!oldProduct.hasPlace){
 			if(oldProduct.productType!=0){
 				new ProductHistory(
-						product:oldProduct,
-						project:detail.project,
-						isPurchase:false,
-						quantity:(oldQuantity * -1),
-						date:new Date(),
-						totalQuantity:0,
-						vendor:detail.vendor,
-						LastModifyBy: session.employee
-						).save()
+				product:oldProduct,
+				project:detail.project,
+				isPurchase:false,
+				quantity:(oldQuantity * -1),
+				date:new Date(),
+				totalQuantity:0,
+				vendor:detail.vendor,
+				LastModifyBy: session.employee
+				).save()
 			}else{
 				oldProduct.totalQuantity += oldQuantity
 				new ProductHistory(
-						product:oldProduct,
-						project:detail.project,
-						isPurchase:false,
-						quantity:(oldQuantity * -1),
-						date:new Date(),
-						totalQuantity:(oldProduct.totalQuantity),
-						vendor:"",
-						LastModifyBy: session.employee
-						).save()
+				product:oldProduct,
+				project:detail.project,
+				isPurchase:false,
+				quantity:(oldQuantity * -1),
+				date:new Date(),
+				totalQuantity:(oldProduct.totalQuantity),
+				vendor:"",
+				LastModifyBy: session.employee
+				).save()
 				oldProduct.save()
 			}
 		}
@@ -468,60 +468,60 @@ class ProjectController extends GridController {
 		def cal2 = Calendar.getInstance();
 		switch(product.costUnit){
 			case "0":
-				detail.startTime = df.parse(params.startDate + " " + params.startHour + ":" + params.startMin)
-				detail.endTime = detail.startTime
-				break;
+			detail.startTime = df.parse(params.startDate + " " + params.startHour + ":" + params.startMin)
+			detail.endTime = detail.startTime
+			break;
 			case "1": //次(時間)
-				detail.startTime = df.parse(params.startDate + " " + params.startHour + ":" + params.startMin)
-				detail.endTime = df.parse(params.endDate + " " + params.endHour + ":" + params.startMin)
-				cal1.setTime detail.startTime
-				cal2.setTime detail.endTime
-				if(cal2.compareTo(cal1) <= 0){
-					return throwError("結束時間需大於開始時間");
-				}
-				break;
+			detail.startTime = df.parse(params.startDate + " " + params.startHour + ":" + params.startMin)
+			detail.endTime = df.parse(params.endDate + " " + params.endHour + ":" + params.startMin)
+			cal1.setTime detail.startTime
+			cal2.setTime detail.endTime
+			if(cal2.compareTo(cal1) <= 0){
+				return throwError("結束時間需大於開始時間");
+			}
+			break;
 			case "2": //時
-				def hour = 1000 * 60 * 60 * product.costRange
-				detail.startTime = df.parse(params.startDate + " " + params.startHour + ":" + params.startMin)
+			def hour = 1000 * 60 * 60 * product.costRange
+			detail.startTime = df.parse(params.startDate + " " + params.startHour + ":" + params.startMin)
 			//	detail.endTime = df.parse(params.endDate + " " + params.endHour + ":" + params.startMin)
-				cal1.setTime detail.startTime
-				int costRange = product.costRange.intValue()
-				cal1.add(Calendar.HOUR ,costRange)
-				cal1.add(Calendar.MINUTE , product.costRange.subtract(new BigDecimal(costRange)).multiply(new BigDecimal(60)).intValue())
-				detail.endTime  = cal1.getTime();
+			cal1.setTime detail.startTime
+			int costRange = product.costRange.intValue()
+			cal1.add(Calendar.HOUR ,costRange)
+			cal1.add(Calendar.MINUTE , product.costRange.subtract(new BigDecimal(costRange)).multiply(new BigDecimal(60)).intValue())
+			detail.endTime  = cal1.getTime();
 			//	cal1.setTime detail.startTime
 			//	cal2.setTime detail.endTime
 			//	if(cal2.compareTo(cal1) <= 0 || ((cal2.getTimeInMillis() - cal1.getTimeInMillis())%hour) != 0 ){
 			//		return throwError("結束時間需大於開始時間 且 每次使用時間以 " + product.costRange + " 小時為單位");
 			//	}
-				break;
+			break;
 			case "3": //天
 			//def day = 1000 * 60 * 60 * 24 * product.costRange
-				detail.startTime = df.parse(params.startDate + " 00:00")
+			detail.startTime = df.parse(params.startDate + " 00:00")
 
 			//	detail.endTime = df.parse(params.endDate + " 00:00")
-				cal1.setTime detail.startTime
-				int costRange = product.costRange.intValue()
-				cal1.add(Calendar.DATE, costRange)
-				cal1.add(Calendar.HOUR , product.costRange.subtract(new BigDecimal(costRange)).multiply(new BigDecimal(24)).intValue())
-				detail.endTime  = cal1.getTime();
+			cal1.setTime detail.startTime
+			int costRange = product.costRange.intValue()
+			cal1.add(Calendar.DATE, costRange)
+			cal1.add(Calendar.HOUR , product.costRange.subtract(new BigDecimal(costRange)).multiply(new BigDecimal(24)).intValue())
+			detail.endTime  = cal1.getTime();
 			//	cal2.setTime detail.endTime
 			//	if(cal2.compareTo(cal1) <= 0 || ((cal2.getTimeInMillis() - cal1.getTimeInMillis())%hour) != 0 ){
 			//		return throwError("結束日期需大於開始日期 且 每次使用時間以 " + product.costRange + " 天為單位");
 			//	}
-				break;
+			break;
 			case "4": //月
-				detail.startTime = df.parse(params.startDate + " 00:00")
-				cal1.setTime detail.startTime
+			detail.startTime = df.parse(params.startDate + " 00:00")
+			cal1.setTime detail.startTime
 			//	if((params.int("mouth") % product.costRange) != 0){
 			//		return throwError("每次使用時間以 " + product.costRange + " 個月為單位");
 			//	}
 			//	cal1.add(Calendar.MONTH, params.int("mouth"))
-				int costRange = product.costRange.intValue()
-				cal1.add(Calendar.MONTH, costRange)
-				cal1.add(Calendar.DATE , product.costRange.subtract(new BigDecimal(costRange)).multiply(new BigDecimal(30)).intValue())
-				detail.endTime  = cal1.getTime();
-				break;
+			int costRange = product.costRange.intValue()
+			cal1.add(Calendar.MONTH, costRange)
+			cal1.add(Calendar.DATE , product.costRange.subtract(new BigDecimal(costRange)).multiply(new BigDecimal(30)).intValue())
+			detail.endTime  = cal1.getTime();
+			break;
 
 		}
 
@@ -546,15 +546,15 @@ class ProjectController extends GridController {
 
 				// history
 				new ProductHistory(
-						product:product,
-						project:detail.project,
-						isPurchase:false,
-						quantity:detail.quantity,
-						date:detail.startTime,
-						totalQuantity:product.totalQuantity,
-						vendor:"",
-						LastModifyBy: session.employee
-						).save()
+				product:product,
+				project:detail.project,
+				isPurchase:false,
+				quantity:detail.quantity,
+				date:detail.startTime,
+				totalQuantity:product.totalQuantity,
+				vendor:"",
+				LastModifyBy: session.employee
+				).save()
 			}else{
 				//detail.startTime = df.parse(params.date2 + " " + params.hour2 + ":" + params.min2)
 				//detail.endTime = detail.startTime
@@ -571,15 +571,15 @@ class ProjectController extends GridController {
 
 
 				new ProductHistory(
-						product:product,
-						project:detail.project,
-						isPurchase:false,
-						quantity:detail.quantity,
-						date:detail.startTime,
-						totalQuantity:0,
-						vendor:params.vendor1,
-						LastModifyBy: session.employee
-						).save()
+				product:product,
+				project:detail.project,
+				isPurchase:false,
+				quantity:detail.quantity,
+				date:detail.startTime,
+				totalQuantity:0,
+				vendor:params.vendor1,
+				LastModifyBy: session.employee
+				).save()
 			}
 		}else{
 			def place = Place.findById(params.long("place3"))
@@ -630,60 +630,60 @@ class ProjectController extends GridController {
 		def amount = params.int("1".equals(type)?"amount1":"amount3")
 		switch(product.costUnit){
 			case "0":
-				detail.startTime = df.parse(params.startDate + " " + params.startHour + ":" + params.startMin)
-				detail.endTime = detail.startTime
-				break;
+			detail.startTime = df.parse(params.startDate + " " + params.startHour + ":" + params.startMin)
+			detail.endTime = detail.startTime
+			break;
 			case "1": //次(時間)
-				detail.startTime = df.parse(params.startDate + " " + params.startHour + ":" + params.startMin)
-				detail.endTime = df.parse(params.endDate + " " + params.endHour + ":" + params.startMin)
-				cal1.setTime detail.startTime
-				cal2.setTime detail.endTime
-				if(cal2.compareTo(cal1) <= 0){
-					return throwError("結束時間需大於開始時間");
-				}
-				break;
+			detail.startTime = df.parse(params.startDate + " " + params.startHour + ":" + params.startMin)
+			detail.endTime = df.parse(params.endDate + " " + params.endHour + ":" + params.startMin)
+			cal1.setTime detail.startTime
+			cal2.setTime detail.endTime
+			if(cal2.compareTo(cal1) <= 0){
+				return throwError("結束時間需大於開始時間");
+			}
+			break;
 			case "2": //時
 			//def hour = 1000 * 60 * 60 * product.costRange
-				detail.startTime = df.parse(params.startDate + " " + params.startHour + ":" + params.startMin)
+			detail.startTime = df.parse(params.startDate + " " + params.startHour + ":" + params.startMin)
 			//	detail.endTime = df.parse(params.endDate + " " + params.endHour + ":" + params.startMin)
-				cal1.setTime detail.startTime
-				int costRange = product.costRange.intValue()
-				cal1.add(Calendar.HOUR ,costRange * amount)
-				cal1.add(Calendar.MINUTE , product.costRange.subtract(new BigDecimal(costRange)).multiply(new BigDecimal(amount)).multiply(new BigDecimal(60)).intValue())
-				detail.endTime  = cal1.getTime();
+			cal1.setTime detail.startTime
+			int costRange = product.costRange.intValue()
+			cal1.add(Calendar.HOUR ,costRange * amount)
+			cal1.add(Calendar.MINUTE , product.costRange.subtract(new BigDecimal(costRange)).multiply(new BigDecimal(amount)).multiply(new BigDecimal(60)).intValue())
+			detail.endTime  = cal1.getTime();
 			//	cal1.setTime detail.startTime
 			//	cal2.setTime detail.endTime
 			//	if(cal2.compareTo(cal1) <= 0 || ((cal2.getTimeInMillis() - cal1.getTimeInMillis())%hour) != 0 ){
 			//		return throwError("結束時間需大於開始時間 且 每次使用時間以 " + product.costRange + " 小時為單位");
 			//	}
-				break;
+			break;
 			case "3": //天
 			//def day = 1000 * 60 * 60 * 24 * product.costRange
-				detail.startTime = df.parse(params.startDate + " 00:00")
+			detail.startTime = df.parse(params.startDate + " 00:00")
 
 			//	detail.endTime = df.parse(params.endDate + " 00:00")
-				cal1.setTime detail.startTime
-				int costRange = product.costRange.intValue()
-				cal1.add(Calendar.DATE, costRange * amount)
-				cal1.add(Calendar.HOUR , product.costRange.subtract(new BigDecimal(costRange)).multiply(new BigDecimal(amount)).multiply(new BigDecimal(24)).intValue())
-				detail.endTime  = cal1.getTime();
+			cal1.setTime detail.startTime
+			int costRange = product.costRange.intValue()
+			cal1.add(Calendar.DATE, costRange * amount)
+			cal1.add(Calendar.HOUR , product.costRange.subtract(new BigDecimal(costRange)).multiply(new BigDecimal(amount)).multiply(new BigDecimal(24)).intValue())
+			detail.endTime  = cal1.getTime();
 			//	cal2.setTime detail.endTime
 			//	if(cal2.compareTo(cal1) <= 0 || ((cal2.getTimeInMillis() - cal1.getTimeInMillis())%hour) != 0 ){
 			//		return throwError("結束日期需大於開始日期 且 每次使用時間以 " + product.costRange + " 天為單位");
 			//	}
-				break;
+			break;
 			case "4": //月
-				detail.startTime = df.parse(params.startDate + " 00:00")
-				cal1.setTime detail.startTime
+			detail.startTime = df.parse(params.startDate + " 00:00")
+			cal1.setTime detail.startTime
 			//	if((params.int("mouth") % product.costRange) != 0){
 			//		return throwError("每次使用時間以 " + product.costRange + " 個月為單位");
 			//	}
 			//	cal1.add(Calendar.MONTH, params.int("mouth"))
-				int costRange = product.costRange.intValue()
-				cal1.add(Calendar.MONTH, costRange * amount)
-				cal1.add(Calendar.DATE , product.costRange.subtract(new BigDecimal(costRange)).multiply(new BigDecimal(amount)).multiply(new BigDecimal(30)).intValue())
-				detail.endTime  = cal1.getTime();
-				break;
+			int costRange = product.costRange.intValue()
+			cal1.add(Calendar.MONTH, costRange * amount)
+			cal1.add(Calendar.DATE , product.costRange.subtract(new BigDecimal(costRange)).multiply(new BigDecimal(amount)).multiply(new BigDecimal(30)).intValue())
+			detail.endTime  = cal1.getTime();
+			break;
 		}
 
 		if("1".equals(type)){
@@ -703,15 +703,15 @@ class ProjectController extends GridController {
 
 				// history
 				new ProductHistory(
-						product:product,
-						project:detail.project,
-						isPurchase:false,
-						quantity:detail.quantity,
-						date:detail.startTime,
-						totalQuantity:product.totalQuantity,
-						vendor:"",
-						LastModifyBy: session.employee
-						).save()
+				product:product,
+				project:detail.project,
+				isPurchase:false,
+				quantity:detail.quantity,
+				date:detail.startTime,
+				totalQuantity:product.totalQuantity,
+				vendor:"",
+				LastModifyBy: session.employee
+				).save()
 			}else{
 				//無庫存/代叫商品
 				//detail.startTime = df.parse(params.date2 + " " + params.hour2 + ":" + params.min2)
@@ -725,15 +725,15 @@ class ProjectController extends GridController {
 				detail.vendor=params.vendor1
 
 				new ProductHistory(
-						product:product,
-						project:detail.project,
-						isPurchase:false,
-						quantity:detail.quantity,
-						date:detail.startTime,
-						totalQuantity:0,
-						vendor:params.productType==1?"":params.vendor1,
-						LastModifyBy: session.employee
-						).save()
+				product:product,
+				project:detail.project,
+				isPurchase:false,
+				quantity:detail.quantity,
+				date:detail.startTime,
+				totalQuantity:0,
+				vendor:params.productType==1?"":params.vendor1,
+				LastModifyBy: session.employee
+				).save()
 
 			}
 		}else{
@@ -891,7 +891,7 @@ class ProjectController extends GridController {
 	}
 
 	//去小數零
-	def formatDecimal(BigDecimal n){
+	private BigDecimal formatDecimal(BigDecimal n){
 		return n.toString().indexOf(".0")>0?n.intValue():n;
 	}
 }
