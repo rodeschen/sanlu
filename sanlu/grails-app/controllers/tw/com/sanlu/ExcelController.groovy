@@ -566,11 +566,11 @@ class ExcelController extends BaseController {
 				sheet.addCell(new Label(2, singLine, "禮儀師簽名：	",commonFormat))
 				
 				//年     月     日
-				sheet.mergeCells 6, singLine, 8, singLine
-				sheet.addCell(new Label(6, singLine, "年     月     日",commonFormat))
+				sheet.mergeCells 7, singLine, 8, singLine
+				sheet.addCell(new Label(7, singLine, "年     月     日",commonFormat))
 				sheet.mergeCells 0, singLine, 1, singLine
 				sheet.addCell(new Label(0, singLine, "",commonFormat))				
-				sheet.mergeCells 4, singLine, 5, singLine
+				sheet.mergeCells 4, singLine, 6, singLine
 				sheet.addCell(new Label(4, singLine, "",commonFormat))
 			}
 			catch(Exception e){
