@@ -13,7 +13,7 @@ class LoginController extends BaseController {
 		def userId = params.get("id")
 		def pw = params.get("pw").encodeAsMD5()
 		Employee employee = Employee.findByEmpNameAndPassword(userId,pw)
-		if(employee){
+		if(employee && !employee.isLeft){
 			log.info userId+" login sucess"
 			session.empName =employee.empName
 			session.empNo =employee.empNo

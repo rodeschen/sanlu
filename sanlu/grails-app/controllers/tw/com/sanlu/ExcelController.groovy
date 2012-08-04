@@ -92,7 +92,7 @@ class ExcelController extends BaseController {
 			cal.set params.int("exportYear"), params.int("exportMonth")-1, 00
 			def cal2 = Calendar.instance
 			cal2.set params.int("exportYear"), params.int("exportMonth"), 00
-			
+
 			def products = Product.findAllByProductType(0)
 			def criteria = ProductHistory.createCriteria()
 			def productHistorys = criteria {
@@ -237,7 +237,7 @@ class ExcelController extends BaseController {
 				WritableCellFormat evenFormat = new WritableCellFormat(sheet.getCell(0, 7).getCellFormat())
 
 				// write out our header
-				
+
 				//日期
 				sheet.addCell(new Label(4, 1,Utility.dateFormat.format(project.closingDate),new WritableCellFormat(sheet.getCell(4,1).getCellFormat())))
 				//案號
@@ -281,8 +281,8 @@ class ExcelController extends BaseController {
 							notAgencyTmp+=it.productName + "，"
 						}
 
-						//計價單位類別  0:次
 						switch(it.costUnit){
+							//計價單位類別  0:次
 							case "0":
 								def tmp = ""
 								def place = ""
@@ -290,7 +290,8 @@ class ExcelController extends BaseController {
 									if(it.place&&"".equals(place)){
 										place = (it.place?"("+it.place.placeName+")":"")
 									}
-									tmp +=it.startTime.getMonth()+1+"/"+it.startTime.getDate()+"，"
+									tmp +=(it.startTime.toCalendar().get(Calendar.MONTH)+1)+"/"+it.startTime.toCalendar().get(Calendar.DATE)+"，"
+									//tmp +=it.startTime.getMonth()+1+"/"+it.startTime.getDate()+"，"
 									modifiedPrice = it.modifiedPrice
 									modifiedCostPrice = it.modifiedInternalPrice
 								}
@@ -299,11 +300,11 @@ class ExcelController extends BaseController {
 							//次數
 								sheet.addCell(new Label(4, row,((int)(productBills.size()*it.costRange)).toString(),count%2!=0?oddFormat:evenFormat))
 								break
-							case "1":
+							case "2":
 								productBills.each(){
 
-									//1:區間(時)
-									sheet.addCell(new Label(2, row,Utility.dateTimeFormat.format(it.startTime) + (it.place?"("+it.place.placeName+")":"") ,count%2!=0?oddFormat:evenFormat))
+									//2:區間(時)
+									sheet.addCell(new Label(2, row,Utility.dateTimeFormat.format(it.startTime) +" ~ "+ Utility.dateTimeFormat.format(it.endTime)+ (it.place?"("+it.place.placeName+")":"") ,count%2!=0?oddFormat:evenFormat))
 									//次數
 									sheet.addCell(new Label(4, row,((int)it.quantity).toString(),count%2!=0?oddFormat:evenFormat))
 
@@ -311,10 +312,20 @@ class ExcelController extends BaseController {
 									modifiedCostPrice = it.modifiedInternalPrice
 								}
 								break
-							case "2":
+							case "3":
 								productBills.each(){
 
-									//2:區間(天)
+									//3:區間(天)
+									sheet.addCell(new Label(2, row,Utility.dateTimeFormat.format(it.startTime) + " ~ "+ Utility.dateTimeFormat.format(it.endTime)+ (it.place?"("+it.place.placeName+")":""),count%2!=0?oddFormat:evenFormat))
+									//次數
+									sheet.addCell(new Label(4, row,((int)it.quantity).toString(),count%2!=0?oddFormat:evenFormat))
+									modifiedPrice = it.modifiedPrice
+									modifiedCostPrice = it.modifiedInternalPrice
+								}
+								break
+							case "4":
+								productBills.each(){
+									//4:區間(月)
 									sheet.addCell(new Label(2, row,Utility.dateTimeFormat.format(it.startTime) + " ~ "+ Utility.dateTimeFormat.format(it.endTime)+ (it.place?"("+it.place.placeName+")":""),count%2!=0?oddFormat:evenFormat))
 									//次數
 									sheet.addCell(new Label(4, row,((int)it.quantity).toString(),count%2!=0?oddFormat:evenFormat))
@@ -435,6 +446,7 @@ class ExcelController extends BaseController {
 				sheet.getSettings().setPassword(parameter.value);
 
 				def commonFormat = new WritableCellFormat(sheet.getCell(1,1).getCellFormat())
+				commonFormat.setBorder(Border.ALL, BorderLineStyle.THIN)
 				// write out our header
 				//案名
 				sheet.addCell(new Label(1, 1,project.projectName,commonFormat))
@@ -470,7 +482,7 @@ class ExcelController extends BaseController {
 										place = (it.place?"("+it.place.placeName+")":"")
 									}
 
-									tmp +=(it.startTime.getMonth()+1)+"/"+it.startTime.getDate()+"，"
+									tmp +=(it.startTime.toCalendar().get(Calendar.MONTH)+1)+"/"+it.startTime.toCalendar().get(Calendar.DATE)+"，"
 									modifiedPrice = it.modifiedPrice
 								}
 								tmp = tmp?.substring(0, tmp.length()-1)
@@ -478,29 +490,45 @@ class ExcelController extends BaseController {
 							//次數
 								sheet.addCell(new Label(3, row,((int)(productBills.size()*it.costRange)).toString(),commonFormat))
 								break
-							case "1":
+							case "2":
 								productBills.each(){
-									//1:區間(時)
-									sheet.addCell(new Label(1, row,Utility.dateTimeFormat.format(it.startTime) + (it.place?"("+it.place.placeName+")":""),commonFormat))
+									//2:區間(時)
+									sheet.addCell(new Label(1, row,Utility.dateTimeFormat.format(it.startTime) + " ~ "+ Utility.dateTimeFormat.format(it.endTime)+ (it.place?"("+it.place.placeName+")":""),commonFormat))
 									//次數
 									sheet.addCell(new Label(3, row,((int)it.quantity).toString(),commonFormat))
 									modifiedPrice = it.modifiedPrice
 								}
 								break
-							case "2":
+							case "3":
 								productBills.each(){
-									//2:區間(天)
-									sheet.addCell(new Label(1, row,Utility.dateTimeFormat.format(it.startTime) + " ~ "+ Utility.dateTimeFormat.format(it.endTime)+ (it.place?"("+it.place.placeName+")":"") ,commonFormat))
+
+									//3:區間(天)
+									sheet.addCell(new Label(1, row,Utility.dateTimeFormat.format(it.startTime) + " ~ "+ Utility.dateTimeFormat.format(it.endTime)+ (it.place?"("+it.place.placeName+")":""),commonFormat))
+									//次數
+									sheet.addCell(new Label(3, row,((int)it.quantity).toString(),commonFormat))
+									modifiedPrice = it.modifiedPrice
+								}
+								break
+							case "4":
+								productBills.each(){
+									//4:區間(月)
+									sheet.addCell(new Label(1, row,Utility.dateTimeFormat.format(it.startTime) + " ~ "+ Utility.dateTimeFormat.format(it.endTime)+ (it.place?"("+it.place.placeName+")":""),commonFormat))
 									//次數
 									sheet.addCell(new Label(3, row,((int)it.quantity).toString(),commonFormat))
 									modifiedPrice = it.modifiedPrice
 								}
 								break
 						}
+						//共計
+						sheet.addCell(new Label(2, row,"共計",commonFormat))
 						//顯示單位
 						sheet.addCell(new Label(4, row,it.unit,commonFormat))
+						
+						sheet.addCell(new Label(5, row,"單價",commonFormat))
 						//單價
 						sheet.addCell(new Label(6, row,((int)modifiedPrice).toString(),commonFormat))
+						//共計
+						sheet.addCell(new Label(7, row,"共計",commonFormat))
 						//應收金額
 						sheet.addCell(new Formula(8, row, "D"+(row+1)+"*G"+(row+1),commonFormat))
 						row++
@@ -512,6 +540,8 @@ class ExcelController extends BaseController {
 				//應收金額合計
 				WritableFont writableFont = new WritableFont(WritableFont.ARIAL,12,WritableFont.NO_BOLD,false,format.UnderlineStyle.NO_UNDERLINE,format.Colour.RED);
 				WritableCellFormat wcf = new WritableCellFormat(writableFont);
+				
+				wcf.setBorder(Border.ALL, BorderLineStyle.THIN)
 				wcf.setVerticalAlignment format.VerticalAlignment.CENTRE
 				wcf.setAlignment format.Alignment.CENTRE
 				wcf.setFont(writableFont)
@@ -526,8 +556,22 @@ class ExcelController extends BaseController {
 
 				row++
 				//以上報價未稅如需發票稅外另計 5%。
-				sheet.mergeCells 0, row, 8, 21
-				sheet.addCell(new Label(0, row, "以上報價未稅如需發票稅外另計 5%。"))
+				def endLine = 21 * ((int)(row/22)+ ((row%22)>0?1:0))
+				sheet.mergeCells 0, row, 8, endLine
+				sheet.addCell(new Label(0, row, "以上報價未稅如需發票稅外另計 5%。",commonFormat))
+				
+				//禮儀師簽名：	
+				def singLine = endLine + 1
+				sheet.mergeCells 2, singLine, 3, singLine
+				sheet.addCell(new Label(2, singLine, "禮儀師簽名：	",commonFormat))
+				
+				//年     月     日
+				sheet.mergeCells 6, singLine, 8, singLine
+				sheet.addCell(new Label(6, singLine, "年     月     日",commonFormat))
+				sheet.mergeCells 0, singLine, 1, singLine
+				sheet.addCell(new Label(0, singLine, "",commonFormat))				
+				sheet.mergeCells 4, singLine, 5, singLine
+				sheet.addCell(new Label(4, singLine, "",commonFormat))
 			}
 			catch(Exception e){
 				e.printStackTrace();

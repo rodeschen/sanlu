@@ -259,6 +259,7 @@ class ProjectController extends GridController {
 		project.sallingTotal = amount1
 		project.total = amount2
 		project.costTotal = amount3
+		project.closer = session.employee
 		project.save()
 		render [:] as JSON
 	}
