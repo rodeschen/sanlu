@@ -381,7 +381,7 @@
 							url : contextRoot + "/excel/productDaily",
 							target : "_self",
 							data : {
-								productId : productDailyForm.find("#productId")
+								productId : productDailyForm.find("#productDailyId")
 										.val(),
 								exportYear : productDailyForm.find(
 										"#exportYear").val(),

@@ -81,7 +81,7 @@ class ProjectController extends GridController {
 			rowCount = pList.count{
 				and{
 					isNull("deleter")
-					isNull("closingDate")
+					isNotNull("closingDate")
 				}
 
 			}
@@ -89,7 +89,7 @@ class ProjectController extends GridController {
 			projects = pList.list{
 				and{
 					isNull("deleter")
-					isNull("closingDate")
+					isNotNull("closingDate")
 				}
 				firstResult (startRow)
 				maxResults(pageRows)
@@ -275,6 +275,9 @@ class ProjectController extends GridController {
 		render [:] as JSON
 	}
 
+	/**
+	 * 新增專案
+	 */
 	def addAction = {
 
 		DateFormat df = new SimpleDateFormat("yyyy-M-d HH:mm");
@@ -317,6 +320,9 @@ class ProjectController extends GridController {
 		render res as JSON
 	}
 
+	/**
+	 * 修改專案
+	 */
 	def updateAction = {
 		def project = Project.findById(params.id)
 		if(project){
@@ -338,7 +344,10 @@ class ProjectController extends GridController {
 		render [:] as JSON
 	}
 
-	def delete = {
+	/**
+	 * 刪除專案
+	 */
+	def deleteAction = {
 		def project = Project.findById(params.id)
 		def details = BillDetail.findAllByProject(project)
 
@@ -381,10 +390,24 @@ class ProjectController extends GridController {
 		render res as JSON
 	}
 
-	def deleteAction = {
-		def project = Project.findById(id)
-		return project?project.delete(flush: true):throwError("無法刪除");
+	/**
+	 * 刪除已購買產品
+	 */
+	def deleteProduct = {
+		def billDetail = BillDetail.findById(params.long("id"))
+		
+		if(billDetail){
+			billDetail.delete(flush: true);
+		}else{
+			throwError("無法刪除");
+		}	
+		def res = ["IsSuccess" : true]
+		render res as JSON
 	}
+	
+	/**
+	 * 修改專案
+	 */
 	def modifyAction={
 		def project = Project.findById(id)
 		if(!project) {
@@ -424,6 +447,9 @@ class ProjectController extends GridController {
 	//	lastModifyBy:emp2,
 	//	project:project1 //
 
+	/**
+	 * 修改已購買產品
+	 */
 	def updateProduct ={
 		def type = params.type
 		def detail= BillDetail.findById(params.long("detailid"));
@@ -619,6 +645,9 @@ class ProjectController extends GridController {
 
 	}
 
+	/**
+	 * 新增購買產品
+	 */
 	def addProduct={
 		def type = params.type
 		def detail= new BillDetail();
