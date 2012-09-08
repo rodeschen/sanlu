@@ -72,6 +72,15 @@ class ComboboxController extends BaseController {
 		render res as JSON
 	}
 
+	def placeOfProductAuto = {
+		def l = Product.findAllByHasPlaceAndProductNameLike(true,"%"+params.term+"%")
+		def res = []
+		int i=0;
+		l?.each(){
+			res[i++] = it.productName
+		}
+		render res as JSON
+	}
 	//場地
 	def place ={
 		def l = Place.findAll()
@@ -81,7 +90,17 @@ class ComboboxController extends BaseController {
 		}
 		render res as JSON
 	}
-
+	
+	def placeAuto ={
+		def l = Place.findAllByPlaceNameLike("%"+params.term+"%")
+		def res = []
+		int i=0;
+		l?.each(){
+			res[i++] = it.placeName
+		}
+		render res as JSON
+	}
+	
 	//一般商品
 	def normalProduct ={
 		def l = Product.findAllByHasPlaceAndProductType(false,0)
@@ -91,12 +110,37 @@ class ComboboxController extends BaseController {
 		}
 		render res as JSON
 	}
+	def normalProductAuto ={
+		def l = Product.findAllByProductTypeAndProductNameLike(0,"%"+params.term+"%")
+		def res = []
+		int i=0;
+		l?.each(){
+			//非場地類
+			if(!it.hasPlace){
+				res[i++] = it.productName
+			}
+		}
+		render res as JSON
+	}
 	//代叫商品
 	def normalProduct2 = {
 		def l = Product.findAllByHasPlaceAndProductType(false,2)
 		def res = [:]
 		l?.each(){
 			res[it.id] = ["value":it.id,"unit":it.costUnit,range:it.costRange,"text":it.productName]
+		}
+		render res as JSON
+	}
+	def normalProductAuto2 = {
+		log.info params.term;
+		def l = Product.findAllByProductTypeAndProductNameLike(2,"%"+params.term+"%")
+		def res = []
+		int i=0;
+		l?.each(){
+			//非場地類
+			if(!it.hasPlace){
+				res[i++] = it.productName
+			}
 		}
 		render res as JSON
 	}
@@ -110,6 +154,18 @@ class ComboboxController extends BaseController {
 		}
 		render res as JSON
 	}
+	def normalProductAuto1 = {
+		def l = Product.findAllByProductTypeAndProductNameLike(1,"%"+params.term+"%")
+		def res = []
+		int i=0;
+		l?.each(){
+			//非場地類
+			if(!it.hasPlace){
+				res[i++] = it.productName
+			}
+		}
+		render res as JSON
+	}
 
 	//非場地型商品
 	def product ={
@@ -117,6 +173,16 @@ class ComboboxController extends BaseController {
 		def res = [:]
 		l?.each(){
 			res[it.id] = it.productName
+		}
+		render res as JSON
+	}
+	
+	def productAuto ={
+		def l = Product.findAllByHasPlaceAndProductNameLike(false,"%"+params.term+"%")
+		def res = []
+		int i=0;
+		l?.each(){
+			res[i++] = it.productName
 		}
 		render res as JSON
 	}
@@ -128,6 +194,18 @@ class ComboboxController extends BaseController {
 			l?.each(){
 				res[it.place.id] = it.place.placeName
 			}
+		}
+		render res as JSON
+	}
+	
+	def placeByProductAuto={
+		def res = []
+		int i=0;
+		if(params.getAt("id")){
+			def l = ProductLinkPlace.findAllByProductAndProductNameLike(Product.findById(params.get("id")),"%"+params.term+"%");
+			l?.each(){
+				res[i++] = it.place.placeName
+			}			
 		}
 		render res as JSON
 	}

@@ -106,6 +106,22 @@ $.extend($.fn, {
             
         });
         return this;
+    },//HTML5 autocomplete 
+    setAutocomplete: function(data, append){    	
+    	$('body').append('<datalist id="'+$(this).attr('id')+'datalist'+'"></datalist>');
+    	var datalist = $('#'+$(this).attr('id')+'datalist');
+        !append && datalist.html('') && datalist.append($('<option></option>'));
+        
+        $.each(data, function(value, data){
+            if (typeof data === 'string') {
+            	datalist.append($('<option></option>').val(value).text(data));
+            }
+            else {
+            	datalist.append($('<option>', data));
+            }            
+        });
+        $(this).attr("list",datalist.attr('id'));
+        return this;
     },
     serializeData: function(){
         var res = {}, fields = this.find(":input,:disabled").serializeArray();

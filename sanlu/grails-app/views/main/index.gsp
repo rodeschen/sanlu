@@ -438,7 +438,7 @@
                     var funeralCompanyAuto = $("#funeralCompanyAuto");
                     funeralCompanyAuto.autocomplete({
                         source: contextRoot + "/combobox/funeralCompanyAuto",
-                        select: function(){                            
+                        change: function(){                            
                             funeralCompany.find("option:contains("+$(this).val()+")").attr('selected', 'selected').trigger("change");
                         }
                     });
