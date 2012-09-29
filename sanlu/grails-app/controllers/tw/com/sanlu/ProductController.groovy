@@ -27,6 +27,15 @@ class ProductController extends GridController{
 		["rowData":productLinkPlace,"rowCount":ProductLinkPlace.countByProduct(Product.findById(params.get("product.id")))]
 	}
 
+	/**
+	 * 進貨時帶入成本單價
+	 */
+	def queryProductCostPrice = {
+		def product = Product.findById(params.get("id"))
+		def res = ["price" : product?product.costPrice:""]
+		render res as JSON
+	}
+
 	def insertAction={
 
 		def json = new JSONObject(params.get("data"))
@@ -201,11 +210,14 @@ class ProductController extends GridController{
 
 		def product = Product.findById(params.normalProduct)
 		def purchaseQuantity = new BigDecimal(params.purchaseQuantity)
+		//ps:進貨單價為空時以原成本單價計算
+		def purchasePrice = new BigDecimal(params.purchasePrice?params.purchasePrice:product.costPrice);
 		//原庫存數量 * 原成本單價 + 進貨數量 * 進貨單價
-		def totalCost = (product.totalQuantity?product.totalQuantity.multiply(product.costPrice):BigDecimal.ZERO).plus(purchaseQuantity.multiply(new BigDecimal(params.purchasePrice)))
-
+		
+		def totalCost = (product.totalQuantity?product.totalQuantity.multiply(product.costPrice):BigDecimal.ZERO).plus(purchaseQuantity.multiply(purchasePrice))
+		
 		product.totalQuantity = (product.totalQuantity?product.totalQuantity:BigDecimal.ZERO).plus(purchaseQuantity)
-
+		
 		product.costPrice = totalCost.divide(product.totalQuantity,2,BigDecimal.ROUND_HALF_UP)
 
 		product.save()
