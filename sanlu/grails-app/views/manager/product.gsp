@@ -11,6 +11,7 @@
 					url : contextRoot + "/product/queryProduct",
 					pager : true,
 					sortname : 'productNo',
+					height : 240,
 					caption : "商品清單",
 					colModel : [{
 						name : 'id',
@@ -28,7 +29,7 @@
 						name : 'productName',
 						index : 'productName',
 						align : 'center',
-						width : 20
+						width : 30
 					}, {
 						header : "類別",
 						name : 'hasPlace',

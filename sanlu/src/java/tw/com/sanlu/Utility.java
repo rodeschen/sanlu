@@ -86,4 +86,14 @@ public class Utility {
 			return null;
 		}
 	}
+	
+	/**
+	 * Days Between
+	 * @param d1
+	 * @param d2
+	 * @return days
+	 */
+	public static int daysBetween(Date d1, Date d2){
+		return (int)( (d2.getTime() - d1.getTime()) / (1000 * 60 * 60 * 24));
+	}
 }

@@ -37,8 +37,12 @@ class ProductController extends GridController{
 	}
 
 	def insertAction={
-
+		
 		def json = new JSONObject(params.get("data"))
+		//檢查產品名稱不可重複
+		if(Product.findByProductName(json.get("productName"))){
+			return throwError("產品名稱不可重複!!");
+		}
 		boolean isNomal = new Boolean(params.get("isNomal"))
 		int count = isNomal?Product.executeQuery("select MAX( id ) from Product")[0]:0
 		boolean hasPlace = "T".equals( json.getString("hasPlace"))
@@ -117,7 +121,12 @@ class ProductController extends GridController{
 			productLinkPlace= Product.findById(id)
 		}
 		if(!productLinkPlace) {
-			return println("無法修改")
+			return throwError("無法修改")
+		}
+		//檢查產品名稱不可重複
+		def tempP = Product.findByProductName(json.get("productName"))
+		if(tempP.getId()!=productLinkPlace.getId()){
+			return throwError("產品名稱不可重複!!")
 		}
 		if(!isNomal){
 			//場地
@@ -155,6 +164,7 @@ class ProductController extends GridController{
 					case 'productNo':
 					case 'placeId':
 					case 'productId':
+					case 'placeIdAuto':
 						break
 					case 'price':
 					case 'sallingPrice':

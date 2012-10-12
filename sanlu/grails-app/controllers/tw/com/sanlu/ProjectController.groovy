@@ -924,4 +924,30 @@ class ProjectController extends GridController {
 	private BigDecimal formatDecimal(BigDecimal n){
 		return n.toString().indexOf(".0")>0?n.intValue():n;
 	}
+	
+	def addDays = {		
+		def cal = Calendar.getInstance()
+		if(params.startDate){
+			cal.setTime Utility.stringToDate(params.startDate, "yyyy-MM-dd")
+		}
+		cal.add(Calendar.DATE, params.int("day") * params.int("costRange"))
+		def res = ["endDate" : Utility.dateFormat.format(cal.getTime())]
+		render res as JSON
+	}
+	
+	/**
+	 * 計算兩個日期相差天數
+	 */
+	def daysBetween = {
+		def cal1 = Calendar.getInstance()
+		cal1.setTime Utility.stringToDate(params.startDate, "yyyy-MM-dd")
+		
+		def cal2 = Calendar.getInstance()
+		cal2.setTime Utility.stringToDate(params.endDate, "yyyy-MM-dd")
+		
+		def res = ["amount" : Utility.daysBetween(cal1.getTime(),cal2.getTime()) / params.int("costRange")]
+		render res as JSON
+	}
+	
+	
 }
