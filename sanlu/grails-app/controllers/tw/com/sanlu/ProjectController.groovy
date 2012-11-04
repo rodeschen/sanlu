@@ -490,67 +490,7 @@ class ProjectController extends GridController {
 
 		def product = Product.findById(params.long("product" + type))
 		detail.product = product
-		DateFormat df = new SimpleDateFormat("yyyy-M-d HH:mm");
-		def cal1 = Calendar.getInstance();
-		def cal2 = Calendar.getInstance();
-		switch(product.costUnit){
-			case "0":
-			detail.startTime = df.parse(params.startDate + " " + params.startHour + ":" + params.startMin)
-			detail.endTime = detail.startTime
-			break;
-			case "1": //次(時間)
-			detail.startTime = df.parse(params.startDate + " " + params.startHour + ":" + params.startMin)
-			detail.endTime = df.parse(params.endDate + " " + params.endHour + ":" + params.startMin)
-			cal1.setTime detail.startTime
-			cal2.setTime detail.endTime
-			if(cal2.compareTo(cal1) <= 0){
-				return throwError("結束時間需大於開始時間");
-			}
-			break;
-			case "2": //時
-			def hour = 1000 * 60 * 60 * product.costRange
-			detail.startTime = df.parse(params.startDate + " " + params.startHour + ":" + params.startMin)
-			//	detail.endTime = df.parse(params.endDate + " " + params.endHour + ":" + params.startMin)
-			cal1.setTime detail.startTime
-			int costRange = product.costRange.intValue()
-			cal1.add(Calendar.HOUR ,costRange)
-			cal1.add(Calendar.MINUTE , product.costRange.subtract(new BigDecimal(costRange)).multiply(new BigDecimal(60)).intValue())
-			detail.endTime  = cal1.getTime();
-			//	cal1.setTime detail.startTime
-			//	cal2.setTime detail.endTime
-			//	if(cal2.compareTo(cal1) <= 0 || ((cal2.getTimeInMillis() - cal1.getTimeInMillis())%hour) != 0 ){
-			//		return throwError("結束時間需大於開始時間 且 每次使用時間以 " + product.costRange + " 小時為單位");
-			//	}
-			break;
-			case "3": //天
-			//def day = 1000 * 60 * 60 * 24 * product.costRange
-			detail.startTime = df.parse(params.startDate + " 00:00")
-
-			//	detail.endTime = df.parse(params.endDate + " 00:00")
-			cal1.setTime detail.startTime
-			int costRange = product.costRange.intValue()
-			cal1.add(Calendar.DATE, costRange)
-			cal1.add(Calendar.HOUR , product.costRange.subtract(new BigDecimal(costRange)).multiply(new BigDecimal(24)).intValue())
-			detail.endTime  = cal1.getTime();
-			//	cal2.setTime detail.endTime
-			//	if(cal2.compareTo(cal1) <= 0 || ((cal2.getTimeInMillis() - cal1.getTimeInMillis())%hour) != 0 ){
-			//		return throwError("結束日期需大於開始日期 且 每次使用時間以 " + product.costRange + " 天為單位");
-			//	}
-			break;
-			case "4": //月
-			detail.startTime = df.parse(params.startDate + " 00:00")
-			cal1.setTime detail.startTime
-			//	if((params.int("mouth") % product.costRange) != 0){
-			//		return throwError("每次使用時間以 " + product.costRange + " 個月為單位");
-			//	}
-			//	cal1.add(Calendar.MONTH, params.int("mouth"))
-			int costRange = product.costRange.intValue()
-			cal1.add(Calendar.MONTH, costRange)
-			cal1.add(Calendar.DATE , product.costRange.subtract(new BigDecimal(costRange)).multiply(new BigDecimal(30)).intValue())
-			detail.endTime  = cal1.getTime();
-			break;
-
-		}
+		def amount = parseCostUnit(params, type, product, detail)
 
 
 		def productHistory = new ProductHistory();
@@ -629,10 +569,7 @@ class ProjectController extends GridController {
 			detail.price = link.sallingPrice
 			detail.color = 3
 			detail.place = place
-			detail.modifiedPrice = params.modifiedPrice3 != ""?new BigDecimal(params.modifiedPrice3):detail.price
-			detail.costPrice = link.costPrice
-			detail.modifiedCostPrice = detail.costPrice
-
+			detail.modifiedPrice = params.modifiedPrice3 != ""?new BigDecimal(params.modifiedPrice3):detail.price			
 		}
 		detail.lastModifyBy = session.employee
 		detail.save()
@@ -654,67 +591,7 @@ class ProjectController extends GridController {
 		detail.project = Project.findById(params.long("id"))
 		def product = Product.findById(params.long("1".equals(type)?"product1":"product3"))
 		detail.product = product
-		DateFormat df = new SimpleDateFormat("yyyy-M-d HH:mm");
-		def cal1 = Calendar.getInstance();
-		def cal2 = Calendar.getInstance();
-		def amount = params.int("1".equals(type)?"amount1":"amount3")
-		switch(product.costUnit){
-			case "0":
-			detail.startTime = df.parse(params.startDate + " " + params.startHour + ":" + params.startMin)
-			detail.endTime = detail.startTime
-			break;
-			case "1": //次(時間)
-			detail.startTime = df.parse(params.startDate + " " + params.startHour + ":" + params.startMin)
-			detail.endTime = df.parse(params.endDate + " " + params.endHour + ":" + params.startMin)
-			cal1.setTime detail.startTime
-			cal2.setTime detail.endTime
-			if(cal2.compareTo(cal1) <= 0){
-				return throwError("結束時間需大於開始時間");
-			}
-			break;
-			case "2": //時
-			//def hour = 1000 * 60 * 60 * product.costRange
-			detail.startTime = df.parse(params.startDate + " " + params.startHour + ":" + params.startMin)
-			//	detail.endTime = df.parse(params.endDate + " " + params.endHour + ":" + params.startMin)
-			cal1.setTime detail.startTime
-			int costRange = product.costRange.intValue()
-			cal1.add(Calendar.HOUR ,costRange * amount)
-			cal1.add(Calendar.MINUTE , product.costRange.subtract(new BigDecimal(costRange)).multiply(new BigDecimal(amount)).multiply(new BigDecimal(60)).intValue())
-			detail.endTime  = cal1.getTime();
-			//	cal1.setTime detail.startTime
-			//	cal2.setTime detail.endTime
-			//	if(cal2.compareTo(cal1) <= 0 || ((cal2.getTimeInMillis() - cal1.getTimeInMillis())%hour) != 0 ){
-			//		return throwError("結束時間需大於開始時間 且 每次使用時間以 " + product.costRange + " 小時為單位");
-			//	}
-			break;
-			case "3": //天
-			//def day = 1000 * 60 * 60 * 24 * product.costRange
-			detail.startTime = df.parse(params.startDate + " 00:00")
-
-			//	detail.endTime = df.parse(params.endDate + " 00:00")
-			cal1.setTime detail.startTime
-			int costRange = product.costRange.intValue()
-			cal1.add(Calendar.DATE, costRange * amount)
-			cal1.add(Calendar.HOUR , product.costRange.subtract(new BigDecimal(costRange)).multiply(new BigDecimal(amount)).multiply(new BigDecimal(24)).intValue())
-			detail.endTime  = cal1.getTime();
-			//	cal2.setTime detail.endTime
-			//	if(cal2.compareTo(cal1) <= 0 || ((cal2.getTimeInMillis() - cal1.getTimeInMillis())%hour) != 0 ){
-			//		return throwError("結束日期需大於開始日期 且 每次使用時間以 " + product.costRange + " 天為單位");
-			//	}
-			break;
-			case "4": //月
-			detail.startTime = df.parse(params.startDate + " 00:00")
-			cal1.setTime detail.startTime
-			//	if((params.int("mouth") % product.costRange) != 0){
-			//		return throwError("每次使用時間以 " + product.costRange + " 個月為單位");
-			//	}
-			//	cal1.add(Calendar.MONTH, params.int("mouth"))
-			int costRange = product.costRange.intValue()
-			cal1.add(Calendar.MONTH, costRange * amount)
-			cal1.add(Calendar.DATE , product.costRange.subtract(new BigDecimal(costRange)).multiply(new BigDecimal(amount)).multiply(new BigDecimal(30)).intValue())
-			detail.endTime  = cal1.getTime();
-			break;
-		}
+		def amount = parseCostUnit(params, type, product, detail)
 
 		if("1".equals(type)){
 			if(params.productType=="0"){
@@ -799,6 +676,71 @@ class ProjectController extends GridController {
 		}
 		def res = ["IsSuccess" : true]
 		render res as JSON
+	}
+
+	def parseCostUnit(params, type, product, detail){
+		DateFormat df = new SimpleDateFormat("yyyy-M-d HH:mm");
+		def cal1 = Calendar.getInstance();
+		def cal2 = Calendar.getInstance();
+		def amount = params.int("1".equals(type)?"amount1":"amount3")
+		switch(product.costUnit){
+			case "0":
+				detail.startTime = df.parse(params.startDate + " " + params.startHour + ":" + params.startMin)
+				detail.endTime = detail.startTime
+				break;
+			case "1": //次(時間)
+				detail.startTime = df.parse(params.startDate + " " + params.startHour + ":" + params.startMin)
+				detail.endTime = df.parse(params.endDate + " " + params.endHour + ":" + params.startMin)
+				cal1.setTime detail.startTime
+				cal2.setTime detail.endTime
+				if(cal2.compareTo(cal1) <= 0){
+					return throwError("結束時間需大於開始時間");
+				}
+				break;
+			case "2": //時
+			//def hour = 1000 * 60 * 60 * product.costRange
+				detail.startTime = df.parse(params.startDate + " " + params.startHour + ":" + params.startMin)
+			//	detail.endTime = df.parse(params.endDate + " " + params.endHour + ":" + params.startMin)
+				cal1.setTime detail.startTime
+				int costRange = product.costRange.intValue()
+				cal1.add(Calendar.HOUR ,costRange * amount)
+				cal1.add(Calendar.MINUTE , product.costRange.subtract(new BigDecimal(costRange)).multiply(new BigDecimal(amount)).multiply(new BigDecimal(60)).intValue())
+				detail.endTime  = cal1.getTime();
+			//	cal1.setTime detail.startTime
+			//	cal2.setTime detail.endTime
+			//	if(cal2.compareTo(cal1) <= 0 || ((cal2.getTimeInMillis() - cal1.getTimeInMillis())%hour) != 0 ){
+			//		return throwError("結束時間需大於開始時間 且 每次使用時間以 " + product.costRange + " 小時為單位");
+			//	}
+				break;
+			case "3": //天
+			//def day = 1000 * 60 * 60 * 24 * product.costRange
+				detail.startTime = df.parse(params.startDate + " 00:00")
+
+			//	detail.endTime = df.parse(params.endDate + " 00:00")
+				cal1.setTime detail.startTime
+				int costRange = product.costRange.intValue()
+				cal1.add(Calendar.DATE, costRange * amount)
+				cal1.add(Calendar.HOUR , product.costRange.subtract(new BigDecimal(costRange)).multiply(new BigDecimal(amount)).multiply(new BigDecimal(24)).intValue())
+				detail.endTime  = cal1.getTime();
+			//	cal2.setTime detail.endTime
+			//	if(cal2.compareTo(cal1) <= 0 || ((cal2.getTimeInMillis() - cal1.getTimeInMillis())%hour) != 0 ){
+			//		return throwError("結束日期需大於開始日期 且 每次使用時間以 " + product.costRange + " 天為單位");
+			//	}
+				break;
+			case "4": //月
+				detail.startTime = df.parse(params.startDate + " 00:00")
+				cal1.setTime detail.startTime
+			//	if((params.int("mouth") % product.costRange) != 0){
+			//		return throwError("每次使用時間以 " + product.costRange + " 個月為單位");
+			//	}
+			//	cal1.add(Calendar.MONTH, params.int("mouth"))
+				int costRange = product.costRange.intValue()
+				cal1.add(Calendar.MONTH, costRange * amount)
+				cal1.add(Calendar.DATE , product.costRange.subtract(new BigDecimal(costRange)).multiply(new BigDecimal(amount)).multiply(new BigDecimal(30)).intValue())
+				detail.endTime  = cal1.getTime();
+				break;
+		}
+		return amount
 	}
 
 	def search={}

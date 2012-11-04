@@ -11,7 +11,7 @@
 					url : contextRoot + "/product/queryProduct",
 					pager : true,
 					sortname : 'productNo',
-					height : 240,
+					height : 190,
 					caption : "商品清單",
 					colModel : [{
 						name : 'id',
@@ -268,6 +268,7 @@
 
 							$("#placeDiv,#productId")[isNomal ? 'hide' : 'show']();
 							$("#productName,#hasPlaceDiv,#unitDiv,#productTypeDiv,#costUnitDiv,#costRangeDiv")[!isNomal ? 'hide' : 'show']();
+							
 							if (action.indexOf("modify") > -1) {
 								selrow = grid.jqGrid('getGridParam', 'selrow');
 								if (!selrow) {
@@ -283,6 +284,7 @@
 								$("#sallingPrice").val(id.sallingPrice);
 								$("#costPrice").val(id.costPrice);
 								$("#unit").val( isNomal ? id.unit : id['product.unit']);
+								
 								if (isNomal) {
 									productType.val(id.productType);
 									hasPlace.val( hasplace ? "T" : "F");
@@ -305,9 +307,7 @@
 							productId.val(product.id);
 							if (isNomal) {
 								hasPlace.trigger("change");
-							} else {
-
-							}
+							} 
 						},
 						'titlePosition' : 'inside',
 						'transitionIn' : 'elastic',
@@ -386,12 +386,12 @@
 					var v = $(this).val();
 					$("#priceDiv,#sallingPriceDiv,#totalDiv,#costPriceDiv,#productTypeDiv")[v == "F" ? 'show' : 'hide']();
 					productType.val(v == "T" ? "2" : productType.val());
-
+					
 					//選擇場地時不可選'次'
 					if (v == "F") {
-						costUnit.find("option[value='2']").removeAttr('selected', 'selected').end().find("option[value='0']").show().attr('selected', 'selected').trigger('change');
+						costUnit.find("option[value='0']").show().trigger('change');
 					} else {
-						costUnit.find("option[value='0']").hide().removeAttr('selected', 'selected').end().find("option[value='2']").show().attr('selected', 'selected').trigger('change');
+						costUnit.find("option[value='0']").hide().removeAttr('selected', 'selected').trigger('change');
 
 					}
 				});

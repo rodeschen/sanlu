@@ -194,6 +194,7 @@
                         url: contextRoot + "/project/queryProjects",
                         datatype: "json",
                         mtype: 'POST',
+                        height : 190,
                         caption: "當日出館或未出館專案",
                         postData: {
                             closing: "N"

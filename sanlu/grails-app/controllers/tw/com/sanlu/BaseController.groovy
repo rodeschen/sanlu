@@ -18,19 +18,22 @@ abstract class BaseController {
 		"employee"
 	]
 	def beforeInterceptor ={
-		log.info "";
 		def b = true;
+		if(!"login".equals(params.controller)){
+			log.info(params.toMapString());
+		}
+		
 		if(manageUrl.contains(params.controller)?3>=session.empLevel:session.empLevel ){
 			def res = [:]
 			params.keySet().each (){
-				res[it] = params.get(it);
+				res[it] = params.get(it);				
 			}
 			params.responseJSON = res as JSON
-		}else if(!"main".equals(params.controller) && !"login".equals(params.controller)){
-			if(!request.xhr){
+		}else if(!"main".equals(params.controller) && !"login".equals(params.controller)){			
+			if(!request.xhr){				
 				if(params.action){
 					redirect(controller:"main",action:"index")
-				}else{
+				}else{					
 					redirect(uri:"/")
 				}
 			}else{
