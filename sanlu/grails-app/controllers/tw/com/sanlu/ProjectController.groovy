@@ -564,8 +564,8 @@ class ProjectController extends GridController {
 			if(hasUse.size()>0){
 				return throwError("此時間場地使用中!!")
 			}
-			println params.modifiedPrice3
-			detail.quantity = 1
+			
+			detail.quantity = amount
 			detail.price = link.sallingPrice
 			detail.color = 3
 			detail.place = place
