@@ -33,12 +33,12 @@ class FuneralCompanyController extends GridController{
 		render res as JSON
 	}
 	def modifyAction={
-		def company = FuneralCompany.findById(id)
+		def company = FuneralCompany.findById(params.long("id"))
 		if(!company) {
 			return throwError("無法修改");			
 		}
 
-		new JSONObject(params.get("data")).each(){
+		new JSONObject(params).each(){
 			switch( it.key ){
 				case 'funeralCompanyName':
 				case 'phone1':

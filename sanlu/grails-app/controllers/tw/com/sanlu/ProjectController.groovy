@@ -569,7 +569,7 @@ class ProjectController extends GridController {
 			detail.price = link.sallingPrice
 			detail.color = 3
 			detail.place = place
-			detail.modifiedPrice = params.modifiedPrice3 != ""?new BigDecimal(params.modifiedPrice3):detail.price			
+			detail.modifiedPrice = params.modifiedPrice3?new BigDecimal(params.modifiedPrice3):detail.price			
 		}
 		detail.lastModifyBy = session.employee
 		detail.save()
