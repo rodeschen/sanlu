@@ -18,8 +18,8 @@ class ProductController extends GridController{
 
 	@GridQuery
 	def queryProduct = {
-		def products =Product.list(max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc")
-		["rowData":products,"rowCount":Product.count()]
+		def products =params.get("searchProductName")?Product.findAllByProductNameLike("%"+params.get("searchProductName")+"%",[max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc"]):Product.list(max:pageRows,offset:startRow,sort:sortBy,order:isAsc?"asc":"desc")
+		["rowData":products,"rowCount":params.get("searchProductName")?Product.countByProductNameLike("%"+params.get("searchProductName")+"%"):Product.count()]
 	}
 	@GridQuery
 	def queryPlaceProduct = {
@@ -37,7 +37,7 @@ class ProductController extends GridController{
 	}
 
 	def insertAction={
-		
+
 		def json = new JSONObject(params.get("data"))
 		//檢查產品名稱不可重複
 		if(Product.findByProductName(json.get("productName"))){
@@ -223,11 +223,11 @@ class ProductController extends GridController{
 		//ps:進貨單價為空時以原成本單價計算
 		def purchasePrice = new BigDecimal(params.purchasePrice?params.purchasePrice:product.costPrice);
 		//原庫存數量 * 原成本單價 + 進貨數量 * 進貨單價
-		
+
 		def totalCost = (product.totalQuantity?product.totalQuantity.multiply(product.costPrice):BigDecimal.ZERO).plus(purchaseQuantity.multiply(purchasePrice))
-		
+
 		product.totalQuantity = (product.totalQuantity?product.totalQuantity:BigDecimal.ZERO).plus(purchaseQuantity)
-		
+
 		product.costPrice = totalCost.divide(product.totalQuantity,2,BigDecimal.ROUND_HALF_UP)
 
 		product.save()

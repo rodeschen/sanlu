@@ -20,7 +20,8 @@ public class Utility {
 			.getDateTimeInstance();
 	public final static SimpleDateFormat dateFormat = new SimpleDateFormat(
 			"yyyy-MM-dd");
-	
+	public final static SimpleDateFormat monthDateFormat = new SimpleDateFormat(
+			"M/d");
 	public final static SimpleDateFormat dateTimeFormat = new SimpleDateFormat(
 			"M/d HH:mm");
 	

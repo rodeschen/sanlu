@@ -194,7 +194,7 @@
                         url: contextRoot + "/project/queryProjects",
                         datatype: "json",
                         mtype: 'POST',
-                        height : 190,
+                        height : 200,
                         caption: "當日出館或未出館專案",
                         postData: {
                             closing: "N"
@@ -281,6 +281,7 @@
                         url: contextRoot + "/place/queryPlace",
                         caption: "場地",
                         pager: true,
+                        height : 200,
                         colModel: [{
                             name: 'id',
                             index: 'id',

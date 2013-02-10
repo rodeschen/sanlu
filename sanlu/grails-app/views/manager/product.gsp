@@ -6,12 +6,14 @@
 	<body>
 		<script>
 			$(document).ready(function() {
-				var hasPlace = $("#hasPlace"), placeId = $("#placeId"), productName = $('#productName'), productId = $('#productId'), costUnit = $("#costUnit"), costRange = $("#costRange"), productType = $("#productType"),placeIdAuto =$("#placeIdAuto");
+				var hasPlace = $("#hasPlace"), placeId = $("#placeId"), productName = $('#productName'), productId = $('#productId');
+				var costUnit = $("#costUnit"), costRange = $("#costRange"), productType = $("#productType"),placeIdAuto =$("#placeIdAuto");
 				var grid1 = $("#grid1").jqGrid({
 					url : contextRoot + "/product/queryProduct",
 					pager : true,
 					sortname : 'productNo',
-					height : 190,
+					height : 300,
+					rowNum : 15,
 					caption : "商品清單",
 					colModel : [{
 						name : 'id',
@@ -143,6 +145,7 @@
 					url : contextRoot + "/product/queryPlaceProduct",
 					datatype : "local",
 					pager : true,
+					height : 200,
 					//grouping: true,
 					//groupingView: {
 					//groupField: ['product.productName'],
@@ -253,7 +256,19 @@
 						}
 					})
 				});
-
+				$("#search1").fancybox({
+					'titlePosition' : 'inside',
+					'transitionIn' : 'elastic',
+					'transitionOut' : 'elastic'
+				});
+				
+				$("#padd3").click(function() {
+					grid1.jqGrid('setGridParam', {
+							postData : $("#addForm3").serializeData(),
+							datatype : "json"
+						}).trigger("reloadGrid");
+					$.fancybox.close();
+				})
 				var action = "";
 				$("#add1,#modify1,#add2,#modify2").each(function() {
 
@@ -456,6 +471,7 @@
 				商品
 			</legend>
 			<div>
+				<a id="search1" href="#pdialog3" class="button">搜尋商品</a>
 				<a id="add1" href="#pdialog" class="button">新增商品</a>
 				<a id="modify1" href="#pdialog" class="button">修改商品</a>
 				<button id="delete1">
@@ -463,7 +479,7 @@
 				</button>
 				<a id="purchaseBtn" href="#pdialog2" class="button">進貨</a>
 			</div>
-			<div id="grid1" />
+			<div id="grid1"/>
 		</fieldset>
 		<fieldset>
 			<legend>
@@ -476,7 +492,7 @@
 					刪除場地
 				</button>
 			</div>
-			<div id="grid2" />
+			<div id="grid2"/>
 		</fieldset>
 		<div class="hide">
 			<div id="pdialog" class="dialog" style="display:block;width:400px;">
@@ -651,6 +667,28 @@
 								確定
 							</button>
 							<button id="pclose2" type="button">
+								取消
+							</button>
+						</div>
+					</div>
+				</g:form>
+			</div>
+		</div>
+		<div class="hide">
+			<div id="pdialog3" class="dialog3" style="display:block;width:400px;">
+				<g:form name="addForm3" id="addForm3" onsubmit="return false;" autocomplete="off" novalidate="novalidate">
+					<div class="dialog-body">					
+						<div class="field-row" id="priceDiv">
+							<span class="th1">產品名稱：</span>
+							<span>
+								<input type="text" id="searchProductName" name="searchProductName" placeholder="產品名稱" class="validate[required]"/>
+							</span>
+						</div>
+						<div style="text-align:center;">
+							<button id="padd3" type="button">
+								確定
+							</button>
+							<button id="pclose3" type="button">
 								取消
 							</button>
 						</div>

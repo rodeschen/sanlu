@@ -40,6 +40,8 @@
                     
                     var grid2 = $("#palceGrid").jqGrid({
                         url: contextRoot + "/place/queryPlace",
+                        height : 300,
+                        rowNum : 15,
                         caption: "場地",
                         pager: true,
                         colModel: [{
