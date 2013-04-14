@@ -148,7 +148,7 @@
                                 $("#phone1").val(id.phone1);
                                 $("#phone2").val(id.phone2);
                                 if (isNormal) {
-                                	contactAddrCity.val(id.contactAddrCity);
+                                	contactAddrCity.val(id.contactAddrCity).trigger('change');
                                     $("#contactAddrArea").val(id.contactAddrArea);
                                     $("#contactAddr").val(id.contactAddr);
                                     $("#funeralCompanyName").val(id.funeralCompanyName);

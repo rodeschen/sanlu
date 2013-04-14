@@ -112,7 +112,7 @@ class ProductController extends GridController{
 	def modifyAction={
 		def productLinkPlace
 		def json = new JSONObject(params.get("data"))
-
+				
 		boolean isNomal = new Boolean(params.get("isNomal"))
 
 		if(!isNomal){
@@ -125,7 +125,8 @@ class ProductController extends GridController{
 		}
 		//檢查產品名稱不可重複
 		def tempP = Product.findByProductName(json.get("productName"))
-		if(tempP.getId()!=productLinkPlace.getId()){
+		
+		if(tempP!=null && tempP.getId()!=productLinkPlace.getId()){
 			return throwError("產品名稱不可重複!!")
 		}
 		if(!isNomal){

@@ -43,7 +43,9 @@ class FuneralCompanyController extends GridController{
 				case 'funeralCompanyName':
 				case 'phone1':
 				case 'phone2':
-				case 'address':
+				case 'contactAddr':
+				case 'contactAddrCity':
+				case 'contactAddrArea':
 					company.putAt it.key,it.value
 					break
 			}
