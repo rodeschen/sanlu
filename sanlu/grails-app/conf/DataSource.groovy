@@ -1,3 +1,4 @@
+import grails.util.Environment;
 dataSource {
 	logSql = true	
 	pooled = true
@@ -5,7 +6,7 @@ dataSource {
 	url = "jdbc:mysql://localhost/yourDB"
 	driverClassName = "com.mysql.jdbc.Driver"
     username = "root"
-	password = "r&rSanlu"
+	password = Environment.PRODUCTION==Environment.current?"r&rSanlu":"rick0223"
 	properties {
 		maxActive = 50
 		maxIdle = 25

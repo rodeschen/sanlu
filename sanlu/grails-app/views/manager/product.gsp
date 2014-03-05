@@ -217,7 +217,7 @@
 
 				$("#delete1,#delete2").click(function() {
 					var action = $(this).prop("id");
-					var grid = action.indexOf('2') > -1 ? grid2 : grid1
+					var grid = action.indexOf('2') > -1 ? grid2 : grid1;
 					var selrow = grid.jqGrid('getGridParam', 'selrow');
 					if (!selrow) {
 						alert("請先選擇刪除列");
@@ -254,7 +254,7 @@
 							}
 							alert("刪除成功");
 						}
-					})
+					});
 				});
 				$("#search1").fancybox({
 					'titlePosition' : 'inside',
@@ -268,7 +268,7 @@
 							datatype : "json"
 						}).trigger("reloadGrid");
 					$.fancybox.close();
-				})
+				});
 				var action = "";
 				$("#add1,#modify1,#add2,#modify2").each(function() {
 
@@ -368,7 +368,7 @@
 								refreshProduct();
 								alert("產品/場地" + (action == "add1" || action == "add2" ? "新增" : "修改") + "成功");
 							}
-						})
+						});
 					}
 				});
 				$("#pclose2,#pclose1").click(function() {
@@ -394,7 +394,7 @@
 								grid1.trigger("reloadGrid");
 								alert("進貨成功");
 							}
-						})
+						});
 					}
 				});
 				hasPlace.change(function() {

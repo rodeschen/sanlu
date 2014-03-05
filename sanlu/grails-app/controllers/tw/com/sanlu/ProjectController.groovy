@@ -236,9 +236,13 @@ class ProjectController extends GridController {
 	}
 
 	def updateClosing = {
-		def project = Project.findById(params.long("id"))
+		def project = Project.findById(params.long("id"))		
 		project.closingDate = new Date()
 		project.outDate = project.closingDate
+		if(project.outDate.before(project.inDate)){
+			return throwError("結帳時，入館日期不可大於今日!!");
+		}
+		
 		def details = BillDetail.findAllByProject(project)
 		def amount1 = 0 ,amount2 =0 , amount3 = 0
 		details?.each(){
@@ -260,7 +264,12 @@ class ProjectController extends GridController {
 		project.total = amount2
 		project.costTotal = amount3
 		project.closer = session.employee
-		project.save()
+		def re = project.save()
+		if(project.hasErrors()){
+			println project.errors
+			return throwError("結帳失敗請聯絡資訊人員!");
+		}
+		
 		render [:] as JSON
 	}
 

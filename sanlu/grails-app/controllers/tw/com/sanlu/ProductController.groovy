@@ -47,7 +47,7 @@ class ProductController extends GridController{
 		int count = isNomal?Product.executeQuery("select MAX( id ) from Product")[0]:0
 		boolean hasPlace = "T".equals( json.getString("hasPlace"))
 		def product = null
-
+		println "costPrice"+json.getString("costPrice")
 		if(isNomal){
 			if(hasPlace){
 				product = new Product(
@@ -64,6 +64,7 @@ class ProductController extends GridController{
 						productName:json.getString("productName"),
 						price:new BigDecimal(json.getString("price")),
 						sallingPrice:new BigDecimal(json.getString("sallingPrice")),
+						costPrice:new BigDecimal(json.getString("costPrice")),
 						unit:json.getString("unit"),
 						hasPlace:"T".equals( json.getString("hasPlace")),
 						costRange:json.getInt("costRange"),
@@ -71,6 +72,7 @@ class ProductController extends GridController{
 						lastModifyBy:session.employee)
 			}
 		}else{
+		
 			product = new ProductLinkPlace(
 					product : Product.findById(json.getString("productId")),
 					place : Place.findById(json.getString("placeId")),
