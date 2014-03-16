@@ -221,7 +221,7 @@ class ExcelController extends BaseController {
 		}
 		if(project){
 			def cal = Calendar.instance
-			def file = new File(ExcelUtility.BILL_PATH+"/帳單-案名-" + project.projectName + "-" +cal.getTime().format("yyyy-MM-dd")+".xls")
+			def file = new File(ExcelUtility.BILL_PATH+"/"+ project.projectName + "-" +cal.getTime().format("yyyy-MM-dd")+"-"+project.funeralCompany.funeralCompanyName+".xls")
 			// create our workbook and sheet
 			def workbook = Workbook.createWorkbook(file,Workbook.getWorkbook(ExcelUtility.getResource("excel/bill.xls").inputStream),settings)
 
@@ -262,7 +262,7 @@ class ExcelController extends BaseController {
 				def isAgencyTmp = ""
 				//提出商品明細：
 				def notAgencyTmp = ""
-				def modifiedPrice,modifiedCostPrice
+				def modifiedPrice,modifiedCostPrice,amountReceivable=0,amountCostReceivable=0
 				billDetails.each() {
 
 					//def productBills = BillDetail.findAllByProjectAndProductAndShowBill(project,it,true)
@@ -296,6 +296,8 @@ class ExcelController extends BaseController {
 									amount += it.quantity *it.product.costRange
 									modifiedPrice = it.modifiedPrice
 									modifiedCostPrice = it.modifiedInternalPrice
+									amountReceivable += it.quantity *it.product.costRange * modifiedPrice
+									amountCostReceivable +=it.quantity *it.product.costRange * modifiedCostPrice
 								}
 								tmp = tmp.endsWith("，")?tmp.substring(0, tmp.length()-1):tmp
 								sheet.addCell(new Label(2, row,tmp+ place,count%2!=0?oddFormat:evenFormat))
@@ -310,6 +312,8 @@ class ExcelController extends BaseController {
 									amount += it.quantity *it.product.costRange
 									modifiedPrice = it.modifiedPrice
 									modifiedCostPrice = it.modifiedInternalPrice
+									amountReceivable += it.quantity *it.product.costRange * modifiedPrice
+									amountCostReceivable +=it.quantity *it.product.costRange * modifiedCostPrice
 								}
 							//2:區間(時)
 								sheet.addCell(new Label(2, row,tmpHour ,count%2!=0?oddFormat:evenFormat))
@@ -323,6 +327,8 @@ class ExcelController extends BaseController {
 									amount += it.quantity *it.product.costRange
 									modifiedPrice = it.modifiedPrice
 									modifiedCostPrice = it.modifiedInternalPrice
+									amountReceivable += it.quantity *it.product.costRange * modifiedPrice
+									amountCostReceivable +=it.quantity *it.product.costRange * modifiedCostPrice
 								}
 							//3:區間(天)
 								sheet.addCell(new Label(2, row,tmpDay,count%2!=0?oddFormat:evenFormat))
@@ -336,6 +342,8 @@ class ExcelController extends BaseController {
 									amount += it.quantity *it.product.costRange
 									modifiedPrice = it.modifiedPrice
 									modifiedCostPrice = it.modifiedInternalPrice
+									amountReceivable += it.quantity *it.product.camountReceivable
+									amountCostReceivable +=it.quantity *it.product.costRange * modifiedCostPrice
 								}
 							//4:區間(月)
 								sheet.addCell(new Label(2, row,tmpMonth,count%2!=0?oddFormat:evenFormat))
@@ -348,13 +356,15 @@ class ExcelController extends BaseController {
 						//單價
 						sheet.addCell(new Label(6, row,((int)modifiedPrice).toString(),count%2!=0?oddFormat:evenFormat))
 						//應收金額
-						sheet.addCell(new Formula(7, row, "E"+(row+1)+"*G"+(row+1),count%2!=0?oddFormat:evenFormat))
+						//sheet.addCell(new Formula(7, row, "E"+(row+1)+"*G"+(row+1),count%2!=0?oddFormat:evenFormat))
+						sheet.addCell(new Number(7, row, (int)amountReceivable,count%2!=0?oddFormat:evenFormat))
 						//減號
 						sheet.addCell(new Label(8, row, "─",count%2!=0?oddFormat:evenFormat))
 						//成本單價
 						sheet.addCell(new Label(9, row,((int)modifiedCostPrice).toString(),count%2!=0?oddFormat:evenFormat))
 						//實收金額
-						sheet.addCell(new Formula(10, row, "E"+(row+1)+"*J"+(row+1),count%2!=0?oddFormat:evenFormat))
+						//sheet.addCell(new Formula(10, row, "E"+(row+1)+"*J"+(row+1),count%2!=0?oddFormat:evenFormat))
+						sheet.addCell(new Number(10, row, (int)amountCostReceivable,count%2!=0?oddFormat:evenFormat))
 						//等號
 						sheet.addCell(new Label(11, row, "=",count%2!=0?oddFormat:evenFormat))
 						//折讓金額
@@ -444,7 +454,7 @@ class ExcelController extends BaseController {
 		}
 		if(project){
 			def cal = Calendar.instance
-			def file = new File(ExcelUtility.BILL_PATH+"/外帳單-案名-" + project.projectName + "-" +cal.getTime().format("yyyy-MM-dd")+".xls")
+			def file = new File(ExcelUtility.BILL_PATH+"/"+project.funeralCompany.funeralCompanyName+"-" + project.projectName + "-" +cal.getTime().format("yyyy-MM-dd")+".xls")
 			// create our workbook and sheet
 			def workbook = Workbook.createWorkbook(file,Workbook.getWorkbook(ExcelUtility.getResource("excel/外帳.xls").inputStream),settings)
 
@@ -477,7 +487,7 @@ class ExcelController extends BaseController {
 						sheet.addCell(new Label(0, row,it.productName,commonFormat))
 
 						def amount = 0;
-						def modifiedPrice
+						def modifiedPrice=0,amountReceivable=0;
 						switch(it.costUnit){
 							//計價單位類別  0:次
 							case "0":
@@ -490,6 +500,7 @@ class ExcelController extends BaseController {
 									tmp +=(it.startTime.toCalendar().get(Calendar.MONTH)+1)+"/"+it.startTime.toCalendar().get(Calendar.DATE)+"，"
 									amount += it.quantity *it.product.costRange
 									modifiedPrice = it.modifiedPrice
+									amountReceivable += it.quantity * it.product.costRange * modifiedPrice
 								}
 								tmp = tmp?.substring(0, tmp.length()-1)
 								sheet.addCell(new Label(1, row,tmp+place ,commonFormat))
@@ -502,8 +513,8 @@ class ExcelController extends BaseController {
 								productBills.each(){
 									tmpHour += (""==tmpHour?"":";") + Utility.monthDateFormat.format(it.startTime) +(it.startTime.date!=it.endTime.date?("~"+ Utility.monthDateFormat.format(it.endTime)):"")+ (it.place?"("+it.place.placeName+")":"")
 									amount += it.quantity *it.product.costRange
-
 									modifiedPrice = it.modifiedPrice
+									amountReceivable += it.quantity * it.product.costRange * modifiedPrice
 								}
 							//2:區間(時)
 								sheet.addCell(new Label(1, row,tmpHour,commonFormat))
@@ -515,8 +526,8 @@ class ExcelController extends BaseController {
 								productBills.each(){
 									tmpDay += (""==tmpDay?"":";") + Utility.monthDateFormat.format(it.startTime) + (it.startTime.date!=it.endTime.date?("~"+ Utility.monthDateFormat.format(it.endTime)):"") + (it.place?"("+it.place.placeName+")":"")
 									amount += it.quantity *it.product.costRange
-
 									modifiedPrice = it.modifiedPrice
+									amountReceivable += it.quantity * it.product.costRange * modifiedPrice
 								}
 							//3:區間(天)
 								sheet.addCell(new Label(1, row,tmpDay,commonFormat))
@@ -528,8 +539,8 @@ class ExcelController extends BaseController {
 								productBills.each(){
 									tmpMonth += (""==tmpMonth?"":";") + Utility.monthDateFormat.format(it.startTime) + (it.startTime.date!=it.endTime.date?("~"+ Utility.monthDateFormat.format(it.endTime)):"")+ (it.place?"("+it.place.placeName+")":"")
 									amount += it.quantity *it.product.costRange
-
 									modifiedPrice = it.modifiedPrice
+									amountReceivable += it.quantity * it.product.costRange * modifiedPrice
 								}
 
 							//4:區間(月)
@@ -548,7 +559,8 @@ class ExcelController extends BaseController {
 						//共計
 						sheet.addCell(new Label(7, row,"共計",commonFormat))
 						//應收金額
-						sheet.addCell(new Formula(8, row, "D"+(row+1)+"*G"+(row+1),commonFormat))
+						//sheet.addCell(new Formula(8, row, "D"+(row+1)+"*G"+(row+1),commonFormat))
+						sheet.addCell(new Number(8, row, (int)amountReceivable,commonFormat))
 						row++
 					}
 					count++
