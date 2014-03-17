@@ -262,7 +262,7 @@ class ExcelController extends BaseController {
 				def isAgencyTmp = ""
 				//提出商品明細：
 				def notAgencyTmp = ""
-				def modifiedPrice,modifiedCostPrice,amountReceivable=0,amountCostReceivable=0
+				
 				billDetails.each() {
 
 					//def productBills = BillDetail.findAllByProjectAndProductAndShowBill(project,it,true)
@@ -283,6 +283,7 @@ class ExcelController extends BaseController {
 							notAgencyTmp+=it.productName + "，"
 						}
 						def amount = 0;
+						def modifiedPrice,modifiedCostPrice,amountReceivable=0,amountCostReceivable=0
 						switch(it.costUnit){
 							//計價單位類別  0:次
 							case "0":
