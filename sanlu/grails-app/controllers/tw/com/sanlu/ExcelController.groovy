@@ -343,7 +343,7 @@ class ExcelController extends BaseController {
 									amount += it.quantity *it.product.costRange
 									modifiedPrice = it.modifiedPrice
 									modifiedCostPrice = it.modifiedInternalPrice
-									amountReceivable += it.quantity *it.product.camountReceivable
+									amountReceivable += it.quantity *it.product.costRange * modifiedPrice
 									amountCostReceivable +=it.quantity *it.product.costRange * modifiedCostPrice
 								}
 							//4:區間(月)

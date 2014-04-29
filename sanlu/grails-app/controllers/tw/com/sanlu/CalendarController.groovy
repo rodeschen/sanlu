@@ -70,10 +70,14 @@ class CalendarController extends GridController {
 	def query={
 		def startAndEnd = calCalendar();
 		//def billDetails = BillDetail.findAllByStartTimeBetween(startAndEnd.start,startAndEnd.end)
+		
 		def bList = BillDetail.createCriteria()
 		def billDetails = bList.list{
 			and{
-				between('startTime',startAndEnd.start,startAndEnd.end)
+				and{
+					le('startTime',startAndEnd.start)
+					ge('endTime',startAndEnd.end)
+				}
 				if(params.type == 'p'){
 					project{ eq('id',params.id?params.long("id"):"") }
 				}else if (params.type == "l"){

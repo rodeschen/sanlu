@@ -666,7 +666,7 @@ class ProjectController extends GridController {
 
 			}
 			if(hasUse.size()>0){
-				return throwError("此時間場地使用中!!")
+				return throwError("案號:"+hasUse.project.id + " 此時間場地使用中!!")
 			}
 			detail.quantity = amount
 			detail.price = link.sallingPrice
